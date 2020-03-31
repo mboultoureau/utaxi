@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-03-31T09:55:43.387Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36" etag="19Vxz1aqFTNZ1jupn7mC" version="12.9.5" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2020-03-31T10:01:53.001Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36" etag="P4GNTleoBqX7CILsJ1Pz" version="12.9.5" type="gitlab">
   <diagram name="Page-1" id="2c0d36ab-eaac-3732-788b-9136903baeff">
-    <mxGraphModel dx="868" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="496" dy="257" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -32,7 +32,7 @@
           <mxGeometry x="107" y="335.5" width="223" height="54.5" as="geometry" />
         </mxCell>
         <mxCell id="41" value="Démission ou désinscription" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" parent="1" vertex="1">
-          <mxGeometry x="550" y="470" width="210" height="40" as="geometry" />
+          <mxGeometry x="550" y="462.5" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="48" value="Liste des utilisateurs" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" parent="1" vertex="1">
           <mxGeometry x="1770" y="475" width="160" height="40" as="geometry" />
@@ -206,7 +206,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-146" value="Affichage la course actuelle" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=10;" parent="1" vertex="1">
-          <mxGeometry x="1660" y="583.25" width="140" height="40" as="geometry" />
+          <mxGeometry x="1660" y="581.44" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-147" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="xQzob73jMmwW_WmET0h1-146" edge="1">
           <mxGeometry x="-166.83999999999997" y="135.5" width="100" height="100" as="geometry">
@@ -218,10 +218,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-149" value="Indiquer sa localisation actuelle" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=10;" parent="1" vertex="1">
-          <mxGeometry x="1390" y="582.88" width="170" height="37.12" as="geometry" />
+          <mxGeometry x="1380" y="580" width="170" height="37.12" as="geometry" />
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-150" value="Voir ses dernières et &#xa;prochaines courses" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=10;" parent="1" vertex="1">
-          <mxGeometry x="1525" y="630" width="130" height="40" as="geometry" />
+          <mxGeometry x="1490" y="643.75" width="130" height="40" as="geometry" />
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-151" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="xQzob73jMmwW_WmET0h1-142" target="xQzob73jMmwW_WmET0h1-150" edge="1">
           <mxGeometry x="-266.84" y="192.62" width="100" height="100" as="geometry">
@@ -239,6 +239,30 @@
           <mxGeometry x="-276.85" y="78.25" width="100" height="100" as="geometry">
             <mxPoint x="1589.9" y="297.25" as="sourcePoint" />
             <mxPoint x="1589.9" y="327.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xs6JpK7SzmqAGYHthAqy-112" value="Modifier informations" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" vertex="1" parent="1">
+          <mxGeometry x="560" y="572.88" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xs6JpK7SzmqAGYHthAqy-113" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0" edge="1" parent="1">
+          <mxGeometry x="-23.29" y="248" width="100" height="100" as="geometry">
+            <mxPoint x="654.7100000000002" y="502.5" as="sourcePoint" />
+            <mxPoint x="654.7100000000002" y="575" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xs6JpK7SzmqAGYHthAqy-114" value="Activer/désactiver travail " style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="643.75" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xs6JpK7SzmqAGYHthAqy-115" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="xQzob73jMmwW_WmET0h1-142">
+          <mxGeometry x="-256.84" y="192.62" width="100" height="100" as="geometry">
+            <mxPoint x="1600" y="390" as="sourcePoint" />
+            <mxPoint x="1650" y="644" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1610" y="540" />
+              <mxPoint x="1600" y="490" />
+              <mxPoint x="1537" y="440" />
+              <mxPoint x="1560" y="537.12" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
