@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-03-31T10:01:53.001Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36" etag="P4GNTleoBqX7CILsJ1Pz" version="12.9.5" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2020-03-31T10:03:21.846Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36" etag="2cC938W1cWzUmiBLbu8X" version="12.9.5" type="gitlab">
   <diagram name="Page-1" id="2c0d36ab-eaac-3732-788b-9136903baeff">
-    <mxGraphModel dx="496" dy="257" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1021" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -32,7 +32,7 @@
           <mxGeometry x="107" y="335.5" width="223" height="54.5" as="geometry" />
         </mxCell>
         <mxCell id="41" value="Démission ou désinscription" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" parent="1" vertex="1">
-          <mxGeometry x="550" y="462.5" width="210" height="40" as="geometry" />
+          <mxGeometry x="500" y="430" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="48" value="Liste des utilisateurs" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" parent="1" vertex="1">
           <mxGeometry x="1770" y="475" width="160" height="40" as="geometry" />
@@ -81,7 +81,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-114" value="Différents status" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" parent="1" vertex="1">
-          <mxGeometry x="358" y="465" width="170" height="35" as="geometry" />
+          <mxGeometry x="358" y="475" width="170" height="35" as="geometry" />
         </mxCell>
         <mxCell id="xQzob73jMmwW_WmET0h1-115" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="xQzob73jMmwW_WmET0h1-114" target="xQzob73jMmwW_WmET0h1-109" edge="1">
           <mxGeometry x="-620.59" y="289" width="100" height="100" as="geometry">
@@ -242,12 +242,12 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xs6JpK7SzmqAGYHthAqy-112" value="Modifier informations" style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=14" vertex="1" parent="1">
-          <mxGeometry x="560" y="572.88" width="210" height="40" as="geometry" />
+          <mxGeometry x="730" y="430" width="210" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="xs6JpK7SzmqAGYHthAqy-113" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0" edge="1" parent="1">
-          <mxGeometry x="-23.29" y="248" width="100" height="100" as="geometry">
-            <mxPoint x="654.7100000000002" y="502.5" as="sourcePoint" />
-            <mxPoint x="654.7100000000002" y="575" as="targetPoint" />
+        <mxCell id="xs6JpK7SzmqAGYHthAqy-113" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="10" target="xs6JpK7SzmqAGYHthAqy-112">
+          <mxGeometry x="22" y="135.5" width="100" height="100" as="geometry">
+            <mxPoint x="700.0000000000001" y="390" as="sourcePoint" />
+            <mxPoint x="700.0000000000001" y="462.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="xs6JpK7SzmqAGYHthAqy-114" value="Activer/désactiver travail " style="rounded=1;fillColor=#23445D;gradientColor=none;strokeColor=none;fontColor=#FFFFFF;fontStyle=1;fontFamily=Tahoma;fontSize=10;" vertex="1" parent="1">
