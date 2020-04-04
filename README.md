@@ -17,7 +17,7 @@ Cette section vous explique comment installer les différentes dépendances et c
     ```sh
     export JAVA_HOME="/chemin/vers/java/jdk-14.jdk"
     export MAVEN_HOME="/chemin/vers/maven/Maven"
-    export PATH="$PATH:$JAVA_HOME/Contents/Home/bin:$MAVEN_HOME/bin"
+    export PATH="$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin"
     ```
 
     Sur MacOS, vous devez probablement adaptez la première ligne comme ceci ou la retirez :
@@ -35,4 +35,9 @@ Cette section vous explique comment installer les différentes dépendances et c
     -   Paramètre optionnel : par défaut le dépôt de Maven est situé à l'adresse `~/.m2/repository` ce qui peut allourdir votre home. Vous pouvez changer cette valeur dans le fichier `~/.m2/settings.xml`. Consultez la [documentation d'Apache Maven](https://maven.apache.org/settings.html) pour en savoir plus.
 
 -   Testez votre installation avec la commande `mvn -v` dans terminal.
+
+### Configuration de Visual Studio Code
+
+- Nous vous recommandons d'installer le [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
+
 -   Ouvrez ce projet dans votre éditeur comme Visual Studio Code et entrez la commande `mvn clean javafx:run`.
