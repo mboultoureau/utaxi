@@ -38,6 +38,10 @@ Cette section vous explique comment installer les différentes dépendances et c
 
 ### Configuration de Visual Studio Code
 
-- Nous vous recommandons d'installer le [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
+-   Nous vous recommandons d'installer le [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
+-   Ouvrez ce projet dans votre éditeur comme Visual Studio Code et entrez la commande `mvn javafx:run`.
 
--   Ouvrez ce projet dans votre éditeur comme Visual Studio Code et entrez la commande `mvn clean javafx:run`.
+### Configuration d'Eclipse
+
+-   Aller dans File > Import > Maven > Existing Maven Projects. Dans Root Directory spécifier le chemin du projet et cliquer sur Finish.
+-   Pour exécuter le programme, cliquer sur la flèche à côté du bouton Run > Run as > Maven build. Une fenêtre s'ouvre, dans Goals écrivez `javafx:run`. Cliquez Apply puis Run.

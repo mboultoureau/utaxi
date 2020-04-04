@@ -1,4 +1,11 @@
 {
     "editor.tabSize": 4,
-    "editor.wordWrap": "bounded"
+    "editor.wordWrap": "bounded",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
