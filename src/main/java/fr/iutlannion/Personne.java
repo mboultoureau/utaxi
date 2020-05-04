@@ -1,4 +1,6 @@
-public class Personne {
+package fr.iutlannion;
+
+abstract public class Personne {
 
     private String nom;
     private String prenom;
@@ -11,4 +13,20 @@ public class Personne {
         this.email = email;
         this.id = id;
     }
+
+	public String getNom() {
+		return nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getId() {
+		return id;
+	}
 }

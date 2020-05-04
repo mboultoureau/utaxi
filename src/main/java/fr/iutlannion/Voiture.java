@@ -1,3 +1,5 @@
+package fr.iutlannion;
+
 public class Voiture {
     private String immatriculation;
     private String marque;
@@ -12,4 +14,24 @@ public class Voiture {
         this.couleur = couleur;
         this.type = type;
     }
+
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
+	public String getMarque() {
+		return marque;
+	}
+
+	public String getTypeEssence() {
+		return typeEssence;
+	}
+
+	public String getCouleur() {
+		return couleur;
+	}
+
+	public String getType() {
+		return type;
+	}
 }

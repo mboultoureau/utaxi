@@ -1,3 +1,5 @@
+package fr.iutlannion;
+
 import java.util.ArrayList;
 
 public class Conducteur extends Personne {
@@ -5,29 +7,40 @@ public class Conducteur extends Personne {
     private double tarif;
     private double nbKmParcourus;
 
-    private ArrayList<float>note;
+    private ArrayList<Float>notes;
     private Voiture voiture;
 
     Conducteur(String nom, String prenom, String email, String id, double tarif, double nbKmParcourus, float note, String immatriculation, String marque, String typeEssence, String couleur, String type){
 
-        super(String nom, String prenom, String email, String id);
+        super(nom, prenom, email, id);
         
-        ArrayList<float> note = new ArrayList<float>();
+        this.notes = new ArrayList<Float>();
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
-        this.note = note;
-        Voiture voiture = new Voiture(String immatriculation, String marque, String typeEssence, String couleur, String type);
+        this.voiture = new Voiture(immatriculation, marque, typeEssence, couleur, type);
     }
 
-    public double salaire() {
-
+    public double getSalaire() {
+    	return 0.0;
     }
 
-    public float noteMoyenne() {
+    public float getNoteMoyenne() {
         float noteMoy = 0;
-        for (int i = 0; i < note.size(); i++) {
-            noteMoy += note.get(i);
+        for (int i = 0; i < notes.size(); i++) {
+            noteMoy += notes.get(i);
         }
-        return noteMoy / note.size();
+        return noteMoy / notes.size();
     }
+
+	public double getTarif() {
+		return tarif;
+	}
+
+	public double getNbKmParcourus() {
+		return nbKmParcourus;
+	}
+
+	public Voiture getVoiture() {
+		return voiture;
+	}
 }

@@ -1,3 +1,5 @@
+package fr.iutlannion;
+
 public class Adresse {
     private String rue;
     private String ville;
@@ -12,4 +14,24 @@ public class Adresse {
         this.codePostal = codePostal;
         this.pays = pays;
     }
+
+	public String getRue() {
+		return rue;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+	public String getPays() {
+		return pays;
+	}
 }
