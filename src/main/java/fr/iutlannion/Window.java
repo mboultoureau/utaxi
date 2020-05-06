@@ -32,15 +32,18 @@ public class Window extends Stage {
         this.setX(0);
         this.setY(0);
         this.setResizable(false);
-        final Scene scenePrincipal = new Scene(principal(), 220, 200);
+        final Scene scenePrincipal = new Scene(principal(), 750, 500);
         Scene sceneConnexion = new Scene(connexion(), 220, 200);
 
         this.setScene(sceneConnexion);
         final Window self = this;
+
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println("Hello World");
                 self.setScene(scenePrincipal);
+                self.setWidth(750);
+                self.setHeight(500);
             }
         }));
     }
