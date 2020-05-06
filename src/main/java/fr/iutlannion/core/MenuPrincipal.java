@@ -1,54 +1,32 @@
-package fr.iutlannion;
+package fr.iutlannion.core;
 
-import fr.iutlannion.auth.Connexion;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-public class Window extends Stage {
-
+public class MenuPrincipal {
     private Label label = new Label("Page principal");
-    private Connexion connexion = new Connexion(this);
     private Button buttonOk = new Button("OK");
     
-    final Scene scenePrincipal = new Scene(principal(), 750, 500);
-    final Scene sceneConnexion = new Scene(connexion.creerContenu(), 750, 500);
-
-    public Window() {
-        this.setTitle("Ma première fenêtre");
-        this.setWidth(500);
-        this.setHeight(150);
-        this.setX(0);
-        this.setY(0);
-        
-        this.setScene(scenePrincipal);
-        
-        final Window self = this;
-
+ 
+    
+    public MenuPrincipal() {   	
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println("Hello World");
-                self.setScene(sceneConnexion);
-                self.setWidth(750);
-                self.setHeight(500);
+                Window.getInstance().gotoPage("connexion");
+                Window.getInstance().setWidth(750);
+                Window.getInstance().setHeight(500);
             }
         }));
     }
 
-    
-    public void goToPrincipal() {
-    	this.setScene(scenePrincipal);
-    }
-
-
-    Parent principal() {
+    Parent creerContenu() {
 
         GridPane gridPane1 = new GridPane();
         gridPane1.setPadding(new Insets(10));

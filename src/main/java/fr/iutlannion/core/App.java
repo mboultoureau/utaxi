@@ -1,10 +1,13 @@
-package fr.iutlannion;
+package fr.iutlannion.core;
 
-import java.util.ArrayList;
 
 import fr.iutlannion.auth.Admin;
 import fr.iutlannion.auth.Conducteur;
 import fr.iutlannion.auth.Passager;
+import fr.iutlannion.manager.Admins;
+import fr.iutlannion.manager.Conducteurs;
+import fr.iutlannion.manager.Passagers;
+import fr.iutlannion.manager.Voitures;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,12 +18,7 @@ public class App extends Application {
     }
 
     public static void main( String[] args )
-    {
-    	ArrayList<Admin> admins = new ArrayList<Admin>();
-    	ArrayList<Conducteur> conducteurs = new ArrayList<Conducteur>();
-    	ArrayList<Passager> passagers = new ArrayList<Passager>();
-    	ArrayList<Voiture> voitures = new ArrayList<Voiture>();
-    	
+    {	
     	// Admins
     	Admin manon = new Admin("Goasguen", "Manon", "manon@email.com", "manon");
     	Admin ronan = new Admin("Renoux", "Ronan", "ronan@email.com", "ronan");
@@ -28,34 +26,34 @@ public class App extends Application {
     	Admin remi = new Admin("Bastille", "Rémi", "remi@email.com", "remi");
     	Admin mathis = new Admin("Boultoureau", "Mathis", "mathis@email.com", "mathis");
     	
-    	admins.add(manon);
-    	admins.add(ronan);
-    	admins.add(erwan);
-    	admins.add(remi);
-    	admins.add(mathis);
+    	Admins.getInstance().add(manon);
+    	Admins.getInstance().add(ronan);
+    	Admins.getInstance().add(erwan);
+    	Admins.getInstance().add(remi);
+    	Admins.getInstance().add(mathis);
     	
     	// Voitures
     	Voiture v1 = new Voiture("AA-111-AA", "Tesla", "Electrique", "Noir", "Sportive");
     	Voiture v2 = new Voiture("BB-222-BBB", "Peugeot", "Gazole", "Bleu", "Citadine");
     	Voiture v3 = new Voiture("CCC-333-CC", "Citroen", "SP95", "Blanc", "Citadine");
     	
-    	voitures.add(v1);
-    	voitures.add(v2);
-    	voitures.add(v3);
+    	Voitures.getInstance().add(v1);
+    	Voitures.getInstance().add(v2);
+    	Voitures.getInstance().add(v3);
     	
     	// Conducteurs
     	Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1);
     	Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "georges", 3.2, 10000, v2);
     	
-    	conducteurs.add(c1);
-    	conducteurs.add(c2);
+    	Conducteurs.getInstance().add(c1);
+    	Conducteurs.getInstance().add(c2);
     	
     	// Passagers
     	Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email", "daniel");
     	Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde");
     	
-    	passagers.add(p1);
-    	passagers.add(p2);
+    	Passagers.getInstance().add(p1);
+    	Passagers.getInstance().add(p2);
     	
         launch();
     }

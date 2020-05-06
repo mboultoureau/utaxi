@@ -87,7 +87,7 @@
 					<configuration>
 						<archive>
 							<manifest>
-								<mainClass>fr.iutlannion.App</mainClass>
+								<mainClass>fr.iutlannion.core.App</mainClass>
 							</manifest>
 						</archive>
 					</configuration>
@@ -97,7 +97,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.4</version>
 				<configuration>
-					<mainClass>fr.iutlannion.App</mainClass>
+					<mainClass>fr.iutlannion.core.App</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

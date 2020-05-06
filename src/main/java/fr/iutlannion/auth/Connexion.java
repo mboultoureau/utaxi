@@ -1,6 +1,5 @@
 package fr.iutlannion.auth;
 
-import fr.iutlannion.Window;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -16,8 +15,6 @@ import javafx.stage.Stage;
 
 public class Connexion extends Stage {
 	
-	private Window window;
-	
     private Label label1 = new Label("Connexion à PStage");
     private Label label2 = new Label("Nom :");
     private Label label3 = new Label("Mot de passe :");
@@ -28,16 +25,12 @@ public class Connexion extends Stage {
     private TextField textField = new TextField();
     private PasswordField passwordField = new PasswordField();
     
-    public Connexion(Window w) {
+    public Connexion() {
     	
-    	this.window = w;
-    	
-    	final Connexion self = this;
     	
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println("Hello World");
-                self.window.goToPrincipal();
+            	System.out.println("Bouton cliqué");
             }
         }));
     }

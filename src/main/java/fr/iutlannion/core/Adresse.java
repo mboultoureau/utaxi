@@ -1,4 +1,4 @@
-package fr.iutlannion;
+package fr.iutlannion.core;
 
 public class Adresse {
     private String rue;

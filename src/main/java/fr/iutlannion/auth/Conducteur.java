@@ -2,7 +2,7 @@ package fr.iutlannion.auth;
 
 import java.util.ArrayList;
 
-import fr.iutlannion.Voiture;
+import fr.iutlannion.core.Voiture;
 
 public class Conducteur extends Personne {
 
