@@ -34,4 +34,8 @@ abstract public class Personne {
 	public int getId() {
 		return this.id;
 	}
+
+	public String getMotDePasse() {
+		return this.motDePasse;
+	}
 }

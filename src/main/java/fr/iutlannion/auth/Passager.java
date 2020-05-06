@@ -2,7 +2,7 @@ package fr.iutlannion.auth;
 
 public class Passager extends Personne {
 
-    Passager(String nom, String prenom, String email, String motDePasse){
+    public Passager(String nom, String prenom, String email, String motDePasse){
         super(nom, prenom, email, motDePasse);
     }
 
