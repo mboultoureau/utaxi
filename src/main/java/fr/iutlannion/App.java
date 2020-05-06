@@ -56,8 +56,7 @@ public class App extends Application {
     	
     	passagers.add(p1);
     	passagers.add(p2);
-
-        System.out.println( "Hello World!" );
+    	
         launch();
     }
 }
