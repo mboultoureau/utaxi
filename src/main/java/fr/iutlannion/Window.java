@@ -1,14 +1,18 @@
 package fr.iutlannion;
 
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Window extends Stage {
 
@@ -67,8 +71,8 @@ public class Window extends Stage {
         gridPane.add(passwordField, 1, 2);
         gridPane.add(buttonOk, 1, 3);
         gridPane.add(buttonAnnuler, 1, 3);
-        gridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
-        gridPane.setHalignment(label1, HPos.CENTER);
+        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
+        GridPane.setHalignment(label1, HPos.CENTER);
 
         return gridPane;
     }
