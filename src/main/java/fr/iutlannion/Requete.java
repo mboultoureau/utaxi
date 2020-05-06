@@ -1,5 +1,8 @@
 package fr.iutlannion;
 
+import fr.iutlannion.auth.Conducteur;
+import fr.iutlannion.auth.Passager;
+
 public class Requete {
     private Passager passager;
     private Conducteur conducteur;

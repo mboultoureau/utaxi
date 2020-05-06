@@ -1,4 +1,4 @@
-package fr.iutlannion;
+package fr.iutlannion.auth;
 
 public class Admin extends Personne {
 

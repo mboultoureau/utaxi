@@ -1,4 +1,4 @@
-package fr.iutlannion;
+package fr.iutlannion.auth;
 
 abstract public class Personne {
 
