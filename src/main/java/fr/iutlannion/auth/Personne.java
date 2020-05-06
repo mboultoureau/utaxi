@@ -5,28 +5,33 @@ abstract public class Personne {
     private String nom;
     private String prenom;
     private String email;
-    private String id;
+    private String motDePasse;
+    private static int nb = 0;
+    private int id;
 
-    Personne(String nom, String prenom, String email, String id) {
+    Personne(String nom, String prenom, String email, String motDePasse) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.id = id;
+        this.motDePasse = motDePasse;
+        
+        nb++;
+        this.id = nb;
     }
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public String getPrenom() {
-		return prenom;
+		return this.prenom;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
-	public String getId() {
-		return id;
+	public int getId() {
+		return this.id;
 	}
 }

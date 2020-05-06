@@ -12,9 +12,9 @@ public class Conducteur extends Personne {
     private ArrayList<Float>notes;
     private Voiture voiture;
 
-    Conducteur(String nom, String prenom, String email, String id, double tarif, double nbKmParcourus, float note, String immatriculation, String marque, String typeEssence, String couleur, String type){
+    Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus, float note, String immatriculation, String marque, String typeEssence, String couleur, String type){
 
-        super(nom, prenom, email, id);
+        super(nom, prenom, email, motDePasse);
         
         this.notes = new ArrayList<Float>();
         this.tarif = tarif;

@@ -1,9 +1,10 @@
 package fr.iutlannion.auth;
 
 public class Admin extends Personne {
+	
 
-    Admin(String nom, String prenom, String email, String id){
-        super(nom, prenom, email, id);
+    public Admin(String nom, String prenom, String email, String motDePasse){
+    	super(nom, prenom, email, motDePasse);
     }
 
     public void modifierInfo() {
