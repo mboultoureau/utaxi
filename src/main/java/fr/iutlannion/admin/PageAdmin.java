@@ -25,7 +25,10 @@ public class PageAdmin extends Stage {
             .observableArrayList(Passagers.getInstance().getListPassager());
     private ListView<Passager> listViewPassager = new ListView<Passager>(passagers);
 
-    private ListView listViewConducteur = new ListView();
+    private ObservableList<Conducteur> conducteurs = FXCollections
+            .observableArrayList(Conducteurs.getInstance().getListConducteur());
+    private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
+
     private Button buttonEditAdmin = new Button("Edit Admin info");
     private Button buttonEditPassager = new Button("Edit Passager info");
 

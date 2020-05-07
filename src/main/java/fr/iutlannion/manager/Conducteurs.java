@@ -12,6 +12,10 @@ public class Conducteurs {
 		instance = this;
 	}
 
+	public ArrayList<Conducteur> getListConducteur() {
+		return this.conducteurs;
+	}
+
 	public static Conducteurs getInstance() {
 		if (instance == null) {
 			return new Conducteurs();

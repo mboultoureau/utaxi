@@ -46,6 +46,10 @@ public class App extends Application {
 
 		Conducteurs.getInstance().add(c1);
 		Conducteurs.getInstance().add(c2);
+		c1.ajouterNote(4.5f);
+		c1.ajouterNote(4.8f);
+
+		c2.ajouterNote(4.0f);
 
 		// Passagers
 		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email", "daniel");
