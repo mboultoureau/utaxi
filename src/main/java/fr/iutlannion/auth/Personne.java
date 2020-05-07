@@ -44,7 +44,10 @@ abstract public class Personne {
 		return this.motDePasse;
 	}
 
-	public void modifierInfo(String nom) {
+	public void modifierInfo(String nom, String prenom, String email, String motdepasse) {
 		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motdepasse;
 	}
 }

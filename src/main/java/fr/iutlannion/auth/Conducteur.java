@@ -59,4 +59,14 @@ public class Conducteur extends Personne {
     public void ajouterNote(float note) {
         notes.add(note);
     }
+
+    public void modifierInfo(String nom, String prenom, String email, String motdepasse, double tarif,
+            double kmParcourus) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.motDePasse = motdepasse;
+        this.tarif = tarif;
+        this.nbKmParcourus = kmParcourus;
+    }
 }

@@ -39,7 +39,6 @@ public class PageConnexion extends Stage {
                         passwordField.getText()) != null) {
                     System.out.println("Passager");
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    System.out.println("Admin");
                     Window.getInstance().gotoPage("admin");
                 } else {
                     System.out.println("Email/mot de passe invalide");
