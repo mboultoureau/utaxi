@@ -11,14 +11,12 @@ import javafx.scene.layout.GridPane;
 
 public class MenuPrincipal {
     private Label label = new Label("Page principal");
-    private Button buttonOk = new Button("OK");
-    
- 
-    
-    public MenuPrincipal() {   	
-        buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
+    private Button buttonConnexion = new Button("Connexion");
+    private Button buttonInscription = new Button("Incription");
+
+    public MenuPrincipal() {
+        buttonConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println("Hello World");
                 Window.getInstance().gotoPage("connexion");
                 Window.getInstance().setWidth(750);
                 Window.getInstance().setHeight(500);
@@ -28,13 +26,18 @@ public class MenuPrincipal {
 
     Parent creerContenu() {
 
+        buttonConnexion.setMinSize(50, 50);
+        buttonInscription.setMinSize(50, 50);
+
         GridPane gridPane1 = new GridPane();
         gridPane1.setPadding(new Insets(10));
         gridPane1.setAlignment(Pos.CENTER);
         gridPane1.setVgap(5);
         gridPane1.setHgap(5);
         gridPane1.add(label, 0, 0);
-        gridPane1.add(buttonOk, 50, 0);
+        label.setAlignment(Pos.CENTER);
+        gridPane1.add(buttonConnexion, 0, 1);
+        gridPane1.add(buttonInscription, 1, 1);
 
         return gridPane1;
     }
