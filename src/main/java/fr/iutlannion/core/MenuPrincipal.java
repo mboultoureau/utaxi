@@ -18,8 +18,12 @@ public class MenuPrincipal {
         buttonConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Window.getInstance().gotoPage("connexion");
-                Window.getInstance().setWidth(750);
-                Window.getInstance().setHeight(500);
+            }
+        }));
+        
+        buttonInscription.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("inscription");
             }
         }));
     }

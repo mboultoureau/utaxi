@@ -1,6 +1,5 @@
 package fr.iutlannion.core;
 
-
 import fr.iutlannion.auth.Admin;
 import fr.iutlannion.auth.Conducteur;
 import fr.iutlannion.auth.Passager;
