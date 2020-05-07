@@ -7,25 +7,34 @@ import javafx.scene.shape.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import javafx.scene.input.MouseEvent;
 import javafx.collections.*;
-
-import fr.iutlannion.manager.Admins;
-import fr.iutlannion.auth.Admin;
+import javafx.event.EventHandler;
+import fr.iutlannion.manager.*;
+import fr.iutlannion.auth.*;
 
 public class PageAdmin extends Stage {
 
     private GridPane gridPane = new GridPane();
     private Label label1 = new Label("Page admin");
 
-    ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
-    ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
+    private ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
+    private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
 
-    private ListView listViewPassager = new ListView();
+    private ObservableList<Passager> passagers = FXCollections
+            .observableArrayList(Passagers.getInstance().getListPassager());
+    private ListView<Passager> listViewPassager = new ListView<Passager>(passagers);
+
     private ListView listViewConducteur = new ListView();
-    private Button button = new Button("Edit Admin info");
+    private Button buttonEditAdmin = new Button("Edit Admin info");
+    private Button buttonEditPassager = new Button("Edit Passager info");
 
     public PageAdmin() {
-
+        buttonEditAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                System.out.println(listViewAdmin.getSelectionModel().getSelectedItem());
+            }
+        }));
     }
 
     public Parent creerContenu() {
@@ -43,7 +52,8 @@ public class PageAdmin extends Stage {
         gridPane.add(listViewAdmin, 0, 1);
         gridPane.add(listViewPassager, 0, 2);
         gridPane.add(listViewConducteur, 0, 3);
-        gridPane.add(button, 1, 2);
+        gridPane.add(buttonEditAdmin, 1, 1);
+        gridPane.add(buttonEditPassager, 1, 2);
 
         return gridPane;
     }

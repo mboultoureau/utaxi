@@ -12,6 +12,10 @@ public class Passagers {
 		instance = this;
 	}
 
+	public ArrayList<Passager> getListPassager() {
+		return this.passagers;
+	}
+
 	public static Passagers getInstance() {
 		if (instance == null) {
 			return new Passagers();
