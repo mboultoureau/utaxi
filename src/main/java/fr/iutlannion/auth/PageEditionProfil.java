@@ -6,8 +6,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class PageEditionProfil extends Stage {
-	GridPane gridPane = new GridPane();
-	Label salut = new Label("Salut");
+	private GridPane gridPane = new GridPane();
+	private Label salut = new Label("Salut");
+
 	
 	public PageEditionProfil() {
 		
@@ -15,7 +16,7 @@ public class PageEditionProfil extends Stage {
 	
 	public Parent creerContenu() {
 		
-		gridPane.getChildren().addAll(salut);
+		gridPane.add(salut, 1, 1);
 		
 		return gridPane;
 	}

@@ -27,7 +27,6 @@ public class Window extends Stage {
 		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 300, 200));
 		scenes.put("connexion", new Scene(connexion.creerContenu()));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
-		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu()));
 		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));
 		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu(), 1200, 800));
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
@@ -36,6 +35,10 @@ public class Window extends Stage {
 	public Window() {
 		instance = this;
 
+		this.setTitle("UTaxi");
+		this.setMinHeight(480);
+		this.setMinWidth(640);
+		
 		this.gotoPage("mainMenu");
 	}
 
