@@ -19,6 +19,10 @@ public class Admins {
 		return instance;
 	}
 
+	public ArrayList<Admin> getListAdmin() {
+		return this.admins;
+	}
+
 	public void add(Admin a) {
 		if (!this.admins.contains(a)) {
 			this.admins.add(a);
@@ -44,6 +48,10 @@ public class Admins {
 			}
 		}
 		return res;
+	}
+
+	public Admin getAdmin(int index) {
+		return admins.get(index);
 	}
 
 }

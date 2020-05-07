@@ -7,21 +7,24 @@ import javafx.scene.shape.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import javafx.collections.*;
+
+import fr.iutlannion.manager.Admins;
+import fr.iutlannion.auth.Admin;
 
 public class PageAdmin extends Stage {
 
     private GridPane gridPane = new GridPane();
     private Label label1 = new Label("Page admin");
-    private ListView listViewAdmin = new ListView();
+
+    ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
+    ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
+
     private ListView listViewPassager = new ListView();
     private ListView listViewConducteur = new ListView();
-    private Button button = new Button("Read Selected Value");
+    private Button button = new Button("Edit Admin info");
 
     public PageAdmin() {
-
-        listViewAdmin.getItems().add("Item 1");
-        listViewAdmin.getItems().add("Item 2");
-        listViewAdmin.getItems().add("Item 1");
 
     }
 
