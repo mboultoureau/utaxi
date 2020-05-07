@@ -1,8 +1,10 @@
-package fr.iutlannion.core;
+
 
 import fr.iutlannion.auth.Admin;
 import fr.iutlannion.auth.Conducteur;
 import fr.iutlannion.auth.Passager;
+import fr.iutlannion.core.Voiture;
+import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Admins;
 import fr.iutlannion.manager.Conducteurs;
 import fr.iutlannion.manager.Passagers;

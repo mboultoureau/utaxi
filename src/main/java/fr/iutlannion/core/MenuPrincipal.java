@@ -13,9 +13,8 @@ public class MenuPrincipal {
     private Label label = new Label("Page principal");
     private Button buttonConnexion = new Button("Connexion");
     private Button buttonInscription = new Button("Incription");
-    private Button buttonEditer = new Button("Editer profil");
+    private Button buttonEnregistrementVehicule = new Button("Incription");
 
-    
     public MenuPrincipal() {
         buttonConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
@@ -28,10 +27,10 @@ public class MenuPrincipal {
                 Window.getInstance().gotoPage("inscription");
             }
         }));
-        
-        buttonEditer.setOnMouseClicked((new EventHandler<MouseEvent>() {
+
+        buttonEnregistrementVehicule.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Window.getInstance().gotoPage("editionProfil");
+                Window.getInstance().gotoPage("pageEnregistrementVehicule");
             }
         }));
     }
@@ -50,7 +49,7 @@ public class MenuPrincipal {
         label.setAlignment(Pos.CENTER);
         gridPane1.add(buttonConnexion, 0, 1);
         gridPane1.add(buttonInscription, 1, 1);
-        gridPane1.add(buttonEditer, 1, 2);
+        gridPane1.add(buttonEnregistrementVoiture, 2, 2);
 
         return gridPane1;
     }
