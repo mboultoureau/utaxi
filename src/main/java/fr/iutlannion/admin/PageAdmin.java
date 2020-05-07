@@ -1,5 +1,5 @@
 package fr.iutlannion.admin;
 
-public class AdminPanel {
+public class PageAdmin {
 
 }

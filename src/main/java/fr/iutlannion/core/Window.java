@@ -2,7 +2,7 @@ package fr.iutlannion.core;
 
 import java.util.HashMap;
 
-import fr.iutlannion.auth.Connexion;
+import fr.iutlannion.auth.PageConnexion;
 import fr.iutlannion.auth.Inscription;
 import fr.iutlannion.auth.PageEditionProfil;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class Window extends Stage {
 	private static HashMap<String, Scene> scenes;
 
 	private static MenuPrincipal menuPrincipal = new MenuPrincipal();
-	private static Connexion connexion = new Connexion();
+	private static PageConnexion connexion = new PageConnexion();
 	private static Inscription inscription = new Inscription();
 	private static PageEditionProfil pageEditionProfil = new PageEditionProfil();
 	
