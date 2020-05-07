@@ -14,6 +14,7 @@ public class MenuPrincipal {
     private Button buttonConnexion = new Button("Connexion");
     private Button buttonInscription = new Button("Incription");
     private Button buttonEditer = new Button("Editer profil");
+    private Button buttonEnregistrerVoiture = new Button("Enregistrer Voiture");
 
     
     public MenuPrincipal() {
@@ -34,6 +35,12 @@ public class MenuPrincipal {
                 Window.getInstance().gotoPage("editionProfil");
             }
         }));
+
+        buttonEnregistrerVoiture.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("enregistrementVoiture");
+            }
+        }));
     }
 
     Parent creerContenu() {
@@ -51,6 +58,7 @@ public class MenuPrincipal {
         gridPane1.add(buttonConnexion, 0, 1);
         gridPane1.add(buttonInscription, 1, 1);
         gridPane1.add(buttonEditer, 1, 2);
+        gridPane1.add(buttonEnregistrerVoiture, 1, 3);
 
         return gridPane1;
     }

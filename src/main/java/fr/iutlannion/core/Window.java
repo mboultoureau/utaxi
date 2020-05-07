@@ -5,6 +5,7 @@ import java.util.HashMap;
 import fr.iutlannion.auth.PageConnexion;
 import fr.iutlannion.auth.Inscription;
 import fr.iutlannion.auth.PageEditionProfil;
+import fr.iutlannion.auth.PageEnregistrementVoiture;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,6 +18,7 @@ public class Window extends Stage {
 	private static PageConnexion connexion = new PageConnexion();
 	private static Inscription inscription = new Inscription();
 	private static PageEditionProfil pageEditionProfil = new PageEditionProfil();
+	private static PageEnregistrementVoiture pageEnregistrementVoiture = new PageEnregistrementVoiture();
 	
 	static {
 		scenes = new HashMap<String, Scene>();
@@ -24,6 +26,7 @@ public class Window extends Stage {
 		scenes.put("connexion", new Scene(connexion.creerContenu()));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
 		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu()));
+		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));
 	}
 
 	public Window() {
