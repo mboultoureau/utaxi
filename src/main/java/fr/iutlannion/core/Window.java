@@ -3,7 +3,8 @@ package fr.iutlannion.core;
 import java.util.HashMap;
 
 import fr.iutlannion.auth.PageConnexion;
-import fr.iutlannion.auth.Inscription;
+import fr.iutlannion.auth.PageEditionProfil;
+import fr.iutlannion.auth.PageInscription;
 import fr.iutlannion.admin.PageAdmin;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,8 +15,9 @@ public class Window extends Stage {
 	private static HashMap<String, Scene> scenes;
 
 	private static MenuPrincipal menuPrincipal = new MenuPrincipal();
+	private static PageEditionProfil pageEditionProfil = new PageEditionProfil();
 	private static PageConnexion connexion = new PageConnexion();
-	private static Inscription inscription = new Inscription();
+	private static PageInscription inscription = new PageInscription();
 	private static PageAdmin admin = new PageAdmin();
 
 	static {
@@ -23,6 +25,7 @@ public class Window extends Stage {
 		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 300, 200));
 		scenes.put("connexion", new Scene(connexion.creerContenu()));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
+		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu(), 1200, 800));
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
 	}
 
