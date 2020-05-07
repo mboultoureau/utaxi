@@ -12,25 +12,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import fr.iutlannion.manager.Conducteurs;
 
 public class Connexion extends Stage {
-	
+
     private Label label1 = new Label("Connexion à PStage");
     private Label label2 = new Label("Nom :");
     private Label label3 = new Label("Mot de passe :");
-    
+
     private Button buttonAnnuler = new Button("Annuler");
     private Button buttonOk = new Button("OK");
-    
+
     private TextField textField = new TextField();
     private PasswordField passwordField = new PasswordField();
-    
+
     public Connexion() {
-    	
-    	
+
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-            	System.out.println("Bouton cliqué");
+                System.out.println(Conducteurs.getInstance().verifConnexion("georges@email.com", "georges"));
             }
         }));
     }
@@ -59,5 +59,5 @@ public class Connexion extends Stage {
 
         return gridPane;
     }
-    
+
 }
