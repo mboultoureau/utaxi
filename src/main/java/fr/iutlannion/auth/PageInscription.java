@@ -33,6 +33,14 @@ public class PageInscription extends Stage {
 
 		
 		gridPane.add(labelLastName, 1, 2);
+		gridPane.add(labelLastName, 1, 2);
+
+		gridPane.add(labelLastName, 1, 2);
+		gridPane.add(labelLastName, 1, 2);
+
+		gridPane.add(labelLastName, 1, 2);
+		gridPane.add(labelLastName, 1, 2);
+
 		
 		return gridPane;
 	}
