@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import fr.iutlannion.manager.Conducteurs;
 import fr.iutlannion.manager.Passagers;
 import fr.iutlannion.manager.Admins;
+import fr.iutlannion.core.Window;
 
 public class PageConnexion extends Stage {
 
@@ -39,6 +40,7 @@ public class PageConnexion extends Stage {
                     System.out.println("Passager");
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
                     System.out.println("Admin");
+                    Window.getInstance().gotoPage("admin");
                 } else {
                     System.out.println("Email/mot de passe invalide");
                 }
