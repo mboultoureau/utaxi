@@ -18,7 +18,6 @@ public class Window extends Stage {
 	private static MenuPrincipal menuPrincipal = new MenuPrincipal();
 	private static PageEditionProfil pageEditionProfil = new PageEditionProfil();
 	private static PageEnregistrementVoiture pageEnregistrementVoiture = new PageEnregistrementVoiture();
-	
 	private static PageConnexion connexion = new PageConnexion();
 	private static PageInscription inscription = new PageInscription();
 	private static PageAdmin admin = new PageAdmin();
@@ -28,14 +27,18 @@ public class Window extends Stage {
 		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 300, 200));
 		scenes.put("connexion", new Scene(connexion.creerContenu()));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
-		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu()));
 		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));
+		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu(), 1200, 800));
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
 	}
 
 	public Window() {
 		instance = this;
 
+		this.setTitle("UTaxi");
+		this.setMinHeight(480);
+		this.setMinWidth(640);
+		
 		this.gotoPage("mainMenu");
 	}
 
