@@ -19,6 +19,10 @@ abstract public class Personne {
 		this.id = nb;
 	}
 
+	public String toString() {
+		return "Nom : " + nom + "\nPrenom : " + prenom + "\nEmail : " + email + "\nMot de passe : " + motDePasse;
+	}
+
 	public String getNom() {
 		return this.nom;
 	}

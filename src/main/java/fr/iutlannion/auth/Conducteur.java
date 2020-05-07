@@ -23,10 +23,6 @@ public class Conducteur extends Personne {
         this.voiture = voiture;
     }
 
-    public String toString() {
-        return "Nom : " + nom + "\nPrenom : " + prenom + "\nEmail : " + email + "\nMot de passe : " + motDePasse;
-    }
-
     public double getSalaire() {
         return 0.0;
     }

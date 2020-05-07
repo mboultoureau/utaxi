@@ -30,7 +30,8 @@ public class Connexion extends Stage {
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println(Conducteurs.getInstance().verifConnexion("georges@email.com", "georges"));
+                System.out.println(
+                        Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
             }
         }));
     }
