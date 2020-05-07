@@ -16,7 +16,7 @@ import fr.iutlannion.manager.Conducteurs;
 import fr.iutlannion.manager.Passagers;
 import fr.iutlannion.manager.Admins;
 
-public class Connexion extends Stage {
+public class PageConnexion extends Stage {
 
     private Label label1 = new Label("Connexion à PStage");
     private Label label2 = new Label("Nom :");
@@ -28,7 +28,7 @@ public class Connexion extends Stage {
     private TextField textField = new TextField();
     private PasswordField passwordField = new PasswordField();
 
-    public Connexion() {
+    public PageConnexion() {
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
