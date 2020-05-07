@@ -42,13 +42,13 @@ public class App extends Application {
 
 		// Conducteurs
 		Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1);
-		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "georges", 3.2, 10000, v2);
+		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "patrick", 3.2, 10000, v2);
 
 		Conducteurs.getInstance().add(c1);
 		Conducteurs.getInstance().add(c2);
 
 		// Passagers
-		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email", "daniel");
+		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel");
 		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde");
 
 		Passagers.getInstance().add(p1);

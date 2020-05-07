@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import fr.iutlannion.manager.Conducteurs;
+import fr.iutlannion.manager.Passagers;
+import fr.iutlannion.manager.Admins;
 
 public class Connexion extends Stage {
 
@@ -30,8 +32,16 @@ public class Connexion extends Stage {
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println(
-                        Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
+                if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
+                    System.out.println("Conducteur");
+                } else if (Passagers.getInstance().verifConnexion(textField.getText(),
+                        passwordField.getText()) != null) {
+                    System.out.println("Passager");
+                } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
+                    System.out.println("Admin");
+                } else {
+                    System.out.println("Email/mot de passe invalide");
+                }
             }
         }));
     }

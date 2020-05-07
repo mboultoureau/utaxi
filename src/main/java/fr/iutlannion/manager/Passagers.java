@@ -34,4 +34,15 @@ public class Passagers {
 			System.out.println("Ce passager n'est pas présent.");
 		}
 	}
+
+	public Passager verifConnexion(String mail, String mdp) {
+		Passager res = null;
+
+		for (int i = 0; i < passagers.size(); i++) {
+			if (passagers.get(i).getEmail().equals(mail) && passagers.get(i).getMotDePasse().equals(mdp)) {
+				res = passagers.get(i);
+			}
+		}
+		return res;
+	}
 }
