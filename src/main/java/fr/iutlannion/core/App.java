@@ -6,6 +6,7 @@ import fr.iutlannion.auth.Passager;
 import fr.iutlannion.manager.Admins;
 import fr.iutlannion.manager.Conducteurs;
 import fr.iutlannion.manager.Passagers;
+import fr.iutlannion.manager.Utilisateur;
 import fr.iutlannion.manager.Voitures;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -53,6 +54,13 @@ public class App extends Application {
     	
     	Passagers.getInstance().add(p1);
     	Passagers.getInstance().add(p2);
+    	
+    	
+    	// Utilisateur connecté
+    	Utilisateur u = new Utilisateur(c1);
+    	
+    	Utilisateur.getInstance().getPersonne().getMotDePasse();
+    	
     	
         launch();
     }
