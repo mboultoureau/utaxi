@@ -25,7 +25,7 @@ public class Window extends Stage {
 	static {
 		scenes = new HashMap<String, Scene>();
 		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 300, 200));
-		scenes.put("connexion", new Scene(connexion.creerContenu()));
+		scenes.put("connexion", new Scene(connexion.creerContenu(), 640, 480));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
 		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));
 		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu(), 1200, 800));
@@ -38,7 +38,7 @@ public class Window extends Stage {
 		this.setTitle("UTaxi");
 		this.setMinHeight(480);
 		this.setMinWidth(640);
-		
+
 		this.gotoPage("mainMenu");
 	}
 
