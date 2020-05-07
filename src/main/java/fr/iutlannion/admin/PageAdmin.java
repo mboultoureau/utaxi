@@ -20,6 +20,7 @@ public class PageAdmin extends Stage {
     private Label label2 = new Label("Liste des Admins");
     private Label label3 = new Label("Liste des Passagers");
     private Label label4 = new Label("Liste des Conducteurs");
+    private Label label5 = new Label("Nom :");
 
     private ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
     private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
@@ -35,11 +36,38 @@ public class PageAdmin extends Stage {
     private Button buttonEditAdmin = new Button("Edit Admin info");
     private Button buttonEditPassager = new Button("Edit Passager info");
     private Button buttonEditConducteur = new Button("Edit Conducteur info");
+    private Button buttonSauvegarder = new Button("Sauvegarder");
+    private TextField textFieldNom = new TextField();
+
+    private String TypeCurrentPersonne = null;
 
     public PageAdmin() {
         buttonEditAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println(listViewAdmin.getSelectionModel().getSelectedItem());
+                TypeCurrentPersonne = "Admin";
+                textFieldNom.setText(listViewAdmin.getSelectionModel().getSelectedItem().getNom());
+            }
+        }));
+
+        buttonEditPassager.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                TypeCurrentPersonne = "Passager";
+                System.out.println(listViewPassager.getSelectionModel().getSelectedItem());
+            }
+        }));
+
+        buttonEditConducteur.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                TypeCurrentPersonne = "Conducteur";
+                System.out.println(listViewConducteur.getSelectionModel().getSelectedItem());
+            }
+        }));
+
+        buttonSauvegarder.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                if (TypeCurrentPersonne.equals("Admin")) {
+                    listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText());
+                }
             }
         }));
     }
@@ -66,6 +94,9 @@ public class PageAdmin extends Stage {
         gridPane.add(buttonEditAdmin, 0, 3);
         gridPane.add(buttonEditPassager, 1, 3);
         gridPane.add(buttonEditConducteur, 2, 3);
+        gridPane.add(label5, 0, 4);
+        gridPane.add(textFieldNom, 0, 5);
+        gridPane.add(buttonSauvegarder, 3, 6);
 
         gridPane.setHalignment(buttonEditAdmin, HPos.CENTER);
         gridPane.setHalignment(buttonEditPassager, HPos.CENTER);

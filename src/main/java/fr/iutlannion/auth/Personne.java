@@ -20,7 +20,8 @@ abstract public class Personne {
 	}
 
 	public String toString() {
-		return "Nom : " + nom + "\nPrenom : " + prenom + "\nEmail : " + email + "\nMot de passe : " + motDePasse;
+		return "Id : " + id + "\nNom : " + nom + "\nPrenom : " + prenom + "\nEmail : " + email + "\nMot de passe : "
+				+ motDePasse;
 	}
 
 	public String getNom() {
@@ -41,5 +42,9 @@ abstract public class Personne {
 
 	public String getMotDePasse() {
 		return this.motDePasse;
+	}
+
+	public void modifierInfo(String nom) {
+		this.nom = nom;
 	}
 }
