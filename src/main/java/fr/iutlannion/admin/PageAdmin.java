@@ -33,43 +33,51 @@ public class PageAdmin extends Stage {
             .observableArrayList(Conducteurs.getInstance().getListConducteur());
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
-    private Button buttonEditAdmin = new Button("Edit Admin info");
-    private Button buttonEditPassager = new Button("Edit Passager info");
-    private Button buttonEditConducteur = new Button("Edit Conducteur info");
     private Button buttonSauvegarder = new Button("Sauvegarder");
     private TextField textFieldNom = new TextField();
 
     private String TypeCurrentPersonne = null;
 
     public PageAdmin() {
-        buttonEditAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
+        listViewAdmin.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Admin";
+                buttonSauvegarder.setDisable(false);
                 textFieldNom.setText(listViewAdmin.getSelectionModel().getSelectedItem().getNom());
             }
-        }));
+        });
 
-        buttonEditPassager.setOnMouseClicked((new EventHandler<MouseEvent>() {
+        listViewPassager.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Passager";
-                System.out.println(listViewPassager.getSelectionModel().getSelectedItem());
+                buttonSauvegarder.setDisable(false);
+                textFieldNom.setText(listViewPassager.getSelectionModel().getSelectedItem().getNom());
             }
-        }));
+        });
 
-        buttonEditConducteur.setOnMouseClicked((new EventHandler<MouseEvent>() {
+        listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Conducteur";
-                System.out.println(listViewConducteur.getSelectionModel().getSelectedItem());
+                buttonSauvegarder.setDisable(false);
+                textFieldNom.setText(listViewConducteur.getSelectionModel().getSelectedItem().getNom());
             }
-        }));
+        });
 
         buttonSauvegarder.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (TypeCurrentPersonne.equals("Admin")) {
                     listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText());
+                } else if (TypeCurrentPersonne.equals("Passager")) {
+                    listViewPassager.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText());
+                } else if (TypeCurrentPersonne.equals("Conducteur")) {
+                    listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText());
                 }
             }
         }));
+
     }
 
     public Parent creerContenu() {
@@ -82,6 +90,7 @@ public class PageAdmin extends Stage {
         listViewAdmin.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPassager.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewConducteur.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        buttonSauvegarder.setDisable(true);
 
         /* Colonne, Ligne */
         gridPane.add(label1, 0, 0);
@@ -91,16 +100,10 @@ public class PageAdmin extends Stage {
         gridPane.add(listViewAdmin, 0, 2);
         gridPane.add(listViewPassager, 1, 2);
         gridPane.add(listViewConducteur, 2, 2);
-        gridPane.add(buttonEditAdmin, 0, 3);
-        gridPane.add(buttonEditPassager, 1, 3);
-        gridPane.add(buttonEditConducteur, 2, 3);
         gridPane.add(label5, 0, 4);
         gridPane.add(textFieldNom, 0, 5);
         gridPane.add(buttonSauvegarder, 3, 6);
 
-        gridPane.setHalignment(buttonEditAdmin, HPos.CENTER);
-        gridPane.setHalignment(buttonEditPassager, HPos.CENTER);
-        gridPane.setHalignment(buttonEditConducteur, HPos.CENTER);
         gridPane.setHalignment(label2, HPos.CENTER);
         gridPane.setHalignment(label3, HPos.CENTER);
         gridPane.setHalignment(label4, HPos.CENTER);
