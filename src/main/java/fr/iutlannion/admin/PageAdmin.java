@@ -138,6 +138,16 @@ public class PageAdmin extends Stage {
                         .setText(String.valueOf(listViewConducteur.getSelectionModel().getSelectedItem().getTarif()));
                 textFieldKmParcourus.setText(
                         String.valueOf(listViewConducteur.getSelectionModel().getSelectedItem().getNbKmParcourus()));
+                textFieldImmatriculation.setText(String.valueOf(
+                        listViewConducteur.getSelectionModel().getSelectedItem().getVoiture().getImmatriculation()));
+                textFieldMarque.setText(String
+                        .valueOf(listViewConducteur.getSelectionModel().getSelectedItem().getVoiture().getMarque()));
+                textFieldTypeEssence.setText(String.valueOf(
+                        listViewConducteur.getSelectionModel().getSelectedItem().getVoiture().getTypeEssence()));
+                textFieldCouleur.setText(String
+                        .valueOf(listViewConducteur.getSelectionModel().getSelectedItem().getVoiture().getCouleur()));
+                textFieldType.setText(String
+                        .valueOf(listViewConducteur.getSelectionModel().getSelectedItem().getVoiture().getType()));
             }
         });
 
@@ -153,7 +163,9 @@ public class PageAdmin extends Stage {
                     listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
                             textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText(),
                             Double.parseDouble(textFieldTarif.getText()),
-                            Double.parseDouble(textFieldKmParcourus.getText()));
+                            Double.parseDouble(textFieldKmParcourus.getText()), textFieldImmatriculation.getText(),
+                            textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
+                            textFieldType.getText());
                 }
             }
         }));

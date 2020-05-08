@@ -39,4 +39,14 @@ public class Voiture {
 	public String getType() {
 		return type;
 	}
+
+	public Voiture modifierInfo(String immatriculation, String marque, String typeessence, String couleur,
+			String type) {
+		this.immatriculation = immatriculation;
+		this.marque = marque;
+		this.typeEssence = typeessence;
+		this.couleur = couleur;
+		this.type = type;
+		return this;
+	}
 }
