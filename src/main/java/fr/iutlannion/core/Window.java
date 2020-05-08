@@ -24,7 +24,7 @@ public class Window extends Stage {
 
 	static {
 		scenes = new HashMap<String, Scene>();
-		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 300, 200));
+		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu()));
 		scenes.put("connexion", new Scene(connexion.creerContenu(), 640, 480));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
 		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));

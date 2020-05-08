@@ -45,6 +45,12 @@ public class PageConnexion extends Stage {
                 }
             }
         }));
+        
+        buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("mainMenu");
+            }
+        }));
     }
 
     public Parent creerContenu() {
