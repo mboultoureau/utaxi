@@ -44,6 +44,7 @@ public class PageAdmin extends Stage {
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
     private Button buttonSauvegarder = new Button("Sauvegarder");
+    private Button buttonSupprimer = new Button("Supprimer");
     private TextField textFieldNom = new TextField();
     private TextField textFieldPrenom = new TextField();
     private TextField textFieldEmail = new TextField();
@@ -64,6 +65,7 @@ public class PageAdmin extends Stage {
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Admin";
                 buttonSauvegarder.setDisable(false);
+                buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -90,6 +92,7 @@ public class PageAdmin extends Stage {
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Passager";
                 buttonSauvegarder.setDisable(false);
+                buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -116,6 +119,7 @@ public class PageAdmin extends Stage {
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Conducteur";
                 buttonSauvegarder.setDisable(false);
+                buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(true);
                 textFieldKmParcourus.setVisible(true);
                 textFieldImmatriculation.setVisible(true);
@@ -153,6 +157,8 @@ public class PageAdmin extends Stage {
 
         buttonSauvegarder.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
+                buttonSauvegarder.setDisable(true);
+                buttonSupprimer.setDisable(true);
                 if (TypeCurrentPersonne.equals("Admin")) {
                     listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
                             textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
@@ -167,6 +173,54 @@ public class PageAdmin extends Stage {
                             textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
                             textFieldType.getText());
                 }
+                listViewAdmin.getSelectionModel().clearSelection();
+                listViewPassager.getSelectionModel().clearSelection();
+                listViewConducteur.getSelectionModel().clearSelection();
+                textFieldNom.setText("");
+                textFieldPrenom.setText("");
+                textFieldEmail.setText("");
+                textFieldMotdepasse.setText("");
+                textFieldTarif.setText("");
+                textFieldKmParcourus.setText("");
+                textFieldImmatriculation.setText("");
+                textFieldMarque.setText("");
+                textFieldTypeEssence.setText("");
+                textFieldCouleur.setText("");
+                textFieldType.setText("");
+            }
+        }));
+
+        buttonSupprimer.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                textFieldNom.setText("");
+                textFieldPrenom.setText("");
+                textFieldEmail.setText("");
+                textFieldMotdepasse.setText("");
+                textFieldTarif.setText("");
+                textFieldKmParcourus.setText("");
+                textFieldImmatriculation.setText("");
+                textFieldMarque.setText("");
+                textFieldTypeEssence.setText("");
+                textFieldCouleur.setText("");
+                textFieldType.setText("");
+                buttonSauvegarder.setDisable(true);
+                buttonSupprimer.setDisable(true);
+                if (TypeCurrentPersonne.equals("Admin")) {
+                    Admins.getInstance().remove(listViewAdmin.getSelectionModel().getSelectedItem());
+                    admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
+                    listViewAdmin.setItems(admins);
+                } else if (TypeCurrentPersonne.equals("Passager")) {
+                    Passagers.getInstance().remove(listViewPassager.getSelectionModel().getSelectedItem());
+                    passagers.remove(listViewPassager.getSelectionModel().getSelectedItem());
+                    listViewPassager.setItems(passagers);
+                } else if (TypeCurrentPersonne.equals("Conducteur")) {
+                    Conducteurs.getInstance().remove(listViewConducteur.getSelectionModel().getSelectedItem());
+                    conducteurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
+                    listViewConducteur.setItems(conducteurs);
+                }
+                listViewAdmin.getSelectionModel().clearSelection();
+                listViewPassager.getSelectionModel().clearSelection();
+                listViewConducteur.getSelectionModel().clearSelection();
             }
         }));
 
@@ -177,7 +231,7 @@ public class PageAdmin extends Stage {
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setVgap(5);
         gridPane.setHgap(5);
-        gridPane.setGridLinesVisible(true);
+        /* gridPane.setGridLinesVisible(true); */
 
         listViewAdmin.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPassager.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -186,6 +240,7 @@ public class PageAdmin extends Stage {
         listViewPassager.setMaxHeight(380);
         listViewConducteur.setMaxHeight(380);
         buttonSauvegarder.setDisable(true);
+        buttonSupprimer.setDisable(true);
         textFieldTarif.setVisible(false);
         textFieldKmParcourus.setVisible(false);
         textFieldImmatriculation.setVisible(false);
@@ -201,9 +256,7 @@ public class PageAdmin extends Stage {
         label14.setVisible(false);
         label15.setVisible(false);
 
-        /*
-         * Colonne, Ligne ronan@email.com
-         */
+        /* Colonne, Ligne */
         gridPane.add(label1, 0, 0);
         gridPane.add(label2, 0, 1);
         gridPane.add(label3, 1, 1);
@@ -234,11 +287,13 @@ public class PageAdmin extends Stage {
         gridPane.add(textFieldCouleur, 0, 11);
         gridPane.add(textFieldType, 1, 11);
         gridPane.add(buttonSauvegarder, 3, 11);
+        gridPane.add(buttonSupprimer, 3, 10);
 
         gridPane.setHalignment(label2, HPos.CENTER);
         gridPane.setHalignment(label3, HPos.CENTER);
         gridPane.setHalignment(label4, HPos.CENTER);
-        gridPane.setHalignment(buttonSauvegarder, HPos.RIGHT);
+        gridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
+        gridPane.setHalignment(buttonSupprimer, HPos.LEFT);
 
         return gridPane;
     }
