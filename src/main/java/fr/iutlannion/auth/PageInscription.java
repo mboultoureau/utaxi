@@ -12,8 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -53,7 +53,7 @@ public class PageInscription extends Stage {
 	private TextField cTarifField = new TextField();
 	private CheckBox cMajeur = new CheckBox("Je reconnais être majeur dans le pays où je m'inscrit.");
 	private CheckBox cConditions = new CheckBox("Je reconnais avoir lu les conditions générales d'utilisation et de ventes et les acceptent.");
-	private Button cBack = new Button("J'ai déjà un compte");
+	private Button cConnexion = new Button("J'ai déjà un compte");
 	private Button cNext = new Button("Suivant");
 	
 	// Passager
@@ -70,17 +70,30 @@ public class PageInscription extends Stage {
 	private TextField pConfirmerMdpField = new PasswordField();
 	private CheckBox pMajeur = new CheckBox("Je reconnais être majeur dans le pays où je m'inscrit.");
 	private CheckBox pConditions = new CheckBox("Je reconnais avoir lu les conditions générales d'utilisation et de ventes et les acceptent.");
-	private Button pBack = new Button("J'ai déjà un compte");
+	private Button pConnexion = new Button("J'ai déjà un compte");
 	private Button pNext = new Button("Suivant");
 	
+	
 
-	public PageInscription() {
+	public PageInscription() {		
         backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Window.getInstance().gotoPage("mainMenu");
             }
         }));
-
+        
+        
+        pConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("connexion");
+            }
+        }));
+        
+        cConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("connexion");
+            }
+        }));
 	}
 
 	public Parent creerContenu() {
@@ -127,7 +140,7 @@ public class PageInscription extends Stage {
 		conducteurPane.add(cTarifField, 1, 5);
 		conducteurPane.add(cMajeur, 0, 8, 2, 1);
 		conducteurPane.add(cConditions, 0, 9, 2, 1);
-		conducteurPane.add(cBack, 0, 12);
+		conducteurPane.add(cConnexion, 0, 12);
 		conducteurPane.add(cNext, 1, 12);
 
 		GridPane.setHalignment(cNext, HPos.RIGHT);
@@ -157,7 +170,7 @@ public class PageInscription extends Stage {
 		passagerPane.add(pConfirmerMdpField, 1, 3);
 		passagerPane.add(pMajeur, 0, 8, 2, 1);
 		passagerPane.add(pConditions, 0, 9, 2, 1);
-		passagerPane.add(pBack, 0, 12);
+		passagerPane.add(pConnexion, 0, 12);
 		passagerPane.add(pNext, 1, 12);
 		
 		GridPane.setHalignment(pNext, HPos.RIGHT);
