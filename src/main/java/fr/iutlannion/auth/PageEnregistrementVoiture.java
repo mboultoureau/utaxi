@@ -104,6 +104,7 @@ public class PageEnregistrementVoiture extends Stage {
 
 
 		root.setTop(header);
+		root.setCenter(voiture);
 		
 		return root;
 
