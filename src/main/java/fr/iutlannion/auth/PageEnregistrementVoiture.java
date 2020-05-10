@@ -45,6 +45,7 @@ public class PageEnregistrementVoiture extends Stage {
 	private TextField fcouleur = new TextField();
 	private Label type = new Label("Type");
 	private TextField ftype = new TextField();
+	private Button annuler = new Button("Annuler");
 	private Button buttonSuivant = new Button("Next");
 
 	public PageEnregistrementVoiture() {
@@ -93,6 +94,7 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.add(ftEss, 0, 5);
 		voiture.add(type, 0, 6);
 		voiture.add(ftype, 0, 7);
+		voiture.add(annuler, 0, 9);
 		voiture.add(buttonSuivant, 1, 9);
 
 		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
