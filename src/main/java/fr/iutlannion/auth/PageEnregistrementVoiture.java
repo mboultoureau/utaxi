@@ -101,7 +101,7 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.setMinWidth(640);
 		voiture.setHgap(30);
 		voiture.setVgap(10);
-
+		GridPane.setHgrow(imat, Priority.ALWAYS);
 
 		root.setTop(header);
 		root.setCenter(voiture);
