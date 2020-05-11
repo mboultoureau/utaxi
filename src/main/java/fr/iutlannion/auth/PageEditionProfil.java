@@ -30,11 +30,12 @@ public class PageEditionProfil extends Stage {
 	
 	//CONTENU
 	private GridPane gridPane = new GridPane();
+	
 	private Label label1 = new Label("Nom :");
 	private Label label2 = new Label("Prénom :");
 	private Label label3 = new Label("Mail :");
 	private Label label4 = new Label("Mot de passe :");
-	private Label actuel = new Label(Utilisateur.getInstance().getPersonne().getMotDePasse());
+	private Label actuel = new Label("actuel");
 	private Label nv = new Label("nouveau");
 	private Label erreur = new Label("Erreur de mot de passe");
 	
@@ -74,7 +75,7 @@ public class PageEditionProfil extends Stage {
 	}
 	
 	public Parent creerContenu() {
-		header.setMinWidth(640);
+		
 		header.setPadding(new Insets(0, 20, 0, 20));
 		
 		header.setPrefHeight(50);
@@ -105,10 +106,11 @@ public class PageEditionProfil extends Stage {
 			Label nom = new Label(Utilisateur.getInstance().getPersonne().getNom());
 			Label prenom =new Label(Utilisateur.getInstance().getPersonne().getPrenom());
 			Label mail = new Label(Utilisateur.getInstance().getPersonne().getEmail());
-		 GridPane gridPane = new GridPane();
+		    GridPane gridPane = new GridPane();
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(5);
 	        gridPane.setHgap(5);
+	        gridPane.setAlignment(Pos.TOP_CENTER);
 	        
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);
