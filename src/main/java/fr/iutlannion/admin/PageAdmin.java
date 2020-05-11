@@ -26,7 +26,6 @@ public class PageAdmin extends Stage {
 
     private BorderPane root = new BorderPane();
     private GridPane gridPane = new GridPane();
-    private Label label1 = new Label("Page admin");
     private Label label2 = new Label("Liste des Admins");
     private Label label3 = new Label("Liste des Passagers");
     private Label label4 = new Label("Liste des Conducteurs");
@@ -235,6 +234,20 @@ public class PageAdmin extends Stage {
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
                 buttonAjouterAdmin.setDisable(false);
+                textFieldTarif.setVisible(false);
+                textFieldKmParcourus.setVisible(false);
+                textFieldImmatriculation.setVisible(false);
+                textFieldMarque.setVisible(false);
+                textFieldTypeEssence.setVisible(false);
+                textFieldCouleur.setVisible(false);
+                textFieldType.setVisible(false);
+                label9.setVisible(false);
+                label10.setVisible(false);
+                label11.setVisible(false);
+                label12.setVisible(false);
+                label13.setVisible(false);
+                label14.setVisible(false);
+                label15.setVisible(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
                     Admins.getInstance().remove(listViewAdmin.getSelectionModel().getSelectedItem());
                     admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
@@ -327,7 +340,6 @@ public class PageAdmin extends Stage {
         label15.setVisible(false);
 
         /* Colonne, Ligne */
-        gridPane.add(label1, 0, 0);
         gridPane.add(label2, 0, 1);
         gridPane.add(label3, 1, 1);
         gridPane.add(label4, 2, 1);
