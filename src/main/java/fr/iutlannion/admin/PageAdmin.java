@@ -12,6 +12,8 @@ import javafx.collections.*;
 import javafx.event.EventHandler;
 import fr.iutlannion.manager.*;
 import fr.iutlannion.auth.*;
+import fr.iutlannion.core.*;
+import fr.iutlannion.core.Window;
 
 public class PageAdmin extends Stage {
 
@@ -44,6 +46,7 @@ public class PageAdmin extends Stage {
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
     private Button buttonSauvegarder = new Button("Sauvegarder");
+    private Button buttonDeconnexion = new Button("Deconnexion");
     private Button buttonSupprimer = new Button("Supprimer");
     private Button buttonAjouterAdmin = new Button("Ajouter Admin");
     private TextField textFieldNom = new TextField();
@@ -68,6 +71,7 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
+                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -96,6 +100,7 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
+                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -123,6 +128,7 @@ public class PageAdmin extends Stage {
                 TypeCurrentPersonne = "Conducteur";
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
+                buttonDeconnexion.setDisable(true);
                 buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(true);
                 textFieldKmParcourus.setVisible(true);
@@ -164,6 +170,7 @@ public class PageAdmin extends Stage {
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
                 buttonAjouterAdmin.setDisable(false);
+                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -243,7 +250,10 @@ public class PageAdmin extends Stage {
                 listViewConducteur.getSelectionModel().clearSelection();
             }
         }));
-
+        buttonDeconnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+				Window.getInstance().gotoPage("mainMenu");
+			}}));
         buttonAjouterAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
@@ -318,12 +328,14 @@ public class PageAdmin extends Stage {
         gridPane.add(buttonSauvegarder, 3, 11);
         gridPane.add(buttonSupprimer, 3, 10);
         gridPane.add(buttonAjouterAdmin, 3, 9);
+        gridPane.add(buttonDeconnexion, 3, 12);
 
-        gridPane.setHalignment(label2, HPos.CENTER);
-        gridPane.setHalignment(label3, HPos.CENTER);
-        gridPane.setHalignment(label4, HPos.CENTER);
-        gridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
-        gridPane.setHalignment(buttonSupprimer, HPos.LEFT);
+        GridPane.setHalignment(label2, HPos.CENTER);
+        GridPane.setHalignment(label3, HPos.CENTER);
+        GridPane.setHalignment(label4, HPos.CENTER);
+        GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
+        GridPane.setHalignment(buttonSupprimer, HPos.LEFT);
+        GridPane.setHalignment(buttonDeconnexion, HPos.LEFT);
 
         return gridPane;
     }
