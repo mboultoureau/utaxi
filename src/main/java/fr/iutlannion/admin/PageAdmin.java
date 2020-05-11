@@ -71,7 +71,6 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
-                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -100,7 +99,6 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
-                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -128,7 +126,6 @@ public class PageAdmin extends Stage {
                 TypeCurrentPersonne = "Conducteur";
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
-                buttonDeconnexion.setDisable(true);
                 buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(true);
                 textFieldKmParcourus.setVisible(true);
@@ -170,7 +167,6 @@ public class PageAdmin extends Stage {
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
                 buttonAjouterAdmin.setDisable(false);
-                buttonDeconnexion.setDisable(true);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -250,16 +246,19 @@ public class PageAdmin extends Stage {
                 listViewConducteur.getSelectionModel().clearSelection();
             }
         }));
-        buttonDeconnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
-			}}));
+
         buttonAjouterAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
                         textFieldMotdepasse.getText());
                 Admins.getInstance().add(newAdmin);
                 listViewAdmin.getItems().add(newAdmin);
+            }
+        }));
+
+        buttonDeconnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("connexion");
             }
         }));
 
