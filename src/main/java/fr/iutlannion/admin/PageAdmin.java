@@ -45,6 +45,7 @@ public class PageAdmin extends Stage {
 
     private Button buttonSauvegarder = new Button("Sauvegarder");
     private Button buttonSupprimer = new Button("Supprimer");
+    private Button buttonAjouterAdmin = new Button("Ajouter Admin");
     private TextField textFieldNom = new TextField();
     private TextField textFieldPrenom = new TextField();
     private TextField textFieldEmail = new TextField();
@@ -64,6 +65,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Admin";
+                buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(false);
@@ -91,6 +93,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Passager";
+                buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(false);
@@ -118,6 +121,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Conducteur";
+                buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
                 textFieldTarif.setVisible(true);
@@ -159,6 +163,21 @@ public class PageAdmin extends Stage {
             public void handle(MouseEvent event) {
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
+                buttonAjouterAdmin.setDisable(false);
+                textFieldTarif.setVisible(false);
+                textFieldKmParcourus.setVisible(false);
+                textFieldImmatriculation.setVisible(false);
+                textFieldMarque.setVisible(false);
+                textFieldTypeEssence.setVisible(false);
+                textFieldCouleur.setVisible(false);
+                textFieldType.setVisible(false);
+                label9.setVisible(false);
+                label10.setVisible(false);
+                label11.setVisible(false);
+                label12.setVisible(false);
+                label13.setVisible(false);
+                label14.setVisible(false);
+                label15.setVisible(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
                     listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
                             textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
@@ -205,6 +224,7 @@ public class PageAdmin extends Stage {
                 textFieldType.setText("");
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
+                buttonAjouterAdmin.setDisable(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
                     Admins.getInstance().remove(listViewAdmin.getSelectionModel().getSelectedItem());
                     admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
@@ -221,6 +241,15 @@ public class PageAdmin extends Stage {
                 listViewAdmin.getSelectionModel().clearSelection();
                 listViewPassager.getSelectionModel().clearSelection();
                 listViewConducteur.getSelectionModel().clearSelection();
+            }
+        }));
+
+        buttonAjouterAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
+                        textFieldMotdepasse.getText());
+                Admins.getInstance().add(newAdmin);
+                listViewAdmin.getItems().add(newAdmin);
             }
         }));
 
@@ -288,6 +317,7 @@ public class PageAdmin extends Stage {
         gridPane.add(textFieldType, 1, 11);
         gridPane.add(buttonSauvegarder, 3, 11);
         gridPane.add(buttonSupprimer, 3, 10);
+        gridPane.add(buttonAjouterAdmin, 3, 9);
 
         gridPane.setHalignment(label2, HPos.CENTER);
         gridPane.setHalignment(label3, HPos.CENTER);
