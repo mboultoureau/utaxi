@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.paint.*;
 
 public class PageEditionProfil extends Stage {
 	//HEADER
@@ -28,14 +29,15 @@ public class PageEditionProfil extends Stage {
 	private Label logo = new Label("UTaxi");
 	
 	//CONTENU
-	GridPane gridPane = new GridPane();
-	Label label1 = new Label("Nom :");
-	Label label2 = new Label("Prénom :");
-	Label label3 = new Label("Mail :");
-	Label label4 = new Label("Mot de passe :");
-	Label label5 = new Label("");
-	Label actuel = new Label("actuel");
-	Label nv = new Label("nouveau");
+	private GridPane gridPane = new GridPane();
+	private Label label1 = new Label("Nom :");
+	private Label label2 = new Label("Prénom :");
+	private Label label3 = new Label("Mail :");
+	private Label label4 = new Label("Mot de passe :");
+	private Label actuel = new Label(Utilisateur.getInstance().getPersonne().getMotDePasse());
+	private Label nv = new Label("nouveau");
+	private Label erreur = new Label("Erreur de mot de passe");
+	
 	
 	private TextField textField1 = new TextField();
 	private TextField textField2 = new TextField();
@@ -61,21 +63,11 @@ public class PageEditionProfil extends Stage {
 		
 		buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if(passwordField1.getText()==Utilisateur.getInstance().getPersonne().getMotDePasse()) {
-					if(textField1!=null) {
-						//Utilisateur.getInstance().getPersonne().setNom(textField1.getText());
-					}
-					if(textField2!=null) {
-						//Utilisateur.getInstance().getPersonne().setPrenom(textField2.getText());
-					}
-					if(textField3!=null) {
-						//Utilisateur.getInstance().getPersonne().setEmail(textField3.getText());
-					}
-					if(passwordField2!=null) {
-						//Utilisateur.getInstance().getPersonne().setMotDePasse(passwordField2.getText());
-					}
+				if(passwordField1.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
+					
+					Utilisateur.getInstance().getPersonne().modifierInfo(textField1.getText(), textField2.getText(), textField3.getText(), passwordField2.getText());
 				}else {
-					root.setBottom(new Label("Erreur de mot de passe"));
+					root.setBottom(erreur);
 				}
 			}
 		}));
@@ -108,6 +100,8 @@ public class PageEditionProfil extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 		
 		//
+			erreur.setTextFill(Color.RED);
+		
 			Label nom = new Label(Utilisateur.getInstance().getPersonne().getNom());
 			Label prenom =new Label(Utilisateur.getInstance().getPersonne().getPrenom());
 			Label mail = new Label(Utilisateur.getInstance().getPersonne().getEmail());
