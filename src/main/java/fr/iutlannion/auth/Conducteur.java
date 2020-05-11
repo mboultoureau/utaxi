@@ -23,7 +23,11 @@ public class Conducteur extends Personne {
         this.voiture = voiture;
     }
 
-    public String toString() {
+    public Conducteur() {
+    	super(null, null, null, null);
+	}
+
+	public String toString() {
         return super.toString() + "\nNotes : " + getNoteMoyenne() + "\nTarif : " + tarif + "\nNombre Km : "
                 + nbKmParcourus + "\n" + voiture.toString();
     }
@@ -50,10 +54,6 @@ public class Conducteur extends Personne {
 
     public Voiture getVoiture() {
         return voiture;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void ajouterNote(float note) {

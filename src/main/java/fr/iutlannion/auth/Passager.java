@@ -6,7 +6,11 @@ public class Passager extends Personne {
         super(nom, prenom, email, motDePasse);
     }
 
-    public void reserver() {
+    public Passager() {
+		super(null, null, null, null);
+	}
+
+	public void reserver() {
 
     }
 

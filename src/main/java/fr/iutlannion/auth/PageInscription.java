@@ -1,11 +1,16 @@
 package fr.iutlannion.auth;
 
+import java.io.StringWriter;
+
 import fr.iutlannion.core.Window;
+import fr.iutlannion.exceptions.TextFieldException;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -13,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +29,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PageInscription extends Stage {
+
+	private Conducteur c = new Conducteur();
+	private Passager p = new Passager();
 
 	private BorderPane root = new BorderPane();
 
@@ -75,7 +84,28 @@ public class PageInscription extends Stage {
 	private Button pConnexion = new Button("J'ai déjà un compte");
 	private Button pNext = new Button("Suivant");
 
+	// Alerte
+	private Alert alert = new Alert(AlertType.ERROR);
+	private TextArea textErrors = new TextArea();
+	private GridPane gridErrors = new GridPane();
+
 	public PageInscription() {
+
+		// Alerte
+		alert.setTitle("Erreur lors du formulaire");
+		textErrors.setEditable(false);
+		textErrors.setWrapText(true);
+		textErrors.setMaxWidth(Double.MAX_VALUE);
+		textErrors.setMaxHeight(Double.MAX_VALUE);
+		gridErrors.setMaxWidth(Double.MAX_VALUE);
+		gridErrors.add(textErrors, 0, 1);
+		GridPane.setVgrow(textErrors, Priority.ALWAYS);
+		GridPane.setHgrow(textErrors, Priority.ALWAYS);
+
+		// Set expandable Exception into the dialog pane.
+		alert.getDialogPane().setExpandableContent(gridErrors);
+
+		// Événements
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("mainMenu");
@@ -93,6 +123,63 @@ public class PageInscription extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
+
+		// Suivant
+		pNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				String errors = checkPassager();
+
+				if (errors.equals("")) {
+
+				} else {
+					alert.setHeaderText("Erreur lors de la création du passager");
+					alert.setContentText("Le formulaire contient quelques erreurs...");
+
+					textErrors.setText(errors);
+
+					alert.showAndWait();
+				}
+			}
+		}));
+	}
+
+	public void checkConducteur() {
+
+	}
+
+	public String checkPassager() {
+
+		StringWriter errors = new StringWriter();
+
+		try {
+			p.setNom(pNomField.getText());
+		} catch (TextFieldException e) {
+			errors.write(e.getMessage() + "\n");
+		}
+
+		try {
+			p.setPrenom(pPrenomField.getText());
+		} catch (TextFieldException e) {
+			errors.write(e.getMessage() + "\n");
+		}
+
+		try {
+			p.setEmail(pEmailField.getText());
+		} catch (TextFieldException e) {
+			errors.write(e.getMessage() + "\n");
+		}
+
+		if (pMdpField.getText().equals(pConfirmerMdpField.getText())) {
+			try {
+				p.setPassword(pMdpField.getText());
+			} catch (TextFieldException e) {
+				errors.write(e.getMessage() + "\n");
+			}
+		} else {
+			errors.write("Les mots de passe doivent être identiques.");
+		}
+
+		return errors.toString();
 	}
 
 	public Parent creerContenu() {
