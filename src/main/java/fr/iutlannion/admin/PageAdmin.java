@@ -273,6 +273,7 @@ public class PageAdmin extends Stage {
                         textFieldMotdepasse.getText());
                 Admins.getInstance().add(newAdmin);
                 listViewAdmin.getItems().add(newAdmin);
+                listViewAdmin.getSelectionModel().select(newAdmin);
             }
         }));
 
@@ -368,15 +369,16 @@ public class PageAdmin extends Stage {
         gridPane.add(textFieldTypeEssence, 2, 9);
         gridPane.add(textFieldCouleur, 0, 11);
         gridPane.add(textFieldType, 1, 11);
-        gridPane.add(buttonSauvegarder, 3, 11);
-        gridPane.add(buttonSupprimer, 3, 10);
-        gridPane.add(buttonAjouterAdmin, 3, 9);
+        gridPane.add(buttonSauvegarder, 2, 11);
+        gridPane.add(buttonSupprimer, 2, 11);
+        gridPane.add(buttonAjouterAdmin, 2, 12);
 
         GridPane.setHalignment(label2, HPos.CENTER);
         GridPane.setHalignment(label3, HPos.CENTER);
         GridPane.setHalignment(label4, HPos.CENTER);
         GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
-        GridPane.setHalignment(buttonSupprimer, HPos.LEFT);
+        GridPane.setHalignment(buttonSupprimer, HPos.RIGHT);
+        GridPane.setHalignment(buttonAjouterAdmin, HPos.RIGHT);
 
         root.setTop(header);
         root.setCenter(gridPane);
