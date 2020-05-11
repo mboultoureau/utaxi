@@ -4,6 +4,7 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
@@ -17,6 +18,13 @@ import fr.iutlannion.core.Window;
 
 public class PageAdmin extends Stage {
 
+    // Header
+    private HBox header = new HBox();
+    private Button backButton = new Button("Deconnexion");
+    private Label title = new Label("ADMIN");
+    private Label logo = new Label("UTaxi");
+
+    private BorderPane root = new BorderPane();
     private GridPane gridPane = new GridPane();
     private Label label1 = new Label("Page admin");
     private Label label2 = new Label("Liste des Admins");
@@ -46,7 +54,6 @@ public class PageAdmin extends Stage {
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
     private Button buttonSauvegarder = new Button("Sauvegarder");
-    private Button buttonDeconnexion = new Button("Deconnexion");
     private Button buttonSupprimer = new Button("Supprimer");
     private Button buttonAjouterAdmin = new Button("Ajouter Admin");
     private TextField textFieldNom = new TextField();
@@ -256,7 +263,7 @@ public class PageAdmin extends Stage {
             }
         }));
 
-        buttonDeconnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
+        backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Window.getInstance().gotoPage("connexion");
             }
@@ -265,6 +272,31 @@ public class PageAdmin extends Stage {
     }
 
     public Parent creerContenu() {
+
+        header.setPadding(new Insets(0, 20, 0, 20));
+
+        header.setPrefHeight(50);
+        header.setStyle("-fx-background-color: #000;");
+        header.setAlignment(Pos.CENTER);
+
+        // Back
+        backButton.setStyle(
+                "-fx-background-color: #000; -fx-text-fill: #fff; -fx-border-color: #fff; -fx-border-width: 2;");
+        backButton.setAlignment(Pos.CENTER_LEFT);
+
+        // Title
+        title.setStyle("-fx-text-fill: #fff;");
+        title.setAlignment(Pos.CENTER);
+        title.setFont(new Font("Arial", 20));
+        title.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(title, Priority.ALWAYS);
+
+        // Logo
+        logo.setStyle("-fx-text-fill: #fff;");
+        logo.setAlignment(Pos.CENTER_RIGHT);
+
+        header.getChildren().addAll(backButton, title, logo);
+
         gridPane.setPadding(new Insets(10));
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setVgap(5);
@@ -327,15 +359,16 @@ public class PageAdmin extends Stage {
         gridPane.add(buttonSauvegarder, 3, 11);
         gridPane.add(buttonSupprimer, 3, 10);
         gridPane.add(buttonAjouterAdmin, 3, 9);
-        gridPane.add(buttonDeconnexion, 3, 12);
 
         GridPane.setHalignment(label2, HPos.CENTER);
         GridPane.setHalignment(label3, HPos.CENTER);
         GridPane.setHalignment(label4, HPos.CENTER);
         GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
         GridPane.setHalignment(buttonSupprimer, HPos.LEFT);
-        GridPane.setHalignment(buttonDeconnexion, HPos.LEFT);
 
-        return gridPane;
+        root.setTop(header);
+        root.setCenter(gridPane);
+
+        return root;
     }
 }
