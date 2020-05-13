@@ -46,7 +46,7 @@ public class PageConnexion extends Stage {
                     label4.setText("");
                     Window.getInstance().gotoPage("admin");
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
-                    label4.setText("Erreur, champ vide");
+                    label4.setText("Erreur, champ(s) vide");
                 } else {
                     label4.setText("Email/mot de passe invalide");
                 }

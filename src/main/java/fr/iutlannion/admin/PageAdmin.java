@@ -40,6 +40,7 @@ public class PageAdmin extends Stage {
     private Label label13 = new Label("Type essence :");
     private Label label14 = new Label("Couleur :");
     private Label label15 = new Label("Type :");
+    private Label label16 = new Label("");
 
     private ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
     private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
@@ -74,6 +75,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Admin";
+                label16.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -102,6 +104,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Passager";
+                label16.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -130,6 +133,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Conducteur";
+                label16.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -188,38 +192,95 @@ public class PageAdmin extends Stage {
                 label14.setVisible(false);
                 label15.setVisible(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
-                    listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
-                            textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
+                    if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
+                            || textFieldEmail.getText().compareTo("") == 0
+                            || textFieldMotdepasse.getText().compareTo("") == 0) {
+                        label16.setText("Erreur, champ(s) vide");
+                    } else {
+                        label16.setText("");
+                        listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
+                                textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
+                        listViewAdmin.getSelectionModel().clearSelection();
+                        listViewPassager.getSelectionModel().clearSelection();
+                        listViewConducteur.getSelectionModel().clearSelection();
+                        textFieldNom.setText("");
+                        textFieldPrenom.setText("");
+                        textFieldEmail.setText("");
+                        textFieldMotdepasse.setText("");
+                        textFieldTarif.setText("");
+                        textFieldKmParcourus.setText("");
+                        textFieldImmatriculation.setText("");
+                        textFieldMarque.setText("");
+                        textFieldTypeEssence.setText("");
+                        textFieldCouleur.setText("");
+                        textFieldType.setText("");
+                    }
                 } else if (TypeCurrentPersonne.equals("Passager")) {
-                    listViewPassager.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
-                            textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
+                    if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
+                            || textFieldEmail.getText().compareTo("") == 0
+                            || textFieldMotdepasse.getText().compareTo("") == 0) {
+                        label16.setText("Erreur, champ(s) vide");
+                    } else {
+                        label16.setText("");
+                        listViewPassager.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
+                                textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
+                        listViewAdmin.getSelectionModel().clearSelection();
+                        listViewPassager.getSelectionModel().clearSelection();
+                        listViewConducteur.getSelectionModel().clearSelection();
+                        textFieldNom.setText("");
+                        textFieldPrenom.setText("");
+                        textFieldEmail.setText("");
+                        textFieldMotdepasse.setText("");
+                        textFieldTarif.setText("");
+                        textFieldKmParcourus.setText("");
+                        textFieldImmatriculation.setText("");
+                        textFieldMarque.setText("");
+                        textFieldTypeEssence.setText("");
+                        textFieldCouleur.setText("");
+                        textFieldType.setText("");
+                    }
                 } else if (TypeCurrentPersonne.equals("Conducteur")) {
-                    listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
-                            textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText(),
-                            Double.parseDouble(textFieldTarif.getText()),
-                            Double.parseDouble(textFieldKmParcourus.getText()), textFieldImmatriculation.getText(),
-                            textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
-                            textFieldType.getText());
+                    if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
+                            || textFieldEmail.getText().compareTo("") == 0
+                            || textFieldMotdepasse.getText().compareTo("") == 0
+                            || textFieldTarif.getText().compareTo("") == 0
+                            || textFieldKmParcourus.getText().compareTo("") == 0
+                            || textFieldImmatriculation.getText().compareTo("") == 0
+                            || textFieldMarque.getText().compareTo("") == 0
+                            || textFieldTypeEssence.getText().compareTo("") == 0
+                            || textFieldType.getText().compareTo("") == 0
+                            || textFieldCouleur.getText().compareTo("") == 0) {
+                        label16.setText("Erreur, champ(s) vide");
+                    } else {
+                        label16.setText("");
+                        listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
+                                textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText(),
+                                Double.parseDouble(textFieldTarif.getText()),
+                                Double.parseDouble(textFieldKmParcourus.getText()), textFieldImmatriculation.getText(),
+                                textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
+                                textFieldType.getText());
+                        listViewAdmin.getSelectionModel().clearSelection();
+                        listViewPassager.getSelectionModel().clearSelection();
+                        listViewConducteur.getSelectionModel().clearSelection();
+                        textFieldNom.setText("");
+                        textFieldPrenom.setText("");
+                        textFieldEmail.setText("");
+                        textFieldMotdepasse.setText("");
+                        textFieldTarif.setText("");
+                        textFieldKmParcourus.setText("");
+                        textFieldImmatriculation.setText("");
+                        textFieldMarque.setText("");
+                        textFieldTypeEssence.setText("");
+                        textFieldCouleur.setText("");
+                        textFieldType.setText("");
+                    }
                 }
-                listViewAdmin.getSelectionModel().clearSelection();
-                listViewPassager.getSelectionModel().clearSelection();
-                listViewConducteur.getSelectionModel().clearSelection();
-                textFieldNom.setText("");
-                textFieldPrenom.setText("");
-                textFieldEmail.setText("");
-                textFieldMotdepasse.setText("");
-                textFieldTarif.setText("");
-                textFieldKmParcourus.setText("");
-                textFieldImmatriculation.setText("");
-                textFieldMarque.setText("");
-                textFieldTypeEssence.setText("");
-                textFieldCouleur.setText("");
-                textFieldType.setText("");
             }
         }));
 
         buttonSupprimer.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
+                label16.setText("");
                 textFieldNom.setText("");
                 textFieldPrenom.setText("");
                 textFieldEmail.setText("");
@@ -269,11 +330,18 @@ public class PageAdmin extends Stage {
 
         buttonAjouterAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
-                        textFieldMotdepasse.getText());
-                Admins.getInstance().add(newAdmin);
-                listViewAdmin.getItems().add(newAdmin);
-                listViewAdmin.getSelectionModel().select(newAdmin);
+                if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
+                        || textFieldEmail.getText().compareTo("") == 0
+                        || textFieldMotdepasse.getText().compareTo("") == 0) {
+                    label16.setText("Erreur, champ(s) vide");
+                } else {
+                    label16.setText("");
+                    Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(),
+                            textFieldEmail.getText(), textFieldMotdepasse.getText());
+                    Admins.getInstance().add(newAdmin);
+                    listViewAdmin.getItems().add(newAdmin);
+                    listViewAdmin.getSelectionModel().select(newAdmin);
+                }
             }
         }));
 
@@ -315,6 +383,8 @@ public class PageAdmin extends Stage {
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setVgap(5);
         gridPane.setHgap(5);
+        label16.setTextFill(Color.RED);
+        label16.setFont(new Font(20));
         /* gridPane.setGridLinesVisible(true); */
 
         listViewAdmin.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -358,6 +428,7 @@ public class PageAdmin extends Stage {
         gridPane.add(label13, 2, 8);
         gridPane.add(label14, 0, 10);
         gridPane.add(label15, 1, 10);
+        gridPane.add(label16, 1, 13, 1, 1);
         gridPane.add(textFieldNom, 0, 5);
         gridPane.add(textFieldPrenom, 1, 5);
         gridPane.add(textFieldEmail, 2, 5);
