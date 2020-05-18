@@ -3,7 +3,7 @@ package fr.iutlannion.auth;
 import java.util.ArrayList;
 
 import fr.iutlannion.core.Voiture;
-import fr.iutlannion.exceptions.TextFieldException;
+import fr.iutlannion.exceptions.FormatException;
 
 public class Conducteur extends Personne {
 
@@ -49,11 +49,11 @@ public class Conducteur extends Personne {
         return tarif;
     }
     
-    public void setTarif(String t) throws TextFieldException {
+    public void setTarif(String t) throws FormatException {
     	try {
     		this.tarif = Double.valueOf(t);
     	} catch(NumberFormatException e) {
-			throw new TextFieldException("Le tarif doit être valide (ex : 10.3).");
+			throw new FormatException("Le tarif doit être valide (ex : 10.3).");
     	}
     }
 

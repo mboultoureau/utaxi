@@ -1,6 +1,6 @@
 package fr.iutlannion.auth;
 
-import fr.iutlannion.exceptions.TextFieldException;
+import fr.iutlannion.exceptions.FormatException;
 
 abstract public class Personne {
 
@@ -30,13 +30,13 @@ abstract public class Personne {
 		return this.nom;
 	}
 	
-	public void setNom(String n) throws TextFieldException {
+	public void setNom(String n) throws FormatException {
 		n = n.trim();
 		
 		if (n.length() < 3 || n.length() > 30) {
-			throw new TextFieldException("Le nom doit contenir entre 3 et 30 caractères");
+			throw new FormatException("Le nom doit contenir entre 3 et 30 caractères");
 		} else if (!n.matches("[a-zA-Zéèêà -]+")) {
-			throw new TextFieldException("Le nom doit contenir uniquement des lettres et des espaces.");
+			throw new FormatException("Le nom doit contenir uniquement des lettres et des espaces.");
 		} else {
 			this.nom = n;
 		}
@@ -46,13 +46,13 @@ abstract public class Personne {
 		return this.prenom;
 	}
 	
-	public void setPrenom(String p) throws TextFieldException {
+	public void setPrenom(String p) throws FormatException {
 		p = p.trim();
 		
 		if (p.length() < 3 || p.length() > 30) {
-			throw new TextFieldException("Le prénom doit contenir entre 3 et 30 caractères");
+			throw new FormatException("Le prénom doit contenir entre 3 et 30 caractères");
 		} else if (!p.matches("[a-zA-Zéèêà -]+")) {
-			throw new TextFieldException("Le prénom doit contenir uniquement des lettres et des espaces.");
+			throw new FormatException("Le prénom doit contenir uniquement des lettres et des espaces.");
 		} else {
 			this.prenom = p;
 		}
@@ -62,13 +62,13 @@ abstract public class Personne {
 		return this.email;
 	}
 	
-	public void setEmail(String e) throws TextFieldException {
+	public void setEmail(String e) throws FormatException {
 		e = e.trim();
 		
 		if (e.length() < 3 || e.length() > 120) {
-			throw new TextFieldException("Votre adresse email doit contenir entre 3 et 120 caractères");
+			throw new FormatException("Votre adresse email doit contenir entre 3 et 120 caractères");
 		} else if (!e.matches("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")) {
-			throw new TextFieldException("L'adresse email doit être valide.");
+			throw new FormatException("L'adresse email doit être valide.");
 		} else {
 			this.email = e;
 		}
@@ -82,9 +82,9 @@ abstract public class Personne {
 		return this.motDePasse;
 	}
 	
-	public void setPassword(String p) throws TextFieldException {
+	public void setPassword(String p) throws FormatException {
 		if (p.length() < 5 || p.length() > 120) {
-			throw new TextFieldException("Le mot de passe doit contenir entre 5 et 120 caractères");
+			throw new FormatException("Le mot de passe doit contenir entre 5 et 120 caractères");
 		} else {
 			this.motDePasse = p;
 		}

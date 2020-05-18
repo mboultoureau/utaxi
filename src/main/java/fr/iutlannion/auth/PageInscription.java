@@ -1,7 +1,7 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.exceptions.TextFieldException;
+import fr.iutlannion.exceptions.FormatException;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -202,21 +202,21 @@ public class PageInscription extends Stage {
 
 		try {
 			c.setNom(pNomField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			cNomError.setVisible(true);
 			cNomError.setText(e.getMessage());
 		}
 
 		try {
 			c.setPrenom(pPrenomField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			cPrenomError.setVisible(true);
 			cPrenomError.setText(e.getMessage());
 		}
 
 		try {
 			c.setEmail(pEmailField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			cEmailError.setVisible(true);
 			cEmailError.setText(e.getMessage());
 		}
@@ -224,7 +224,7 @@ public class PageInscription extends Stage {
 		if (cMdpField.getText().equals(cConfirmerMdpField.getText())) {
 			try {
 				c.setPassword(cMdpField.getText());
-			} catch (TextFieldException e) {
+			} catch (FormatException e) {
 				cMdpError.setVisible(true);
 				cMdpError.setText(e.getMessage());
 			}
@@ -236,7 +236,7 @@ public class PageInscription extends Stage {
 
 		try {
 			c.setTarif(cTarifField.getText());
-		} catch(TextFieldException e) {
+		} catch(FormatException e) {
 			cTarifError.setVisible(true);
 			cTarifError.setText(e.getMessage());
 		}
@@ -258,21 +258,21 @@ public class PageInscription extends Stage {
 
 		try {
 			p.setNom(pNomField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			pNomError.setVisible(true);
 			pNomError.setText(e.getMessage());
 		}
 
 		try {
 			p.setPrenom(pPrenomField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			pPrenomError.setVisible(true);
 			pPrenomError.setText(e.getMessage());
 		}
 
 		try {
 			p.setEmail(pEmailField.getText());
-		} catch (TextFieldException e) {
+		} catch (FormatException e) {
 			pEmailError.setVisible(true);
 			pEmailError.setText(e.getMessage());
 		}
@@ -280,7 +280,7 @@ public class PageInscription extends Stage {
 		if (pMdpField.getText().equals(pConfirmerMdpField.getText())) {
 			try {
 				p.setPassword(pMdpField.getText());
-			} catch (TextFieldException e) {
+			} catch (FormatException e) {
 				pMdpError.setVisible(true);
 				pMdpError.setText(e.getMessage());
 			}

@@ -7,11 +7,11 @@ package fr.iutlannion.exceptions;
  * @version 1
  *
  */
-public class TextFieldException extends Exception {
+public class FormatException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public TextFieldException(String message) {
+	public FormatException(String message) {
 		super(message);
 	}
 	
