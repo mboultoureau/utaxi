@@ -65,7 +65,6 @@ public class PageEditionProfil extends Stage {
 		buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if(passwordField1.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
-					
 					Utilisateur.getInstance().getPersonne().modifierInfo(textField1.getText(), textField2.getText(), textField3.getText(), passwordField2.getText());
 				}else {
 					root.setBottom(erreur);
@@ -106,11 +105,12 @@ public class PageEditionProfil extends Stage {
 			Label nom = new Label(Utilisateur.getInstance().getPersonne().getNom());
 			Label prenom =new Label(Utilisateur.getInstance().getPersonne().getPrenom());
 			Label mail = new Label(Utilisateur.getInstance().getPersonne().getEmail());
-		    GridPane gridPane = new GridPane();
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(5);
 	        gridPane.setHgap(5);
 	        gridPane.setAlignment(Pos.TOP_CENTER);
+			gridPane.setMinWidth(640);
+			
 	        
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);
@@ -131,6 +131,7 @@ public class PageEditionProfil extends Stage {
 	        gridPane.add(passwordField2, 2,7);
 	        gridPane.add(buttonOk, 1, 9);
 	        gridPane.add(buttonAnnuler, 2, 9);
+	        
 	        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
 	        GridPane.setHalignment(nom, HPos.RIGHT);
 	        GridPane.setHalignment(prenom, HPos.RIGHT);
