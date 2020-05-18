@@ -47,8 +47,7 @@ public class Window extends Stage {
 		this.setTitle("UTaxi");
 		this.setMinHeight(480);
 		this.setMinWidth(640);
-		this.setResizable(false);
-
+		
 		this.gotoPage("mainMenu");
 	}
 
