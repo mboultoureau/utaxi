@@ -38,7 +38,7 @@ public class Window extends Stage {
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
 		scenes.put("horaires", new Scene(horaires.creerContenu(), 640, 480));
 		scenes.put("paiement", new Scene(paiement.creerContenu()));
-		scenes.put("conducteur", new Scene(conducteur.creerContenu(), 1200, 650));
+		scenes.put("conducteur", new Scene(conducteur.creerContenu(), 1200, 800));
 	}
 
 	public Window() {
