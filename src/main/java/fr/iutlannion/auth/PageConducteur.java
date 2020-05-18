@@ -32,11 +32,7 @@ public class PageConducteur extends Stage {
 	private Label title = new Label("Page Conducteur");
 	private Label logo = new Label("UTaxi");
 
-	// calendrier
 	private GridPane gridPane = new GridPane();
-
-	private Button annuler = new Button("Annuler");
-	private Button buttonSuivant = new Button("Next");
 
 	public PageConducteur() {
 
