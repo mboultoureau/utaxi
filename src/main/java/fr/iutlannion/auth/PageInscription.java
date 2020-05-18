@@ -1,7 +1,5 @@
 package fr.iutlannion.auth;
 
-import java.io.StringWriter;
-
 import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.TextFieldException;
 import javafx.event.EventHandler;
@@ -169,6 +167,13 @@ public class PageInscription extends Stage {
 				checkPassager();
 			}
 		}));
+		
+		// Suivant
+		cNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				checkConducteur();
+			}
+		}));
 	}
 
 	
@@ -178,7 +183,7 @@ public class PageInscription extends Stage {
 		cEmailError.setVisible(false);
 		cMdpError.setVisible(false);
 		cConfirmerMdpError.setVisible(false);
-		cTarif.setVisible(false);
+		cTarifError.setVisible(false);
 		cConditionsError.setVisible(false);
 		
 		pNomError.setVisible(false);
@@ -191,11 +196,55 @@ public class PageInscription extends Stage {
 	
 	/**
 	 * Vérifie si le conducteur a saisi tous les champs correctement.
-	 * 
-	 * @return Retourne une chaine avec toutes les erreurs ou une chaine vide.
 	 */
 	private void checkConducteur() {
+		hideErrors();
 
+		try {
+			c.setNom(pNomField.getText());
+		} catch (TextFieldException e) {
+			cNomError.setVisible(true);
+			cNomError.setText(e.getMessage());
+		}
+
+		try {
+			c.setPrenom(pPrenomField.getText());
+		} catch (TextFieldException e) {
+			cPrenomError.setVisible(true);
+			cPrenomError.setText(e.getMessage());
+		}
+
+		try {
+			c.setEmail(pEmailField.getText());
+		} catch (TextFieldException e) {
+			cEmailError.setVisible(true);
+			cEmailError.setText(e.getMessage());
+		}
+
+		if (cMdpField.getText().equals(cConfirmerMdpField.getText())) {
+			try {
+				c.setPassword(cMdpField.getText());
+			} catch (TextFieldException e) {
+				cMdpError.setVisible(true);
+				cMdpError.setText(e.getMessage());
+			}
+		} else {
+			cConfirmerMdpError.setVisible(true);
+			cConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
+		}
+		
+
+		try {
+			c.setTarif(cTarifField.getText());
+		} catch(TextFieldException e) {
+			cTarifError.setVisible(true);
+			cTarifError.setText(e.getMessage());
+		}
+		
+		if (!cMajeur.isSelected() || !cConditions.isSelected()) {
+			cConditionsError.setVisible(true);
+			cConditionsError.setText("Vous devez être majeur et accepté les conditions.");
+		}
 	}
 	
 
@@ -205,6 +254,7 @@ public class PageInscription extends Stage {
 	 */
 	private void checkPassager() {
 
+		hideErrors();
 
 		try {
 			p.setNom(pNomField.getText());
@@ -212,31 +262,37 @@ public class PageInscription extends Stage {
 			pNomError.setVisible(true);
 			pNomError.setText(e.getMessage());
 		}
-/*
+
 		try {
 			p.setPrenom(pPrenomField.getText());
 		} catch (TextFieldException e) {
-			errors.write(e.getMessage() + "\n");
+			pPrenomError.setVisible(true);
+			pPrenomError.setText(e.getMessage());
 		}
 
 		try {
 			p.setEmail(pEmailField.getText());
 		} catch (TextFieldException e) {
-			errors.write(e.getMessage() + "\n");
+			pEmailError.setVisible(true);
+			pEmailError.setText(e.getMessage());
 		}
 
 		if (pMdpField.getText().equals(pConfirmerMdpField.getText())) {
 			try {
 				p.setPassword(pMdpField.getText());
 			} catch (TextFieldException e) {
-				errors.write(e.getMessage() + "\n");
+				pMdpError.setVisible(true);
+				pMdpError.setText(e.getMessage());
 			}
 		} else {
-			errors.write("Les mots de passe doivent être identiques.");
+			pConfirmerMdpError.setVisible(true);
+			pConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
 		}
-
-		return errors.toString();*/
 		
+		if (!pMajeur.isSelected() || !pConditions.isSelected()) {
+			pConditionsError.setVisible(true);
+			pConditionsError.setText("Vous devez être majeur et accepté les conditions.");
+		}
 	}
 
 	public Parent creerContenu() {
@@ -268,6 +324,7 @@ public class PageInscription extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 		
 		
+		hideErrors();
 		
 		
 		// Errors conducteurs
@@ -306,16 +363,17 @@ public class PageInscription extends Stage {
 		
 		conducteurPane.add(cMajeur, 0, 9, 2, 1);
 		conducteurPane.add(cConditions, 0, 10, 2, 1);
+		conducteurPane.add(cConditionsError, 0, 11, 2, 1);
 		
-		conducteurPane.add(cConnexion, 0, 11);
-		conducteurPane.add(cNext, 1, 11);
+		conducteurPane.add(cConnexion, 0, 12);
+		conducteurPane.add(cNext, 1, 12);
 
 		GridPane.setHalignment(cNext, HPos.RIGHT);
 
-		conducteurPane.setPadding(new Insets(30, 30, 30, 30));
+		conducteurPane.setPadding(new Insets(20, 30, 10, 30));
 		conducteurPane.setMinWidth(640);
 		conducteurPane.setHgap(30);
-		conducteurPane.setVgap(10);
+		conducteurPane.setVgap(7);
 
 		GridPane.setHgrow(cNom, Priority.ALWAYS);
 		GridPane.setHgrow(cMdp, Priority.ALWAYS);
@@ -357,7 +415,7 @@ public class PageInscription extends Stage {
 		
 		passagerPane.add(pMajeur, 0, 9, 2, 1);
 		passagerPane.add(pConditions, 0, 10, 2, 1);
-		passagerPane.add(pConditionsError, 0, 11);
+		passagerPane.add(pConditionsError, 0, 11, 2, 1);
 		
 		passagerPane.add(pConnexion, 0, 12);
 		passagerPane.add(pNext, 1, 12);
@@ -365,10 +423,10 @@ public class PageInscription extends Stage {
 		GridPane.setHalignment(pNext, HPos.RIGHT);
 
 		// passagerPane.setGridLinesVisible(true);
-		passagerPane.setPadding(new Insets(30, 30, 30, 30));
+		passagerPane.setPadding(new Insets(20, 30, 30, 30));
 		passagerPane.setMinWidth(640);
 		passagerPane.setHgap(30);
-		passagerPane.setVgap(10);
+		passagerPane.setVgap(7);
 
 		GridPane.setHgrow(pNom, Priority.ALWAYS);
 		GridPane.setHgrow(pMdp, Priority.ALWAYS);
@@ -382,7 +440,7 @@ public class PageInscription extends Stage {
 		// Tabs
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		tabPane.getTabs().addAll(passagerTab, conducteurTab);
-		tabPane.setMinHeight(405);
+		tabPane.setMinHeight(300);
 
 		
 		root.setMinHeight(480);
