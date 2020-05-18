@@ -219,7 +219,7 @@ public class PageAdmin extends Stage {
                     if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
                             || textFieldEmail.getText().compareTo("") == 0
                             || textFieldMotdepasse.getText().compareTo("") == 0) {
-                        label16.setText("Erreur, champ(s) vide");
+                        label16.setText("Erreur, champs vide(s)");
                     } else {
                         label16.setText("");
                         listViewPassager.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
@@ -250,7 +250,7 @@ public class PageAdmin extends Stage {
                             || textFieldTypeEssence.getText().compareTo("") == 0
                             || textFieldType.getText().compareTo("") == 0
                             || textFieldCouleur.getText().compareTo("") == 0) {
-                        label16.setText("Erreur, champ(s) vide");
+                        label16.setText("Erreur, champs vide(s)");
                     } else {
                         label16.setText("");
                         listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
@@ -333,7 +333,7 @@ public class PageAdmin extends Stage {
                 if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
                         || textFieldEmail.getText().compareTo("") == 0
                         || textFieldMotdepasse.getText().compareTo("") == 0) {
-                    label16.setText("Erreur, champ(s) vide");
+                    label16.setText("Erreur, champs vide(s)");
                 } else {
                     label16.setText("");
                     Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(),

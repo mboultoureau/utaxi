@@ -36,7 +36,7 @@ public class PageConnexion extends Stage {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    System.out.println("Conducteur");
+                    Window.getInstance().gotoPage("conducteur");
                     label4.setText("");
                 } else if (Passagers.getInstance().verifConnexion(textField.getText(),
                         passwordField.getText()) != null) {
@@ -46,7 +46,7 @@ public class PageConnexion extends Stage {
                     label4.setText("");
                     Window.getInstance().gotoPage("admin");
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
-                    label4.setText("Erreur, champ(s) vide");
+                    label4.setText("Erreur, champs vide(s)");
                 } else {
                     label4.setText("Email/mot de passe invalide");
                 }
