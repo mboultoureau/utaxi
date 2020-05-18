@@ -8,6 +8,7 @@ import fr.iutlannion.auth.PageEditionProfil;
 import fr.iutlannion.auth.PageEnregistrementVoiture;
 import fr.iutlannion.auth.PageHoraires;
 import fr.iutlannion.auth.PageInscription;
+import fr.iutlannion.auth.PagePaiement;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -23,16 +24,18 @@ public class Window extends Stage {
 	private static PageInscription inscription = new PageInscription();
 	private static PageAdmin admin = new PageAdmin();
 	private static PageHoraires horaires = new PageHoraires();
+	private static PagePaiement paiement = new PagePaiement();
 
 	static {
 		scenes = new HashMap<String, Scene>();
-		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu(), 640, 480));
+		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu()));
 		scenes.put("connexion", new Scene(connexion.creerContenu(), 640, 480));
 		scenes.put("inscription", new Scene(inscription.creerContenu()));
 		scenes.put("enregistrementVoiture", new Scene(pageEnregistrementVoiture.creerContenu()));
 		scenes.put("editionProfil", new Scene(pageEditionProfil.creerContenu(), 1200, 800));
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
 		scenes.put("horaires", new Scene(horaires.creerContenu(), 640, 480));
+		scenes.put("paiement", new Scene(paiement.creerContenu()));
 	}
 
 	public Window() {

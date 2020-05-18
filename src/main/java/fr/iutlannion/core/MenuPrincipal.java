@@ -16,6 +16,7 @@ public class MenuPrincipal {
     private Button buttonEditer = new Button("Editer profil");
     private Button buttonEnregistrerVoiture = new Button("Enregistrer Voiture");
     private Button buttonHoraires = new Button("Horaires");
+    private Button buttonPaiement = new Button("Paiement");
 
     
     public MenuPrincipal() {
@@ -48,6 +49,12 @@ public class MenuPrincipal {
                 Window.getInstance().gotoPage("horaires");
             }
         }));
+        
+        buttonPaiement.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Window.getInstance().gotoPage("paiement");
+            }
+        }));
     }
 
     Parent creerContenu() {
@@ -60,13 +67,18 @@ public class MenuPrincipal {
         gridPane1.setAlignment(Pos.CENTER);
         gridPane1.setVgap(5);
         gridPane1.setHgap(5);
-        gridPane1.add(label, 0, 0);
+        gridPane1.setMinHeight(480);
+        gridPane1.setMinWidth(640);
+        
+        gridPane1.add(label, 0, 0, 2, 1);
+        
         label.setAlignment(Pos.CENTER);
         gridPane1.add(buttonConnexion, 0, 1);
         gridPane1.add(buttonInscription, 1, 1);
-        gridPane1.add(buttonEditer, 1, 2);
-        gridPane1.add(buttonEnregistrerVoiture, 1, 3);
-        gridPane1.add(buttonHoraires, 1, 4);
+        gridPane1.add(buttonEditer, 0, 2);
+        gridPane1.add(buttonEnregistrerVoiture, 1, 2);
+        gridPane1.add(buttonHoraires, 0, 3);
+        gridPane1.add(buttonPaiement, 1, 3);
 
         return gridPane1;
     }

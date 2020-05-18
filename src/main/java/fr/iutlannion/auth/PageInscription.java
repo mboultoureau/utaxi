@@ -276,6 +276,9 @@ public class PageInscription extends Stage {
 		tabPane.getTabs().addAll(passagerTab, conducteurTab);
 		tabPane.setMinHeight(405);
 
+		
+		root.setMinHeight(480);
+		root.setMinWidth(640);
 		root.setTop(header);
 		root.setCenter(tabPane);
 
