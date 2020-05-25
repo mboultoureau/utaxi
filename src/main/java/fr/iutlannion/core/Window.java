@@ -31,10 +31,7 @@ public class Window extends Stage {
 	private static PagePaiement paiement = new PagePaiement();
 	private static PageConducteur conducteur = new PageConducteur();
 	private static PagePassager passager = new PagePassager();
-<<<<<<< HEAD
-=======
 	private static PageEditionVoiture pageEditionVoiture = new PageEditionVoiture();
->>>>>>> a3ca3cb65cb8b71fa482619b122de8c13ab78311
 
 	static {
 		scenes = new HashMap<String, Scene>();
@@ -48,10 +45,7 @@ public class Window extends Stage {
 		scenes.put("paiement", new Scene(paiement.creerContenu()));
 		scenes.put("conducteur", new Scene(conducteur.creerContenu(), 1200, 800));
 		scenes.put("passager", new Scene(passager.creerContenu(), 1200, 800));
-<<<<<<< HEAD
-=======
-		scenes.put("pageEditionVoiture", new Scene(pageEditionVoiture.creerContenu(),1200,800));
->>>>>>> a3ca3cb65cb8b71fa482619b122de8c13ab78311
+		scenes.put("pageEditionVoiture", new Scene(pageEditionVoiture.creerContenu(), 1200, 800));
 	}
 
 	public Window() {
