@@ -12,7 +12,6 @@ import fr.iutlannion.auth.PageInscription;
 import fr.iutlannion.auth.PagePaiement;
 import fr.iutlannion.auth.PagePassager;
 import fr.iutlannion.auth.PageConducteur;
-import fr.iutlannion.auth.PagePassager;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
