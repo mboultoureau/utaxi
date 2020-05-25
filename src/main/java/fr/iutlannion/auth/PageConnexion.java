@@ -42,7 +42,7 @@ public class PageConnexion extends Stage {
                     passwordField.setText("");
                 } else if (Passagers.getInstance().verifConnexion(textField.getText(),
                         passwordField.getText()) != null) {
-                    System.out.println("Passager");
+                    Window.getInstance().gotoPage("passager");
                     label4.setText("");
                     textField.setText("");
                     passwordField.setText("");

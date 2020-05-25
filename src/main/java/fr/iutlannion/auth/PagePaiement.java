@@ -13,23 +13,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PagePaiement extends Stage {
 
-	
 	private BorderPane root = new BorderPane();
-	
+
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Retour");
 	private Label title = new Label("INFORMATIONS DE PAIEMENT");
 	private Label logo = new Label("UTaxi");
-	
+
 	// Informations de Paiement
 	GridPane grid = new GridPane();
 	private Label num = new Label("Numéro de la carte");
@@ -40,7 +36,7 @@ public class PagePaiement extends Stage {
 	private TextField cvcField = new TextField();
 	private Label name = new Label("Nom inscrit sur la carte");
 	private TextField nameField = new TextField();
-	
+
 	public PagePaiement() {
 		// Événements
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -49,8 +45,7 @@ public class PagePaiement extends Stage {
 			}
 		}));
 	}
-	
-	
+
 	public Parent creerContenu() {
 
 		// Header
@@ -78,8 +73,7 @@ public class PagePaiement extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		
-		
+
 		// Informations de paiement
 		grid.add(num, 0, 0);
 		grid.add(numField, 0, 1);
@@ -89,13 +83,12 @@ public class PagePaiement extends Stage {
 		grid.add(cvcField, 0, 5);
 		grid.add(name, 0, 6);
 		grid.add(nameField, 0, 7);
-		
-		
+
 		root.setMinHeight(480);
 		root.setMinWidth(640);
 		root.setTop(header);
 		root.setCenter(grid);
 		return root;
 	}
-	
+
 }
