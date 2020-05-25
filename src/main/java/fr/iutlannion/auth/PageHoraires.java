@@ -1,5 +1,7 @@
 package fr.iutlannion.auth;
 
+import java.util.spi.CalendarNameProvider;
+
 import fr.iutlannion.core.Window;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -21,6 +23,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 
 
 public class PageHoraires extends Stage {
@@ -36,18 +40,21 @@ public class PageHoraires extends Stage {
 	//calendrier
 	private GridPane calendar = new GridPane();
 
-	TableView<String> table = new TableView<String>();
-	TableColumn<String, String> hotairesCol = new TableColumn<String, String>("Horaires");
-	TableColumn<String, String> lundi = new TableColumn<String, String>("Lundi");
-	TableColumn<String, String> mardi = new TableColumn<String, String>("Mercredi");
-	TableColumn<String, String> mercredi = new TableColumn<String, String>("Jeudi");
-	TableColumn<String, String> jeudi = new TableColumn<String, String>("Vendredi");
-	TableColumn<String, String> vendredi = new TableColumn<String, String>("Samedi");
-	TableColumn<String, String> samedi = new TableColumn<String, String>("Dimanche");
-
 
 	private Button annuler = new Button("Annuler");
 	private Button buttonSuivant = new Button("Next");
+
+
+	// Tableau
+	private TableView<String> horaires = new TableView<String>();
+	private TableColumn<String, String> heures = new TableColumn<String, String>("Horaires");
+	private TableColumn<String, String> lundi = new TableColumn<String, String>("Lundi");;
+	private TableColumn<String, String> mardi = new TableColumn<String, String>("Mardi");;
+	private TableColumn<String, String> mercredi = new TableColumn<String, String>("Mercredi");;
+	private TableColumn<String, String> jeudi = new TableColumn<String, String>("Jeudi");;
+	private TableColumn<String, String> vendredi = new TableColumn<String, String>("Vendredi");;
+	private TableColumn<String, String> samedi = new TableColumn<String, String>("Samedi");;
+	private TableColumn<String, String> dimanche = new TableColumn<String, String>("Dimanche");;
 
 	public PageHoraires() {
 
@@ -86,19 +93,10 @@ public class PageHoraires extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 		
 		header.getChildren().addAll(backButton, title, logo);
-
-		calendar.add(annuler, 0, 9);
-		calendar.add(buttonSuivant, 1, 9);
-
-		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
-		
-		calendar.setPadding(new Insets(30, 30, 30, 30));
-		calendar.setMinWidth(640);
-		calendar.setHgap(30);
-		calendar.setVgap(10);
+		horaires.getColumns().addAll(heures, lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche);
 
 		root.setTop(header);
-		root.setCenter(calendar);
+		root.setCenter(horaires);
 		
 		return root;
 

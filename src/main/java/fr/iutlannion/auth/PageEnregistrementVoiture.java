@@ -56,6 +56,17 @@ public class PageEnregistrementVoiture extends Stage {
 			}
 		}));
 
+		annuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Window.getInstance().gotoPage("mainMenu");
+			}
+		}));
+		
+		buttonSuivant.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Window.getInstance().gotoPage("");
+			}
+		}));
 	}
 
 	public Parent creerContenu() {
