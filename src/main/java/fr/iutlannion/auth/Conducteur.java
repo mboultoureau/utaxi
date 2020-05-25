@@ -69,13 +69,8 @@ public class Conducteur extends Personne {
         notes.add(note);
     }
 
-    public void modifierInfo(String nom, String prenom, String email, String motdepasse, double tarif,
-            double kmParcourus, String immatriculation, String marque, String typeessence, String couleur,
-            String type) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.motDePasse = motdepasse;
+    public void modifierInfoVoiture(double tarif, double kmParcourus, String immatriculation, 
+    		String marque, String typeessence, String couleur, String type) {
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
         this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
