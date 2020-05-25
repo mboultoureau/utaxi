@@ -31,12 +31,11 @@ public class PageEditionProfil extends Stage {
 	//CONTENU
 	private GridPane gridPane = new GridPane();
 	
-	private Label label1 = new Label("Nom :");
-	private Label label2 = new Label("Prénom :");
-	private Label label3 = new Label("Mail :");
-	private Label label4 = new Label("Mot de passe :");
-	private Label actuel = new Label("actuel");
-	private Label nv = new Label("nouveau");
+	private Label label1 = new Label("Nom");
+	private Label label2 = new Label("Prénom");
+	private Label label3 = new Label("Mail");
+	private Label actuel = new Label("Mot de passe actuel");
+	private Label nv = new Label("Nouveau mot de passe");
 	private Label erreur = new Label("Erreur de mot de passe");
 	
 	
@@ -106,38 +105,34 @@ public class PageEditionProfil extends Stage {
 			Label prenom =new Label(Utilisateur.getInstance().getPersonne().getPrenom());
 			Label mail = new Label(Utilisateur.getInstance().getPersonne().getEmail());
 	        gridPane.setPadding(new Insets(30));
-	        gridPane.setVgap(5);
-	        gridPane.setHgap(5);
-	        gridPane.setAlignment(Pos.TOP_CENTER);
-			gridPane.setMinWidth(640);
+	        gridPane.setVgap(10);
+	        gridPane.setHgap(10);
+			GridPane.setHgrow(label1, Priority.ALWAYS);
 			
-	        
+			textField1.setText(Utilisateur.getInstance().getPersonne().getNom());
+			textField2.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+			textField3.setText(Utilisateur.getInstance().getPersonne().getEmail());
+			
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);
 	       
 	        gridPane.add(label1, 0,0);
-	        gridPane.add(nom, 1,0);
-	        gridPane.add(textField1, 2, 0);
+	        gridPane.add(textField1, 0,1);
 	        gridPane.add(label2, 0,2);
-	        gridPane.add(prenom, 1,2);
-	        gridPane.add(textField2, 2,2);
+	        gridPane.add(textField2, 0,3);
 	        gridPane.add(label3, 0,4);
-	        gridPane.add(mail, 1,4);
-	        gridPane.add(textField3, 2,4);
-	        gridPane.add(label4, 0,6);
-	        gridPane.add(actuel, 1,6);
-	        gridPane.add(passwordField1, 2,6);
-	        gridPane.add(nv, 1,7);
-	        gridPane.add(passwordField2, 2,7);
-	        gridPane.add(buttonOk, 1, 9);
-	        gridPane.add(buttonAnnuler, 2, 9);
+	        gridPane.add(textField3, 0,5);
+	        gridPane.add(actuel, 0,6);
+	        gridPane.add(passwordField1, 0,7);
+	        gridPane.add(nv, 0,8);
+	        gridPane.add(passwordField2, 0,9);
+	        gridPane.add(buttonOk, 0,10);
+	        gridPane.add(buttonAnnuler, 1,10);
 	        
 	        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
 	        GridPane.setHalignment(nom, HPos.RIGHT);
 	        GridPane.setHalignment(prenom, HPos.RIGHT);
 	        GridPane.setHalignment(mail, HPos.RIGHT);
-	        GridPane.setHalignment(actuel, HPos.RIGHT);
-	        GridPane.setHalignment(nv, HPos.RIGHT);
 	        
 		
 	        root.setTop(header);
