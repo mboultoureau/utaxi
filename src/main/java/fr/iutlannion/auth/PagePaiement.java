@@ -8,15 +8,19 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
+import javafx.scene.shape.DrawMode;
+import javafx.scene.shape.MeshView;
+import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 public class PagePaiement extends Stage {
@@ -40,6 +44,15 @@ public class PagePaiement extends Stage {
 	private TextField cvcField = new TextField();
 	private Label name = new Label("Nom inscrit sur la carte");
 	private TextField nameField = new TextField();
+	
+	// Carte de crédit
+	// private Box backgroundCreditCard = new Box();
+	private TriangleMesh mesh = new TriangleMesh();
+	private PhongMaterial texture = new PhongMaterial();
+	private StackPane creditCard = new StackPane();
+	private Label noCard = new Label("0000 0000 0000 0000");
+	private Label nameCard = new Label("MR DUPONT JEAN");
+	private Label cvcCard = new Label("000");
 	
 	public PagePaiement() {
 		// Événements
@@ -90,11 +103,82 @@ public class PagePaiement extends Stage {
 		grid.add(name, 0, 6);
 		grid.add(nameField, 0, 7);
 		
-		
 		root.setMinHeight(480);
 		root.setMinWidth(640);
 		root.setTop(header);
-		root.setCenter(grid);
+		root.setLeft(grid);
+		
+		
+		// Carte de crédit 3D		
+		final float height = 54.0f * 3.5f;
+		final float width = 85.0f * 3.5f;
+		
+		mesh.getPoints().addAll(
+				0, 0, 0, // 0
+				width, 0, 0, // 1
+				width, height, 0, // 2
+				0, height, 0, // 3
+				
+				0, 0, 1, // 4
+				width, 0, 1, // 5
+				width, height, 1, // 6
+				0, height, 1 // 7
+		);
+		
+		mesh.getTexCoords().addAll(
+				0, 0, // 0
+				0.5f, 0, // 1
+				0.5f, 1, // 2
+				0, 1, // 3
+				1, 0, // 4
+				1, 1 // 5
+		);
+		
+		mesh.getFaces().addAll(
+				0, 0, 2, 2, 1, 1, // Front 1
+				0, 0, 3, 3, 2, 2, // Front 2
+				4, 1, 5, 4, 6, 5, // Back 1
+				4, 1, 6, 5, 7, 2 // Back 2
+		);
+		
+		texture.setDiffuseMap(new Image("credit-card.png"));
+
+		
+		MeshView p = new MeshView(mesh);
+		p.setDrawMode(DrawMode.FILL);
+		p.setMaterial(texture);
+		
+		p.setRotationAxis(Rotate.Y_AXIS);
+		p.setRotate(180.0);
+		
+		
+		// Numéro de carte
+		noCard.setStyle("-fx-text-fill: #fff;");
+		noCard.setFont(new Font("Arial", 25));
+		StackPane.setMargin(noCard, new Insets(30, 0, 0, 25));
+		StackPane.setAlignment(noCard, Pos.CENTER);
+		
+		// Nom sur la carte
+		nameCard.setStyle("-fx-text-fill: #fff;");
+		nameCard.setFont(new Font("Arial", 12));
+		noCard.setPrefWidth(width);
+		StackPane.setMargin(nameCard, new Insets(90, 0, 0, 25));
+		StackPane.setAlignment(nameCard, Pos.CENTER_LEFT);
+
+		// CVC
+		cvcCard.setStyle("-fx-text-fill: #222;");
+		cvcCard.setFont(new Font("Arial", 15));
+		StackPane.setAlignment(cvcCard, Pos.CENTER_LEFT);
+		StackPane.setMargin(cvcCard, new Insets(0, 0, 62, 112));
+		
+		
+		creditCard.setPadding(new Insets(0, 50, 0, 20));
+		creditCard.setPrefHeight(height);
+		creditCard.setPrefWidth(width);
+		creditCard.getChildren().addAll(p, noCard, nameCard, cvcCard);
+		creditCard.setStyle("-fx-border-radius: 50px");
+
+		root.setRight(creditCard);
 		return root;
 	}
 	
