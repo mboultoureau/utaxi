@@ -48,13 +48,15 @@ public class PageHoraires extends Stage {
 	// Tableau
 	private TableView<String> horaires = new TableView<String>();
 	private TableColumn<String, String> heures = new TableColumn<String, String>("Horaires");
-	private TableColumn<String, String> lundi = new TableColumn<String, String>("Lundi");;
-	private TableColumn<String, String> mardi = new TableColumn<String, String>("Mardi");;
-	private TableColumn<String, String> mercredi = new TableColumn<String, String>("Mercredi");;
-	private TableColumn<String, String> jeudi = new TableColumn<String, String>("Jeudi");;
-	private TableColumn<String, String> vendredi = new TableColumn<String, String>("Vendredi");;
-	private TableColumn<String, String> samedi = new TableColumn<String, String>("Samedi");;
-	private TableColumn<String, String> dimanche = new TableColumn<String, String>("Dimanche");;
+	private TableColumn<String, String> lundi = new TableColumn<String, String>("Lundi");
+	private TableColumn<String, String> mardi = new TableColumn<String, String>("Mardi");
+	private TableColumn<String, String> mercredi = new TableColumn<String, String>("Mercredi");
+	private TableColumn<String, String> jeudi = new TableColumn<String, String>("Jeudi");
+	private TableColumn<String, String> vendredi = new TableColumn<String, String>("Vendredi");
+	private TableColumn<String, String> samedi = new TableColumn<String, String>("Samedi");
+	private TableColumn<String, String> dimanche = new TableColumn<String, String>("Dimanche");
+
+
 
 	public PageHoraires() {
 
