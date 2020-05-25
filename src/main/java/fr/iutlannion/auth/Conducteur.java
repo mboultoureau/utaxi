@@ -25,10 +25,10 @@ public class Conducteur extends Personne {
     }
 
     public Conducteur() {
-    	super(null, null, null, null);
-	}
+        super(null, null, null, null);
+    }
 
-	public String toString() {
+    public String toString() {
         return super.toString() + "\nNotes : " + getNoteMoyenne() + "\nTarif : " + tarif + "\nNombre Km : "
                 + nbKmParcourus + "\n" + voiture.toString();
     }
@@ -48,13 +48,13 @@ public class Conducteur extends Personne {
     public double getTarif() {
         return tarif;
     }
-    
+
     public void setTarif(String t) throws FormatException {
-    	try {
-    		this.tarif = Double.valueOf(t);
-    	} catch(NumberFormatException e) {
-			throw new FormatException("Le tarif doit être valide (ex : 10.3).");
-    	}
+        try {
+            this.tarif = Double.valueOf(t);
+        } catch (NumberFormatException e) {
+            throw new FormatException("Le tarif doit être valide (ex : 10.3).");
+        }
     }
 
     public double getNbKmParcourus() {
@@ -69,10 +69,23 @@ public class Conducteur extends Personne {
         notes.add(note);
     }
 
-    public void modifierInfoVoiture(double tarif, double kmParcourus, String immatriculation, 
-    		String marque, String typeessence, String couleur, String type) {
+    public void modifierInfoVoiture(double tarif, double kmParcourus, String immatriculation, String marque,
+            String typeessence, String couleur, String type) {
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
         this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
     }
+
+    public void modifierInfoAdmin(String nom, String prenom, String email, String motdepasse, double tarif,
+            double kmParcourus, String immatriculation, String marque, String typeessence, String couleur,
+            String type) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.motDePasse = motdepasse;
+        this.tarif = tarif;
+        this.nbKmParcourus = kmParcourus;
+        this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
+    }
+
 }

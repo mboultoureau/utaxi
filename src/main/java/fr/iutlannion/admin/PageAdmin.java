@@ -253,9 +253,9 @@ public class PageAdmin extends Stage {
                         label16.setText("Erreur, champs vide(s)");
                     } else {
                         label16.setText("");
-                        listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
-                                textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText(),
-                                Double.parseDouble(textFieldTarif.getText()),
+                        listViewConducteur.getSelectionModel().getSelectedItem().modifierInfoAdmin(
+                                textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
+                                textFieldMotdepasse.getText(), Double.parseDouble(textFieldTarif.getText()),
                                 Double.parseDouble(textFieldKmParcourus.getText()), textFieldImmatriculation.getText(),
                                 textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
                                 textFieldType.getText());
