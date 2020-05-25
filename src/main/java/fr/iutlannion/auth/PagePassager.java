@@ -1,7 +1,5 @@
 package fr.iutlannion.auth;
 
-import java.util.spi.CalendarNameProvider;
-
 import fr.iutlannion.core.Window;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -9,8 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -19,38 +15,23 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class PageHoraires extends Stage {
+public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
 	// Header
 	private HBox header = new HBox();
-	private Button backButton = new Button("Retour");
-	private Label title = new Label("INSCRIPTION");
+	private Button backButton = new Button("Deconnexion");
+	private Label title = new Label("Page Passager");
 	private Label logo = new Label("UTaxi");
 
-	// calendrier
-	private GridPane calendar = new GridPane();
+	private GridPane gridPane = new GridPane();
 
-	private Button annuler = new Button("Annuler");
-	private Button buttonSuivant = new Button("Next");
-
-	// Tableau
-	private TableView<String> horaires = new TableView<String>();
-	private TableColumn<String, String> heures = new TableColumn<String, String>("Horaires");
-	private TableColumn<String, String> lundi = new TableColumn<String, String>("Lundi");;
-	private TableColumn<String, String> mardi = new TableColumn<String, String>("Mardi");;
-	private TableColumn<String, String> mercredi = new TableColumn<String, String>("Mercredi");;
-	private TableColumn<String, String> jeudi = new TableColumn<String, String>("Jeudi");;
-	private TableColumn<String, String> vendredi = new TableColumn<String, String>("Vendredi");;
-	private TableColumn<String, String> samedi = new TableColumn<String, String>("Samedi");;
-	private TableColumn<String, String> dimanche = new TableColumn<String, String>("Dimanche");;
-
-	public PageHoraires() {
+	public PagePassager() {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
+				Window.getInstance().gotoPage("connexion");
 			}
 		}));
 
@@ -83,11 +64,8 @@ public class PageHoraires extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		horaires.getColumns().addAll(heures, lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche);
 
 		root.setTop(header);
-		root.setCenter(horaires);
-
 		return root;
 
 	}

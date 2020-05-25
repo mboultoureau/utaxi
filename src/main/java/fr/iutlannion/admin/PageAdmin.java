@@ -3,7 +3,6 @@ package fr.iutlannion.admin;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
@@ -13,7 +12,6 @@ import javafx.collections.*;
 import javafx.event.EventHandler;
 import fr.iutlannion.manager.*;
 import fr.iutlannion.auth.*;
-import fr.iutlannion.core.*;
 import fr.iutlannion.core.Window;
 
 public class PageAdmin extends Stage {
@@ -253,9 +251,9 @@ public class PageAdmin extends Stage {
                         label16.setText("Erreur, champs vide(s)");
                     } else {
                         label16.setText("");
-                        listViewConducteur.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
-                                textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText(),
-                                Double.parseDouble(textFieldTarif.getText()),
+                        listViewConducteur.getSelectionModel().getSelectedItem().modifierInfoAdmin(
+                                textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
+                                textFieldMotdepasse.getText(), Double.parseDouble(textFieldTarif.getText()),
                                 Double.parseDouble(textFieldKmParcourus.getText()), textFieldImmatriculation.getText(),
                                 textFieldMarque.getText(), textFieldTypeEssence.getText(), textFieldCouleur.getText(),
                                 textFieldType.getText());

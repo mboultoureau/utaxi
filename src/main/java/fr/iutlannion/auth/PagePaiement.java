@@ -25,15 +25,14 @@ import javafx.stage.Stage;
 
 public class PagePaiement extends Stage {
 
-	
 	private BorderPane root = new BorderPane();
-	
+
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Retour");
 	private Label title = new Label("INFORMATIONS DE PAIEMENT");
 	private Label logo = new Label("UTaxi");
-	
+
 	// Informations de Paiement
 	GridPane grid = new GridPane();
 	private Label num = new Label("Numéro de la carte");
@@ -62,8 +61,7 @@ public class PagePaiement extends Stage {
 			}
 		}));
 	}
-	
-	
+
 	public Parent creerContenu() {
 
 		// Header
@@ -91,8 +89,7 @@ public class PagePaiement extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		
-		
+
 		// Informations de paiement
 		grid.add(num, 0, 0);
 		grid.add(numField, 0, 1);
@@ -181,5 +178,5 @@ public class PagePaiement extends Stage {
 		root.setRight(creditCard);
 		return root;
 	}
-	
+
 }
