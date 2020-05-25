@@ -38,12 +38,18 @@ public class PageConnexion extends Stage {
                 if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
                     Window.getInstance().gotoPage("conducteur");
                     label4.setText("");
+                    textField.setText("");
+                    passwordField.setText("");
                 } else if (Passagers.getInstance().verifConnexion(textField.getText(),
                         passwordField.getText()) != null) {
                     System.out.println("Passager");
                     label4.setText("");
+                    textField.setText("");
+                    passwordField.setText("");
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
                     label4.setText("");
+                    textField.setText("");
+                    passwordField.setText("");
                     Window.getInstance().gotoPage("admin");
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
                     label4.setText("Erreur, champs vide(s)");
