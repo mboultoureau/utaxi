@@ -53,6 +53,8 @@ public class PageEditionVoiture extends Stage{
 		private Button buttonAnnuler = new Button("Annuler");
 	    private Button buttonOk = new Button("OK");
 	    
+	    Conducteur c = (Conducteur) Utilisateur.getInstance().getPersonne();
+	    
 		public PageEditionVoiture() {
 			backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
@@ -69,7 +71,7 @@ public class PageEditionVoiture extends Stage{
 			buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					if(fmdp.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
-						//Utilisateur.getInstance().getPersonne().modifierInfoVoiture(Double.valueOf(ftarif.getText()), Double.valueOf(fnbkm.getText()),fimat.getText(), fmarque.getText(), ftEss.getText(), fcouleur.getText(), ftype.getText());
+						c.modifierInfoVoiture(Double.valueOf(ftarif.getText()), Double.valueOf(fnbkm.getText()),fimmat.getText(), fmarque.getText(), ftEss.getText(), fcouleur.getText(), ftype.getText());
 					}else {
 						root.setBottom(erreur);
 					}
@@ -111,13 +113,13 @@ public class PageEditionVoiture extends Stage{
 		        gridPane.setHgap(10);
 				GridPane.setHgrow(tarif, Priority.ALWAYS);
 				
-				//ftarif.setText(Utilisateur.getInstance().getPersonne().getTarif());
-				//fnbkm.setText(Utilisateur.getInstance().getPersonne().getNbKmParcourus());
-				//fimmat.setText(Utilisateur.getInstance().getPersonne().getVoiture().getImmatriculation());
-				//fmarque.setText(Utilisateur.getInstance().getPersonne().getVoiture().getMarque());
-				//ftEss.setText(Utilisateur.getInstance().getPersonne().getVoiture().getTypeEssence());
-				//fcouleur.setText(Utilisateur.getInstance().getPersonne().getVoiture().getCouleur());
-				//ftype.setText(Utilisateur.getInstance().getPersonne().getVoiture().getType());
+				ftarif.setText(String.valueOf(c.getTarif()));
+				fnbkm.setText(String.valueOf(c.getNbKmParcourus()));
+				fimmat.setText(c.getVoiture().getImmatriculation());
+				fmarque.setText(c.getVoiture().getMarque());
+				ftEss.setText(c.getVoiture().getTypeEssence());
+				fcouleur.setText(c.getVoiture().getCouleur());
+				ftype.setText(c.getVoiture().getType());
 				
 		        buttonAnnuler.setPrefWidth(90);
 		        buttonOk.setPrefWidth(70);
