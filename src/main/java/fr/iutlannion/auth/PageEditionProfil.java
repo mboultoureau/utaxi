@@ -100,10 +100,7 @@ public class PageEditionProfil extends Stage {
 		
 		//
 			erreur.setTextFill(Color.RED);
-		
-			Label nom = new Label(Utilisateur.getInstance().getPersonne().getNom());
-			Label prenom =new Label(Utilisateur.getInstance().getPersonne().getPrenom());
-			Label mail = new Label(Utilisateur.getInstance().getPersonne().getEmail());
+	
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(10);
 	        gridPane.setHgap(10);
@@ -130,9 +127,6 @@ public class PageEditionProfil extends Stage {
 	        gridPane.add(buttonAnnuler, 1,10);
 	        
 	        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
-	        GridPane.setHalignment(nom, HPos.RIGHT);
-	        GridPane.setHalignment(prenom, HPos.RIGHT);
-	        GridPane.setHalignment(mail, HPos.RIGHT);
 	        
 		
 	        root.setTop(header);
