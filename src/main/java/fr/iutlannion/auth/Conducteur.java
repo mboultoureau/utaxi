@@ -3,6 +3,7 @@ package fr.iutlannion.auth;
 import java.util.ArrayList;
 
 import fr.iutlannion.core.Voiture;
+import fr.iutlannion.exceptions.FormatException;
 
 public class Conducteur extends Personne {
 
@@ -46,6 +47,14 @@ public class Conducteur extends Personne {
 
     public double getTarif() {
         return tarif;
+    }
+    
+    public void setTarif(String t) throws FormatException {
+    	try {
+    		this.tarif = Double.valueOf(t);
+    	} catch(NumberFormatException e) {
+			throw new FormatException("Le tarif doit être valide (ex : 10.3).");
+    	}
     }
 
     public double getNbKmParcourus() {
