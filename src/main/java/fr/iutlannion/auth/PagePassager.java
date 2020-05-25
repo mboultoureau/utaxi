@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -16,34 +15,26 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class PagePaiement extends Stage {
+public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
 	// Header
 	private HBox header = new HBox();
-	private Button backButton = new Button("Retour");
-	private Label title = new Label("INFORMATIONS DE PAIEMENT");
+	private Button backButton = new Button("Deconnexion");
+	private Label title = new Label("Page Passager");
 	private Label logo = new Label("UTaxi");
 
-	// Informations de Paiement
-	GridPane grid = new GridPane();
-	private Label num = new Label("Numéro de la carte");
-	private TextField numField = new TextField();
-	private Label expiration = new Label("Date d'expiration");
-	private TextField expirationField = new TextField();
-	private Label cvc = new Label("CVC");
-	private TextField cvcField = new TextField();
-	private Label name = new Label("Nom inscrit sur la carte");
-	private TextField nameField = new TextField();
+	private GridPane gridPane = new GridPane();
 
-	public PagePaiement() {
-		// Événements
+	public PagePassager() {
+
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
+				Window.getInstance().gotoPage("connexion");
 			}
 		}));
+
 	}
 
 	public Parent creerContenu() {
@@ -74,21 +65,8 @@ public class PagePaiement extends Stage {
 
 		header.getChildren().addAll(backButton, title, logo);
 
-		// Informations de paiement
-		grid.add(num, 0, 0);
-		grid.add(numField, 0, 1);
-		grid.add(expiration, 0, 2);
-		grid.add(expirationField, 0, 3);
-		grid.add(cvc, 0, 4);
-		grid.add(cvcField, 0, 5);
-		grid.add(name, 0, 6);
-		grid.add(nameField, 0, 7);
-
-		root.setMinHeight(480);
-		root.setMinWidth(640);
 		root.setTop(header);
-		root.setCenter(grid);
 		return root;
-	}
 
+	}
 }

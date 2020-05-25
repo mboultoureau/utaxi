@@ -52,7 +52,7 @@ public class App extends Application {
 		c2.ajouterNote(4.0f);
 
 		// Passagers
-		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email", "daniel");
+		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel");
 		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde");
 
 		Passagers.getInstance().add(p1);
