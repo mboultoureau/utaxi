@@ -12,6 +12,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application {
+	
+	/**
+	 * Active ou non le mode Debug (le bouton apparaîtra ou non sur le
+	 * menu principal).
+	 */
+	public static final boolean DEBUG = true;
+	
 	public void start(Stage primaryStage) {
 		primaryStage = new Window();
 		primaryStage.show();
