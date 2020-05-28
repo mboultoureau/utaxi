@@ -3,7 +3,7 @@ package fr.iutlannion.core;
 import java.util.HashMap;
 
 import fr.iutlannion.admin.PageAdmin;
-import fr.iutlannion.auth.PageConducteur;
+import fr.iutlannion.dashboard.PageConducteur;
 import fr.iutlannion.auth.PageConnexion;
 import fr.iutlannion.auth.PageEditionProfil;
 import fr.iutlannion.auth.PageEditionVoiture;
@@ -11,7 +11,7 @@ import fr.iutlannion.auth.PageEnregistrementVoiture;
 import fr.iutlannion.auth.PageHoraires;
 import fr.iutlannion.auth.PageInscription;
 import fr.iutlannion.auth.PagePaiement;
-import fr.iutlannion.auth.PagePassager;
+import fr.iutlannion.dashboard.PagePassager;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

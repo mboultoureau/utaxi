@@ -1,4 +1,4 @@
-package fr.iutlannion.core;
+package fr.iutlannion.manager;
 
 public class Voiture {
 	private String immatriculation;

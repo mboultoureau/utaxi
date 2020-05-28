@@ -2,8 +2,6 @@ package fr.iutlannion.manager;
 
 import java.util.ArrayList;
 
-import fr.iutlannion.core.Voiture;
-
 public class Voitures {
 	private ArrayList<Voiture> voitures;
 	private static Voitures instance;

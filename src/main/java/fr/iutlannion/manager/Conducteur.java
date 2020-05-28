@@ -1,8 +1,7 @@
-package fr.iutlannion.auth;
+package fr.iutlannion.manager;
 
 import java.util.ArrayList;
 
-import fr.iutlannion.core.Voiture;
 import fr.iutlannion.exceptions.FormatException;
 
 public class Conducteur extends Personne {

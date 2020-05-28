@@ -138,7 +138,7 @@ public class PagePaiement extends Stage {
 				4, 1, 6, 5, 7, 2 // Back 2
 		);
 		
-		texture.setDiffuseMap(new Image("credit-card.png"));
+		texture.setDiffuseMap(new Image("img/credit-card.png"));
 
 		
 		MeshView p = new MeshView(mesh);

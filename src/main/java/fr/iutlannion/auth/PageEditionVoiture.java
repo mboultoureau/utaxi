@@ -1,6 +1,7 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Utilisateur;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;

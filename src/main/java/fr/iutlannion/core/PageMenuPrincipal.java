@@ -41,7 +41,7 @@ public class PageMenuPrincipal {
     	BorderPane.setAlignment(title, Pos.CENTER);
     	
     	// Image
-    	image = new ImageView(new Image("taxi-order.png"));
+    	image = new ImageView(new Image("img/taxi-order.png"));
     	image.setPreserveRatio(true);
     	image.setFitWidth(350);
     	

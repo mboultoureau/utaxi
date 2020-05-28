@@ -1,12 +1,10 @@
 package fr.iutlannion.core;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -51,7 +49,9 @@ public class PageDebug {
     public PageDebug() {
     	// Pages principales
     	buttonMenuPrincipal.setOnAction(e -> Window.getInstance().gotoPage("mainMenu"));
-    	
+		buttonConducteur.setOnAction(e -> Window.getInstance().gotoPage("conducteur"));
+		buttonPassager.setOnAction(e -> Window.getInstance().gotoPage("passager"));
+
     	// Pages d'authentification
     	buttonConnexion.setOnAction(e -> Window.getInstance().gotoPage("connexion"));
     	buttonInscription.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
@@ -76,12 +76,7 @@ public class PageDebug {
     	title.setAlignment(Pos.CENTER);
     	title.setPadding(new Insets(10));
     	BorderPane.setAlignment(title, Pos.CENTER);
-    	
-    	// Disable buttons
-    	buttonConducteur.setDisable(true);
-    	buttonPassager.setDisable(true);
-    	
-    	
+
     	buttonsPrincipales.getChildren().addAll(buttonMenuPrincipal, buttonConducteur, buttonPassager);
     	buttonsPrincipales.setSpacing(10);
     	

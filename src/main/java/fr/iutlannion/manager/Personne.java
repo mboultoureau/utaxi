@@ -1,4 +1,4 @@
-package fr.iutlannion.auth;
+package fr.iutlannion.manager;
 
 import fr.iutlannion.exceptions.FormatException;
 
