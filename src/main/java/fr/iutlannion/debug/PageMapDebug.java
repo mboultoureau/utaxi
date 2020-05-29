@@ -54,12 +54,17 @@ public class PageMapDebug extends Stage {
     private Marker marker2 = new Marker(49.833, 2.333);
     private Marker marker3 = new Marker(50.833, 2.333);
 
+    private Button moveMarkerButton = new Button("Bouger le marqueur");
+    private Button disableRoutingButton = new Button("Désactiver le trajet");
+
     private Icon icon = new Icon("img/taxi.png", 40, 20);
 
     public PageMapDebug() {
         backButton.setOnAction(e -> Window.getInstance().gotoPage("debug"));
         moveButton.setOnAction(e -> map.setView(Double.valueOf(xField.getText()), Double.valueOf(yField.getText()), Integer.valueOf(zoomField.getText())));
         deleteButton.setOnAction(e -> map.removeMarker(marker3));
+        moveMarkerButton.setOnAction(e -> map.moveMarker(marker1,51.833, 2.333));
+        disableRoutingButton.setOnAction(e -> map.disableRouting());
     }
 
     public Parent creerContenu() {
@@ -99,7 +104,7 @@ public class PageMapDebug extends Stage {
         moveButton.setPrefWidth(300);
 
         // Left Side
-        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton);
+        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton, disableRoutingButton);
         leftScroll.setContent(leftSide);
         leftScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -114,6 +119,7 @@ public class PageMapDebug extends Stage {
         marker2.setIcon(icon);
         map.addMarker(marker2);
         map.addMarker(marker3);
+        map.traceRoute(marker2, marker3);
 
 
         root.setTop(header);

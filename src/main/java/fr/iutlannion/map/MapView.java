@@ -16,6 +16,9 @@ public class MapView extends StackPane {
     private final WebEngine webEngine = browser.getEngine();
     private final ProgressIndicator loader = new ProgressIndicator(0);
     private boolean loaded = false;
+    private int routingMarker1;
+    private int routingMarker2;
+    public boolean enableRouting = false;
 
     private ArrayList<Marker> markers;
 
@@ -45,6 +48,9 @@ public class MapView extends StackPane {
                     for (Marker m : markers) {
                         displayMarker(m);
                     }
+
+                    // Display routing
+                    displayRouting();
 
                 }
             }
@@ -86,6 +92,20 @@ public class MapView extends StackPane {
         webEngine.executeScript("removeMarker(" + position + ");");
     }
 
+    public void moveMarker(Marker marker, double x, double y) {
+        int position = -1;
+
+        if (markers.contains(marker)) {
+            position = markers.indexOf(marker);
+            markers.get(position).setPosition(x, y);
+        }
+
+        if (position == -1) return;
+        if (!loaded) return;
+
+        webEngine.executeScript("moveMarker(" + position + ", " + x + ", " + y + ");");
+    }
+
     public void displayMarker(Marker marker) {
         if(!loaded) return;
 
@@ -95,5 +115,31 @@ public class MapView extends StackPane {
         else {
             webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ", " + marker.getIcon().getObject() + ");");
         }
+    }
+
+    public void traceRoute(Marker marker1, Marker marker2) {
+        if (markers.contains(marker1) && markers.contains(marker2)) {
+            routingMarker1 = markers.indexOf(marker1);
+            routingMarker2 = markers.indexOf(marker2);
+        } else {
+            return;
+        }
+
+        enableRouting = true;
+        if (!loaded) return;
+
+        displayRouting();
+    }
+
+    private void displayRouting() {
+        if (!enableRouting) return;
+        webEngine.executeScript("traceRoute(" + routingMarker1 + ", " + routingMarker2 + ");");
+    }
+
+    public void disableRouting() {
+        enableRouting = false;
+
+        if(!loaded) return;
+        webEngine.executeScript("removeRoute();");
     }
 }
