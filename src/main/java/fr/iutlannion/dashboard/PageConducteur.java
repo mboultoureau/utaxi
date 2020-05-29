@@ -1,7 +1,6 @@
 package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.map.Marker;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
 import javafx.event.EventHandler;
@@ -35,10 +34,6 @@ public class PageConducteur extends Stage {
 	// Right Side
     private MapOptions mapOptions = new MapOptions();
 	private MapView map;
-	private Marker marker = new Marker(48.833, 2.333);
-
-	// Tests map
-	private Button moveButton = new Button("Aller à Paris");
 
 
 	public PageConducteur() {
@@ -48,9 +43,6 @@ public class PageConducteur extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
-
-		moveButton.setOnAction(e -> map.setView(48.833, 2.333, 7));
-
 	}
 
 	public Parent creerContenu() {
@@ -83,14 +75,12 @@ public class PageConducteur extends Stage {
 
 		// Left Side
 		leftSide.add(soon, 0, 0);
-		leftSide.add(moveButton, 0, 1);
 		leftSide.setMinWidth(300);
 
 		// Map
         mapOptions.setCoordinates(47.2186371, -1.5541362);
         mapOptions.setZoom(13);
         map = new MapView(mapOptions);
-        map.addMarker(marker);
 
 		root.setTop(header);
 		root.setRight(map);

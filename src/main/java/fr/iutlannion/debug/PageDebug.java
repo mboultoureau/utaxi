@@ -1,5 +1,6 @@
-package fr.iutlannion.core;
+package fr.iutlannion.debug;
 
+import fr.iutlannion.core.Window;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -45,6 +46,7 @@ public class PageDebug {
     private HBox buttonsAdmin = new HBox();
     private Button buttonAdmin = new Button("Panel d'administration");
     private Button buttonDebug = new Button("Débug");
+    private Button buttonMapDebug = new Button("Débug de carte");
 
     public PageDebug() {
     	// Pages principales
@@ -66,9 +68,10 @@ public class PageDebug {
     	// Pages d'administration et techniques
     	buttonAdmin.setOnAction(e -> Window.getInstance().gotoPage("admin"));
     	buttonDebug.setOnAction(e -> Window.getInstance().gotoPage("debug"));
+		buttonMapDebug.setOnAction(e -> Window.getInstance().gotoPage("mapDebug"));
     }
 
-    Parent creerContenu() {
+    public Parent creerContenu() {
     	// Title
     	title.setStyle("-fx-text-fill: #000;");
     	title.setTextAlignment(TextAlignment.CENTER);
@@ -86,9 +89,11 @@ public class PageDebug {
     	buttonsEdition.getChildren().addAll(buttonEditer, buttonEditerVoiture);
     	buttonsEdition.setSpacing(10);
     	
-    	buttonsAdmin.getChildren().addAll(buttonAdmin, buttonDebug);
+    	buttonsAdmin.getChildren().addAll(buttonAdmin, buttonDebug, buttonMapDebug);
     	buttonsAdmin.setSpacing(10);
-    	
+
+    	buttons.setMinWidth(580);
+    	buttons.setMinHeight(340);
     	buttons.setFillWidth(true);
     	buttons.setSpacing(20);
     	buttons.getChildren().addAll(pagesPrincipales, buttonsPrincipales, pagesAuthentification, buttonsAuthentification, pagesEdition, buttonsEdition, pagesAdmin, buttonsAdmin);

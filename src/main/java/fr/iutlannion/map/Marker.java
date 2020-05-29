@@ -5,6 +5,7 @@ public class Marker {
     private double x;
     private double y;
     private boolean simple = true;
+    private Icon icon = null;
 
     public Marker(double x, double y) {
         this.x = x;
@@ -21,6 +22,15 @@ public class Marker {
 
     public boolean isSimple() {
         return simple;
+    }
+
+    public void setIcon(Icon icon) {
+        this.icon = icon;
+        simple = false;
+    }
+
+    public Icon getIcon() {
+        return this.icon;
     }
 
 }

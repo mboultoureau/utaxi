@@ -9,7 +9,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class MapView extends StackPane {
 
@@ -73,11 +72,28 @@ public class MapView extends StackPane {
         displayMarker(marker);
     }
 
+    public void removeMarker(Marker marker) {
+        int position = -1;
+
+        if (markers.contains(marker)) {
+            position = markers.indexOf(marker);
+            markers.remove(marker);
+        }
+
+        if (position == -1) return;
+        if (!loaded) return;
+
+        webEngine.executeScript("removeMarker(" + position + ");");
+    }
+
     public void displayMarker(Marker marker) {
         if(!loaded) return;
 
         if (marker.isSimple()) {
-            webEngine.executeScript("setSimpleMarker(" + marker.getX() + ", " + marker.getY() + ");");
+            webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ");");
+        }
+        else {
+            webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ", " + marker.getIcon().getObject() + ");");
         }
     }
 }
