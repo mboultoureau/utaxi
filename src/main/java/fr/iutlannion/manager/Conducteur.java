@@ -10,6 +10,7 @@ public class Conducteur extends Personne {
     private double nbKmParcourus;
 
     private ArrayList<Float> notes;
+    private ArrayList<Jour> jours;
     private Voiture voiture;
 
     public Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus,
@@ -85,6 +86,10 @@ public class Conducteur extends Personne {
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
         this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
+    }
+
+    public Jour getJour(int i){
+        return jours.get(i);
     }
 
 }

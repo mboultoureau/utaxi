@@ -46,6 +46,7 @@ public class PageHoraires extends Stage {
 	private TableColumn<String, String> samedi = new TableColumn<String, String>("Samedi");
 	private TableColumn<String, String> dimanche = new TableColumn<String, String>("Dimanche");
 
+	
 
 
 	public PageHoraires() {
