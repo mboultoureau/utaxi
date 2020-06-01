@@ -37,14 +37,20 @@ public class PageHoraires extends Stage {
 
 	// Tableau
 	private TableView<String> horaires = new TableView<String>();
-	private TableColumn<String, Boolean> heures = new TableColumn<String, Boolean>("Horaires");
-	private TableColumn<String, Boolean> lundi = new TableColumn<String, Boolean>("Lundi");
-	private TableColumn<String, Boolean> mardi = new TableColumn<String, Boolean>("Mardi");
-	private TableColumn<String, Boolean> mercredi = new TableColumn<String, Boolean>("Mercredi");
-	private TableColumn<String, Boolean> jeudi = new TableColumn<String, Boolean>("Jeudi");
-	private TableColumn<String, Boolean> vendredi = new TableColumn<String, Boolean>("Vendredi");
-	private TableColumn<String, Boolean> samedi = new TableColumn<String, Boolean>("Samedi");
-	private TableColumn<String, Boolean> dimanche = new TableColumn<String, Boolean>("Dimanche");
+	private TableColumn<String, String> jours = new TableColumn<String, String>("Jours");
+	private TableColumn<String, Boolean> sept = new TableColumn<String, Boolean>("7h-8h");
+	private TableColumn<String, Boolean> huit = new TableColumn<String, Boolean>("8h-9h");
+	private TableColumn<String, Boolean> neuf = new TableColumn<String, Boolean>("9h-10h");
+	private TableColumn<String, Boolean> dix = new TableColumn<String, Boolean>("10h-11h");
+	private TableColumn<String, Boolean> onze = new TableColumn<String, Boolean>("11h-12h");
+	private TableColumn<String, Boolean> midi = new TableColumn<String, Boolean>("12h-13h");
+	private TableColumn<String, Boolean> treize = new TableColumn<String, Boolean>("13h-14h");
+	private TableColumn<String, Boolean> quatorze = new TableColumn<String, Boolean>("14h-15h");
+	private TableColumn<String, Boolean> quinze = new TableColumn<String, Boolean>("15h-16h");
+	private TableColumn<String, Boolean> seize = new TableColumn<String, Boolean>("16h-17h");
+	private TableColumn<String, Boolean> dixsept = new TableColumn<String, Boolean>("17h-18h");
+	private TableColumn<String, Boolean> dixhuit = new TableColumn<String, Boolean>("18h-19h");
+	private TableColumn<String, Boolean> dixneuf = new TableColumn<String, Boolean>("19h-20h");
 
 	
 
@@ -85,7 +91,7 @@ public class PageHoraires extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		horaires.getColumns().addAll(heures, lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche);
+		horaires.getColumns().addAll(heures, sept, huit, neuf, dix, onze, midi, treize, quatorze, quinze, seize, dixsept, dixhuit, dixneuf);
 
 		root.setTop(header);
 		root.setCenter(horaires);
