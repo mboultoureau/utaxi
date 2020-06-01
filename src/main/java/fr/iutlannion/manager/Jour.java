@@ -14,7 +14,7 @@ public class Jour {
         }
     }
 
-    public Boolean getIndex(int i){
+    public Boolean getJours(int i){
         return heures.get(i);
     }
 
