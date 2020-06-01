@@ -1,6 +1,8 @@
-package fr.iutlannion.auth;
+package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.map.MapOptions;
+import fr.iutlannion.map.MapView;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,26 +17,32 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class PagePassager extends Stage {
+public class PageConducteur extends Stage {
 
 	private BorderPane root = new BorderPane();
 
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Passager");
+    private Label title = new Label("Page Conducteur");
 	private Label logo = new Label("UTaxi");
 
-	private GridPane gridPane = new GridPane();
+	// Left Side
+	private GridPane leftSide = new GridPane();
+	private Label soon = new Label("Prochainement");
 
-	public PagePassager() {
+	// Right Side
+    private MapOptions mapOptions = new MapOptions();
+	private MapView map;
+
+
+	public PageConducteur() {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
-
 	}
 
 	public Parent creerContenu() {
@@ -65,7 +73,19 @@ public class PagePassager extends Stage {
 
 		header.getChildren().addAll(backButton, title, logo);
 
+		// Left Side
+		leftSide.add(soon, 0, 0);
+		leftSide.setMinWidth(300);
+
+		// Map
+        mapOptions.setCoordinates(47.2186371, -1.5541362);
+        mapOptions.setZoom(13);
+        map = new MapView(mapOptions);
+
 		root.setTop(header);
+		root.setRight(map);
+		root.setLeft(leftSide);
+
 		return root;
 
 	}

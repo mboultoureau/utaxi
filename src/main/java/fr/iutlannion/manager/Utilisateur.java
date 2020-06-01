@@ -1,10 +1,5 @@
 package fr.iutlannion.manager;
 
-import fr.iutlannion.auth.Admin;
-import fr.iutlannion.auth.Conducteur;
-import fr.iutlannion.auth.Passager;
-import fr.iutlannion.auth.Personne;
-
 public class Utilisateur {
 	
 	private static Utilisateur instance;

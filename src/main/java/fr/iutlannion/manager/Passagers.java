@@ -1,7 +1,6 @@
 package fr.iutlannion.manager;
 
 import java.util.ArrayList;
-import fr.iutlannion.auth.Passager;
 
 public class Passagers {
 	private ArrayList<Passager> passagers;

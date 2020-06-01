@@ -1,4 +1,4 @@
-package fr.iutlannion.auth;
+package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
 import javafx.event.EventHandler;
@@ -15,19 +15,19 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class PageConducteur extends Stage {
+public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Conducteur");
+	private Label title = new Label("Page Passager");
 	private Label logo = new Label("UTaxi");
 
 	private GridPane gridPane = new GridPane();
 
-	public PageConducteur() {
+	public PagePassager() {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {

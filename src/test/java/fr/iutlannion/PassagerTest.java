@@ -2,7 +2,7 @@ package fr.iutlannion;
 
 import org.junit.Test;
 
-import fr.iutlannion.auth.Passager;
+import fr.iutlannion.manager.Passager;
 import fr.iutlannion.exceptions.FormatException;
 import junit.framework.TestCase;
 

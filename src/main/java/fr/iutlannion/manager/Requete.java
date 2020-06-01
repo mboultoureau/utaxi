@@ -1,7 +1,4 @@
-package fr.iutlannion.core;
-
-import fr.iutlannion.auth.Conducteur;
-import fr.iutlannion.auth.Passager;
+package fr.iutlannion.manager;
 
 public class Requete {
     private Passager passager;

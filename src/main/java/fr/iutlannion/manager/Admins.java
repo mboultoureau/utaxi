@@ -1,7 +1,6 @@
 package fr.iutlannion.manager;
 
 import java.util.ArrayList;
-import fr.iutlannion.auth.Admin;
 
 public class Admins {
 	private ArrayList<Admin> admins;

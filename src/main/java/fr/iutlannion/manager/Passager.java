@@ -1,4 +1,4 @@
-package fr.iutlannion.auth;
+package fr.iutlannion.manager;
 
 public class Passager extends Personne {
 

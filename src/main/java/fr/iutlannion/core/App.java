@@ -1,17 +1,20 @@
 package fr.iutlannion.core;
 
-import fr.iutlannion.auth.Admin;
-import fr.iutlannion.auth.Conducteur;
-import fr.iutlannion.auth.Passager;
-import fr.iutlannion.manager.Admins;
-import fr.iutlannion.manager.Conducteurs;
-import fr.iutlannion.manager.Passagers;
-import fr.iutlannion.manager.Utilisateur;
-import fr.iutlannion.manager.Voitures;
+import fr.iutlannion.manager.Admin;
+import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Passager;
+import fr.iutlannion.manager.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application {
+	
+	/**
+	 * Active ou non le mode Debug (le bouton apparaîtra ou non sur le
+	 * menu principal).
+	 */
+	public static final boolean DEBUG = true;
+	
 	public void start(Stage primaryStage) {
 		primaryStage = new Window();
 		primaryStage.show();

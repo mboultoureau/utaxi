@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.*;
 import javafx.event.EventHandler;
 import fr.iutlannion.manager.*;
-import fr.iutlannion.auth.*;
 import fr.iutlannion.core.Window;
 
 public class PageAdmin extends Stage {

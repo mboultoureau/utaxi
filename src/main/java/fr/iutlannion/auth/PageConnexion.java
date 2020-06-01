@@ -20,10 +20,10 @@ import fr.iutlannion.core.Window;
 
 public class PageConnexion extends Stage {
 
-    private Label label1 = new Label("Connexion à PStage");
-    private Label label2 = new Label("Nom :");
-    private Label label3 = new Label("Mot de passe :");
-    private Label label4 = new Label("");
+    private Label connexionLabel = new Label("Connexion à PStage");
+    private Label nomLabel = new Label("Nom :");
+    private Label mdpLabel = new Label("Mot de passe :");
+    private Label erreurLabel = new Label("");
 
     private Button buttonAnnuler = new Button("Annuler");
     private Button buttonOk = new Button("OK");
@@ -31,30 +31,32 @@ public class PageConnexion extends Stage {
     private TextField textField = new TextField();
     private PasswordField passwordField = new PasswordField();
 
+    private GridPane root = new GridPane();
+
     public PageConnexion() {
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
                     Window.getInstance().gotoPage("conducteur");
-                    label4.setText("");
+                    erreurLabel.setText("");
                     textField.setText("");
                     passwordField.setText("");
                 } else if (Passagers.getInstance().verifConnexion(textField.getText(),
                         passwordField.getText()) != null) {
                     Window.getInstance().gotoPage("passager");
-                    label4.setText("");
+                    erreurLabel.setText("");
                     textField.setText("");
                     passwordField.setText("");
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    label4.setText("");
+                    erreurLabel.setText("");
                     textField.setText("");
                     passwordField.setText("");
                     Window.getInstance().gotoPage("admin");
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
-                    label4.setText("Erreur, champs vide(s)");
+                    erreurLabel.setText("Erreur, champs vide(s)");
                 } else {
-                    label4.setText("Email/mot de passe invalide");
+                    erreurLabel.setText("Email/mot de passe invalide");
                 }
             }
         }));
@@ -68,30 +70,30 @@ public class PageConnexion extends Stage {
 
     public Parent creerContenu() {
 
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10));
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setVgap(5);
-        gridPane.setHgap(5);
-        /* gridPane.setGridLinesVisible(true); */
+        root.setPadding(new Insets(10));
+        root.setAlignment(Pos.CENTER);
+        root.setVgap(5);
+        root.setHgap(5);
+        root.setMinWidth(640);
+        root.setMinHeight(455);
 
         buttonAnnuler.setPrefWidth(70);
         buttonOk.setPrefWidth(70);
-        label4.setTextFill(Color.RED);
+        erreurLabel.setTextFill(Color.RED);
 
-        gridPane.add(label1, 0, 0, 2, 1);
-        gridPane.add(label2, 0, 1);
-        gridPane.add(textField, 1, 1);
-        gridPane.add(label3, 0, 2);
-        gridPane.add(passwordField, 1, 2);
-        gridPane.add(buttonOk, 1, 3);
-        gridPane.add(buttonAnnuler, 1, 3);
-        gridPane.add(label4, 1, 4, 2, 1);
+        root.add(connexionLabel, 0, 0, 2, 1);
+        root.add(nomLabel, 0, 1);
+        root.add(textField, 1, 1);
+        root.add(mdpLabel, 0, 2);
+        root.add(passwordField, 1, 2);
+        root.add(buttonOk, 1, 3);
+        root.add(buttonAnnuler, 1, 3);
+        root.add(erreurLabel, 1, 4, 2, 1);
         GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
-        GridPane.setHalignment(label1, HPos.CENTER);
-        GridPane.setHalignment(label4, HPos.CENTER);
+        GridPane.setHalignment(connexionLabel, HPos.CENTER);
+        GridPane.setHalignment(erreurLabel, HPos.CENTER);
 
-        return gridPane;
+        return root;
     }
 
 }

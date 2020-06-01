@@ -2,13 +2,13 @@ package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
+import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Passager;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -16,7 +16,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -121,26 +120,7 @@ public class PageInscription extends Stage {
 	private Button pConnexion = new Button("J'ai déjà un compte");
 	private Button pNext = new Button("Suivant");
 
-	// Alerte
-	private Alert alert = new Alert(AlertType.ERROR);
-	private TextArea textErrors = new TextArea();
-	private GridPane gridErrors = new GridPane();
-
 	public PageInscription() {
-
-		// Alerte
-		alert.setTitle("Erreur lors du formulaire");
-		textErrors.setEditable(false);
-		textErrors.setWrapText(true);
-		textErrors.setMaxWidth(Double.MAX_VALUE);
-		textErrors.setMaxHeight(Double.MAX_VALUE);
-		gridErrors.setMaxWidth(Double.MAX_VALUE);
-		gridErrors.add(textErrors, 0, 1);
-		GridPane.setVgrow(textErrors, Priority.ALWAYS);
-		GridPane.setHgrow(textErrors, Priority.ALWAYS);
-
-		// Set expandable Exception into the dialog pane.
-		alert.getDialogPane().setExpandableContent(gridErrors);
 
 		// Événements
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -164,14 +144,18 @@ public class PageInscription extends Stage {
 		// Suivant
 		pNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				checkPassager();
+				if (!checkPassager()) {
+					Window.getInstance().gotoPage("paiement");
+				}
 			}
 		}));
 		
 		// Suivant
 		cNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				checkConducteur();
+				if (!checkConducteur()) {
+					Window.getInstance().gotoPage("enregistrementVoiture");
+				}
 			}
 		}));
 	}
@@ -196,8 +180,13 @@ public class PageInscription extends Stage {
 	
 	/**
 	 * Vérifie si le conducteur a saisi tous les champs correctement.
+	 * 
+	 * @return Retourne vrai si possède des erreurs
 	 */
-	private void checkConducteur() {
+	private boolean checkConducteur() {
+		
+		boolean hasErrors = false;
+		
 		hideErrors();
 
 		try {
@@ -205,6 +194,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			cNomError.setVisible(true);
 			cNomError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		try {
@@ -212,6 +202,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			cPrenomError.setVisible(true);
 			cPrenomError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		try {
@@ -219,6 +210,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			cEmailError.setVisible(true);
 			cEmailError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		if (cMdpField.getText().equals(cConfirmerMdpField.getText())) {
@@ -227,10 +219,12 @@ public class PageInscription extends Stage {
 			} catch (FormatException e) {
 				cMdpError.setVisible(true);
 				cMdpError.setText(e.getMessage());
+				hasErrors = true;
 			}
 		} else {
 			cConfirmerMdpError.setVisible(true);
 			cConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
+			hasErrors = true;
 		}
 		
 
@@ -239,20 +233,28 @@ public class PageInscription extends Stage {
 		} catch(FormatException e) {
 			cTarifError.setVisible(true);
 			cTarifError.setText(e.getMessage());
+			hasErrors = true;
 		}
 		
 		if (!cMajeur.isSelected() || !cConditions.isSelected()) {
 			cConditionsError.setVisible(true);
 			cConditionsError.setText("Vous devez être majeur et accepté les conditions.");
+			hasErrors = true;
 		}
+		
+		return hasErrors;
 	}
 	
 
 
 	/**
 	 * Vérifie si le passager a saisi tous les champs correctement.
+	 * 
+	 * @return Retourne vrai si possède des erreurs.
 	 */
-	private void checkPassager() {
+	private boolean checkPassager() {
+		
+		boolean hasErrors = false;
 
 		hideErrors();
 
@@ -261,6 +263,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			pNomError.setVisible(true);
 			pNomError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		try {
@@ -268,6 +271,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			pPrenomError.setVisible(true);
 			pPrenomError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		try {
@@ -275,6 +279,7 @@ public class PageInscription extends Stage {
 		} catch (FormatException e) {
 			pEmailError.setVisible(true);
 			pEmailError.setText(e.getMessage());
+			hasErrors = true;
 		}
 
 		if (pMdpField.getText().equals(pConfirmerMdpField.getText())) {
@@ -283,16 +288,21 @@ public class PageInscription extends Stage {
 			} catch (FormatException e) {
 				pMdpError.setVisible(true);
 				pMdpError.setText(e.getMessage());
+				hasErrors = true;
 			}
 		} else {
 			pConfirmerMdpError.setVisible(true);
 			pConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
+			hasErrors = true;
 		}
 		
 		if (!pMajeur.isSelected() || !pConditions.isSelected()) {
 			pConditionsError.setVisible(true);
 			pConditionsError.setText("Vous devez être majeur et accepté les conditions.");
+			hasErrors = true;
 		}
+		
+		return hasErrors;
 	}
 
 	public Parent creerContenu() {
@@ -380,8 +390,6 @@ public class PageInscription extends Stage {
 
 		conducteurTab.setText("Conducteur");
 		conducteurTab.setContent(conducteurPane);
-
-		
 		
 		
 		// Errors passager

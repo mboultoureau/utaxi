@@ -1,7 +1,6 @@
 package fr.iutlannion.manager;
 
 import java.util.ArrayList;
-import fr.iutlannion.auth.Conducteur;
 
 public class Conducteurs {
 	private ArrayList<Conducteur> conducteurs;
