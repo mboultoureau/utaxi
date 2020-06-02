@@ -9,7 +9,7 @@ public class Conducteur extends Personne {
     private double tarif;
     private double nbKmParcourus;
 
-    private ArrayList<Float> notes;
+    private ArrayList<Double> notes;
     private ArrayList<Jour> jours;
     private Voiture voiture;
 
@@ -18,7 +18,7 @@ public class Conducteur extends Personne {
 
         super(nom, prenom, email, motDePasse);
 
-        this.notes = new ArrayList<Float>();
+        this.notes = new ArrayList<Double>();
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
         this.voiture = voiture;
@@ -65,7 +65,7 @@ public class Conducteur extends Personne {
         return voiture;
     }
 
-    public void ajouterNote(float note) {
+    public void ajouterNote(double note) {
         notes.add(note);
     }
 
@@ -88,7 +88,7 @@ public class Conducteur extends Personne {
         this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
     }
 
-    public Jour getJour(int i){
+    public Jour getJour(int i) {
         return jours.get(i);
     }
 

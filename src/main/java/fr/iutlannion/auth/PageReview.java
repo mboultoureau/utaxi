@@ -1,7 +1,9 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Personne;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -44,6 +46,8 @@ public class PageReview extends Stage {
     public PageReview() {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
+                Conducteur c = (Conducteur) Utilisateur.getInstance().getInstance().getPersonne();
+                c.ajouterNote(sliderNote.getValue());
                 Window.getInstance().gotoPage("mainMenu");
             }
         }));

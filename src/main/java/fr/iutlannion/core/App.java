@@ -8,13 +8,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application {
-	
+
 	/**
-	 * Active ou non le mode Debug (le bouton apparaîtra ou non sur le
-	 * menu principal).
+	 * Active ou non le mode Debug (le bouton apparaîtra ou non sur le menu
+	 * principal).
 	 */
 	public static final boolean DEBUG = true;
-	
+
 	public void start(Stage primaryStage) {
 		primaryStage = new Window();
 		primaryStage.show();
@@ -49,10 +49,10 @@ public class App extends Application {
 
 		Conducteurs.getInstance().add(c1);
 		Conducteurs.getInstance().add(c2);
-		c1.ajouterNote(4.5f);
-		c1.ajouterNote(4.8f);
+		c1.ajouterNote(4.5);
+		c1.ajouterNote(4.8);
 
-		c2.ajouterNote(4.0f);
+		c2.ajouterNote(4.0);
 
 		// Passagers
 		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel");
