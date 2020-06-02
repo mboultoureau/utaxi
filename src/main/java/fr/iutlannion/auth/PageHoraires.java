@@ -91,7 +91,7 @@ public class PageHoraires extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		horaires.getColumns().addAll(heures, sept, huit, neuf, dix, onze, midi, treize, quatorze, quinze, seize, dixsept, dixhuit, dixneuf);
+		horaires.getColumns().addAll(jours, sept, huit, neuf, dix, onze, midi, treize, quatorze, quinze, seize, dixsept, dixhuit, dixneuf);
 
 		root.setTop(header);
 		root.setCenter(horaires);

@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.MeshView;
@@ -43,15 +44,28 @@ public class PagePaiement extends Stage {
 	private TextField cvcField = new TextField();
 	private Label name = new Label("Nom inscrit sur la carte");
 	private TextField nameField = new TextField();
+
+	// Erreurs
+	private Label numError = new Label();
+	private Label expirationError = new Label();
+	private Label cvcError = new Label();
+	private Label nameError = new Label();
+
 	
 	// Carte de crédit
 	// private Box backgroundCreditCard = new Box();
 	private TriangleMesh mesh = new TriangleMesh();
 	private PhongMaterial texture = new PhongMaterial();
 	private StackPane creditCard = new StackPane();
-	private Label noCard = new Label("0000 0000 0000 0000");
-	private Label nameCard = new Label("MR DUPONT JEAN");
+	private Label numCard = new Label("0000 0000 0000 0000");
+	private Label nameCard = new Label("DUPONT JEAN");
+	private Label expirationCard = new Label("12/20");
 	private Label cvcCard = new Label("000");
+
+	// Valeurs
+	private String numText = "";
+	private String nameText = "";
+	private String expirationText = "";
 	
 	public PagePaiement() {
 		// Événements
@@ -60,6 +74,59 @@ public class PagePaiement extends Stage {
 				Window.getInstance().gotoPage("mainMenu");
 			}
 		}));
+
+		numField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+			if (newValue.matches("^[0-9]{0,16}$")) {
+				numText = newValue;
+				update();
+				numError.setVisible(false);
+			} else {
+				numError.setText("Vous devez saisir les 16 chiffres de votre carte.");
+				numError.setVisible(true);
+			}
+		}));
+
+		expirationField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if (newValue.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")) {
+				expirationText = newValue;
+				update();
+				expirationError.setVisible(false);
+			} else {
+				expirationError.setText("Veuillez saisir une date d'expiration valide.");
+				expirationError.setVisible(true);
+			}
+		});
+
+		nameField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if (newValue.matches("^[a-zA-Zéèëàäï ]{3,100}$")) {
+				nameText = newValue;
+				update();
+				nameError.setVisible(false);
+			} else {
+				nameError.setText("Veuillez saisir un nom valide (entre 3 et 100 lettres).");
+				nameError.setVisible(true);
+			}
+		});
+	}
+
+	private void update() {
+		if (numText.matches("^[0-9]{0,16}$")) {
+			String[] digits = numText.split("(?<=\\G.{4})");
+			String creditDigit = "";
+			for (String digit : digits) {
+				creditDigit += digit + " ";
+			}
+
+			numCard.setText(creditDigit);
+		}
+
+		if (nameText.matches("^[a-zA-Zéèëàäï ]{3,100}$")) {
+			nameCard.setText(nameText.toUpperCase());
+		}
+
+		if (expirationText.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")) {
+			expirationCard.setText(expirationText);
+		}
 	}
 
 	public Parent creerContenu() {
@@ -93,18 +160,38 @@ public class PagePaiement extends Stage {
 		// Informations de paiement
 		grid.add(num, 0, 0);
 		grid.add(numField, 0, 1);
-		grid.add(expiration, 0, 2);
-		grid.add(expirationField, 0, 3);
-		grid.add(cvc, 0, 4);
-		grid.add(cvcField, 0, 5);
-		grid.add(name, 0, 6);
-		grid.add(nameField, 0, 7);
+		grid.add(numError, 0, 2);
+		grid.add(expiration, 0, 3);
+		grid.add(expirationField, 0, 4);
+		grid.add(expirationError, 0, 5);
+		grid.add(cvc, 0, 6);
+		grid.add(cvcField, 0, 7);
+		grid.add(cvcError, 0, 8);
+		grid.add(name, 0, 9);
+		grid.add(nameField, 0, 10);
+		grid.add(nameError, 0, 11);
 		
 		root.setMinHeight(480);
 		root.setMinWidth(640);
 		root.setTop(header);
 		root.setLeft(grid);
-		
+
+		// Erreurs
+		numError.setVisible(false);
+		expirationError.setVisible(false);
+		cvcError.setVisible(false);
+		nameError.setVisible(false);
+
+		numError.setTextFill(Color.RED);
+		expirationError.setTextFill(Color.RED);
+		cvcError.setTextFill(Color.RED);
+		nameError.setTextFill(Color.RED);
+
+		// Champs
+		numField.setPromptText("0000111122223333");
+		nameField.setPromptText("Dupont Jean");
+		cvcField.setPromptText("123");
+		expirationField.setPromptText("12/20");
 		
 		// Carte de crédit 3D		
 		final float height = 54.0f * 3.5f;
@@ -146,19 +233,19 @@ public class PagePaiement extends Stage {
 		p.setMaterial(texture);
 		
 		p.setRotationAxis(Rotate.Y_AXIS);
-		p.setRotate(180.0);
+		p.setRotate(0.0);
 		
 		
 		// Numéro de carte
-		noCard.setStyle("-fx-text-fill: #fff;");
-		noCard.setFont(new Font("Arial", 25));
-		StackPane.setMargin(noCard, new Insets(30, 0, 0, 25));
-		StackPane.setAlignment(noCard, Pos.CENTER);
+		numCard.setStyle("-fx-text-fill: #fff;");
+		numCard.setFont(new Font("Arial", 25));
+		StackPane.setMargin(numCard, new Insets(30, 0, 0, 25));
+		StackPane.setAlignment(numCard, Pos.CENTER);
 		
 		// Nom sur la carte
 		nameCard.setStyle("-fx-text-fill: #fff;");
 		nameCard.setFont(new Font("Arial", 12));
-		noCard.setPrefWidth(width);
+		numCard.setPrefWidth(width);
 		StackPane.setMargin(nameCard, new Insets(90, 0, 0, 25));
 		StackPane.setAlignment(nameCard, Pos.CENTER_LEFT);
 
@@ -167,12 +254,18 @@ public class PagePaiement extends Stage {
 		cvcCard.setFont(new Font("Arial", 15));
 		StackPane.setAlignment(cvcCard, Pos.CENTER_LEFT);
 		StackPane.setMargin(cvcCard, new Insets(0, 0, 62, 112));
+
+		// Expiration
+		expirationCard.setStyle("-fx-text-fill: #222;");
+		expirationCard.setFont(new Font("Arial", 15));
+		StackPane.setAlignment(expirationCard, Pos.CENTER_LEFT);
+		StackPane.setMargin(expirationCard, new Insets(130, 0, 0, 240));
 		
 		
 		creditCard.setPadding(new Insets(0, 50, 0, 20));
 		creditCard.setPrefHeight(height);
 		creditCard.setPrefWidth(width);
-		creditCard.getChildren().addAll(p, noCard, nameCard, cvcCard);
+		creditCard.getChildren().addAll(p, numCard, nameCard, cvcCard, expirationCard);
 		creditCard.setStyle("-fx-border-radius: 50px");
 
 		root.setRight(creditCard);
