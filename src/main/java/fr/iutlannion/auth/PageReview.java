@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +20,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.paint.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 public class PageReview extends Stage {
     // HEADER
@@ -29,12 +32,11 @@ public class PageReview extends Stage {
 
     // CONTENU
     private GridPane gridPane = new GridPane();
-
     private Label label1 = new Label("");
-
     private Label label2 = new Label("Note : ");
-
+    private Label label3 = new Label("");
     private Button buttonOk = new Button("Valider");
+    Slider sliderNote = new Slider();
 
     public PageReview() {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -42,6 +44,19 @@ public class PageReview extends Stage {
                 Window.getInstance().gotoPage("mainMenu");
             }
         }));
+
+        sliderNote.valueProperty()
+                .addListener((obs, oldval, newVal) -> sliderNote.setValue(Math.round(newVal.doubleValue())));
+
+        sliderNote.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, //
+                    Number oldValue, Number newValue) {
+
+                label3.setText(newValue + "/5");
+            }
+        });
 
     }
 
@@ -71,14 +86,25 @@ public class PageReview extends Stage {
         gridPane.setHgap(10);
         GridPane.setHgrow(label1, Priority.ALWAYS);
 
-        label1.setText("Note et pourboire pour le conducteur " + Utilisateur.getInstance().getPersonne().getNom());
+        label1.setText("Note et pourboire pour " + Utilisateur.getInstance().getPersonne().getNom());
         label1.setFont(new Font("Arial", 16));
+
+        sliderNote.setMin(0);
+        sliderNote.setMax(5);
+        sliderNote.setValue(2.5);
+        sliderNote.setShowTickLabels(true);
+        sliderNote.setShowTickMarks(true);
+        sliderNote.setMajorTickUnit(2.5);
+        sliderNote.setMinorTickCount(1);
+        sliderNote.setBlockIncrement(1);
 
         buttonOk.setPrefWidth(70);
         // column, row
         gridPane.add(label1, 0, 0, 1, 1);
         gridPane.add(label2, 0, 1);
-        gridPane.add(buttonOk, 1, 2);
+        gridPane.add(sliderNote, 1, 1);
+        gridPane.add(label3, 2, 1);
+        gridPane.add(buttonOk, 3, 2);
 
         root.setTop(header);
         root.setCenter(gridPane);
