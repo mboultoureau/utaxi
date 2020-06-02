@@ -37,6 +37,7 @@ public class PageHoraires extends Stage {
 
 	// Tableau
 	private TableView<String> horaires = new TableView<String>();
+	private TableColumn<String, Boolean> heures = new TableColumn<String, Boolean>("Horaires");
 	private TableColumn<String, String> jours = new TableColumn<String, String>("Jours");
 	private TableColumn<String, Boolean> sept = new TableColumn<String, Boolean>("7h-8h");
 	private TableColumn<String, Boolean> huit = new TableColumn<String, Boolean>("8h-9h");
@@ -51,8 +52,6 @@ public class PageHoraires extends Stage {
 	private TableColumn<String, Boolean> dixsept = new TableColumn<String, Boolean>("17h-18h");
 	private TableColumn<String, Boolean> dixhuit = new TableColumn<String, Boolean>("18h-19h");
 	private TableColumn<String, Boolean> dixneuf = new TableColumn<String, Boolean>("19h-20h");
-
-	
 
 	public PageHoraires() {
 
@@ -91,7 +90,8 @@ public class PageHoraires extends Stage {
 		logo.setAlignment(Pos.CENTER_RIGHT);
 
 		header.getChildren().addAll(backButton, title, logo);
-		horaires.getColumns().addAll(heures, sept, huit, neuf, dix, onze, midi, treize, quatorze, quinze, seize, dixsept, dixhuit, dixneuf);
+		horaires.getColumns().addAll(heures, sept, huit, neuf, dix, onze, midi, treize, quatorze, quinze, seize,
+				dixsept, dixhuit, dixneuf);
 
 		root.setTop(header);
 		root.setCenter(horaires);
