@@ -11,6 +11,7 @@ import fr.iutlannion.auth.PageEnregistrementVoiture;
 import fr.iutlannion.auth.PageHoraires;
 import fr.iutlannion.auth.PageInscription;
 import fr.iutlannion.auth.PagePaiement;
+import fr.iutlannion.auth.PageReview;
 import fr.iutlannion.dashboard.PagePassager;
 import fr.iutlannion.debug.PageDebug;
 import fr.iutlannion.debug.PageMapDebug;
@@ -33,6 +34,7 @@ public class Window extends Stage {
 	private static PageInscription inscription = new PageInscription();
 	private static PageHoraires horaires = new PageHoraires();
 	private static PagePaiement paiement = new PagePaiement();
+	private static PageReview review = new PageReview();
 
 	// Pages d'administration
 	private static PageAdmin admin = new PageAdmin();
@@ -56,6 +58,7 @@ public class Window extends Stage {
 		scenes.put("enregistrementVoiture", new Scene(enregistrementVoiture.creerContenu()));
 		scenes.put("horaires", new Scene(horaires.creerContenu(), 640, 480));
 		scenes.put("paiement", new Scene(paiement.creerContenu()));
+		scenes.put("review", new Scene(review.creerContenu(), 640, 480));
 
 		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
 
