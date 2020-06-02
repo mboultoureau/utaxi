@@ -52,8 +52,6 @@ public class PageHoraires extends Stage {
 	private TableColumn<String, Boolean> dixhuit = new TableColumn<String, Boolean>("18h-19h");
 	private TableColumn<String, Boolean> dixneuf = new TableColumn<String, Boolean>("19h-20h");
 
-	
-
 	public PageHoraires() {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
