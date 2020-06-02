@@ -35,8 +35,11 @@ public class PageReview extends Stage {
     private Label label1 = new Label("");
     private Label label2 = new Label("Note : ");
     private Label label3 = new Label("");
+    private Label label4 = new Label("Pourboire : ");
+    private Label label5 = new Label("");
     private Button buttonOk = new Button("Valider");
     Slider sliderNote = new Slider();
+    Slider sliderPourboire = new Slider();
 
     public PageReview() {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -48,6 +51,9 @@ public class PageReview extends Stage {
         sliderNote.valueProperty()
                 .addListener((obs, oldval, newVal) -> sliderNote.setValue(Math.round(newVal.doubleValue())));
 
+        sliderPourboire.valueProperty()
+                .addListener((obs, oldval, newVal) -> sliderPourboire.setValue(Math.round(newVal.doubleValue())));
+
         sliderNote.valueProperty().addListener(new ChangeListener<Number>() {
 
             @Override
@@ -55,6 +61,16 @@ public class PageReview extends Stage {
                     Number oldValue, Number newValue) {
 
                 label3.setText(newValue + "/5");
+            }
+        });
+
+        sliderPourboire.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, //
+                    Number oldValue, Number newValue) {
+
+                label5.setText(newValue + "€");
             }
         });
 
@@ -98,13 +114,26 @@ public class PageReview extends Stage {
         sliderNote.setMinorTickCount(1);
         sliderNote.setBlockIncrement(1);
 
+        sliderPourboire.setMin(0);
+        sliderPourboire.setMax(25);
+        sliderPourboire.setValue(0);
+        sliderPourboire.setShowTickLabels(true);
+        sliderPourboire.setShowTickMarks(true);
+        sliderPourboire.setMajorTickUnit(12.5);
+        sliderPourboire.setMinorTickCount(1);
+        sliderPourboire.setBlockIncrement(1);
+
         buttonOk.setPrefWidth(70);
-        // column, row
+        buttonOk.setPrefHeight(50);
+
         gridPane.add(label1, 0, 0, 1, 1);
         gridPane.add(label2, 0, 1);
         gridPane.add(sliderNote, 1, 1);
         gridPane.add(label3, 2, 1);
-        gridPane.add(buttonOk, 3, 2);
+        gridPane.add(label4, 0, 2);
+        gridPane.add(sliderPourboire, 1, 2);
+        gridPane.add(label5, 2, 2);
+        gridPane.add(buttonOk, 3, 3);
 
         root.setTop(header);
         root.setCenter(gridPane);
