@@ -32,11 +32,11 @@ public class PageEditionProfil extends Stage {
 	private GridPane gridPane = new GridPane();
 	
 	private Label label1 = new Label("Nom");
-	private Label label2 = new Label("Prénom");
+	private Label label2 = new Label("PrÃ©nom");
 	private Label label3 = new Label("Mail");
 	private Label actuel = new Label("Mot de passe actuel");
 	private Label nv = new Label("Nouveau mot de passe");
-	private Label erreur = new Label("Erreur de mot de passe");
+	private Label bottomText=new Label("");
 	
 	
 	private TextField textField1 = new TextField();
@@ -65,8 +65,18 @@ public class PageEditionProfil extends Stage {
 			public void handle(MouseEvent event) {
 				if(passwordField1.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
 					Utilisateur.getInstance().getPersonne().modifierInfo(textField1.getText(), textField2.getText(), textField3.getText(), passwordField2.getText());
+					textField1.setText(Utilisateur.getInstance().getPersonne().getNom());
+					textField2.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+					textField3.setText(Utilisateur.getInstance().getPersonne().getEmail());
+					passwordField1.setText(null);
+					passwordField2.setText(null);
+					bottomText= new Label("Modifications validées");
+					bottomText.setTextFill(Color.GREEN);
+					root.setBottom(bottomText);
 				}else {
-					root.setBottom(erreur);
+					bottomText= new Label("Erreur de mot de passe");
+					bottomText.setTextFill(Color.RED);
+					root.setBottom(bottomText);
 				}
 			}
 		}));
@@ -99,7 +109,7 @@ public class PageEditionProfil extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 		
 		//
-			erreur.setTextFill(Color.RED);
+			bottomText.setTextFill(Color.WHITE);
 	
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(10);
