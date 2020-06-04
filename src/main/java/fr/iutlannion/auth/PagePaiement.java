@@ -1,6 +1,8 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,12 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.DrawMode;
@@ -50,31 +49,62 @@ public class PagePaiement extends Stage {
 	private Label expirationError = new Label();
 	private Label cvcError = new Label();
 	private Label nameError = new Label();
-
 	
 	// Carte de crédit
-	// private Box backgroundCreditCard = new Box();
-	private TriangleMesh mesh = new TriangleMesh();
-	private PhongMaterial texture = new PhongMaterial();
+	private Image frontCard = new Image("img/credit-card-front.png");
+	private Image backCard = new Image("img/credit-card-back.png");
+	private ImageView imageView = new ImageView(frontCard);
 	private StackPane creditCard = new StackPane();
 	private Label numCard = new Label("0000 0000 0000 0000");
 	private Label nameCard = new Label("DUPONT JEAN");
 	private Label expirationCard = new Label("12/20");
 	private Label cvcCard = new Label("000");
 
+	// Bouton suivant et précédent
+	private HBox buttons = new HBox();
+	private Button previousButton = new Button("Précédent");
+	private Button nextButton = new Button("Suivant");
+	private Region space = new Region();
+
 	// Valeurs
 	private String numText = "";
 	private String nameText = "";
 	private String expirationText = "";
+	private String cvcText = "";
 	
 	public PagePaiement() {
 		// Événements
-		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
-			}
-		}));
+		backButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
 
+		numField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+				displayFront();
+			}
+		});
+
+		expirationField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+				displayFront();
+			}
+		});
+
+		nameField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+				displayFront();
+			}
+		});
+
+		cvcField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+				displayBack();
+			}
+		});
+
+		// Erreurs dynamiques
 		numField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
 			if (newValue.matches("^[0-9]{0,16}$")) {
 				numText = newValue;
@@ -107,6 +137,33 @@ public class PagePaiement extends Stage {
 				nameError.setVisible(true);
 			}
 		});
+
+		cvcField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if (newValue.matches("^[0-9]{3}$")) {
+				cvcText = newValue;
+				update();
+				cvcError.setVisible(false);
+			} else {
+				cvcError.setText("Veuillez saisir un CVC valide (3 chiffres).");
+				cvcError.setVisible(true);
+			}
+		});
+	}
+
+	private void displayFront() {
+		imageView.setImage(frontCard);
+		nameCard.setVisible(true);
+		numCard.setVisible(true);
+		expirationCard.setVisible(true);
+		cvcCard.setVisible(false);
+	}
+
+	private void displayBack() {
+		imageView.setImage(backCard);
+		nameCard.setVisible(false);
+		numCard.setVisible(false);
+		expirationCard.setVisible(false);
+		cvcCard.setVisible(true);
 	}
 
 	private void update() {
@@ -126,6 +183,10 @@ public class PagePaiement extends Stage {
 
 		if (expirationText.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")) {
 			expirationCard.setText(expirationText);
+		}
+
+		if (cvcText.matches("^[0-9]{3}$")) {
+			cvcCard.setText(cvcText);
 		}
 	}
 
@@ -192,50 +253,13 @@ public class PagePaiement extends Stage {
 		nameField.setPromptText("Dupont Jean");
 		cvcField.setPromptText("123");
 		expirationField.setPromptText("12/20");
-		
-		// Carte de crédit 3D		
+
+		grid.setPadding(new Insets(40, 20, 0, 20));
+
+		// Carte de crédit
 		final float height = 54.0f * 3.5f;
 		final float width = 85.0f * 3.5f;
-		
-		mesh.getPoints().addAll(
-				0, 0, 0, // 0
-				width, 0, 0, // 1
-				width, height, 0, // 2
-				0, height, 0, // 3
-				
-				0, 0, 1, // 4
-				width, 0, 1, // 5
-				width, height, 1, // 6
-				0, height, 1 // 7
-		);
-		
-		mesh.getTexCoords().addAll(
-				0, 0, // 0
-				0.5f, 0, // 1
-				0.5f, 1, // 2
-				0, 1, // 3
-				1, 0, // 4
-				1, 1 // 5
-		);
-		
-		mesh.getFaces().addAll(
-				0, 0, 2, 2, 1, 1, // Front 1
-				0, 0, 3, 3, 2, 2, // Front 2
-				4, 1, 5, 4, 6, 5, // Back 1
-				4, 1, 6, 5, 7, 2 // Back 2
-		);
-		
-		texture.setDiffuseMap(new Image("img/credit-card.png"));
 
-		
-		MeshView p = new MeshView(mesh);
-		p.setDrawMode(DrawMode.FILL);
-		p.setMaterial(texture);
-		
-		p.setRotationAxis(Rotate.Y_AXIS);
-		p.setRotate(0.0);
-		
-		
 		// Numéro de carte
 		numCard.setStyle("-fx-text-fill: #fff;");
 		numCard.setFont(new Font("Arial", 25));
@@ -250,25 +274,41 @@ public class PagePaiement extends Stage {
 		StackPane.setAlignment(nameCard, Pos.CENTER_LEFT);
 
 		// CVC
+		cvcCard.setVisible(false);
 		cvcCard.setStyle("-fx-text-fill: #222;");
 		cvcCard.setFont(new Font("Arial", 15));
 		StackPane.setAlignment(cvcCard, Pos.CENTER_LEFT);
-		StackPane.setMargin(cvcCard, new Insets(0, 0, 62, 112));
+		StackPane.setMargin(cvcCard, new Insets(0, 0, 62, 162));
 
 		// Expiration
 		expirationCard.setStyle("-fx-text-fill: #222;");
 		expirationCard.setFont(new Font("Arial", 15));
 		StackPane.setAlignment(expirationCard, Pos.CENTER_LEFT);
 		StackPane.setMargin(expirationCard, new Insets(130, 0, 0, 240));
-		
-		
+
 		creditCard.setPadding(new Insets(0, 50, 0, 20));
 		creditCard.setPrefHeight(height);
 		creditCard.setPrefWidth(width);
-		creditCard.getChildren().addAll(p, numCard, nameCard, cvcCard, expirationCard);
+		creditCard.getChildren().addAll(imageView, numCard, nameCard, cvcCard, expirationCard);
 		creditCard.setStyle("-fx-border-radius: 50px");
 
 		root.setRight(creditCard);
+
+		// Buttons
+		HBox.setHgrow(space, Priority.ALWAYS);
+
+		previousButton.setPrefWidth(150);
+		previousButton.setPrefHeight(50);
+
+		nextButton.setPrefWidth(150);
+		nextButton.setPrefHeight(50);
+
+		buttons.setPadding(new Insets(0, 50, 25, 50));
+		buttons.setSpacing(40);
+		buttons.getChildren().addAll(previousButton, space, nextButton);
+
+		root.setBottom(buttons);
+
 		return root;
 	}
 
