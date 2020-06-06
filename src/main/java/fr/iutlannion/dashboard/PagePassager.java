@@ -1,7 +1,11 @@
 package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Conducteurs;
 import javafx.event.EventHandler;
+import fr.iutlannion.map.MapOptions;
+import fr.iutlannion.map.MapView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -25,7 +29,13 @@ public class PagePassager extends Stage {
 	private Label title = new Label("Page Passager");
 	private Label logo = new Label("UTaxi");
 
-	private GridPane gridPane = new GridPane();
+	// Left Side
+	private GridPane leftSide = new GridPane();
+	private Label soon = new Label("Prochainement");
+
+	// Right Side
+	private MapOptions mapOptions = new MapOptions();
+	private MapView map;
 
 	public PagePassager() {
 
@@ -34,7 +44,6 @@ public class PagePassager extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
-
 	}
 
 	public Parent creerContenu() {
@@ -65,7 +74,23 @@ public class PagePassager extends Stage {
 
 		header.getChildren().addAll(backButton, title, logo);
 
+		// Left Side
+		leftSide.add(soon, 0, 0);
+		leftSide.setMinWidth(300);
+
+		// Map
+		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setZoom(13);
+		map = new MapView(mapOptions);
+
+		for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+			map.addMarker(c.getMarker());
+		}
+
 		root.setTop(header);
+		root.setRight(map);
+		root.setLeft(leftSide);
+
 		return root;
 
 	}

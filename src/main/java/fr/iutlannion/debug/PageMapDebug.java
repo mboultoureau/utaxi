@@ -61,9 +61,10 @@ public class PageMapDebug extends Stage {
 
     public PageMapDebug() {
         backButton.setOnAction(e -> Window.getInstance().gotoPage("debug"));
-        moveButton.setOnAction(e -> map.setView(Double.valueOf(xField.getText()), Double.valueOf(yField.getText()), Integer.valueOf(zoomField.getText())));
+        moveButton.setOnAction(e -> map.setView(Double.valueOf(xField.getText()), Double.valueOf(yField.getText()),
+                Integer.valueOf(zoomField.getText())));
         deleteButton.setOnAction(e -> map.removeMarker(marker3));
-        moveMarkerButton.setOnAction(e -> map.moveMarker(marker1,51.833, 2.333));
+        moveMarkerButton.setOnAction(e -> map.moveMarker(marker1, 51.833, 2.333));
         disableRoutingButton.setOnAction(e -> map.disableRouting());
     }
 
@@ -104,7 +105,8 @@ public class PageMapDebug extends Stage {
         moveButton.setPrefWidth(300);
 
         // Left Side
-        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton, disableRoutingButton);
+        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton,
+                disableRoutingButton);
         leftScroll.setContent(leftSide);
         leftScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -120,7 +122,6 @@ public class PageMapDebug extends Stage {
         map.addMarker(marker2);
         map.addMarker(marker3);
         map.traceRoute(marker2, marker3);
-
 
         root.setTop(header);
         root.setRight(map);

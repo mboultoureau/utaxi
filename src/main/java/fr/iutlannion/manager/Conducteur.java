@@ -3,6 +3,7 @@ package fr.iutlannion.manager;
 import java.util.ArrayList;
 
 import fr.iutlannion.exceptions.FormatException;
+import fr.iutlannion.map.Marker;
 
 public class Conducteur extends Personne {
 
@@ -12,9 +13,10 @@ public class Conducteur extends Personne {
     private ArrayList<Double> notes;
     private ArrayList<Jour> jours;
     private Voiture voiture;
+    private Marker marker;
 
     public Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus,
-            Voiture voiture) {
+            Voiture voiture, double x, double y) {
 
         super(nom, prenom, email, motDePasse);
 
@@ -22,6 +24,7 @@ public class Conducteur extends Personne {
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
         this.voiture = voiture;
+        this.marker = new Marker(x, y);
     }
 
     public Conducteur() {
@@ -35,6 +38,10 @@ public class Conducteur extends Personne {
 
     public double getSalaire() {
         return 0.0;
+    }
+
+    public Marker getMarker() {
+        return this.marker;
     }
 
     public float getNoteMoyenne() {

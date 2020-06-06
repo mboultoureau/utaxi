@@ -24,7 +24,7 @@ public class PageConducteur extends Stage {
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-    private Label title = new Label("Page Conducteur");
+	private Label title = new Label("Page Conducteur");
 	private Label logo = new Label("UTaxi");
 
 	// Left Side
@@ -32,9 +32,8 @@ public class PageConducteur extends Stage {
 	private Label soon = new Label("Prochainement");
 
 	// Right Side
-    private MapOptions mapOptions = new MapOptions();
+	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
-
 
 	public PageConducteur() {
 
@@ -78,9 +77,9 @@ public class PageConducteur extends Stage {
 		leftSide.setMinWidth(300);
 
 		// Map
-        mapOptions.setCoordinates(47.2186371, -1.5541362);
-        mapOptions.setZoom(13);
-        map = new MapView(mapOptions);
+		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setZoom(13);
+		map = new MapView(mapOptions);
 
 		root.setTop(header);
 		root.setRight(map);

@@ -44,8 +44,10 @@ public class App extends Application {
 		Voitures.getInstance().add(v3);
 
 		// Conducteurs
-		Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1);
-		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "georges", 3.2, 10000, v2);
+		Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1, 47.219860,
+				-1.545304);
+		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "georges", 3.2, 10000, v2, 47.219364,
+				-1.556202);
 
 		Conducteurs.getInstance().add(c1);
 		Conducteurs.getInstance().add(c2);
