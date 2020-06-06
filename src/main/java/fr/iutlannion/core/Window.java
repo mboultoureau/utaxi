@@ -15,6 +15,8 @@ import fr.iutlannion.auth.PageReview;
 import fr.iutlannion.dashboard.PagePassager;
 import fr.iutlannion.debug.PageDebug;
 import fr.iutlannion.debug.PageMapDebug;
+import fr.iutlannion.manager.Passager;
+import fr.iutlannion.manager.Personne;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
