@@ -152,10 +152,12 @@ public class MapView extends StackPane {
     }
 
     public void disableRouting() {
-        enableRouting = false;
+        if (enableRouting) {
+            enableRouting = false;
 
-        if (!loaded)
-            return;
-        webEngine.executeScript("removeRoute();");
+            if (!loaded)
+                return;
+            webEngine.executeScript("removeRoute();");
+        }
     }
 }
