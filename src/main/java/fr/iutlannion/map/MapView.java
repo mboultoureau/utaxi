@@ -36,7 +36,8 @@ public class MapView extends StackPane {
         // Hide when loading finished
         worker.stateProperty().addListener(new ChangeListener<Worker.State>() {
             @Override
-            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue,
+                    Worker.State newValue) {
                 if (newValue == Worker.State.SUCCEEDED) {
                     loaded = true;
                     loader.setVisible(false);
@@ -65,7 +66,8 @@ public class MapView extends StackPane {
     }
 
     public void setView(double x, double y, int zoom) {
-        if(!loaded) return;
+        if (!loaded)
+            return;
         webEngine.executeScript("setView(" + x + ", " + y + ", " + zoom + ");");
     }
 
@@ -86,8 +88,10 @@ public class MapView extends StackPane {
             markers.remove(marker);
         }
 
-        if (position == -1) return;
-        if (!loaded) return;
+        if (position == -1)
+            return;
+        if (!loaded)
+            return;
 
         webEngine.executeScript("removeMarker(" + position + ");");
     }
@@ -100,20 +104,23 @@ public class MapView extends StackPane {
             markers.get(position).setPosition(x, y);
         }
 
-        if (position == -1) return;
-        if (!loaded) return;
+        if (position == -1)
+            return;
+        if (!loaded)
+            return;
 
         webEngine.executeScript("moveMarker(" + position + ", " + x + ", " + y + ");");
     }
 
     public void displayMarker(Marker marker) {
-        if(!loaded) return;
+        if (!loaded)
+            return;
 
         if (marker.isSimple()) {
             webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ");");
-        }
-        else {
-            webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ", " + marker.getIcon().getObject() + ");");
+        } else {
+            webEngine.executeScript(
+                    "addMarker(" + marker.getX() + ", " + marker.getY() + ", " + marker.getIcon().getObject() + ");");
         }
     }
 
@@ -126,20 +133,23 @@ public class MapView extends StackPane {
         }
 
         enableRouting = true;
-        if (!loaded) return;
+        if (!loaded)
+            return;
 
         displayRouting();
     }
 
     private void displayRouting() {
-        if (!enableRouting) return;
+        if (!enableRouting)
+            return;
         webEngine.executeScript("traceRoute(" + routingMarker1 + ", " + routingMarker2 + ");");
     }
 
     public void disableRouting() {
         enableRouting = false;
 
-        if(!loaded) return;
+        if (!loaded)
+            return;
         webEngine.executeScript("removeRoute();");
     }
 }

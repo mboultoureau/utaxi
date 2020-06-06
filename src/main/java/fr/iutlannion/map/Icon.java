@@ -85,7 +85,7 @@ public class Icon {
         object += "shadowAnchor: [" + this.shadowAnchorX + ", " + this.shadowAnchorY + "],";
         object += "popupAnchor: [" + this.popupAnchorX + ", " + this.popupAnchorY + "]}";
 
-        System.out.println(object);
+        // System.out.println(object);
 
         return object;
     }

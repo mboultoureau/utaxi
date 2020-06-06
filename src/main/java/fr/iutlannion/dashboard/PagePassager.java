@@ -3,14 +3,18 @@ package fr.iutlannion.dashboard;
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Conducteurs;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
+import fr.iutlannion.map.Icon;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -31,11 +35,15 @@ public class PagePassager extends Stage {
 
 	// Left Side
 	private GridPane leftSide = new GridPane();
-	private Label soon = new Label("Prochainement");
 
 	// Right Side
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
+	private Icon icon = new Icon("img/taxi.png", 40, 20);
+
+	private ObservableList<Conducteur> conducteurs = FXCollections
+			.observableArrayList(Conducteurs.getInstance().getListConducteur());
+	private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
 	public PagePassager() {
 
@@ -75,7 +83,7 @@ public class PagePassager extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 
 		// Left Side
-		leftSide.add(soon, 0, 0);
+		leftSide.add(listViewConducteur, 0, 0, 1, 1);
 		leftSide.setMinWidth(300);
 
 		// Map
@@ -85,6 +93,7 @@ public class PagePassager extends Stage {
 
 		for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
 			map.addMarker(c.getMarker());
+			c.getMarker().setIcon(icon);
 		}
 
 		root.setTop(header);

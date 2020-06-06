@@ -46,6 +46,7 @@ public class Window extends Stage {
 	// Debug page
 	private static PageDebug debug = new PageDebug();
 	private static PageMapDebug mapDebug = new PageMapDebug();
+	private String currentPage;
 
 	static {
 		scenes = new HashMap<String, Scene>();
@@ -87,7 +88,12 @@ public class Window extends Stage {
 	}
 
 	public void gotoPage(String page) {
+		currentPage = page;
 		this.setScene(scenes.get(page));
+	}
+
+	public String getCurrentPage() {
+		return currentPage;
 	}
 
 }

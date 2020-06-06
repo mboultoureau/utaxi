@@ -57,8 +57,8 @@ public class App extends Application {
 		c2.ajouterNote(4.0);
 
 		// Passagers
-		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel");
-		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde");
+		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel", 47.220829, -1.565942);
+		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde", 47.213782, -1.554903);
 
 		Passagers.getInstance().add(p1);
 		Passagers.getInstance().add(p2);

@@ -9,14 +9,14 @@ import junit.framework.TestCase;
 public class PassagerTest extends TestCase {
 
 	private Passager p;
-	
+
 	public PassagerTest() {
-		p = new Passager("Nom", "Prenom", "email@mail.com", "password");
+		p = new Passager("Nom", "Prenom", "email@mail.com", "password", 47.219860, -1.545304);
 
 	}
-	
+
 	// NOM
-	
+
 	@Test
 	public void testNomTropCourt() {
 		try {
@@ -36,7 +36,7 @@ public class PassagerTest extends TestCase {
 			assertEquals(e.getMessage(), "Le nom doit contenir entre 3 et 30 caractères");
 		}
 	}
-	
+
 	@Test
 	public void testCaracteresInvalides() {
 		try {
@@ -47,5 +47,4 @@ public class PassagerTest extends TestCase {
 		}
 	}
 
-	
 }

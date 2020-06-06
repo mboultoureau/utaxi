@@ -2,8 +2,10 @@ package fr.iutlannion.manager;
 
 import java.util.ArrayList;
 
+import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.map.Marker;
+import fr.iutlannion.manager.Conducteurs;
 
 public class Conducteur extends Personne {
 
@@ -32,8 +34,15 @@ public class Conducteur extends Personne {
     }
 
     public String toString() {
-        return super.toString() + "\nNotes : " + getNoteMoyenne() + "\nTarif : " + tarif + "\nNombre Km : "
-                + nbKmParcourus + "\n" + voiture.toString();
+        String res = "";
+        if (Window.getInstance().getCurrentPage().compareTo("admin") == 0) {
+            res = super.toString() + "\nNotes : " + getNoteMoyenne() + "\nTarif : " + tarif + "\nNombre Km : "
+                    + nbKmParcourus + "\n" + voiture.toString();
+        } else if (Window.getInstance().getCurrentPage().compareTo("passager") == 0) {
+            res = this.getPrenom() + " " + this.getNom() + "\nTarif : " + this.getTarif() + "\nNotes moyenne : "
+                    + this.getNoteMoyenne();
+        }
+        return res;
     }
 
     public double getSalaire() {
