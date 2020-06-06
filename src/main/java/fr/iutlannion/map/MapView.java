@@ -71,6 +71,12 @@ public class MapView extends StackPane {
         webEngine.executeScript("setView(" + x + ", " + y + ", " + zoom + ");");
     }
 
+    public void refresh() {
+        if (!loaded)
+            return;
+        webEngine.executeScript("window.location.reload();");
+    }
+
     public void setView(double x, double y) {
         setView(x, y, 7);
     }

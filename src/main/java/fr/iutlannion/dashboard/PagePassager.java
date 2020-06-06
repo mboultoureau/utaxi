@@ -40,6 +40,7 @@ public class PagePassager extends Stage {
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
+	private Icon iconSelected = new Icon("img/taxiSelected.png", 40, 20);
 
 	private ObservableList<Conducteur> conducteurs = FXCollections
 			.observableArrayList(Conducteurs.getInstance().getListConducteur());
@@ -52,6 +53,17 @@ public class PagePassager extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
+
+		listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+					c.getMarker().setIcon(icon);
+				}
+				listViewConducteur.getSelectionModel().getSelectedItem().getMarker().setIcon(iconSelected);
+				map.refresh();
+			}
+		});
 	}
 
 	public Parent creerContenu() {
@@ -83,7 +95,7 @@ public class PagePassager extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 
 		// Left Side
-		leftSide.add(listViewConducteur, 0, 0, 1, 1);
+		leftSide.add(listViewConducteur, 0, 0, 2, 1);
 		leftSide.setMinWidth(300);
 
 		// Map
