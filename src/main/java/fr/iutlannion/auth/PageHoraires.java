@@ -56,7 +56,7 @@ public class PageHoraires extends Stage {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
+				Window.getInstance().gotoPage("menuPrincipal");
 			}
 		}));
 

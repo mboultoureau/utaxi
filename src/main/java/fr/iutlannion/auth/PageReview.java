@@ -48,7 +48,7 @@ public class PageReview extends Stage {
             public void handle(MouseEvent event) {
                 Conducteur c = (Conducteur) Utilisateur.getInstance().getInstance().getPersonne();
                 c.ajouterNote(sliderNote.getValue());
-                Window.getInstance().gotoPage("mainMenu");
+                Window.getInstance().gotoPage("menuPrincipal");
             }
         }));
 

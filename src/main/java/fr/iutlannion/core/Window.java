@@ -1,7 +1,5 @@
 package fr.iutlannion.core;
 
-import java.util.HashMap;
-
 import fr.iutlannion.admin.PageAdmin;
 import fr.iutlannion.dashboard.PageConducteur;
 import fr.iutlannion.auth.PageConnexion;
@@ -15,62 +13,16 @@ import fr.iutlannion.auth.PageReview;
 import fr.iutlannion.dashboard.PagePassager;
 import fr.iutlannion.debug.PageDebug;
 import fr.iutlannion.debug.PageMapDebug;
-import fr.iutlannion.manager.Passager;
-import fr.iutlannion.manager.Personne;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Window extends Stage {
 
 	private static Window instance;
-	private static HashMap<String, Scene> scenes;
 
-	// Pages principales
-	private static PageMenuPrincipal menuPrincipal = new PageMenuPrincipal();
-	private static PageConducteur conducteur = new PageConducteur();
-	private static PagePassager passager = new PagePassager();
-
-	// Pages d'authentification
-	private static PageConnexion connexion = new PageConnexion();
-	private static PageEnregistrementVoiture enregistrementVoiture = new PageEnregistrementVoiture();
-	private static PageInscription inscription = new PageInscription();
-	private static PageHoraires horaires = new PageHoraires();
-	private static PagePaiement paiement = new PagePaiement();
-	private static PageReview review = new PageReview();
-
-	// Pages d'administration
-	private static PageAdmin admin = new PageAdmin();
-
-	// Pages d'édition
-	private static PageEditionProfil editionProfil = new PageEditionProfil();
-	private static PageEditionVoiture editionVoiture = new PageEditionVoiture();
-
-	// Debug page
-	private static PageDebug debug = new PageDebug();
-	private static PageMapDebug mapDebug = new PageMapDebug();
 	private String currentPage;
-
-	static {
-		scenes = new HashMap<String, Scene>();
-		scenes.put("mainMenu", new Scene(menuPrincipal.creerContenu()));
-		scenes.put("conducteur", new Scene(conducteur.creerContenu()));
-		scenes.put("passager", new Scene(passager.creerContenu()));
-
-		scenes.put("connexion", new Scene(connexion.creerContenu()));
-		scenes.put("inscription", new Scene(inscription.creerContenu()));
-		scenes.put("enregistrementVoiture", new Scene(enregistrementVoiture.creerContenu()));
-		scenes.put("horaires", new Scene(horaires.creerContenu(), 640, 480));
-		scenes.put("paiement", new Scene(paiement.creerContenu()));
-		scenes.put("review", new Scene(review.creerContenu(), 640, 270));
-
-		scenes.put("admin", new Scene(admin.creerContenu(), 1200, 800));
-
-		scenes.put("editionProfil", new Scene(editionProfil.creerContenu(), 1200, 800));
-		scenes.put("editionVoiture", new Scene(editionVoiture.creerContenu(), 1200, 800));
-
-		scenes.put("debug", new Scene(debug.creerContenu()));
-		scenes.put("mapDebug", new Scene(mapDebug.creerContenu()));
-	}
+	private Stage currentStage;
+	private Scene currentScene;
 
 	public Window() {
 		instance = this;
@@ -79,7 +31,7 @@ public class Window extends Stage {
 		this.setMinHeight(480);
 		this.setMinWidth(640);
 
-		this.gotoPage("mainMenu");
+		this.gotoPage("menuPrincipal");
 	}
 
 	public static Window getInstance() {
@@ -90,8 +42,79 @@ public class Window extends Stage {
 	}
 
 	public void gotoPage(String page) {
+
+		String previousPage = currentPage;
 		currentPage = page;
-		this.setScene(scenes.get(page));
+
+		switch (page) {
+			case "menuPrincipal":
+				currentStage = new PageMenuPrincipal();
+				currentScene = new Scene(((PageMenuPrincipal) currentStage).creerContenu());
+				break;
+			case "conducteur":
+				currentStage = new PageConducteur();
+				currentScene = new Scene(((PageConducteur) currentStage).creerContenu());
+				break;
+			case "passager":
+				currentStage = new PagePassager();
+				currentScene = new Scene(((PagePassager) currentStage).creerContenu());
+				break;
+
+			case "connexion":
+				currentStage = new PageConnexion();
+				currentScene = new Scene(((PageConnexion) currentStage).creerContenu());
+				break;
+			case "inscription":
+				currentStage = new PageInscription();
+				currentScene = new Scene(((PageInscription) currentStage).creerContenu());
+				break;
+			case "enregistrementVoiture":
+				currentStage = new PageEnregistrementVoiture();
+				currentScene = new Scene(((PageEnregistrementVoiture) currentStage).creerContenu());
+				break;
+			case "horaires":
+				currentStage = new PageHoraires();
+				currentScene = new Scene(((PageHoraires) currentStage).creerContenu());
+				break;
+			case "paiement":
+				currentStage = new PagePaiement();
+				currentScene = new Scene(((PagePaiement) currentStage).creerContenu());
+				break;
+			case "review":
+				currentStage = new PageReview();
+				currentScene = new Scene(((PageReview) currentStage).creerContenu());
+				break;
+
+			case "admin":
+				currentStage = new PageAdmin();
+				currentScene = new Scene(((PageAdmin) currentStage).creerContenu());
+				break;
+
+			case "editionProfil":
+				currentStage = new PageEditionProfil();
+				currentScene = new Scene(((PageEditionProfil) currentStage).creerContenu());
+				break;
+			case "editionVoiture":
+				currentStage = new PageEditionVoiture();
+				currentScene = new Scene(((PageEditionVoiture) currentStage).creerContenu());
+				break;
+
+			case "debug":
+				currentStage = new PageDebug();
+				currentScene = new Scene(((PageDebug) currentStage).creerContenu());
+				break;
+			case "mapDebug":
+				currentStage = new PageMapDebug();
+				currentScene = new Scene(((PageMapDebug) currentStage).creerContenu());
+				break;
+
+			default:
+				System.out.println("Page invalide");
+				currentPage = previousPage;
+				break;
+		}
+
+		this.setScene(currentScene);
 	}
 
 	public String getCurrentPage() {

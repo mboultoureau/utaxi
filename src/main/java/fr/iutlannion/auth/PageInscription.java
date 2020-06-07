@@ -125,7 +125,7 @@ public class PageInscription extends Stage {
 		// Événements
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("mainMenu");
+				Window.getInstance().gotoPage("menuPrincipal");
 			}
 		}));
 

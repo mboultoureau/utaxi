@@ -7,19 +7,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
-public class PageMenuPrincipal {
+public class PageMenuPrincipal extends Stage {
 	
 	private BorderPane root = new BorderPane();
-	private Label title = new Label("UTAXI");
+	private Label title = new Label("Bienvenue sur UTAXI");
+	private Label authors = new Label("Par Manon Goasguen, Erwan Leflot, Rémi Bastille, Ronan Renoux et Mathis Boultoureau");
 	private ImageView image;
 	
+	private VBox bottom = new VBox();
 	private HBox buttons = new HBox();
 	private Button login = new Button("Connexion");
 	private Button register = new Button("Inscription");
@@ -27,13 +27,16 @@ public class PageMenuPrincipal {
 	private Region space = new Region();
 	
 	public PageMenuPrincipal() {
+		Window.getInstance().setResizable(false);
+
 		login.setOnAction(e -> Window.getInstance().gotoPage("connexion"));
 		register.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
 		debug.setOnAction(e -> Window.getInstance().gotoPage("debug"));
+
 	}
 	
     Parent creerContenu() {
-    	// Title
+		// Title
     	title.setStyle("-fx-text-fill: #000;");
     	title.setTextAlignment(TextAlignment.CENTER);
     	title.setFont(new Font("Arial", 30));
@@ -71,12 +74,17 @@ public class PageMenuPrincipal {
     	else
     		buttons.getChildren().addAll(login, register, debug);
 
+    	// Bottom
+		authors.setTextAlignment(TextAlignment.CENTER);
+		authors.setAlignment(Pos.CENTER);
+		bottom.setAlignment(Pos.CENTER);
+		bottom.getChildren().addAll(buttons, authors);
 
     	// BorderPane
     	root.setPadding(new Insets(30, 0, 10, 0));
     	root.setTop(title);
     	root.setCenter(image);
-    	root.setBottom(buttons);
+    	root.setBottom(bottom);
  
     	
     	root.setStyle("-fx-background-color: #fff");

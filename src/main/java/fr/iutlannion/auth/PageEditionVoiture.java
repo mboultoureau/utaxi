@@ -59,13 +59,13 @@ public class PageEditionVoiture extends Stage{
 		public PageEditionVoiture() {
 			backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
-	                Window.getInstance().gotoPage("mainMenu");
+	                Window.getInstance().gotoPage("menuPrincipal");
 	            }
 	        }));
 			
 			buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
-	                Window.getInstance().gotoPage("mainMenu");
+	                Window.getInstance().gotoPage("menuPrincipal");
 	            }
 	        }));
 			

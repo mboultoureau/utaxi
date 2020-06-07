@@ -11,8 +11,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
-public class PageDebug {
+public class PageDebug extends Stage {
 	private BorderPane root = new BorderPane();
 
 	private Label title = new Label("Page de débogage");
@@ -49,9 +50,9 @@ public class PageDebug {
 	private Button buttonDebug = new Button("Débug");
 	private Button buttonMapDebug = new Button("Débug de carte");
 
-	public PageDebug() {
+	public PageDebug()  {
 		// Pages principales
-		buttonMenuPrincipal.setOnAction(e -> Window.getInstance().gotoPage("mainMenu"));
+		buttonMenuPrincipal.setOnAction(e -> Window.getInstance().gotoPage("menuPrincipal"));
 		buttonConducteur.setOnAction(e -> Window.getInstance().gotoPage("conducteur"));
 		buttonPassager.setOnAction(e -> Window.getInstance().gotoPage("passager"));
 

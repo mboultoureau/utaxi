@@ -35,6 +35,8 @@ public class PageConnexion extends Stage {
 
     public PageConnexion() {
 
+        Window.getInstance().setResizable(true);
+
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
@@ -63,13 +65,12 @@ public class PageConnexion extends Stage {
 
         buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Window.getInstance().gotoPage("mainMenu");
+                Window.getInstance().gotoPage("menuPrincipal");
             }
         }));
     }
 
     public Parent creerContenu() {
-
         root.setPadding(new Insets(10));
         root.setAlignment(Pos.CENTER);
         root.setVgap(5);
