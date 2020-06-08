@@ -27,4 +27,19 @@ public class Utilisateur {
 	public Personne getPersonne() {
 		return this.personne;
 	}
+
+	public void setPersonne(Admin a) {
+		personne = a;
+		instance = this;
+	}
+
+	public void setPersonne(Passager p) {
+		personne = p;
+		instance = this;
+	}
+
+	public void setPersonne(Conducteur c) {
+		personne = c;
+		instance = this;
+	}
 }
