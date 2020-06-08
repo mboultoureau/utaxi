@@ -1,14 +1,12 @@
 package fr.iutlannion.dashboard;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Conducteurs;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -65,7 +63,6 @@ public class PagePassager extends Stage {
 	// Besoin de Geocoding pour récuperer l'adresse en lat/long
 	private TextField xField = new TextField("47.228752");
 	private TextField yField = new TextField("-1.541096");
-	
 
 	public PagePassager() {
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -93,14 +90,15 @@ public class PagePassager extends Stage {
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
 			infoSituation.setText("Le Utaxi viens vous chercher...");
 			commanderUtaxiButton.setDisable(true);
-			long startTime = System.currentTimeMillis();
-			long elapsedTime = 0L;
 
-			while (elapsedTime < 1*5*1000) {
-				elapsedTime = (new Date()).getTime() - startTime;
-				
-			}
-			infoSituation.setText("OMW Votre taxi est arrivé");
+			Timer myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> infoSituation.setText("Votre taxi est arrivé"));
+				}
+			}, 4000);
+
 		});
 	}
 
@@ -175,6 +173,6 @@ public class PagePassager extends Stage {
 		root.setLeft(leftSide);
 
 		return root;
-		
+
 	}
 }
