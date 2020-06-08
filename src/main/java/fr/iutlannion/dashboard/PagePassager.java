@@ -96,7 +96,13 @@ public class PagePassager extends Stage {
 			myTimer.schedule(new TimerTask() {
 				@Override
 				public void run() {
-					Platform.runLater(() -> infoSituation.setText("Votre taxi est arrivé"));
+					Platform.runLater(() -> {
+						infoSituation.setText("Votre taxi est arrivé");
+						Conducteur user = (Conducteur) Utilisateur.getInstance().getPersonne();
+						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+								user.getMarker().getX(), user.getMarker().getY());
+					});
+
 				}
 			}, 4000);
 
