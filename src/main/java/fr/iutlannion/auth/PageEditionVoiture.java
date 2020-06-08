@@ -40,7 +40,7 @@ public class PageEditionVoiture extends Stage{
 		private Label couleur = new Label("Couleur");
 		private Label type = new Label("Type");
 		private Label mdp = new Label("Mot de passe");
-		private Label erreur = new Label("Erreur de mot de passe");
+		private Label bottomText = new Label("");
 		
 		private TextField ftarif = new TextField();
 		private TextField fnbkm = new TextField();
@@ -72,9 +72,41 @@ public class PageEditionVoiture extends Stage{
 			buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					if(fmdp.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
+						if(ftarif.getText().trim().isEmpty())
+							ftarif.setText(String.valueOf(c.getTarif()));
+						if(fnbkm.getText().trim().isEmpty())
+							fnbkm.setText(String.valueOf(c.getNbKmParcourus()));
+						if(fimmat.getText().trim().isEmpty())
+							fimmat.setText(c.getVoiture().getImmatriculation());
+						if(fmarque.getText().trim().isEmpty())
+							fmarque.setText(c.getVoiture().getMarque());
+						if(ftEss.getText().trim().isEmpty())
+							ftEss.setText(c.getVoiture().getTypeEssence());
+						if(fcouleur.getText().trim().isEmpty())
+							fcouleur.setText(c.getVoiture().getCouleur());
+						if(ftype.getText().trim().isEmpty())
+							ftype.setText(c.getVoiture().getType());
+						
 						c.modifierInfoVoiture(Double.valueOf(ftarif.getText()), Double.valueOf(fnbkm.getText()),fimmat.getText(), fmarque.getText(), ftEss.getText(), fcouleur.getText(), ftype.getText());
+						
+						fmdp.setText(null);
+						
+						bottomText.setText("Modifications validées");
+						bottomText.setTextFill(Color.GREEN);
+						root.setBottom(bottomText);
 					}else {
-						root.setBottom(erreur);
+						bottomText.setText("Erreur de mot de passe");
+						bottomText.setTextFill(Color.RED);
+						root.setBottom(bottomText);
+						
+						ftarif.setText(String.valueOf(c.getTarif()));
+						fnbkm.setText(String.valueOf(c.getNbKmParcourus()));
+						fimmat.setText(c.getVoiture().getImmatriculation());
+						fmarque.setText(c.getVoiture().getMarque());
+						ftEss.setText(c.getVoiture().getTypeEssence());
+						fcouleur.setText(c.getVoiture().getCouleur());
+						ftype.setText(c.getVoiture().getType());
+						fmdp.setText(null);
 					}
 				}
 			}));
@@ -107,8 +139,6 @@ public class PageEditionVoiture extends Stage{
 			header.getChildren().addAll(backButton, title, logo);
 			
 			//
-				erreur.setTextFill(Color.RED);
-			
 		        gridPane.setPadding(new Insets(30));
 		        gridPane.setVgap(10);
 		        gridPane.setHgap(10);
@@ -149,6 +179,7 @@ public class PageEditionVoiture extends Stage{
 			
 		        root.setTop(header);
 				root.setCenter(gridPane);
+				root.setBottom(bottomText);
 				
 				return root;
 		}
