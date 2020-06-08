@@ -39,8 +39,9 @@ public class Conducteur extends Personne {
             res = super.toString() + "\nNotes : " + getNoteMoyenne() + "\nTarif : " + tarif + "\nNombre Km : "
                     + nbKmParcourus + "\n" + voiture.toString();
         } else if (Window.getInstance().getCurrentPage().compareTo("passager") == 0) {
-            res = this.getPrenom() + " " + this.getNom() + "\nTarif : " + this.getTarif() +"€"+"\nNotes moyenne : "
-                    + this.getNoteMoyenne() + "\nVoiture :" + this.voiture.getMarque() +"\nDe couleur :"+this.voiture.getCouleur();
+            res = this.getPrenom() + " " + this.getNom() + "\nTarif : " + this.getTarif() + "€" + "\nNotes moyenne : "
+                    + this.getNoteMoyenne() + "\nVoiture : " + this.voiture.getMarque() + " de couleur "
+                    + this.voiture.getCouleur();
         }
         return res;
     }
