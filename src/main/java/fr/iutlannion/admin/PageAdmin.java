@@ -13,6 +13,14 @@ import javafx.event.EventHandler;
 import fr.iutlannion.manager.*;
 import fr.iutlannion.core.Window;
 
+/**
+ * PageAdmin contient le pannel d'administration
+ * 
+ * @author ronanren
+ * @version 1.0
+ * 
+ */
+
 public class PageAdmin extends Stage {
 
     // Header
