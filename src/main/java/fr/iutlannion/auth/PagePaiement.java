@@ -49,7 +49,7 @@ public class PagePaiement extends Stage {
 	private Label expirationError = new Label();
 	private Label cvcError = new Label();
 	private Label nameError = new Label();
-	
+
 	// Carte de crédit
 	private Image frontCard = new Image("img/credit-card-front.png");
 	private Image backCard = new Image("img/credit-card-back.png");
@@ -71,10 +71,20 @@ public class PagePaiement extends Stage {
 	private String nameText = "";
 	private String expirationText = "";
 	private String cvcText = "";
-	
+
 	public PagePaiement() {
 		// Événements
 		backButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
+
+		nextButton.setOnAction(e -> {
+			if (numText.matches("^[0-9]{0,16}$") && expirationText.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")
+					&& nameText.matches("^[a-zA-Zéèëàäï ]{3,100}$") && cvcText.matches("^[0-9]{3}$")) {
+				Window.getInstance().gotoPage("passager");
+			} else {
+				nameError.setVisible(true);
+				nameError.setText("Veuillez rentrer tous les champs pour continuer");
+			}
+		});
 
 		numField.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
@@ -231,7 +241,7 @@ public class PagePaiement extends Stage {
 		grid.add(name, 0, 9);
 		grid.add(nameField, 0, 10);
 		grid.add(nameError, 0, 11);
-		
+
 		root.setMinHeight(480);
 		root.setMinWidth(640);
 		root.setTop(header);
@@ -265,7 +275,7 @@ public class PagePaiement extends Stage {
 		numCard.setFont(new Font("Arial", 25));
 		StackPane.setMargin(numCard, new Insets(30, 0, 0, 25));
 		StackPane.setAlignment(numCard, Pos.CENTER);
-		
+
 		// Nom sur la carte
 		nameCard.setStyle("-fx-text-fill: #fff;");
 		nameCard.setFont(new Font("Arial", 12));
@@ -286,7 +296,7 @@ public class PagePaiement extends Stage {
 		StackPane.setAlignment(expirationCard, Pos.CENTER_LEFT);
 		StackPane.setMargin(expirationCard, new Insets(130, 0, 0, 240));
 
-		creditCard.setPadding(new Insets(0, 50, 0, 20));
+		creditCard.setPadding(new Insets(0, 50, 0, 50));
 		creditCard.setPrefHeight(height);
 		creditCard.setPrefWidth(width);
 		creditCard.getChildren().addAll(imageView, numCard, nameCard, cvcCard, expirationCard);
