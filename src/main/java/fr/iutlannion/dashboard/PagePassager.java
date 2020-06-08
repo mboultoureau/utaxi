@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Conducteurs;
+import fr.iutlannion.manager.Utilisateur;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +38,7 @@ public class PagePassager extends Stage {
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Passager");
+	private Label title = new Label("Page Passager - Bienvenue " + Utilisateur.getInstance().getPersonne().getPrenom());
 	private Label logo = new Label("UTaxi");
 
 	// Left Side

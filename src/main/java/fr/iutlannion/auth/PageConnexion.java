@@ -54,15 +54,18 @@ public class PageConnexion extends Stage {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
+                    Utilisateur.getInstance().setPersonne(
+                            Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                     Window.getInstance().gotoPage("conducteur");
-                    Utilisateur.getInstance().setPersonne(Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                 } else if (Passagers.getInstance().verifConnexion(textField.getText(),
                         passwordField.getText()) != null) {
+                    Utilisateur.getInstance().setPersonne(
+                            Passagers.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                     Window.getInstance().gotoPage("passager");
-                    Utilisateur.getInstance().setPersonne(Passagers.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
                     Window.getInstance().gotoPage("admin");
-                    Utilisateur.getInstance().setPersonne(Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
+                    Utilisateur.getInstance().setPersonne(
+                            Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
                     erreurLabel.setText("Erreur, champs vide(s)");
                 } else {
