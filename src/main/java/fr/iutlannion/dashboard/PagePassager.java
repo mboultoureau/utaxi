@@ -23,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -51,10 +52,12 @@ public class PagePassager extends Stage {
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
 	private Marker markerCurrentPosition = new Marker(user.getMarker().getX(), user.getMarker().getY());
-	// Mettre la location du passager courant
 	private Marker markerLocationWant = new Marker(47.228752, -1.541096);
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
 	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
+
+	// https://github.com/pointhi/leaflet-color-markers
+	private Icon iconHome = new Icon("img/iconHome.png", 25, 41, 12, 41, 1, -34);
 
 	private ObservableList<Conducteur> conducteurs = FXCollections
 			.observableArrayList(Conducteurs.getInstance().getListConducteur());
@@ -94,6 +97,8 @@ public class PagePassager extends Stage {
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
 			infoSituation.setText("Le Utaxi viens vous chercher...");
 			commanderUtaxiButton.setDisable(true);
+			listViewConducteur.setMouseTransparent(true);
+			listViewConducteur.setFocusTraversable(false);
 
 			Timer myTimer = new Timer();
 			myTimer.schedule(new TimerTask() {
@@ -132,6 +137,8 @@ public class PagePassager extends Stage {
 						user.getMarker().setPosition(Double.parseDouble(xField.getText()),
 								Double.parseDouble(yField.getText()));
 						commanderUtaxiButton.setDisable(false);
+						listViewConducteur.setMouseTransparent(false);
+						listViewConducteur.setFocusTraversable(true);
 					});
 
 				}
@@ -204,6 +211,7 @@ public class PagePassager extends Stage {
 
 		map.addMarker(markerCurrentPosition);
 		map.addMarker(markerLocationWant);
+		markerCurrentPosition.setIcon(iconHome);
 		listViewConducteur.getSelectionModel().select(0);
 
 		mapOptions.setZoom(13);

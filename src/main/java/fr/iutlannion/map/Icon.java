@@ -35,6 +35,20 @@ public class Icon {
         this.shadowSizeY = shadowSizeY;
     }
 
+    public Icon(String iconUrl, int iconSizeX, int iconSizeY, int iconAnchorX, int iconAnchorY, int popupAnchorX,
+            int popupAnchorY) {
+        this.iconUrl = iconUrl;
+        this.iconSizeX = iconSizeX;
+        this.iconSizeY = iconSizeY;
+        this.shadowUrl = shadowUrl;
+        this.shadowSizeX = shadowSizeX;
+        this.shadowSizeY = shadowSizeY;
+        this.iconAnchorX = iconAnchorX;
+        this.iconAnchorY = iconAnchorY;
+        this.popupAnchorX = popupAnchorX;
+        this.popupAnchorY = popupAnchorY;
+    }
+
     public String getIconUrl() {
         return iconUrl;
     }
