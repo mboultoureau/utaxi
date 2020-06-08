@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Conducteurs;
+import fr.iutlannion.manager.Passager;
 import fr.iutlannion.manager.Utilisateur;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -35,6 +36,8 @@ public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
+	Passager user = (Passager) Utilisateur.getInstance().getPersonne();
+
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
@@ -47,7 +50,7 @@ public class PagePassager extends Stage {
 	// Right Side
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
-	private Marker markerCurrentPosition = new Marker(47.211720, -1.560180);
+	private Marker markerCurrentPosition = new Marker(user.getMarker().getX(), user.getMarker().getY());
 	// Mettre la location du passager courant
 	private Marker markerLocationWant = new Marker(47.228752, -1.541096);
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
@@ -98,7 +101,6 @@ public class PagePassager extends Stage {
 				public void run() {
 					Platform.runLater(() -> {
 						infoSituation.setText("Votre taxi est arrivé");
-						Conducteur user = (Conducteur) Utilisateur.getInstance().getPersonne();
 						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
 								user.getMarker().getX(), user.getMarker().getY());
 					});
