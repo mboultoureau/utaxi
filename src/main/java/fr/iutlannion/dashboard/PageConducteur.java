@@ -1,6 +1,7 @@
 package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Utilisateur;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
 import javafx.event.EventHandler;
@@ -24,7 +25,8 @@ public class PageConducteur extends Stage {
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Conducteur");
+	private Label title = new Label(
+			"Page Conducteur - Bienvenue " + Utilisateur.getInstance().getPersonne().getPrenom());
 	private Label logo = new Label("UTaxi");
 
 	// Left Side

@@ -63,9 +63,9 @@ public class PageConnexion extends Stage {
                             Passagers.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
                     Window.getInstance().gotoPage("passager");
                 } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    Window.getInstance().gotoPage("admin");
                     Utilisateur.getInstance().setPersonne(
                             Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
+                    Window.getInstance().gotoPage("admin");
                 } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
                     erreurLabel.setText("Erreur, champs vide(s)");
                 } else {
