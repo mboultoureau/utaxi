@@ -135,7 +135,7 @@ public class PagePassager extends Stage {
 					});
 
 				}
-			}, 20000);
+			}, 30000);
 
 		});
 	}
@@ -176,7 +176,7 @@ public class PagePassager extends Stage {
 		leftSide.add(xField, 0, 3);
 		leftSide.add(yField, 0, 3);
 		leftSide.add(commanderUtaxiButton, 0, 4);
-		leftSide.add(infoSituation, 0, 5);
+		leftSide.add(infoSituation, 0, 5, 1, 1);
 		leftSide.setMinWidth(300);
 		infoSituation.setStyle("-fx-font: 16 arial;");
 		ChoisirUtaxiLabel.setStyle("-fx-font: 24 arial;");
@@ -190,6 +190,7 @@ public class PagePassager extends Stage {
 		yField.setMaxWidth(160);
 		GridPane.setHalignment(yField, HPos.RIGHT);
 		GridPane.setHalignment(commanderUtaxiButton, HPos.CENTER);
+		GridPane.setHalignment(infoSituation, HPos.CENTER);
 
 		// Map
 		mapOptions.setCoordinates(47.2186371, -1.5541362);
