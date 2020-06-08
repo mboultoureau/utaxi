@@ -64,7 +64,7 @@ public class App extends Application {
 		Passagers.getInstance().add(p2);
 
 		// Utilisateur connecté
-		Utilisateur u = new Utilisateur(c1);
+		Utilisateur u = new Utilisateur(p1);
 
 		Utilisateur.getInstance().getPersonne().getMotDePasse();
 

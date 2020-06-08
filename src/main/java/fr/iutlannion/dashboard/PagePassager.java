@@ -100,13 +100,42 @@ public class PagePassager extends Stage {
 				@Override
 				public void run() {
 					Platform.runLater(() -> {
-						infoSituation.setText("Votre taxi est arrivé");
+						infoSituation.setText("Votre Utaxi est arrivé, vous pouvez monter");
 						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
 								user.getMarker().getX(), user.getMarker().getY());
 					});
 
 				}
-			}, 4000);
+			}, 8000);
+
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> {
+						infoSituation.setText("Trajet en cours...");
+
+					});
+
+				}
+			}, 16000);
+
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> {
+						infoSituation.setText("Arrivé à destination !");
+						map.disableRouting();
+						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+								Double.parseDouble(xField.getText()), Double.parseDouble(yField.getText()));
+						map.moveMarker(markerCurrentPosition, Double.parseDouble(xField.getText()),
+								Double.parseDouble(yField.getText()));
+						user.getMarker().setPosition(Double.parseDouble(xField.getText()),
+								Double.parseDouble(yField.getText()));
+						commanderUtaxiButton.setDisable(false);
+					});
+
+				}
+			}, 20000);
 
 		});
 	}
@@ -174,6 +203,7 @@ public class PagePassager extends Stage {
 
 		map.addMarker(markerCurrentPosition);
 		map.addMarker(markerLocationWant);
+		listViewConducteur.getSelectionModel().select(0);
 
 		mapOptions.setZoom(13);
 
