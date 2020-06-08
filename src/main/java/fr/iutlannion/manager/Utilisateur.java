@@ -42,4 +42,9 @@ public class Utilisateur {
 		personne = c;
 		instance = this;
 	}
+
+	public void destroyUtilisateur() {
+		personne = null;
+		instance = this;
+	}
 }
