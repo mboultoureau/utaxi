@@ -41,7 +41,7 @@ public class PageConnexion extends Stage {
 
     // Buttons
     private HBox buttons = new HBox();
-    private Button buttonAnnuler = new Button("Annuler");
+    private Button buttonInscription = new Button("Je n'ai pas de compte");
     private Region space = new Region();
     private Button buttonOk = new Button("OK");
 
@@ -49,7 +49,7 @@ public class PageConnexion extends Stage {
 
     public PageConnexion() {
 
-        Window.getInstance().setResizable(true);
+        Window.getInstance().setResizable(false);
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
@@ -74,7 +74,10 @@ public class PageConnexion extends Stage {
             }
         }));
 
-        buttonAnnuler.setOnAction(e -> Window.getInstance().gotoPage("menuPrincipal"));
+        buttonInscription.setOnAction(e -> {
+            Utilisateur.getInstance().destroyUtilisateur();
+            Window.getInstance().gotoPage("inscription");
+        });
 
         backButton.setOnAction(e -> Window.getInstance().gotoPage("menuPrincipal"));
     }
@@ -110,7 +113,7 @@ public class PageConnexion extends Stage {
         // Center
         center.setPadding(new Insets(10));
         center.setAlignment(Pos.CENTER);
-        center.setVgap(25);
+        center.setVgap(5);
         center.setHgap(5);
         center.setMinWidth(640);
         center.setMinHeight(305);
@@ -121,32 +124,32 @@ public class PageConnexion extends Stage {
         connexionLabel.setFont(new Font("Arial", 30));
         connexionLabel.setAlignment(Pos.CENTER);
 
-        buttonAnnuler.setPrefWidth(70);
+        buttonInscription.setPrefWidth(70);
         buttonOk.setPrefWidth(70);
         erreurLabel.setTextFill(Color.RED);
 
-        center.add(connexionLabel, 0, 0, 2, 1);
-        center.add(emailLabel, 0, 1);
-        center.add(textField, 1, 1);
-        center.add(mdpLabel, 0, 2);
-        center.add(passwordField, 1, 2);
-        center.add(erreurLabel, 1, 3, 2, 1);
+        center.add(connexionLabel, 0, 0);
+        center.add(emailLabel, 0, 3);
+        center.add(textField, 0, 4);
+        center.add(mdpLabel, 0, 5);
+        center.add(passwordField, 0, 6);
+        center.add(erreurLabel, 0, 7);
         GridPane.setHalignment(erreurLabel, HPos.CENTER);
 
         // Buttons
         // OK
         buttonOk.setAlignment(Pos.CENTER);
         buttonOk.setPrefWidth(150);
-        buttonOk.setPrefHeight(50);
+        buttonOk.setPrefHeight(52);
 
         // Annuler
-        buttonAnnuler.setAlignment(Pos.CENTER);
-        buttonAnnuler.setPrefWidth(150);
-        buttonAnnuler.setPrefHeight(50);
+        buttonInscription.setAlignment(Pos.CENTER);
+        buttonInscription.setPrefWidth(150);
+        buttonInscription.setPrefHeight(50);
 
         HBox.setHgrow(space, Priority.ALWAYS);
 
-        buttons.getChildren().addAll(buttonAnnuler, space, buttonOk);
+        buttons.getChildren().addAll(buttonInscription, space, buttonOk);
 
         buttons.setPadding(new Insets(25, 50, 25, 50));
         buttons.setSpacing(40);
