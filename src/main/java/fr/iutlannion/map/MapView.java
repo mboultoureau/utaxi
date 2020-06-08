@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class MapView extends StackPane {
 
+    private static final int DEFAULT_ZOOM = 7;
+
     private final WebView browser = new WebView();
     private final WebEngine webEngine = browser.getEngine();
     private final ProgressIndicator loader = new ProgressIndicator(0);
@@ -43,7 +45,7 @@ public class MapView extends StackPane {
                     loader.setVisible(false);
 
                     // Center map
-                    setView(mapOptions.getX(), mapOptions.getY(), mapOptions.getZoom());
+                    setView(mapOptions.getCoords(), mapOptions.getZoom());
 
                     // Display markers
                     for (Marker m : markers) {
@@ -65,10 +67,10 @@ public class MapView extends StackPane {
         markers = new ArrayList<Marker>();
     }
 
-    public void setView(double x, double y, int zoom) {
+    public void setView(LatLng coords, int zoom) {
         if (!loaded)
             return;
-        webEngine.executeScript("setView(" + x + ", " + y + ", " + zoom + ");");
+        webEngine.executeScript("setView(" + coords.internalString() + ", " + zoom + ");");
     }
 
     public void refresh() {
@@ -77,8 +79,8 @@ public class MapView extends StackPane {
         webEngine.executeScript("window.location.reload();");
     }
 
-    public void setView(double x, double y) {
-        setView(x, y, 7);
+    public void setView(LatLng coords) {
+        setView(coords, DEFAULT_ZOOM);
     }
 
     public void addMarker(Marker marker) {
@@ -102,12 +104,12 @@ public class MapView extends StackPane {
         webEngine.executeScript("removeMarker(" + position + ");");
     }
 
-    public void moveMarker(Marker marker, double x, double y) {
+    public void moveMarker(Marker marker, LatLng coords) {
         int position = -1;
 
         if (markers.contains(marker)) {
             position = markers.indexOf(marker);
-            markers.get(position).setPosition(x, y);
+            markers.get(position).setPosition(coords);
         }
 
         if (position == -1)
@@ -115,7 +117,7 @@ public class MapView extends StackPane {
         if (!loaded)
             return;
 
-        webEngine.executeScript("moveMarker(" + position + ", " + x + ", " + y + ");");
+        webEngine.executeScript("moveMarker(" + position + ", " + coords.internalString() + ");");
     }
 
     public void displayMarker(Marker marker) {
@@ -123,10 +125,10 @@ public class MapView extends StackPane {
             return;
 
         if (marker.isSimple()) {
-            webEngine.executeScript("addMarker(" + marker.getX() + ", " + marker.getY() + ");");
+            webEngine.executeScript("addMarker(" + marker.getCoords().internalString() + ");");
         } else {
             webEngine.executeScript(
-                    "addMarker(" + marker.getX() + ", " + marker.getY() + ", " + marker.getIcon().getObject() + ");");
+                    "addMarker(" + marker.getCoords().internalString() + ", " + marker.getIcon().getObject() + ");");
         }
     }
 

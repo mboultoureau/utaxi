@@ -2,22 +2,16 @@ package fr.iutlannion.map;
 
 public class Marker {
 
-    private double x;
-    private double y;
+    private LatLng coords;
     private boolean simple = true;
     private Icon icon = null;
 
-    public Marker(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Marker(LatLng coords) {
+        this.coords = coords;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
+    public LatLng getCoords() {
+        return this.coords;
     }
 
     public boolean isSimple() {
@@ -33,9 +27,8 @@ public class Marker {
         return this.icon;
     }
 
-    public void setPosition(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public void setPosition(LatLng coords) {
+        this.coords = coords;
     }
 
 }

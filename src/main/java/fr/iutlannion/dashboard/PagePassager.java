@@ -8,14 +8,11 @@ import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Conducteurs;
 import fr.iutlannion.manager.Passager;
 import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.map.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import fr.iutlannion.map.MapOptions;
-import fr.iutlannion.map.MapView;
-import fr.iutlannion.map.Marker;
-import fr.iutlannion.map.Icon;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -51,8 +48,9 @@ public class PagePassager extends Stage {
 	// Right Side
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
-	private Marker markerCurrentPosition = new Marker(user.getMarker().getX(), user.getMarker().getY());
-	private Marker markerLocationWant = new Marker(47.228752, -1.541096);
+	private Marker markerCurrentPosition = new Marker(user.getMarker().getCoords());
+	// Mettre la location du passager courant
+	private Marker markerLocationWant = new Marker(new LatLng(47.228752, -1.541096));
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
 	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
 
@@ -92,8 +90,8 @@ public class PagePassager extends Stage {
 		commanderUtaxiButton.setOnAction(e -> {
 
 			map.disableRouting();
-			map.moveMarker(markerLocationWant, Double.parseDouble(xField.getText()),
-					Double.parseDouble(yField.getText()));
+			LatLng newCoords = new LatLng(Double.parseDouble(xField.getText()), Double.parseDouble(yField.getText()));
+			map.moveMarker(markerLocationWant, newCoords);
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
 			infoSituation.setText("Le Utaxi viens vous chercher...");
 			commanderUtaxiButton.setDisable(true);
@@ -107,7 +105,7 @@ public class PagePassager extends Stage {
 					Platform.runLater(() -> {
 						infoSituation.setText("Votre Utaxi est arrivé, vous pouvez monter");
 						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
-								user.getMarker().getX(), user.getMarker().getY());
+								user.getMarker().getCoords());
 					});
 
 				}
@@ -130,12 +128,11 @@ public class PagePassager extends Stage {
 					Platform.runLater(() -> {
 						infoSituation.setText("Arrivé à destination !");
 						map.disableRouting();
-						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
-								Double.parseDouble(xField.getText()), Double.parseDouble(yField.getText()));
-						map.moveMarker(markerCurrentPosition, Double.parseDouble(xField.getText()),
+						LatLng newCoords = new LatLng(Double.parseDouble(xField.getText()),
 								Double.parseDouble(yField.getText()));
-						user.getMarker().setPosition(Double.parseDouble(xField.getText()),
-								Double.parseDouble(yField.getText()));
+						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(), newCoords);
+						map.moveMarker(markerCurrentPosition, newCoords);
+						user.getMarker().setPosition(newCoords);
 						commanderUtaxiButton.setDisable(false);
 						listViewConducteur.setMouseTransparent(false);
 						listViewConducteur.setFocusTraversable(true);
@@ -200,7 +197,7 @@ public class PagePassager extends Stage {
 		GridPane.setHalignment(infoSituation, HPos.CENTER);
 
 		// Map
-		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 
