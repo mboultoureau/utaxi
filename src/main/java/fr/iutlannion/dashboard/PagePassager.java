@@ -1,10 +1,6 @@
 package fr.iutlannion.dashboard;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
-
-import javax.swing.Timer;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
@@ -52,7 +48,7 @@ public class PagePassager extends Stage {
 	// Mettre la location du passager courant
 	private Marker markerLocationWant = new Marker(47.228752, -1.541096);
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
-	private Icon iconSelected = new Icon("img/taxiSelected.png", 40, 20);
+	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
 
 	private ObservableList<Conducteur> conducteurs = FXCollections
 			.observableArrayList(Conducteurs.getInstance().getListConducteur());
