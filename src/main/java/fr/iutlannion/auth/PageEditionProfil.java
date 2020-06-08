@@ -31,19 +31,19 @@ public class PageEditionProfil extends Stage {
 	//CONTENU
 	private GridPane gridPane = new GridPane();
 	
-	private Label label1 = new Label("Nom");
-	private Label label2 = new Label("PrÃ©nom");
-	private Label label3 = new Label("Mail");
-	private Label actuel = new Label("Mot de passe actuel");
-	private Label nv = new Label("Nouveau mot de passe");
+	private Label labelNom = new Label("Nom");
+	private Label labelPrenom = new Label("PrÃ©nom");
+	private Label labelMail = new Label("Mail");
+	private Label mdpActuel = new Label("Mot de passe actuel");
+	private Label mdpNouveau = new Label("Nouveau mot de passe");
 	private Label bottomText=new Label("");
 	
 	
-	private TextField textField1 = new TextField();
-	private TextField textField2 = new TextField();
-	private TextField textField3 = new TextField();
-	private PasswordField passwordField1 = new PasswordField();
-	private PasswordField passwordField2 = new PasswordField();
+	private TextField tfNom = new TextField();
+	private TextField tfPrenom = new TextField();
+	private TextField tfMail = new TextField();
+	private PasswordField pfMdpActuel = new PasswordField();
+	private PasswordField pfMdpNouveau = new PasswordField();
 	
 	private Button buttonAnnuler = new Button("Annuler");
     private Button buttonOk = new Button("OK");
@@ -63,20 +63,30 @@ public class PageEditionProfil extends Stage {
 		
 		buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if(passwordField1.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
-					Utilisateur.getInstance().getPersonne().modifierInfo(textField1.getText(), textField2.getText(), textField3.getText(), passwordField2.getText());
-					textField1.setText(Utilisateur.getInstance().getPersonne().getNom());
-					textField2.setText(Utilisateur.getInstance().getPersonne().getPrenom());
-					textField3.setText(Utilisateur.getInstance().getPersonne().getEmail());
-					passwordField1.setText(null);
-					passwordField2.setText(null);
-					bottomText= new Label("Modifications validées");
+				if(pfMdpActuel.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
+					if(tfNom.getText().trim().isEmpty())
+						tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
+					if(tfPrenom.getText().trim().isEmpty())
+						tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+					if(tfMail.getText().trim().isEmpty())
+						tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
+					if(pfMdpNouveau.getText().trim().isEmpty())
+						pfMdpNouveau.setText(Utilisateur.getInstance().getPersonne().getMotDePasse());
+					Utilisateur.getInstance().getPersonne().modifierInfo(tfNom.getText(), tfPrenom.getText(), tfMail.getText(), pfMdpNouveau.getText());
+					pfMdpActuel.setText(null);
+					pfMdpNouveau.setText(null);
+					bottomText.setText("Modifications validées");
 					bottomText.setTextFill(Color.GREEN);
 					root.setBottom(bottomText);
 				}else {
-					bottomText= new Label("Erreur de mot de passe");
+					bottomText.setText("Erreur de mot de passe");
 					bottomText.setTextFill(Color.RED);
 					root.setBottom(bottomText);
+					tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
+					tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+					tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
+					pfMdpActuel.setText(null);
+					pfMdpNouveau.setText(null);
 				}
 			}
 		}));
@@ -114,25 +124,25 @@ public class PageEditionProfil extends Stage {
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(10);
 	        gridPane.setHgap(10);
-			GridPane.setHgrow(label1, Priority.ALWAYS);
+			GridPane.setHgrow(labelNom, Priority.ALWAYS);
 			
-			textField1.setText(Utilisateur.getInstance().getPersonne().getNom());
-			textField2.setText(Utilisateur.getInstance().getPersonne().getPrenom());
-			textField3.setText(Utilisateur.getInstance().getPersonne().getEmail());
+			tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
+			tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+			tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
 			
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);
 	       
-	        gridPane.add(label1, 0,0);
-	        gridPane.add(textField1, 0,1);
-	        gridPane.add(label2, 0,2);
-	        gridPane.add(textField2, 0,3);
-	        gridPane.add(label3, 0,4);
-	        gridPane.add(textField3, 0,5);
-	        gridPane.add(actuel, 0,6);
-	        gridPane.add(passwordField1, 0,7);
-	        gridPane.add(nv, 0,8);
-	        gridPane.add(passwordField2, 0,9);
+	        gridPane.add(labelNom, 0,0);
+	        gridPane.add(tfNom, 0,1);
+	        gridPane.add(labelPrenom, 0,2);
+	        gridPane.add(tfPrenom, 0,3);
+	        gridPane.add(labelMail, 0,4);
+	        gridPane.add(tfMail, 0,5);
+	        gridPane.add(mdpActuel, 0,6);
+	        gridPane.add(pfMdpActuel, 0,7);
+	        gridPane.add(mdpNouveau, 0,8);
+	        gridPane.add(pfMdpNouveau, 0,9);
 	        gridPane.add(buttonOk, 0,10);
 	        gridPane.add(buttonAnnuler, 1,10);
 	        
@@ -141,6 +151,7 @@ public class PageEditionProfil extends Stage {
 		
 	        root.setTop(header);
 			root.setCenter(gridPane);
+			root.setBottom(bottomText);
 			
 			return root;
 	}
