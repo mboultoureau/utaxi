@@ -2,6 +2,7 @@ package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
 import javafx.event.EventHandler;
@@ -79,7 +80,7 @@ public class PageConducteur extends Stage {
 		leftSide.setMinWidth(300);
 
 		// Map
-		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 

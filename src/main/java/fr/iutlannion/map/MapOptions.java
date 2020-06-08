@@ -2,48 +2,38 @@ package fr.iutlannion.map;
 
 public class MapOptions {
 
-    private double x;
-    private double y;
+    private LatLng coords;
     private int zoom;
 
-    private static final double defaultX = 48.833;
-    private static final double defaultY = 2.333;
+    private static final LatLng defaultCoordonnees = new LatLng(48.833, 2.333);
     private static final int defaultZoom = 7;
 
 
     public MapOptions() {
-        x = defaultX;
-        y = defaultY;
+        coords = defaultCoordonnees;
         zoom = defaultZoom;
     }
 
-    public MapOptions(double x, double y, int zoom) {
-        this.x = x;
-        this.y = y;
+    public MapOptions(LatLng coords, int zoom) {
+        this.coords = coords;
         this.zoom = zoom;
     }
 
-    public MapOptions(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public MapOptions(LatLng coords) {
+        this.coords = coords;
         this.zoom = defaultZoom;
     }
 
-    public void setCoordinates(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public void setCoordinates(LatLng coords) {
+        this.coords = coords;
     }
 
     public void setZoom(int zoom) {
         this.zoom = zoom;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
+    public LatLng getCoords() {
+        return this.coords;
     }
 
     public int getZoom() {

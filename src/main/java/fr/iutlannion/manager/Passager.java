@@ -1,14 +1,15 @@
 package fr.iutlannion.manager;
 
+import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.Marker;
 
 public class Passager extends Personne {
 
     private Marker marker;
 
-    public Passager(String nom, String prenom, String email, String motDePasse, double x, double y) {
+    public Passager(String nom, String prenom, String email, String motDePasse, LatLng coords) {
         super(nom, prenom, email, motDePasse);
-        this.marker = new Marker(x, y);
+        this.marker = new Marker(coords);
     }
 
     public Passager() {
