@@ -1,19 +1,22 @@
-package fr.iutlannion.manager;
+package fr.iutlannion.map;
 
 public class Adresse {
     private String rue;
     private String ville;
-    private String etat;
     private String codePostal;
-    private String pays;
+    private String numero;
+    private LatLng coords;
 
-    Adresse(String rue, String ville, String etat, String codePostal, String pays) {
+    Adresse(String numero, String rue, String ville, String codePostal) {
         this.rue = rue;
         this.ville = ville;
-        this.etat = etat;
         this.codePostal = codePostal;
-        this.pays = pays;
+        this.numero = numero;
     }
+
+    public String toString() {
+    	return numero + " " + rue + ", " + codePostal + " " + ville;
+	}
 
 	public String getRue() {
 		return rue;
@@ -23,15 +26,11 @@ public class Adresse {
 		return ville;
 	}
 
-	public String getEtat() {
-		return etat;
-	}
-
 	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public String getPays() {
-		return pays;
+	public void setCoords(LatLng coords) {
+    	this.coords = coords;
 	}
 }

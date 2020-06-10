@@ -4,6 +4,7 @@ import fr.iutlannion.manager.Admin;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Passager;
 import fr.iutlannion.manager.*;
+import fr.iutlannion.map.AdresseAPI;
 import fr.iutlannion.map.LatLng;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -79,6 +80,8 @@ public class App extends Application {
 		Utilisateur u = new Utilisateur(p1);
 
 		Utilisateur.getInstance().getPersonne().getMotDePasse();
+
+		// AdresseAPI.getAdresses("Avenue des Champs élysée");
 
 		launch();
 	}
