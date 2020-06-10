@@ -8,6 +8,9 @@ import fr.iutlannion.map.LatLng;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Classe principale
+ */
 public class App extends Application {
 
 	/**
@@ -16,11 +19,19 @@ public class App extends Application {
 	 */
 	public static final boolean DEBUG = true;
 
+	/**
+	 * Affiche l'interface graphique
+	 * @param primaryStage Le stage principale
+	 */
 	public void start(Stage primaryStage) {
 		primaryStage = new Window();
 		primaryStage.show();
 	}
 
+	/**
+	 * Fonction principale, créé des données de tests et lance l'affichage graphique
+	 * @param args Arguments
+	 */
 	public static void main(String[] args) {
 		// Admins
 		Admin manon = new Admin("Goasguen", "Manon", "manon@email.com", "manon");
