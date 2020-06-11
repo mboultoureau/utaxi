@@ -64,6 +64,7 @@ public class PagePassager extends Stage {
 	private Label ChoisirUtaxiLabel = new Label("Choisissez un Utaxi :");
 	private Label ChoisirCoordLabel = new Label("Choisissez où vous voulez aller :");
 	private Label infoSituation = new Label("");
+	private Button Annuler = new Button("Annuler");
 	private Button commanderUtaxiButton = new Button("Commander le Utaxi");
 	// Geocoding pour récuperer l'adresse en lat/long avec une API
 	private AdresseView adresseView = new AdresseView();
@@ -88,9 +89,18 @@ public class PagePassager extends Stage {
 
 		adresseView.getOKButton().setOnAction(e -> confirmAdresse());
 
+		Annuler.setOnMouseClicked(e -> {
+			Adresse adresse = adresseView.getAdresse();
+			adresseView.enable();
+			map.moveMarker(markerLocationWant, new LatLng(0, 0));
+			commanderUtaxiButton.setDisable(true);
+			Annuler.setDisable(true);
+		});
+
 		commanderUtaxiButton.setOnAction(e -> {
 
 			map.disableRouting();
+			Annuler.setDisable(true);
 			Adresse adresse = adresseView.getAdresse();
 			map.moveMarker(markerLocationWant, adresse.getCoords());
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
@@ -134,7 +144,6 @@ public class PagePassager extends Stage {
 								adresse.getCoords());
 						map.moveMarker(markerCurrentPosition, adresse.getCoords());
 						user.getMarker().setPosition(adresse.getCoords());
-						commanderUtaxiButton.setDisable(false);
 						listViewConducteur.setMouseTransparent(false);
 						listViewConducteur.setFocusTraversable(true);
 						adresseView.enable();
@@ -152,6 +161,8 @@ public class PagePassager extends Stage {
 		if (adresse != null) {
 			adresseView.disable();
 			map.moveMarker(markerLocationWant, adresse.getCoords());
+			commanderUtaxiButton.setDisable(false);
+			Annuler.setDisable(false);
 		}
 	}
 
@@ -189,8 +200,9 @@ public class PagePassager extends Stage {
 		leftSide.add(listViewConducteur, 0, 1);
 		leftSide.add(ChoisirCoordLabel, 0, 2);
 		leftSide.add(adresseView, 0, 3);
+		leftSide.add(Annuler, 0, 4);
 		leftSide.add(commanderUtaxiButton, 0, 4);
-		leftSide.add(infoSituation, 0, 5, 1, 1);
+		leftSide.add(infoSituation, 0, 6, 1, 1);
 		leftSide.setMinWidth(300);
 		infoSituation.setStyle("-fx-font: 16 arial;");
 		ChoisirUtaxiLabel.setStyle("-fx-font: 24 arial;");
@@ -202,6 +214,8 @@ public class PagePassager extends Stage {
 		listViewConducteur.setMaxHeight(250);
 		GridPane.setHalignment(commanderUtaxiButton, HPos.CENTER);
 		GridPane.setHalignment(infoSituation, HPos.CENTER);
+		commanderUtaxiButton.setDisable(true);
+		Annuler.setDisable(true);
 
 		// Map
 		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));

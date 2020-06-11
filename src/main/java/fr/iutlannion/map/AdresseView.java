@@ -17,9 +17,7 @@ import java.util.HashMap;
 public class AdresseView extends GridPane {
 
     private Label error = new Label("");
-    private ObservableList<String> adresses = FXCollections.observableArrayList(
-            ""
-    );
+    private ObservableList<String> adresses = FXCollections.observableArrayList("");
     private final ComboBox comboBox = new ComboBox(adresses);
     private Button okButton = new Button("OK");
     private HashMap<String, Adresse> propositions;
@@ -44,8 +42,8 @@ public class AdresseView extends GridPane {
     }
 
     /**
-     * Retourne le bouton OK
-     * Utile pour écouter des événements dessus
+     * Retourne le bouton OK Utile pour écouter des événements dessus
+     * 
      * @return Bouton OK
      */
     public Button getOKButton() {
@@ -54,6 +52,7 @@ public class AdresseView extends GridPane {
 
     /**
      * Obtient l'adresse la plus pertinente
+     * 
      * @return L'adresse la plus pertinente ou null
      */
     public Adresse getAdresse() {
@@ -69,7 +68,6 @@ public class AdresseView extends GridPane {
         if (answers.size() != 0)
             return answers.get(0);
 
-
         return null;
     }
 
@@ -78,6 +76,7 @@ public class AdresseView extends GridPane {
      */
     public void disable() {
         comboBox.setDisable(true);
+        okButton.setDisable(true);
     }
 
     /**
@@ -85,6 +84,7 @@ public class AdresseView extends GridPane {
      */
     public void enable() {
         comboBox.setDisable(false);
+        okButton.setDisable(false);
     }
 
     /**
