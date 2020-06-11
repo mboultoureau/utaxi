@@ -10,6 +10,10 @@ import javafx.scene.web.WebView;
 
 import java.util.ArrayList;
 
+/**
+ * Un widget contenant une carte
+ * Géré avec Leaflet
+ */
 public class MapView extends StackPane {
 
     private static final int DEFAULT_ZOOM = 7;
@@ -24,6 +28,10 @@ public class MapView extends StackPane {
 
     private ArrayList<Marker> markers;
 
+    /**
+     * Créé le widget
+     * @param mapOptions Les options de la carte
+     */
     public MapView(MapOptions mapOptions) {
         getChildren().addAll(browser, loader);
 
@@ -67,27 +75,47 @@ public class MapView extends StackPane {
         markers = new ArrayList<Marker>();
     }
 
+    /**
+     * Définit les coordonnées et le zoom de la carte
+     * @param coords Coordonnées GPS
+     * @param zoom Zoom
+     */
     public void setView(LatLng coords, int zoom) {
         if (!loaded)
             return;
         webEngine.executeScript("setView(" + coords.internalString() + ", " + zoom + ");");
     }
 
+    /**
+     * Refraichit la carte
+     */
     public void refresh() {
         if (!loaded)
             return;
         webEngine.executeScript("window.location.reload();");
     }
 
+    /**
+     * Définit les coordonnées de la carte avec le zoom par défaut
+     * @param coords Coordonnées GPS
+     */
     public void setView(LatLng coords) {
         setView(coords, DEFAULT_ZOOM);
     }
 
+    /**
+     * Ajoute un marqueur
+     * @param marker Le marqueur à ajouter
+     */
     public void addMarker(Marker marker) {
         markers.add(marker);
         displayMarker(marker);
     }
 
+    /**
+     * Supprimer un marqueur
+     * @param marker Le marqueur à supprimer
+     */
     public void removeMarker(Marker marker) {
         int position = -1;
 
@@ -104,6 +132,11 @@ public class MapView extends StackPane {
         webEngine.executeScript("removeMarker(" + position + ");");
     }
 
+    /**
+     * Déplace un marqueur
+     * @param marker Le marqueur à déplacer
+     * @param coords Les nouvelles coordonnées du marqueur
+     */
     public void moveMarker(Marker marker, LatLng coords) {
         int position = -1;
 
@@ -120,6 +153,10 @@ public class MapView extends StackPane {
         webEngine.executeScript("moveMarker(" + position + ", " + coords.internalString() + ");");
     }
 
+    /**
+     * Affiche un marqueur
+     * @param marker Le marqueur à afficher
+     */
     public void displayMarker(Marker marker) {
         if (!loaded)
             return;
@@ -132,6 +169,11 @@ public class MapView extends StackPane {
         }
     }
 
+    /**
+     * Trace un trajet entre deux marqueurs
+     * @param marker1 Le marqueur de départ
+     * @param marker2 Le marqueur d'arrivée
+     */
     public void traceRoute(Marker marker1, Marker marker2) {
         if (markers.contains(marker1) && markers.contains(marker2)) {
             routingMarker1 = markers.indexOf(marker1);
@@ -147,12 +189,18 @@ public class MapView extends StackPane {
         displayRouting();
     }
 
+    /**
+     * Affiche le trajet
+     */
     private void displayRouting() {
         if (!enableRouting)
             return;
         webEngine.executeScript("traceRoute(" + routingMarker1 + ", " + routingMarker2 + ");");
     }
 
+    /**
+     * Supprime le trajet affiché
+     */
     public void disableRouting() {
         if (enableRouting) {
             enableRouting = false;

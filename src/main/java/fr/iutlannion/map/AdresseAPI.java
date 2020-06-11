@@ -11,10 +11,18 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * L'API pour cherche une adresse
+ */
 public class AdresseAPI {
 
     private static final String baseURL = "https://api-adresse.data.gouv.fr/search/";
 
+    /**
+     * Recherche une adresse à partir une chaine
+     * @param recherche La chaine à chercher
+     * @return Une liste d'adresse
+     */
     public static ArrayList<Adresse> getAdresses(String recherche) {
         ArrayList<Adresse> answers = new ArrayList<Adresse>();
 
@@ -65,17 +73,14 @@ public class AdresseAPI {
                 codePostal = properties.getString("postcode");
 
             JSONArray geometry = adresses.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
-            double latitude = geometry.getDouble(0);
-            double longitude = geometry.getDouble(1);
+            double latitude = geometry.getDouble(1);
+            double longitude = geometry.getDouble(0);
             LatLng coords = new LatLng(latitude, longitude);
 
             Adresse adresse = new Adresse(numero, rue, ville, codePostal);
             adresse.setCoords(coords);
 
             answers.add(adresse);
-
-            System.out.println(adresse);
-            System.out.println(coords);
         }
 
         return answers;

@@ -53,20 +53,6 @@ public class Icon {
         this.shadowSizeY = shadowSizeY;
     }
 
-    public Icon(String iconUrl, int iconSizeX, int iconSizeY, int iconAnchorX, int iconAnchorY, int popupAnchorX,
-            int popupAnchorY) {
-        this.iconUrl = iconUrl;
-        this.iconSizeX = iconSizeX;
-        this.iconSizeY = iconSizeY;
-        this.shadowUrl = shadowUrl;
-        this.shadowSizeX = shadowSizeX;
-        this.shadowSizeY = shadowSizeY;
-        this.iconAnchorX = iconAnchorX;
-        this.iconAnchorY = iconAnchorY;
-        this.popupAnchorX = popupAnchorX;
-        this.popupAnchorY = popupAnchorY;
-    }
-
     /**
      * Retourne l'URL de l'icone
      * @return L'URL de l'icone
@@ -119,21 +105,41 @@ public class Icon {
         this.shadowSizeY = shadowSizeY;
     }
 
+    /**
+     * Définit les coordonnées de l'image de l'icone
+     * @param iconAnchorX Coordonnée X de l'image de l'icone
+     * @param iconAnchorY Coordonnée Y de l'image de l'icone
+     */
     public void setIconAnchor(int iconAnchorX, int iconAnchorY) {
         this.iconAnchorX = iconAnchorX;
         this.iconAnchorY = iconAnchorY;
     }
 
+    /**
+     * Définit la position de l'ombre
+     * @param shadowAnchorX Coordonnée X de l'ombre
+     * @param shadowAnchorY Coordonnée Y de l'ombre
+     */
     public void setShadownAnchor(int shadowAnchorX, int shadowAnchorY) {
         this.shadowAnchorX = shadowAnchorX;
         this.shadowAnchorY = shadowAnchorY;
     }
 
+    /**
+     * Définit la position du popup
+     * @param popupAnchorX Coordonnée X du popup
+     * @param popupAnchorY Coordonnée Y du popup
+     */
     public void setPopupAnchor(int popupAnchorX, int popupAnchorY) {
         this.popupAnchorX = popupAnchorX;
         this.popupAnchorY = popupAnchorY;
     }
 
+    /**
+     * Retourne l'objet au format JSON
+     * Utile pour l'intégrer à Leaflet avec JavaScript
+     * @return L'objet au format JSON
+     */
     public String getObject() {
         String object = "{iconUrl: '" + this.iconUrl + "',";
         object += "shadowUrl: '" + this.shadowUrl + "',";
@@ -142,8 +148,6 @@ public class Icon {
         object += "iconAnchor: [" + this.iconAnchorX + ", " + this.iconAnchorY + "],";
         object += "shadowAnchor: [" + this.shadowAnchorX + ", " + this.shadowAnchorY + "],";
         object += "popupAnchor: [" + this.popupAnchorX + ", " + this.popupAnchorY + "]}";
-
-        // System.out.println(object);
 
         return object;
     }

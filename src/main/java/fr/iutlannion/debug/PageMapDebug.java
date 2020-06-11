@@ -56,6 +56,9 @@ public class PageMapDebug extends Stage {
 
     private Icon icon = new Icon("img/taxi.png", 40, 20);
 
+    // Adresse Search
+    private AdresseView adresseView = new AdresseView();
+
     public PageMapDebug() {
         backButton.setOnAction(e -> Window.getInstance().gotoPage("debug"));
         moveButton.setOnAction(e -> {
@@ -65,6 +68,19 @@ public class PageMapDebug extends Stage {
         deleteButton.setOnAction(e -> map.removeMarker(marker3));
         moveMarkerButton.setOnAction(e -> map.moveMarker(marker1, new LatLng(51.833, 2.333)));
         disableRoutingButton.setOnAction(e -> map.disableRouting());
+
+        adresseView.getOKButton().setOnAction(e -> confirmAdresse());
+    }
+
+    private void confirmAdresse() {
+        Adresse adresse = adresseView.getAdresse();
+        if (adresse != null) {
+
+
+            adresseView.disable();
+            Marker m = new Marker(adresse.getCoords());
+            map.addMarker(m);
+        }
     }
 
     public Parent creerContenu() {
@@ -105,7 +121,7 @@ public class PageMapDebug extends Stage {
 
         // Left Side
         leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton,
-                disableRoutingButton);
+                disableRoutingButton, adresseView);
         leftScroll.setContent(leftSide);
         leftScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
