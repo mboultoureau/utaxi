@@ -4,7 +4,7 @@ import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Passager;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Utilisateurs;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -125,21 +125,21 @@ public class PageInscription extends Stage {
 		// Événements
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Utilisateur.getInstance().destroyUtilisateur();
+				Utilisateurs.resetPersonneCourante();
 				Window.getInstance().gotoPage("menuPrincipal");
 			}
 		}));
 
 		pConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Utilisateur.getInstance().destroyUtilisateur();
+				Utilisateurs.resetPersonneCourante();
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
 
 		cConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Utilisateur.getInstance().destroyUtilisateur();
+				Utilisateurs.resetPersonneCourante();
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
@@ -148,7 +148,7 @@ public class PageInscription extends Stage {
 		pNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if (!checkPassager()) {
-					Utilisateur.getInstance().setPersonne(p);
+					Utilisateurs.setPersonneCourante(p);
 					Window.getInstance().gotoPage("paiement");
 				}
 			}
@@ -158,7 +158,7 @@ public class PageInscription extends Stage {
 		cNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if (!checkConducteur()) {
-					Utilisateur.getInstance().setPersonne(c);
+					Utilisateurs.setPersonneCourante(p);
 					Window.getInstance().gotoPage("enregistrementVoiture");
 				}
 			}

@@ -1,6 +1,6 @@
 package fr.iutlannion.auth;
 
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.*;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -16,9 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import fr.iutlannion.manager.Conducteurs;
-import fr.iutlannion.manager.Passagers;
-import fr.iutlannion.manager.Admins;
 import fr.iutlannion.core.Window;
 
 public class PageConnexion extends Stage {
@@ -53,21 +50,21 @@ public class PageConnexion extends Stage {
 
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                if (Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    Utilisateur.getInstance().setPersonne(
-                            Conducteurs.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
-                    Window.getInstance().gotoPage("conducteur");
-                } else if (Passagers.getInstance().verifConnexion(textField.getText(),
-                        passwordField.getText()) != null) {
-                    Utilisateur.getInstance().setPersonne(
-                            Passagers.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
-                    Window.getInstance().gotoPage("passager");
-                } else if (Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()) != null) {
-                    Utilisateur.getInstance().setPersonne(
-                            Admins.getInstance().verifConnexion(textField.getText(), passwordField.getText()));
-                    Window.getInstance().gotoPage("admin");
-                } else if (textField.getText().compareTo("") == 0 || passwordField.getText().compareTo("") == 0) {
+                String email = textField.getText().trim();
+                String password = passwordField.getText().trim();
+                Personne tentative = Utilisateurs.connexion(email, password);
+
+                if (email.compareTo("") == 0 || password.compareTo("") == 0) {
                     erreurLabel.setText("Erreur, champs vide(s)");
+                } else if (tentative != null) {
+                    Utilisateurs.setPersonneCourante(tentative);
+
+                    if (tentative instanceof Admin)
+                        Window.getInstance().gotoPage("admin");
+                    else if (tentative instanceof Conducteur)
+                        Window.getInstance().gotoPage("conducteur");
+                    else if (tentative instanceof Passager)
+                        Window.getInstance().gotoPage("passager");
                 } else {
                     erreurLabel.setText("Email/mot de passe invalide");
                 }
@@ -75,7 +72,7 @@ public class PageConnexion extends Stage {
         }));
 
         buttonInscription.setOnAction(e -> {
-            Utilisateur.getInstance().destroyUtilisateur();
+            Utilisateurs.resetPersonneCourante();
             Window.getInstance().gotoPage("inscription");
         });
 

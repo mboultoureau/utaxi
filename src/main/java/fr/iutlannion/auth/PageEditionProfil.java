@@ -1,7 +1,7 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Utilisateurs;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -63,16 +63,16 @@ public class PageEditionProfil extends Stage {
 		
 		buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if(pfMdpActuel.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
+				if(pfMdpActuel.getText().compareTo(Utilisateurs.getPersonneCourante().getMotDePasse())==0) {
 					if(tfNom.getText().trim().isEmpty())
-						tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
+						tfNom.setText(Utilisateurs.getPersonneCourante().getNom());
 					if(tfPrenom.getText().trim().isEmpty())
-						tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
+						tfPrenom.setText(Utilisateurs.getPersonneCourante().getPrenom());
 					if(tfMail.getText().trim().isEmpty())
-						tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
+						tfMail.setText(Utilisateurs.getPersonneCourante().getEmail());
 					if(pfMdpNouveau.getText().trim().isEmpty())
-						pfMdpNouveau.setText(Utilisateur.getInstance().getPersonne().getMotDePasse());
-					Utilisateur.getInstance().getPersonne().modifierInfo(tfNom.getText(), tfPrenom.getText(), tfMail.getText(), pfMdpNouveau.getText());
+						pfMdpNouveau.setText(Utilisateurs.getPersonneCourante().getMotDePasse());
+					Utilisateurs.getPersonneCourante().modifierInfo(tfNom.getText(), tfPrenom.getText(), tfMail.getText(), pfMdpNouveau.getText());
 					pfMdpActuel.setText(null);
 					pfMdpNouveau.setText(null);
 					bottomText.setText("Modifications validées");
@@ -82,9 +82,9 @@ public class PageEditionProfil extends Stage {
 					bottomText.setText("Erreur de mot de passe");
 					bottomText.setTextFill(Color.RED);
 					root.setBottom(bottomText);
-					tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
-					tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
-					tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
+					tfNom.setText(Utilisateurs.getPersonneCourante().getNom());
+					tfPrenom.setText(Utilisateurs.getPersonneCourante().getPrenom());
+					tfMail.setText(Utilisateurs.getPersonneCourante().getEmail());
 					pfMdpActuel.setText(null);
 					pfMdpNouveau.setText(null);
 				}
@@ -126,9 +126,9 @@ public class PageEditionProfil extends Stage {
 	        gridPane.setHgap(10);
 			GridPane.setHgrow(labelNom, Priority.ALWAYS);
 			
-			tfNom.setText(Utilisateur.getInstance().getPersonne().getNom());
-			tfPrenom.setText(Utilisateur.getInstance().getPersonne().getPrenom());
-			tfMail.setText(Utilisateur.getInstance().getPersonne().getEmail());
+			tfNom.setText(Utilisateurs.getPersonneCourante().getNom());
+			tfPrenom.setText(Utilisateurs.getPersonneCourante().getPrenom());
+			tfMail.setText(Utilisateurs.getPersonneCourante().getEmail());
 			
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);

@@ -2,7 +2,7 @@ package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Utilisateurs;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -54,7 +54,7 @@ public class PageEditionVoiture extends Stage{
 		private Button buttonAnnuler = new Button("Annuler");
 	    private Button buttonOk = new Button("OK");
 	    
-	    Conducteur c = (Conducteur) Utilisateur.getInstance().getPersonne();
+	    Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	    
 		public PageEditionVoiture() {
 			backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -71,7 +71,7 @@ public class PageEditionVoiture extends Stage{
 			
 			buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
-					if(fmdp.getText().compareTo(Utilisateur.getInstance().getPersonne().getMotDePasse())==0) {
+					if(fmdp.getText().compareTo(Utilisateurs.getPersonneCourante().getMotDePasse())==0) {
 						if(ftarif.getText().trim().isEmpty())
 							ftarif.setText(String.valueOf(c.getTarif()));
 						if(fnbkm.getText().trim().isEmpty())

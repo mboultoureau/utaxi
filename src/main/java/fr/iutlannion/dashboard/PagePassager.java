@@ -4,10 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Conducteurs;
-import fr.iutlannion.manager.Passager;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.*;
 import fr.iutlannion.map.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -34,12 +31,12 @@ public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
-	Passager user = (Passager) Utilisateur.getInstance().getPersonne();
+	Passager user = (Passager) Utilisateurs.getPersonneCourante();
 
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Passager - Bienvenue " + Utilisateur.getInstance().getPersonne().getPrenom());
+	private Label title = new Label("Page Passager - Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
 	private Label logo = new Label("UTaxi");
 
 	// Left Side
@@ -58,7 +55,7 @@ public class PagePassager extends Stage {
 	private Icon iconHome = new Icon("img/iconHome.png", 25, 41, 12, 41, 1, -34);
 
 	private ObservableList<Conducteur> conducteurs = FXCollections
-			.observableArrayList(Conducteurs.getInstance().getListConducteur());
+			.observableArrayList(Utilisateurs.getListConducteur());
 	private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
 	private Label ChoisirUtaxiLabel = new Label("Choisissez un Utaxi :");
@@ -79,7 +76,7 @@ public class PagePassager extends Stage {
 		listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+				for (Conducteur c : Utilisateurs.getListConducteur()) {
 					c.getMarker().setIcon(icon);
 				}
 				listViewConducteur.getSelectionModel().getSelectedItem().getMarker().setIcon(iconSelected);
@@ -222,7 +219,7 @@ public class PagePassager extends Stage {
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 
-		for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+		for (Conducteur c : Utilisateurs.getListConducteur()) {
 			map.addMarker(c.getMarker());
 			c.getMarker().setIcon(icon);
 		}

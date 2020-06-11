@@ -47,15 +47,15 @@ public class PageAdmin extends Stage {
     private Label label15 = new Label("Type :");
     private Label label16 = new Label("");
 
-    private ObservableList<Admin> admins = FXCollections.observableArrayList(Admins.getInstance().getListAdmin());
+    private ObservableList<Admin> admins = FXCollections.observableArrayList(Utilisateurs.getListAdmin());
     private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
 
     private ObservableList<Passager> passagers = FXCollections
-            .observableArrayList(Passagers.getInstance().getListPassager());
+            .observableArrayList(Utilisateurs.getListPassagers());
     private ListView<Passager> listViewPassager = new ListView<Passager>(passagers);
 
     private ObservableList<Conducteur> conducteurs = FXCollections
-            .observableArrayList(Conducteurs.getInstance().getListConducteur());
+            .observableArrayList(Utilisateurs.getListConducteur());
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
     private Button buttonSauvegarder = new Button("Sauvegarder");
@@ -315,15 +315,15 @@ public class PageAdmin extends Stage {
                 label14.setVisible(false);
                 label15.setVisible(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
-                    Admins.getInstance().remove(listViewAdmin.getSelectionModel().getSelectedItem());
+                    Utilisateurs.remove(listViewAdmin.getSelectionModel().getSelectedItem());
                     admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
                     listViewAdmin.setItems(admins);
                 } else if (TypeCurrentPersonne.equals("Passager")) {
-                    Passagers.getInstance().remove(listViewPassager.getSelectionModel().getSelectedItem());
+                    Utilisateurs.remove(listViewPassager.getSelectionModel().getSelectedItem());
                     passagers.remove(listViewPassager.getSelectionModel().getSelectedItem());
                     listViewPassager.setItems(passagers);
                 } else if (TypeCurrentPersonne.equals("Conducteur")) {
-                    Conducteurs.getInstance().remove(listViewConducteur.getSelectionModel().getSelectedItem());
+                    Utilisateurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
                     conducteurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
                     listViewConducteur.setItems(conducteurs);
                 }
@@ -343,7 +343,7 @@ public class PageAdmin extends Stage {
                     label16.setText("");
                     Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(),
                             textFieldEmail.getText(), textFieldMotdepasse.getText());
-                    Admins.getInstance().add(newAdmin);
+                    Utilisateurs.add(newAdmin);
                     listViewAdmin.getItems().add(newAdmin);
                     listViewAdmin.getSelectionModel().select(newAdmin);
                 }

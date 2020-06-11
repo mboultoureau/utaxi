@@ -6,7 +6,6 @@ import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.Marker;
-import fr.iutlannion.manager.Conducteurs;
 
 public class Conducteur extends Personne {
 
