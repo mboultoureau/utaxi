@@ -76,7 +76,6 @@ public class PageMapDebug extends Stage {
         Adresse adresse = adresseView.getAdresse();
         if (adresse != null) {
 
-
             adresseView.disable();
             Marker m = new Marker(adresse.getCoords());
             map.addMarker(m);
@@ -120,8 +119,8 @@ public class PageMapDebug extends Stage {
         moveButton.setPrefWidth(300);
 
         // Left Side
-        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton,
-                disableRoutingButton, adresseView);
+        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton, disableRoutingButton,
+                adresseView);
         leftScroll.setContent(leftSide);
         leftScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

@@ -22,6 +22,7 @@ public class App extends Application {
 
 	/**
 	 * Affiche l'interface graphique
+	 * 
 	 * @param primaryStage Le stage principale
 	 */
 	public void start(Stage primaryStage) {
@@ -31,6 +32,7 @@ public class App extends Application {
 
 	/**
 	 * Fonction principale, créé des données de tests et lance l'affichage graphique
+	 * 
 	 * @param args Arguments
 	 */
 	public static void main(String[] args) {
@@ -57,10 +59,10 @@ public class App extends Application {
 		Voitures.getInstance().add(v3);
 
 		// Conducteurs
-		Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1, new LatLng(47.219860,
-				-1.545304));
-		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "patrick", 3.2, 10000, v2, new LatLng(47.219364,
-				-1.556202));
+		Conducteur c1 = new Conducteur("Dupond", "Georges", "georges@email.com", "georges", 10.2, 1000, v1,
+				new LatLng(47.219860, -1.545304));
+		Conducteur c2 = new Conducteur("Dupond", "Patrick", "patrick@email.com", "patrick", 3.2, 10000, v2,
+				new LatLng(47.219364, -1.556202));
 
 		Conducteurs.getInstance().add(c1);
 		Conducteurs.getInstance().add(c2);
@@ -70,14 +72,15 @@ public class App extends Application {
 		c2.ajouterNote(4.0);
 
 		// Passagers
-		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel", new LatLng(47.220829, -1.565942));
+		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel",
+				new LatLng(47.220829, -1.565942));
 		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde", new LatLng(47.213782, -1.554903));
 
 		Passagers.getInstance().add(p1);
 		Passagers.getInstance().add(p2);
 
 		// Utilisateur connecté
-		Utilisateur u = new Utilisateur(c1);
+		Utilisateur u = new Utilisateur(p1);
 
 		Utilisateur.getInstance().getPersonne().getMotDePasse();
 
