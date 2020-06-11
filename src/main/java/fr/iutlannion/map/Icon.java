@@ -54,6 +54,31 @@ public class Icon {
     }
 
     /**
+     * Créé une icone
+     * @param iconUrl L'URL de l'icone
+     * @param iconSizeX La largeur de l'icone
+     * @param iconSizeY La hauteur de l'icone
+     * @param iconAnchorX La coordonnée X de l'image de l'icone
+     * @param iconAnchorY La coordonnée Y de l'image de l'icone
+     * @param popupAnchorX La position X de la popup
+     * @param popupAnchorY La position Y de la popup
+     */
+    public Icon(String iconUrl, int iconSizeX, int iconSizeY, int iconAnchorX, int iconAnchorY, int popupAnchorX,
+                int popupAnchorY) {
+        this.iconUrl = iconUrl;
+        this.iconSizeX = iconSizeX;
+        this.iconSizeY = iconSizeY;
+        this.shadowUrl = shadowUrl;
+        this.shadowSizeX = shadowSizeX;
+        this.shadowSizeY = shadowSizeY;
+        this.iconAnchorX = iconAnchorX;
+        this.iconAnchorY = iconAnchorY;
+        this.popupAnchorX = popupAnchorX;
+        this.popupAnchorY = popupAnchorY;
+    }
+
+
+    /**
      * Retourne l'URL de l'icone
      * @return L'URL de l'icone
      */
