@@ -17,8 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -36,7 +34,7 @@ public class PagePassager extends Stage {
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Passager - Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
+	private Label title = new Label("Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
 	private Label logo = new Label("UTaxi");
 
 	// Left Side

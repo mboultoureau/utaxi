@@ -5,7 +5,6 @@ import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Passager;
 import fr.iutlannion.manager.Utilisateurs;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +17,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -123,46 +121,36 @@ public class PageInscription extends Stage {
 	public PageInscription() {
 
 		// Événements
-		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Utilisateurs.resetPersonneCourante();
-				Window.getInstance().gotoPage("menuPrincipal");
-			}
-		}));
+		backButton.setOnAction(e -> {
+			Utilisateurs.resetPersonneCourante();
+			Window.getInstance().gotoPage("menuPrincipal");
+		});
 
-		pConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Utilisateurs.resetPersonneCourante();
-				Window.getInstance().gotoPage("connexion");
-			}
-		}));
+		pConnexion.setOnAction(e -> {
+			Utilisateurs.resetPersonneCourante();
+			Window.getInstance().gotoPage("connexion");
+		});
 
-		cConnexion.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Utilisateurs.resetPersonneCourante();
-				Window.getInstance().gotoPage("connexion");
-			}
-		}));
+		cConnexion.setOnAction(e -> {
+			Utilisateurs.resetPersonneCourante();
+			Window.getInstance().gotoPage("connexion");
+		});
 
 		// Suivant
-		pNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				if (!checkPassager()) {
-					Utilisateurs.setPersonneCourante(p);
-					Window.getInstance().gotoPage("paiement");
-				}
+		pNext.setOnAction(e -> {
+			if (!checkPassager()) {
+				Utilisateurs.setPersonneCourante(p);
+				Window.getInstance().gotoPage("paiement");
 			}
-		}));
+		});
 
 		// Suivant
-		cNext.setOnMouseClicked((new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				if (!checkConducteur()) {
-					Utilisateurs.setPersonneCourante(p);
-					Window.getInstance().gotoPage("enregistrementVoiture");
-				}
+		cNext.setOnAction(e -> {
+			if (!checkConducteur()) {
+				Utilisateurs.setPersonneCourante(p);
+				Window.getInstance().gotoPage("enregistrementVoiture");
 			}
-		}));
+		});
 	}
 
 	private void hideErrors() {

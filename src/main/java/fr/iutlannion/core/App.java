@@ -66,10 +66,17 @@ public class App extends Application {
 
 		c2.ajouterNote(4.0);
 
+		// Cartes bancaires des passagers
+		CarteBancaire cb1 = new CarteBancaire("1111111111111111", "12/21", "000", "Daniel Balavoine");
+		CarteBancaire cb2 = new CarteBancaire("2222333344445555", "09/21", "111", "Lorde Queen");
+
+		// Localisations des passagers
+		LatLng l1 = new LatLng(47.220829, -1.565942);
+		LatLng l2 = new LatLng(47.213782, -1.554903);
+
 		// Passagers
-		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel",
-				new LatLng(47.220829, -1.565942));
-		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde", new LatLng(47.213782, -1.554903));
+		Passager p1 = new Passager("Balavoine", "Daniel", "daniel@email.com", "daniel", l1, cb1);
+		Passager p2 = new Passager("Queen", "Lorde", "lorde@email.com", "lorde", l2, cb2);
 
 		Utilisateurs.add(p1);
 		Utilisateurs.add(p2);

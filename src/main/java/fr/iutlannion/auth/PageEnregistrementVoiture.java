@@ -24,7 +24,7 @@ public class PageEnregistrementVoiture extends Stage {
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Retour");
-	private Label title = new Label("INSCRIPTION");
+	private Label title = new Label("ENREGISTREMENT DU VÉHICULE");
 	private Label logo = new Label("UTaxi");
 
 	// informations voiture
@@ -58,7 +58,7 @@ public class PageEnregistrementVoiture extends Stage {
 
 		buttonSuivant.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("");
+				Window.getInstance().gotoPage("horaires");
 			}
 		}));
 	}

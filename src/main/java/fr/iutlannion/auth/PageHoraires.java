@@ -1,7 +1,5 @@
 package fr.iutlannion.auth;
 
-import java.util.spi.CalendarNameProvider;
-
 import fr.iutlannion.core.Window;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
