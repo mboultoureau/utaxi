@@ -498,9 +498,9 @@ public class PageAdmin extends Stage {
         GridPane.setHalignment(label3, HPos.CENTER);
         GridPane.setHalignment(label4, HPos.CENTER);
         GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
-        GridPane.setHalignment(buttonAnnuler, HPos.LEFT);
+        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
         GridPane.setHalignment(buttonSupprimer, HPos.RIGHT);
-        GridPane.setHalignment(buttonAjouterAdmin, HPos.RIGHT);
+        GridPane.setHalignment(buttonAjouterAdmin, HPos.LEFT);
 
         root.setTop(header);
         root.setCenter(gridPane);
