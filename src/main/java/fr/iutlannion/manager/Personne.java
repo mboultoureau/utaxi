@@ -77,10 +77,6 @@ abstract public class Personne {
 	public int getId() {
 		return this.id;
 	}
-
-	public String getMotDePasse() {
-		return this.motDePasse;
-	}
 	
 	public void setPassword(String p) throws FormatException {
 		if (p.length() < 5 || p.length() > 120) {
@@ -88,6 +84,10 @@ abstract public class Personne {
 		} else {
 			this.motDePasse = p;
 		}
+	}
+
+	public String getMotDePasse() {
+		return this.motDePasse;
 	}
 
 	public void modifierInfo(String nom, String prenom, String email, String motdepasse) {
