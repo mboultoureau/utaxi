@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
+import javafx.scene.paint.Color;
 
 public class PageEnregistrementVoiture extends Stage {
 
