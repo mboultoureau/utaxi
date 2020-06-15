@@ -2,21 +2,15 @@ package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
-import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Passager;
-import fr.iutlannion.manager.Utilisateurs;
+import fr.iutlannion.manager.*;
+import fr.iutlannion.map.LatLng;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -36,407 +30,298 @@ import javafx.stage.Stage;
  */
 public class PageInscription extends Stage {
 
-	private Conducteur c = new Conducteur();
-	private Passager p = new Passager();
-
 	private BorderPane root = new BorderPane();
 
 	// Header
-	private HBox header = new HBox();
-	private Button backButton = new Button("Retour");
-	private Label title = new Label("INSCRIPTION");
-	private Label logo = new Label("UTaxi");
-
-	// Tabs
-	private TabPane tabPane = new TabPane();
-	private Tab passagerTab = new Tab();
-	private Tab conducteurTab = new Tab();
+	private HBox headerPane = new HBox();
+	private Button retourButton = new Button("Retour");
+	private Label titreLabel = new Label("INSCRIPTION");
+	private Label logoLabel = new Label("UTaxi");
 
 	// Conducteur
-	private GridPane conducteurPane = new GridPane();
+	private GridPane gridPane = new GridPane();
 
-	private Label cNom = new Label("Nom");
-	private TextField cNomField = new TextField();
-	private Label cNomError = new Label("");
+	private HBox typePane = new HBox();
+	private ToggleGroup typeGroup = new ToggleGroup();
+	private Label typeLabel = new Label("Vous êtes :");
+	private RadioButton passagerRadio = new RadioButton("Passager/ère");
+	private RadioButton conducteurRadio = new RadioButton("Conducteur/trice");
 
-	private Label cPrenom = new Label("Prenom");
-	private TextField cPrenomField = new TextField();
-	private Label cPrenomError = new Label("");
+	private Label nomLabel = new Label("Nom");
+	private TextField nomField = new TextField();
+	private Label nomError = new Label("Le nom est incorrect.");
 
-	private Label cEmail = new Label("Email");
-	private TextField cEmailField = new TextField();
-	private Label cEmailError = new Label("");
+	private Label prenomLabel = new Label("Prenom");
+	private TextField prenomField = new TextField();
+	private Label prenomError = new Label("Le prénom est incorrect.");
 
-	private Label cMdp = new Label("Mot de passe");
-	private TextField cMdpField = new PasswordField();
-	private Label cMdpError = new Label("");
+	private Label emailLabel = new Label("Email");
+	private TextField emailField = new TextField();
+	private Label emailError = new Label("");
 
-	private Label cConfirmerMdp = new Label("Confirmer le mot de passe");
-	private TextField cConfirmerMdpField = new PasswordField();
-	private Label cConfirmerMdpError = new Label("");
+	private Label mdpLabel = new Label("Mot de passe");
+	private TextField mdpField = new PasswordField();
+	private Label mdpError = new Label("Le mot de passe est incorrect.");
 
-	private Label cTarif = new Label("Tarif (en euros)");
-	private TextField cTarifField = new TextField();
-	private Label cTarifError = new Label("");
+	private Label confirmationMdpLabel = new Label("Confirmer le mot de passe");
+	private TextField confirmationMdpField = new PasswordField();
+	private Label confirmationMdpError = new Label("Les mots de passe ne correspondent pas.");
 
-	private CheckBox cMajeur = new CheckBox("Je reconnais être majeur dans le pays où je m'inscrit.");
-	private CheckBox cConditions = new CheckBox(
+	private Label tarifLabel = new Label("Tarif (en euros)");
+	private TextField tarifField = new TextField();
+	private Label tarifError = new Label("Le tarif est invalide.");
+
+	private CheckBox majeurCheckbox = new CheckBox("Je reconnais être majeur dans le pays où je m'inscrit.");
+	private CheckBox conditionsCheckbox = new CheckBox(
 			"Je reconnais avoir lu les conditions générales d'utilisation et de ventes et les acceptent.");
-	private Button cConnexion = new Button("J'ai déjà un compte");
-	private Label cConditionsError = new Label("");
 
-	private Button cNext = new Button("Suivant");
+	private Button connexionButton = new Button("J'ai déjà un compte");
+	private Label conditionsError = new Label("Vous devez accepter les conditions d'utilisation et être majeur.");
 
-	// Passager
-	private GridPane passagerPane = new GridPane();
-
-	private Label pNom = new Label("Nom");
-	private TextField pNomField = new TextField();
-	private Label pNomError = new Label("");
-
-	private Label pPrenom = new Label("Prenom");
-	private TextField pPrenomField = new TextField();
-	private Label pPrenomError = new Label("");
-
-	private Label pEmail = new Label("Email");
-	private TextField pEmailField = new TextField();
-	private Label pEmailError = new Label("");
-
-	private Label pMdp = new Label("Mot de passe");
-	private TextField pMdpField = new PasswordField();
-	private Label pMdpError = new Label("");
-
-	private Label pConfirmerMdp = new Label("Confirmer le mot de passe");
-	private TextField pConfirmerMdpField = new PasswordField();
-	private Label pConfirmerMdpError = new Label("");
-
-	private CheckBox pMajeur = new CheckBox("Je reconnais être majeur dans le pays où je m'inscrit.");
-	private CheckBox pConditions = new CheckBox(
-			"Je reconnais avoir lu les conditions générales d'utilisation et de ventes et les acceptent.");
-	private Label pConditionsError = new Label("");
-
-	private Button pConnexion = new Button("J'ai déjà un compte");
-	private Button pNext = new Button("Suivant");
+	private Button suivantButton = new Button("Suivant");
 
 	public PageInscription() {
 
 		// Événements
-		backButton.setOnAction(e -> {
+		retourButton.setOnAction(e -> {
 			Utilisateurs.resetPersonneCourante();
 			Window.getInstance().gotoPage("menuPrincipal");
 		});
 
-		pConnexion.setOnAction(e -> {
+		connexionButton.setOnAction(e -> {
 			Utilisateurs.resetPersonneCourante();
 			Window.getInstance().gotoPage("connexion");
 		});
 
-		cConnexion.setOnAction(e -> {
-			Utilisateurs.resetPersonneCourante();
-			Window.getInstance().gotoPage("connexion");
-		});
-
-		// Suivant
-		pNext.setOnAction(e -> {
-			if (!checkPassager()) {
-				Utilisateurs.setPersonneCourante(p);
-				Window.getInstance().gotoPage("paiement");
+		suivantButton.setOnAction(e -> {
+			if (verifierPersonne()) {
+				RadioButton selectionne = (RadioButton) typeGroup.getSelectedToggle();
+				if (selectionne.getText().equals("Passager/ère")) {
+					Passager p = new Passager(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), null, null);
+					Utilisateurs.setPersonneCourante(p);
+					Window.getInstance().gotoPage("paiement");
+				} else {
+					Conducteur c = new Conducteur(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), Double.valueOf(tarifField.getText()), 0, null, null);
+					Utilisateurs.setPersonneCourante(c);
+					Window.getInstance().gotoPage("enregistrementVoiture");
+				}
 			}
 		});
 
-		// Suivant
-		cNext.setOnAction(e -> {
-			if (!checkConducteur()) {
-				Utilisateurs.setPersonneCourante(p);
-				Window.getInstance().gotoPage("enregistrementVoiture");
+		typeGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+				RadioButton selectionne = (RadioButton) typeGroup.getSelectedToggle();
+				afficherTarif(selectionne.getText().equals("Conducteur/trice"));
 			}
 		});
-	}
-
-	private void hideErrors() {
-		cNomError.setVisible(false);
-		cPrenomError.setVisible(false);
-		cEmailError.setVisible(false);
-		cMdpError.setVisible(false);
-		cConfirmerMdpError.setVisible(false);
-		cTarifError.setVisible(false);
-		cConditionsError.setVisible(false);
-
-		pNomError.setVisible(false);
-		pPrenomError.setVisible(false);
-		pEmailError.setVisible(false);
-		pMdpError.setVisible(false);
-		pConfirmerMdpError.setVisible(false);
-		pConditionsError.setVisible(false);
 	}
 
 	/**
-	 * Vérifie si le conducteur a saisi tous les champs correctement.
+	 * Vérifie si l'utilisateur a saisi tous les champs correctement.
 	 * 
-	 * @return Retourne vrai si possède des erreurs
+	 * @return Retourne vrai si tous les champs sont correctes
 	 */
-	private boolean checkConducteur() {
+	private boolean verifierPersonne() {
 
-		boolean hasErrors = false;
+		boolean valide = true;
+		cacherErreurs();
 
-		hideErrors();
-
-		try {
-			c.setNom(cNomField.getText());
-		} catch (FormatException e) {
-			cNomError.setVisible(true);
-			cNomError.setText(e.getMessage());
-			hasErrors = true;
+		// Nom
+		if (nomField.getText().length() < 3 || nomField.getText().length() > 30) {
+			nomError.setText("Le nom doit contenir entre 3 et 30 caractères.");
+			nomError.setVisible(true);
+			valide = false;
+		} else if (!nomField.getText().matches("[a-zA-Zéèêà -]+")) {
+			nomError.setText("Le nom doit contenir uniquement des lettres et des espaces.");
+			nomError.setVisible(true);
+			valide = false;
 		}
 
-		try {
-			c.setPrenom(cPrenomField.getText());
-		} catch (FormatException e) {
-			cPrenomError.setVisible(true);
-			cPrenomError.setText(e.getMessage());
-			hasErrors = true;
+		// Prénom
+		if (prenomField.getText().length() < 3 || prenomField.getText().length() > 30) {
+			prenomError.setText("Le nom doit contenir entre 3 et 30 caractères.");
+			prenomError.setVisible(true);
+			valide = false;
+		} else if (!prenomField.getText().matches("[a-zA-Zéèêà -]+")) {
+			prenomError.setText("Le prénom doit contenir uniquement des lettres et des espaces.");
+			prenomError.setVisible(true);
+			valide = false;
 		}
 
-		try {
-			c.setEmail(cEmailField.getText());
-		} catch (FormatException e) {
-			cEmailError.setVisible(true);
-			cEmailError.setText(e.getMessage());
-			hasErrors = true;
+		// Adresse email
+		if (emailField.getText().length() < 3 || emailField.getText().length() > 120) {
+			emailError.setText("L'adresse email doit contenir entre 3 et 120 caractères.");
+			emailError.setVisible(true);
+			valide = false;
+		} else if (!emailField.getText().matches("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")) {
+			emailError.setText("L'adresse email doit être valide.");
+			emailError.setVisible(true);
+			valide = false;
 		}
 
-		if (cMdpField.getText().equals(cConfirmerMdpField.getText())) {
+		// Mot de passe
+		if (mdpField.getText().length() < 5 || mdpField.getText().length() > 120) {
+			mdpError.setText("Le mot de passe doit contenir entre 5 et 120 caractères");
+			mdpError.setVisible(true);
+			valide = false;
+		}
+
+		// Confirmation de mot de passe
+		if (!mdpField.getText().equals(confirmationMdpField.getText())) {
+			confirmationMdpError.setText("Les mots de passe doivent être identiques.");
+			confirmationMdpError.setVisible(true);
+			valide = false;
+		}
+
+		// Tarif
+		RadioButton selectionne = (RadioButton) typeGroup.getSelectedToggle();
+		if (selectionne.getText().equals("Conducteur/trice")) {
 			try {
-				c.setPassword(cMdpField.getText());
-			} catch (FormatException e) {
-				cMdpError.setVisible(true);
-				cMdpError.setText(e.getMessage());
-				hasErrors = true;
+				Double.parseDouble(tarifField.getText());
+			} catch (NumberFormatException e) {
+				tarifError.setText("Le tarif doit être valide (ex : 10.3).");
+				tarifError.setVisible(true);
+				valide = false;
 			}
-		} else {
-			cConfirmerMdpError.setVisible(true);
-			cConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
-			hasErrors = true;
 		}
 
-		try {
-			c.setTarif(cTarifField.getText());
-		} catch (FormatException e) {
-			cTarifError.setVisible(true);
-			cTarifError.setText(e.getMessage());
-			hasErrors = true;
+		if (!majeurCheckbox.isSelected() || !conditionsCheckbox.isSelected()) {
+			conditionsError.setText("Vous devez être majeur(e) et accepter les conditions.");
+			conditionsError.setVisible(true);
+			valide = false;
 		}
 
-		if (!cMajeur.isSelected() || !cConditions.isSelected()) {
-			cConditionsError.setVisible(true);
-			cConditionsError.setText("Vous devez être majeur et accepté les conditions.");
-			hasErrors = true;
-		}
-
-		return hasErrors;
+		return valide;
 	}
 
 	/**
-	 * Vérifie si le passager a saisi tous les champs correctement.
-	 * 
-	 * @return Retourne vrai si possède des erreurs.
+	 * Permet d'afficher ou de masquer le champ tarif
+	 * @param afficher un booléen indiquant l'affichage ou non du champ
 	 */
-	private boolean checkPassager() {
+	private void afficherTarif(boolean afficher) {
+		tarifLabel.setVisible(afficher);
+		tarifField.setVisible(afficher);
+	}
 
-		boolean hasErrors = false;
-
-		hideErrors();
-
-		try {
-			p.setNom(pNomField.getText());
-		} catch (FormatException e) {
-			pNomError.setVisible(true);
-			pNomError.setText(e.getMessage());
-			hasErrors = true;
-		}
-
-		try {
-			p.setPrenom(pPrenomField.getText());
-		} catch (FormatException e) {
-			pPrenomError.setVisible(true);
-			pPrenomError.setText(e.getMessage());
-			hasErrors = true;
-		}
-
-		try {
-			p.setEmail(pEmailField.getText());
-		} catch (FormatException e) {
-			pEmailError.setVisible(true);
-			pEmailError.setText(e.getMessage());
-			hasErrors = true;
-		}
-
-		if (pMdpField.getText().equals(pConfirmerMdpField.getText())) {
-			try {
-				p.setPassword(pMdpField.getText());
-			} catch (FormatException e) {
-				pMdpError.setVisible(true);
-				pMdpError.setText(e.getMessage());
-				hasErrors = true;
-			}
-		} else {
-			pConfirmerMdpError.setVisible(true);
-			pConfirmerMdpError.setText("Les mots de passe doivent être identiques.");
-			hasErrors = true;
-		}
-
-		if (!pMajeur.isSelected() || !pConditions.isSelected()) {
-			pConditionsError.setVisible(true);
-			pConditionsError.setText("Vous devez être majeur et accepté les conditions.");
-			hasErrors = true;
-		}
-
-		return hasErrors;
+	/**
+	 * Masque toutes les erreurs
+	 */
+	private void cacherErreurs() {
+		nomError.setVisible(false);
+		prenomError.setVisible(false);
+		emailError.setVisible(false);
+		mdpError.setVisible(false);
+		confirmationMdpError.setVisible(false);
+		tarifError.setVisible(false);
+		conditionsError.setVisible(false);
 	}
 
 	public Parent creerContenu() {
 
 		// HEADER
-		header.setMinWidth(640);
-		header.setPadding(new Insets(0, 20, 0, 20));
+		headerPane.setMinWidth(640);
+		headerPane.setPadding(new Insets(0, 20, 0, 20));
 
-		header.setPrefHeight(50);
-		header.setStyle("-fx-background-color: #000;");
-		header.setAlignment(Pos.CENTER);
+		headerPane.setPrefHeight(50);
+		headerPane.setStyle("-fx-background-color: #000;");
+		headerPane.setAlignment(Pos.CENTER);
 
 		// Bouton retour
-		backButton.setStyle(
+		retourButton.setStyle(
 				"-fx-background-color: #000; -fx-text-fill: #fff; -fx-border-color: #fff; -fx-border-width: 2;");
-		backButton.setAlignment(Pos.CENTER_LEFT);
+		retourButton.setAlignment(Pos.CENTER_LEFT);
 
 		// Titre
-		title.setStyle("-fx-text-fill: #fff;");
-		title.setAlignment(Pos.CENTER);
-		title.setFont(new Font("Arial", 20));
-		title.setMaxWidth(Double.MAX_VALUE);
-		HBox.setHgrow(title, Priority.ALWAYS);
+		titreLabel.setStyle("-fx-text-fill: #fff;");
+		titreLabel.setAlignment(Pos.CENTER);
+		titreLabel.setFont(new Font("Arial", 20));
+		titreLabel.setMaxWidth(Double.MAX_VALUE);
+		HBox.setHgrow(titreLabel, Priority.ALWAYS);
 
 		// Logo
-		logo.setStyle("-fx-text-fill: #fff;");
-		logo.setAlignment(Pos.CENTER_RIGHT);
+		logoLabel.setStyle("-fx-text-fill: #fff;");
+		logoLabel.setAlignment(Pos.CENTER_RIGHT);
 
-		header.getChildren().addAll(backButton, title, logo);
+		headerPane.getChildren().addAll(retourButton, titreLabel, logoLabel);
 
-		hideErrors();
+		// Affichages des erreurs
+		nomError.setTextFill(Color.RED);
+		prenomError.setTextFill(Color.RED);
+		emailError.setTextFill(Color.RED);
+		mdpError.setTextFill(Color.RED);
+		confirmationMdpError.setTextFill(Color.RED);
+		tarifError.setTextFill(Color.RED);
+		conditionsError.setTextFill(Color.RED);
 
-		// Errors conducteurs
-		cNomError.setTextFill(Color.RED);
-		cPrenomError.setTextFill(Color.RED);
-		cEmailError.setTextFill(Color.RED);
-		cMdpError.setTextFill(Color.RED);
-		cConfirmerMdpError.setTextFill(Color.RED);
-		cTarifError.setTextFill(Color.RED);
-		cConditionsError.setTextFill(Color.RED);
+		cacherErreurs();
+
+		// RadioButtons ; sélectionner du type d'utilisateur
+		typePane.getChildren().addAll(passagerRadio, conducteurRadio);
+		HBox.setMargin(conducteurRadio, new Insets(0, 0, 10, 50));
+		passagerRadio.setToggleGroup(typeGroup);
+		conducteurRadio.setToggleGroup(typeGroup);
+		passagerRadio.setSelected(true);
+
+		// Buttons connexion et suivant
+		connexionButton.setPrefWidth(150);
+		connexionButton.setPrefHeight(50);
+
+		suivantButton.setPrefWidth(150);
+		suivantButton.setPrefHeight(50);
 
 		// Conducteur
-		conducteurPane.add(cNom, 0, 0);
-		conducteurPane.add(cNomField, 0, 1);
-		conducteurPane.add(cNomError, 0, 2);
+		gridPane.add(typeLabel, 0, 0);
+		gridPane.add(typePane, 0, 1, 2, 1);
 
-		conducteurPane.add(cPrenom, 0, 3);
-		conducteurPane.add(cPrenomField, 0, 4);
-		conducteurPane.add(cPrenomError, 0, 5);
+		gridPane.add(nomLabel, 0, 2);
+		gridPane.add(nomField, 0, 3);
+		gridPane.add(nomError, 0, 4);
 
-		conducteurPane.add(cEmail, 0, 6);
-		conducteurPane.add(cEmailField, 0, 7);
-		conducteurPane.add(cEmailError, 0, 8);
+		gridPane.add(prenomLabel, 0, 5);
+		gridPane.add(prenomField, 0, 6);
+		gridPane.add(prenomError, 0, 7);
 
-		conducteurPane.add(cMdp, 1, 0);
-		conducteurPane.add(cMdpField, 1, 1);
-		conducteurPane.add(cMdpError, 1, 2);
+		gridPane.add(emailLabel, 0, 8);
+		gridPane.add(emailField, 0, 9);
+		gridPane.add(emailError, 0, 10);
 
-		conducteurPane.add(cConfirmerMdp, 1, 3);
-		conducteurPane.add(cConfirmerMdpField, 1, 4);
-		conducteurPane.add(cConfirmerMdpError, 1, 5);
+		gridPane.add(mdpLabel, 1, 2);
+		gridPane.add(mdpField, 1, 3);
+		gridPane.add(mdpError, 1, 4);
 
-		conducteurPane.add(cTarif, 1, 6);
-		conducteurPane.add(cTarifField, 1, 7);
-		conducteurPane.add(cTarifError, 1, 8);
+		gridPane.add(confirmationMdpLabel, 1, 5);
+		gridPane.add(confirmationMdpField, 1, 6);
+		gridPane.add(confirmationMdpError, 1, 7);
 
-		conducteurPane.add(cMajeur, 0, 9, 2, 1);
-		conducteurPane.add(cConditions, 0, 10, 2, 1);
-		conducteurPane.add(cConditionsError, 0, 11, 2, 1);
+		gridPane.add(tarifLabel, 1, 8);
+		gridPane.add(tarifField, 1, 9);
+		gridPane.add(tarifError, 1, 10);
 
-		conducteurPane.add(cConnexion, 0, 12);
-		conducteurPane.add(cNext, 1, 12);
+		gridPane.add(majeurCheckbox, 0, 11, 2, 1);
+		gridPane.add(conditionsCheckbox, 0, 12, 2, 1);
+		gridPane.add(conditionsError, 0, 13, 2, 1);
 
-		GridPane.setHalignment(cNext, HPos.RIGHT);
+		gridPane.add(connexionButton, 0, 14);
+		gridPane.add(suivantButton, 1, 14);
 
-		conducteurPane.setPadding(new Insets(20, 30, 10, 30));
-		conducteurPane.setMinWidth(640);
-		conducteurPane.setHgap(30);
-		conducteurPane.setVgap(7);
+		GridPane.setHalignment(suivantButton, HPos.RIGHT);
 
-		GridPane.setHgrow(cNom, Priority.ALWAYS);
-		GridPane.setHgrow(cMdp, Priority.ALWAYS);
+		gridPane.setPadding(new Insets(20, 30, 30, 30));
+		gridPane.setMinWidth(640);
+		gridPane.setHgap(30);
+		gridPane.setVgap(7);
 
-		conducteurTab.setText("Conducteur");
-		conducteurTab.setContent(conducteurPane);
+		GridPane.setHgrow(nomLabel, Priority.ALWAYS);
+		GridPane.setHgrow(mdpLabel, Priority.ALWAYS);
 
-		// Errors passager
-		pNomError.setTextFill(Color.RED);
-		pPrenomError.setTextFill(Color.RED);
-		pEmailError.setTextFill(Color.RED);
-		pMdpError.setTextFill(Color.RED);
-		pConfirmerMdpError.setTextFill(Color.RED);
-		pConditionsError.setTextFill(Color.RED);
-
-		// Passager
-		passagerPane.add(pNom, 0, 0);
-		passagerPane.add(pNomField, 0, 1);
-		passagerPane.add(pNomError, 0, 2);
-
-		passagerPane.add(pPrenom, 0, 3);
-		passagerPane.add(pPrenomField, 0, 4);
-		passagerPane.add(pPrenomError, 0, 5);
-
-		passagerPane.add(pEmail, 0, 6);
-		passagerPane.add(pEmailField, 0, 7);
-		passagerPane.add(pEmailError, 0, 8);
-
-		passagerPane.add(pMdp, 1, 0);
-		passagerPane.add(pMdpField, 1, 1);
-		passagerPane.add(pMdpError, 1, 2);
-
-		passagerPane.add(pConfirmerMdp, 1, 3);
-		passagerPane.add(pConfirmerMdpField, 1, 4);
-		passagerPane.add(pConfirmerMdpError, 1, 5);
-
-		passagerPane.add(pMajeur, 0, 9, 2, 1);
-		passagerPane.add(pConditions, 0, 10, 2, 1);
-		passagerPane.add(pConditionsError, 0, 11, 2, 1);
-
-		passagerPane.add(pConnexion, 0, 12);
-		passagerPane.add(pNext, 1, 12);
-
-		GridPane.setHalignment(pNext, HPos.RIGHT);
-
-		// passagerPane.setGridLinesVisible(true);
-		passagerPane.setPadding(new Insets(20, 30, 30, 30));
-		passagerPane.setMinWidth(640);
-		passagerPane.setHgap(30);
-		passagerPane.setVgap(7);
-
-		GridPane.setHgrow(pNom, Priority.ALWAYS);
-		GridPane.setHgrow(pMdp, Priority.ALWAYS);
-
-		passagerTab.setText("Passager");
-		passagerTab.setContent(passagerPane);
-
-		// Tabs
-		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		tabPane.getTabs().addAll(passagerTab, conducteurTab);
-		tabPane.setMinHeight(300);
+		// Masquer le champ tarif
+		afficherTarif(false);
 
 		root.setMinHeight(480);
 		root.setMinWidth(640);
-		root.setTop(header);
-		root.setCenter(tabPane);
+		root.setTop(headerPane);
+		root.setCenter(gridPane);
 
 		return root;
 	}

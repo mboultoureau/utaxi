@@ -34,7 +34,7 @@ abstract public class Personne {
 		n = n.trim();
 		
 		if (n.length() < 3 || n.length() > 30) {
-			throw new FormatException("Le nom doit contenir entre 3 et 30 caractères");
+			throw new FormatException("Le nom doit contenir entre 3 et 30 caractères.");
 		} else if (!n.matches("[a-zA-Zéèêà -]+")) {
 			throw new FormatException("Le nom doit contenir uniquement des lettres et des espaces.");
 		} else {
@@ -50,7 +50,7 @@ abstract public class Personne {
 		p = p.trim();
 		
 		if (p.length() < 3 || p.length() > 30) {
-			throw new FormatException("Le prénom doit contenir entre 3 et 30 caractères");
+			throw new FormatException("Le prénom doit contenir entre 3 et 30 caractères.");
 		} else if (!p.matches("[a-zA-Zéèêà -]+")) {
 			throw new FormatException("Le prénom doit contenir uniquement des lettres et des espaces.");
 		} else {
@@ -66,7 +66,7 @@ abstract public class Personne {
 		e = e.trim();
 		
 		if (e.length() < 3 || e.length() > 120) {
-			throw new FormatException("Votre adresse email doit contenir entre 3 et 120 caractères");
+			throw new FormatException("L'adresse email doit contenir entre 3 et 120 caractères.");
 		} else if (!e.matches("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")) {
 			throw new FormatException("L'adresse email doit être valide.");
 		} else {
