@@ -6,11 +6,15 @@ import javafx.scene.paint.*;
 import javafx.scene.text.Font;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.geometry.*;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.*;
 import javafx.event.EventHandler;
 import fr.iutlannion.manager.*;
+
+import java.util.Optional;
+
 import fr.iutlannion.core.Window;
 
 /**
@@ -289,52 +293,57 @@ public class PageAdmin extends Stage {
 
         buttonSupprimer.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                label16.setText("");
-                textFieldNom.setText("");
-                textFieldPrenom.setText("");
-                textFieldEmail.setText("");
-                textFieldMotdepasse.setText("");
-                textFieldTarif.setText("");
-                textFieldKmParcourus.setText("");
-                textFieldImmatriculation.setText("");
-                textFieldMarque.setText("");
-                textFieldTypeEssence.setText("");
-                textFieldCouleur.setText("");
-                textFieldType.setText("");
-                buttonSauvegarder.setDisable(true);
-                buttonSupprimer.setDisable(true);
-                buttonAnnuler.setDisable(true);
-                buttonAjouterAdmin.setDisable(false);
-                textFieldTarif.setVisible(false);
-                textFieldKmParcourus.setVisible(false);
-                textFieldImmatriculation.setVisible(false);
-                textFieldMarque.setVisible(false);
-                textFieldTypeEssence.setVisible(false);
-                textFieldCouleur.setVisible(false);
-                textFieldType.setVisible(false);
-                label9.setVisible(false);
-                label10.setVisible(false);
-                label11.setVisible(false);
-                label12.setVisible(false);
-                label13.setVisible(false);
-                label14.setVisible(false);
-                label15.setVisible(false);
-                if (TypeCurrentPersonne.equals("Admin")) {
-                    Utilisateurs.remove(listViewAdmin.getSelectionModel().getSelectedItem());
-                    admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
-                    listViewAdmin.setItems(admins);
-                } else if (TypeCurrentPersonne.equals("Passager")) {
-                    Utilisateurs.remove(listViewPassager.getSelectionModel().getSelectedItem());
-                    passagers.remove(listViewPassager.getSelectionModel().getSelectedItem());
-                    listViewPassager.setItems(passagers);
-                } else if (TypeCurrentPersonne.equals("Conducteur")) {
-                    Utilisateurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
-                    conducteurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
-                    listViewConducteur.setItems(conducteurs);
+                Alert confirmation = new Alert(AlertType.CONFIRMATION);
+                Optional<ButtonType> result = confirmation.showAndWait();
+
+                if (result.get() == ButtonType.OK) {
+                    label16.setText("");
+                    textFieldNom.setText("");
+                    textFieldPrenom.setText("");
+                    textFieldEmail.setText("");
+                    textFieldMotdepasse.setText("");
+                    textFieldTarif.setText("");
+                    textFieldKmParcourus.setText("");
+                    textFieldImmatriculation.setText("");
+                    textFieldMarque.setText("");
+                    textFieldTypeEssence.setText("");
+                    textFieldCouleur.setText("");
+                    textFieldType.setText("");
+                    buttonSauvegarder.setDisable(true);
+                    buttonSupprimer.setDisable(true);
+                    buttonAnnuler.setDisable(true);
+                    buttonAjouterAdmin.setDisable(false);
+                    textFieldTarif.setVisible(false);
+                    textFieldKmParcourus.setVisible(false);
+                    textFieldImmatriculation.setVisible(false);
+                    textFieldMarque.setVisible(false);
+                    textFieldTypeEssence.setVisible(false);
+                    textFieldCouleur.setVisible(false);
+                    textFieldType.setVisible(false);
+                    label9.setVisible(false);
+                    label10.setVisible(false);
+                    label11.setVisible(false);
+                    label12.setVisible(false);
+                    label13.setVisible(false);
+                    label14.setVisible(false);
+                    label15.setVisible(false);
+                    if (TypeCurrentPersonne.equals("Admin")) {
+                        Utilisateurs.remove(listViewAdmin.getSelectionModel().getSelectedItem());
+                        admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
+                        listViewAdmin.setItems(admins);
+                    } else if (TypeCurrentPersonne.equals("Passager")) {
+                        Utilisateurs.remove(listViewPassager.getSelectionModel().getSelectedItem());
+                        passagers.remove(listViewPassager.getSelectionModel().getSelectedItem());
+                        listViewPassager.setItems(passagers);
+                    } else if (TypeCurrentPersonne.equals("Conducteur")) {
+                        Utilisateurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
+                        conducteurs.remove(listViewConducteur.getSelectionModel().getSelectedItem());
+                        listViewConducteur.setItems(conducteurs);
+                    }
+                    listViewAdmin.getSelectionModel().clearSelection();
+                    listViewPassager.getSelectionModel().clearSelection();
+                    listViewConducteur.getSelectionModel().clearSelection();
                 }
-                listViewAdmin.getSelectionModel().clearSelection();
-                listViewPassager.getSelectionModel().clearSelection();
-                listViewConducteur.getSelectionModel().clearSelection();
             }
         }));
 
