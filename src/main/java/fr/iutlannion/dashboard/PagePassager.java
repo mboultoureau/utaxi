@@ -2,6 +2,7 @@ package fr.iutlannion.dashboard;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.*;
@@ -44,7 +45,6 @@ public class PagePassager extends Stage {
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
 	private Marker markerCurrentPosition = new Marker(user.getMarker().getCoords());
-	// Mettre la location du passager courant
 	private Marker markerLocationWant = new Marker(new LatLng(0, 0));
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
 	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
@@ -60,6 +60,7 @@ public class PagePassager extends Stage {
 	private Label ChoisirCoordLabel = new Label("Choisissez où vous voulez aller :");
 	private Label infoSituation = new Label("");
 	private Button Annuler = new Button("Annuler");
+	private Button moveTaxi = new Button("Déplacer les Utaxi");
 	private Button commanderUtaxiButton = new Button("Commander le Utaxi");
 	// Geocoding pour récuperer l'adresse en lat/long avec une API
 	private AdresseView adresseView = new AdresseView();
@@ -92,10 +93,23 @@ public class PagePassager extends Stage {
 			Annuler.setDisable(true);
 		});
 
+		moveTaxi.setOnMouseClicked(e -> {
+			double randomLat;
+			double randomLong;
+			for (Conducteur c : Utilisateurs.getListConducteur()) {
+				randomLat = ThreadLocalRandom.current().nextDouble(-0.001, 0.001);
+				randomLong = ThreadLocalRandom.current().nextDouble(-0.001, 0.001);
+				map.moveMarker(c.getMarker(), new LatLng(c.getMarker().getCoords().getLatitude() + randomLat,
+						c.getMarker().getCoords().getLongitude() + randomLong));
+			}
+
+		});
+
 		commanderUtaxiButton.setOnAction(e -> {
 
 			map.disableRouting();
 			Annuler.setDisable(true);
+			moveTaxi.setDisable(true);
 			Adresse adresse = adresseView.getAdresse();
 			map.moveMarker(markerLocationWant, adresse.getCoords());
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
@@ -143,6 +157,7 @@ public class PagePassager extends Stage {
 						listViewConducteur.setFocusTraversable(true);
 						adresseView.enable();
 						map.moveMarker(markerLocationWant, new LatLng(0, 0));
+						moveTaxi.setDisable(false);
 					});
 
 				}
@@ -197,6 +212,7 @@ public class PagePassager extends Stage {
 		leftSide.add(adresseView, 0, 3);
 		leftSide.add(Annuler, 0, 4);
 		leftSide.add(commanderUtaxiButton, 0, 4);
+		leftSide.add(moveTaxi, 0, 5);
 		leftSide.add(infoSituation, 0, 6, 1, 1);
 		leftSide.setMinWidth(300);
 		infoSituation.setStyle("-fx-font: 16 arial;");
