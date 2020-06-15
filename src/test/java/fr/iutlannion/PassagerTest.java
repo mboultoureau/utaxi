@@ -1,5 +1,6 @@
 package fr.iutlannion;
 
+import fr.iutlannion.map.LatLng;
 import org.junit.Test;
 
 import fr.iutlannion.manager.Passager;
@@ -11,8 +12,7 @@ public class PassagerTest extends TestCase {
 	private Passager p;
 
 	public PassagerTest() {
-		p = new Passager("Nom", "Prenom", "email@mail.com", "password", 47.219860, -1.545304);
-
+		p = new Passager("Nom", "Prenom", "email@mail.com", "password", new LatLng(47.219860, -1.545304), null);
 	}
 
 	// NOM
