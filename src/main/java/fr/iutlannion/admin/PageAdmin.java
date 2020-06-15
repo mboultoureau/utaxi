@@ -50,8 +50,7 @@ public class PageAdmin extends Stage {
     private ObservableList<Admin> admins = FXCollections.observableArrayList(Utilisateurs.getListAdmin());
     private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
 
-    private ObservableList<Passager> passagers = FXCollections
-            .observableArrayList(Utilisateurs.getListPassagers());
+    private ObservableList<Passager> passagers = FXCollections.observableArrayList(Utilisateurs.getListPassagers());
     private ListView<Passager> listViewPassager = new ListView<Passager>(passagers);
 
     private ObservableList<Conducteur> conducteurs = FXCollections
@@ -61,6 +60,7 @@ public class PageAdmin extends Stage {
     private Button buttonSauvegarder = new Button("Sauvegarder");
     private Button buttonSupprimer = new Button("Supprimer");
     private Button buttonAjouterAdmin = new Button("Ajouter Admin");
+    private Button buttonAnnuler = new Button("Annuler");
     private TextField textFieldNom = new TextField();
     private TextField textFieldPrenom = new TextField();
     private TextField textFieldEmail = new TextField();
@@ -84,6 +84,7 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
+                buttonAnnuler.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -113,6 +114,7 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
+                buttonAnnuler.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
                 textFieldImmatriculation.setVisible(false);
@@ -142,6 +144,7 @@ public class PageAdmin extends Stage {
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
+                buttonAnnuler.setDisable(false);
                 textFieldTarif.setVisible(true);
                 textFieldKmParcourus.setVisible(true);
                 textFieldImmatriculation.setVisible(true);
@@ -181,6 +184,7 @@ public class PageAdmin extends Stage {
             public void handle(MouseEvent event) {
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
+                buttonAnnuler.setDisable(true);
                 buttonAjouterAdmin.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
@@ -299,6 +303,7 @@ public class PageAdmin extends Stage {
                 textFieldType.setText("");
                 buttonSauvegarder.setDisable(true);
                 buttonSupprimer.setDisable(true);
+                buttonAnnuler.setDisable(true);
                 buttonAjouterAdmin.setDisable(false);
                 textFieldTarif.setVisible(false);
                 textFieldKmParcourus.setVisible(false);
@@ -347,6 +352,44 @@ public class PageAdmin extends Stage {
                     listViewAdmin.getItems().add(newAdmin);
                     listViewAdmin.getSelectionModel().select(newAdmin);
                 }
+            }
+        }));
+
+        buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                buttonSauvegarder.setDisable(true);
+                buttonSupprimer.setDisable(true);
+                buttonAnnuler.setDisable(true);
+                buttonAjouterAdmin.setDisable(false);
+                textFieldTarif.setVisible(false);
+                textFieldKmParcourus.setVisible(false);
+                textFieldImmatriculation.setVisible(false);
+                textFieldMarque.setVisible(false);
+                textFieldTypeEssence.setVisible(false);
+                textFieldCouleur.setVisible(false);
+                textFieldType.setVisible(false);
+                label9.setVisible(false);
+                label10.setVisible(false);
+                label11.setVisible(false);
+                label12.setVisible(false);
+                label13.setVisible(false);
+                label14.setVisible(false);
+                label15.setVisible(false);
+                listViewAdmin.getSelectionModel().clearSelection();
+                listViewPassager.getSelectionModel().clearSelection();
+                listViewConducteur.getSelectionModel().clearSelection();
+                textFieldNom.setText("");
+                textFieldPrenom.setText("");
+                textFieldEmail.setText("");
+                textFieldMotdepasse.setText("");
+                textFieldTarif.setText("");
+                textFieldKmParcourus.setText("");
+                textFieldImmatriculation.setText("");
+                textFieldMarque.setText("");
+                textFieldTypeEssence.setText("");
+                textFieldCouleur.setText("");
+                textFieldType.setText("");
+                label16.setText("");
             }
         }));
 
@@ -400,6 +443,7 @@ public class PageAdmin extends Stage {
         listViewConducteur.setMaxHeight(380);
         buttonSauvegarder.setDisable(true);
         buttonSupprimer.setDisable(true);
+        buttonAnnuler.setDisable(true);
         textFieldTarif.setVisible(false);
         textFieldKmParcourus.setVisible(false);
         textFieldImmatriculation.setVisible(false);
@@ -448,11 +492,13 @@ public class PageAdmin extends Stage {
         gridPane.add(buttonSauvegarder, 2, 11);
         gridPane.add(buttonSupprimer, 2, 11);
         gridPane.add(buttonAjouterAdmin, 2, 12);
+        gridPane.add(buttonAnnuler, 2, 12);
 
         GridPane.setHalignment(label2, HPos.CENTER);
         GridPane.setHalignment(label3, HPos.CENTER);
         GridPane.setHalignment(label4, HPos.CENTER);
         GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
+        GridPane.setHalignment(buttonAnnuler, HPos.LEFT);
         GridPane.setHalignment(buttonSupprimer, HPos.RIGHT);
         GridPane.setHalignment(buttonAjouterAdmin, HPos.RIGHT);
 
