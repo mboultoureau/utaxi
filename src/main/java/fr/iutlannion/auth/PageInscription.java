@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 /**
  * PageInscription contient la première phase de l'inscription avec le
  * renseignement des informations de connexion.
