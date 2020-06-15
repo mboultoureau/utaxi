@@ -3,7 +3,7 @@ package fr.iutlannion.auth;
 import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Utilisateurs;
 import fr.iutlannion.manager.Voiture;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -86,7 +86,7 @@ public class PageEnregistrementVoiture extends Stage {
 		buttonSuivant.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if (!checkVoiture()){
-					Conducteur c = (Conducteur) Utilisateur.getInstance().getPersonne();
+					Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 					c.modifierInfoVoiture(Double.parseDouble(ftarif.getText()), Double.parseDouble(fkmParcourus.getText()), fimat.getText(), marque.getText(), ftEss.getValue(), fcouleur.getText(), ftype.getText());
 					Window.getInstance().gotoPage("horaires");
 				}
