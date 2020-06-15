@@ -2,18 +2,14 @@ package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Utilisateur;
-import fr.iutlannion.manager.Personne;
+import fr.iutlannion.manager.Utilisateurs;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -21,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.paint.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
@@ -46,7 +41,7 @@ public class PageReview extends Stage {
     public PageReview() {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Conducteur c = (Conducteur) Utilisateur.getInstance().getInstance().getPersonne();
+                Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
                 c.ajouterNote(sliderNote.getValue());
                 Window.getInstance().gotoPage("menuPrincipal");
             }
@@ -106,7 +101,7 @@ public class PageReview extends Stage {
         gridPane.setHgap(10);
         GridPane.setHgrow(label1, Priority.ALWAYS);
 
-        label1.setText("Note et pourboire pour " + Utilisateur.getInstance().getPersonne().getNom());
+        label1.setText("Note et pourboire pour " + Utilisateurs.getPersonneCourante().getNom());
         label1.setFont(new Font("Arial", 16));
 
         sliderNote.setMin(0);

@@ -1,41 +1,62 @@
 package fr.iutlannion.map;
 
+/**
+ * Représente un marqueur
+ */
 public class Marker {
 
-    private double x;
-    private double y;
+    private LatLng coords;
     private boolean simple = true;
     private Icon icon = null;
 
-    public Marker(double x, double y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Créé un marqueur
+     * @param coords Coordonnées du marqueur
+     */
+    public Marker(LatLng coords) {
+        this.coords = coords;
     }
 
-    public double getX() {
-        return x;
+    /**
+     * Retourne les coordonnées GPS du marqueur
+     * @return Coordonnées GPS du marqueur
+     */
+    public LatLng getCoords() {
+        return this.coords;
     }
 
-    public double getY() {
-        return y;
-    }
-
+    /**
+     * Renvoie un booléan avec sa simplicité (avec icone ou non)
+     * Utilisé en interne pour MapView
+     * @return Simplicité du marqueur
+     */
     public boolean isSimple() {
         return simple;
     }
 
+    /**
+     * Définit l'icone du marqueur
+     * @param icon Icone du marqueur
+     */
     public void setIcon(Icon icon) {
         this.icon = icon;
         simple = false;
     }
 
+    /**
+     * Retourne l'icone du marqueur
+     * @return Icone du marqueur
+     */
     public Icon getIcon() {
         return this.icon;
     }
 
-    public void setPosition(double x, double y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Définit la position du marqueur
+     * @param coords Coordonnées GPS du marqueur
+     */
+    public void setPosition(LatLng coords) {
+        this.coords = coords;
     }
 
 }

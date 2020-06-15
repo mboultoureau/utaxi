@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
+import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.Marker;
-import fr.iutlannion.manager.Conducteurs;
 
 public class Conducteur extends Personne {
 
@@ -18,7 +18,7 @@ public class Conducteur extends Personne {
     private Marker marker;
 
     public Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus,
-            Voiture voiture, double x, double y) {
+                      Voiture voiture, LatLng coords) {
 
         super(nom, prenom, email, motDePasse);
 
@@ -26,7 +26,7 @@ public class Conducteur extends Personne {
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
         this.voiture = voiture;
-        this.marker = new Marker(x, y);
+        this.marker = new Marker(coords);
     }
 
     public Conducteur() {

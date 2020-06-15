@@ -1,14 +1,20 @@
 package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.Utilisateurs;
+import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -26,8 +32,13 @@ public class PageConducteur extends Stage {
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
 	private Label title = new Label(
-			"Page Conducteur - Bienvenue " + Utilisateur.getInstance().getPersonne().getPrenom());
-	private Label logo = new Label("UTaxi");
+			"Page Conducteur - Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
+	private final ObservableList<String> options = FXCollections.observableArrayList(
+			"Tableau de bord",
+			"Édition de profil",
+			"Édition de voiture"
+	);
+	private final ComboBox selectionPage = new ComboBox(options);
 
 	// Left Side
 	private GridPane leftSide = new GridPane();
@@ -44,6 +55,22 @@ public class PageConducteur extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
+
+		selectionPage.setValue("Tableau de bord");
+
+		selectionPage.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				switch (newValue.toString()) {
+					case "Édition de profil":
+						Window.getInstance().gotoPage("editionProfil");
+						break;
+					case "Édition de voiture":
+						Window.getInstance().gotoPage("editionVoiture");
+						break;
+				}
+			}
+		});
 	}
 
 	public Parent creerContenu() {
@@ -69,17 +96,16 @@ public class PageConducteur extends Stage {
 		HBox.setHgrow(title, Priority.ALWAYS);
 
 		// Logo
-		logo.setStyle("-fx-text-fill: #fff;");
-		logo.setAlignment(Pos.CENTER_RIGHT);
+		selectionPage.setStyle("-fx-text-fill: #fff;");
 
-		header.getChildren().addAll(backButton, title, logo);
+		header.getChildren().addAll(backButton, title, selectionPage);
 
 		// Left Side
 		leftSide.add(soon, 0, 0);
 		leftSide.setMinWidth(300);
 
 		// Map
-		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 

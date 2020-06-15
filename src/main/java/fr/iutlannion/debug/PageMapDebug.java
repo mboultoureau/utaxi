@@ -1,10 +1,7 @@
 package fr.iutlannion.debug;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.map.Icon;
-import fr.iutlannion.map.Marker;
-import fr.iutlannion.map.MapOptions;
-import fr.iutlannion.map.MapView;
+import fr.iutlannion.map.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -50,22 +47,39 @@ public class PageMapDebug extends Stage {
 
     // Marqueurs
     private Button deleteButton = new Button("Supprimer le 3ème marqueur");
-    private Marker marker1 = new Marker(48.833, 2.333);
-    private Marker marker2 = new Marker(49.833, 2.333);
-    private Marker marker3 = new Marker(50.833, 2.333);
+    private Marker marker1 = new Marker(new LatLng(48.833, 2.333));
+    private Marker marker2 = new Marker(new LatLng(49.833, 2.333));
+    private Marker marker3 = new Marker(new LatLng(50.833, 2.333));
 
     private Button moveMarkerButton = new Button("Bouger le marqueur");
     private Button disableRoutingButton = new Button("Désactiver le trajet");
 
     private Icon icon = new Icon("img/taxi.png", 40, 20);
 
+    // Adresse Search
+    private AdresseView adresseView = new AdresseView();
+
     public PageMapDebug() {
         backButton.setOnAction(e -> Window.getInstance().gotoPage("debug"));
-        moveButton.setOnAction(e -> map.setView(Double.valueOf(xField.getText()), Double.valueOf(yField.getText()),
-                Integer.valueOf(zoomField.getText())));
+        moveButton.setOnAction(e -> {
+            LatLng newCoords = new LatLng(Double.valueOf(xField.getText()), Double.valueOf(yField.getText()));
+            map.setView(newCoords, Integer.valueOf(zoomField.getText()));
+        });
         deleteButton.setOnAction(e -> map.removeMarker(marker3));
-        moveMarkerButton.setOnAction(e -> map.moveMarker(marker1, 51.833, 2.333));
+        moveMarkerButton.setOnAction(e -> map.moveMarker(marker1, new LatLng(51.833, 2.333)));
         disableRoutingButton.setOnAction(e -> map.disableRouting());
+
+        adresseView.getOKButton().setOnAction(e -> confirmAdresse());
+    }
+
+    private void confirmAdresse() {
+        Adresse adresse = adresseView.getAdresse();
+        if (adresse != null) {
+
+            adresseView.disable();
+            Marker m = new Marker(adresse.getCoords());
+            map.addMarker(m);
+        }
     }
 
     public Parent creerContenu() {
@@ -105,14 +119,14 @@ public class PageMapDebug extends Stage {
         moveButton.setPrefWidth(300);
 
         // Left Side
-        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton,
-                disableRoutingButton);
+        leftSide.getChildren().addAll(moveLabel, move, moveButton, deleteButton, moveMarkerButton, disableRoutingButton,
+                adresseView);
         leftScroll.setContent(leftSide);
         leftScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Map
-        mapOptions.setCoordinates(47.2186371, -1.5541362);
+        mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
         mapOptions.setZoom(13);
         map = new MapView(mapOptions);
         map.addMarker(marker1);

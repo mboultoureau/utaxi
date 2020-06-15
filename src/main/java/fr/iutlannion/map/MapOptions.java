@@ -1,51 +1,72 @@
 package fr.iutlannion.map;
 
+/**
+ * Contient les options initiales de la carte
+ */
 public class MapOptions {
 
-    private double x;
-    private double y;
+    private LatLng coords;
     private int zoom;
 
-    private static final double defaultX = 48.833;
-    private static final double defaultY = 2.333;
+    private static final LatLng defaultCoordonnees = new LatLng(48.833, 2.333);
     private static final int defaultZoom = 7;
 
 
+    /**
+     * Définit les options initiales de la carte
+     */
     public MapOptions() {
-        x = defaultX;
-        y = defaultY;
+        coords = defaultCoordonnees;
         zoom = defaultZoom;
     }
 
-    public MapOptions(double x, double y, int zoom) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Définit les options initiales de la carte
+     * @param coords Les coordonnées initiales
+     * @param zoom Le zoom initial
+     */
+    public MapOptions(LatLng coords, int zoom) {
+        this.coords = coords;
         this.zoom = zoom;
     }
 
-    public MapOptions(double x, double y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Définit les options initiales de la carte
+     * @param coords Coordonnées initiales
+     */
+    public MapOptions(LatLng coords) {
+        this.coords = coords;
         this.zoom = defaultZoom;
     }
 
-    public void setCoordinates(double x, double y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Définit les coordonnées initiales de la carte
+     * @param coords Coordonnées initiales de la carte
+     */
+    public void setCoordinates(LatLng coords) {
+        this.coords = coords;
     }
 
+    /**
+     * Définit le zoom initial de la carte
+     * @param zoom Zoom initial de la carte
+     */
     public void setZoom(int zoom) {
         this.zoom = zoom;
     }
 
-    public double getX() {
-        return x;
+    /**
+     * Retourne les coordonnées initiales de la carte
+     * @return Coordonnées initiales de la carte
+     */
+    public LatLng getCoords() {
+        return this.coords;
     }
 
-    public double getY() {
-        return y;
-    }
-
+    /**
+     * Retourne le zoom initial de la carte
+     * @return Zoom initial de la carte
+     */
     public int getZoom() {
         return zoom;
     }

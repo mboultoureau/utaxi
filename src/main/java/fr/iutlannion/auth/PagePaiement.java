@@ -1,9 +1,11 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.CarteBancaire;
+import fr.iutlannion.manager.Passager;
+import fr.iutlannion.manager.Utilisateurs;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -12,15 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.DrawMode;
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Font;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 public class PagePaiement extends Stage {
@@ -73,12 +69,19 @@ public class PagePaiement extends Stage {
 	private String cvcText = "";
 
 	public PagePaiement() {
+		Window.getInstance().setMinWidth(700);
+
 		// Événements
 		backButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
 
 		nextButton.setOnAction(e -> {
 			if (numText.matches("^[0-9]{0,16}$") && expirationText.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")
 					&& nameText.matches("^[a-zA-Zéèëàäï ]{3,100}$") && cvcText.matches("^[0-9]{3}$")) {
+				CarteBancaire cb = new CarteBancaire(numText, expirationText, cvcText, nameText);
+				Passager p = (Passager) Utilisateurs.getPersonneCourante();
+				p.setCb(cb);
+				Utilisateurs.setPersonneCourante(p);
+				Utilisateurs.add(p);
 				Window.getInstance().gotoPage("passager");
 			} else {
 				nameError.setVisible(true);

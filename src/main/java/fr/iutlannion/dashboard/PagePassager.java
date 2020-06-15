@@ -4,17 +4,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.manager.Conducteur;
-import fr.iutlannion.manager.Conducteurs;
-import fr.iutlannion.manager.Utilisateur;
+import fr.iutlannion.manager.*;
+import fr.iutlannion.map.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import fr.iutlannion.map.MapOptions;
-import fr.iutlannion.map.MapView;
-import fr.iutlannion.map.Marker;
-import fr.iutlannion.map.Icon;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -35,10 +29,12 @@ public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
 
+	Passager user = (Passager) Utilisateurs.getPersonneCourante();
+
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label("Page Passager - Bienvenue " + Utilisateur.getInstance().getPersonne().getPrenom());
+	private Label title = new Label("Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
 	private Label logo = new Label("UTaxi");
 
 	// Left Side
@@ -47,23 +43,26 @@ public class PagePassager extends Stage {
 	// Right Side
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
-	private Marker markerCurrentPosition = new Marker(47.211720, -1.560180);
+	private Marker markerCurrentPosition = new Marker(user.getMarker().getCoords());
 	// Mettre la location du passager courant
-	private Marker markerLocationWant = new Marker(47.228752, -1.541096);
+	private Marker markerLocationWant = new Marker(new LatLng(0, 0));
 	private Icon icon = new Icon("img/taxi.png", 40, 20);
 	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
 
+	// https://github.com/pointhi/leaflet-color-markers
+	private Icon iconHome = new Icon("img/iconHome.png", 25, 41, 12, 41, 1, -34);
+
 	private ObservableList<Conducteur> conducteurs = FXCollections
-			.observableArrayList(Conducteurs.getInstance().getListConducteur());
+			.observableArrayList(Utilisateurs.getListConducteur());
 	private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
 	private Label ChoisirUtaxiLabel = new Label("Choisissez un Utaxi :");
 	private Label ChoisirCoordLabel = new Label("Choisissez où vous voulez aller :");
 	private Label infoSituation = new Label("");
+	private Button Annuler = new Button("Annuler");
 	private Button commanderUtaxiButton = new Button("Commander le Utaxi");
-	// Besoin de Geocoding pour récuperer l'adresse en lat/long
-	private TextField xField = new TextField("47.228752");
-	private TextField yField = new TextField("-1.541096");
+	// Geocoding pour récuperer l'adresse en lat/long avec une API
+	private AdresseView adresseView = new AdresseView();
 
 	public PagePassager() {
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -75,7 +74,7 @@ public class PagePassager extends Stage {
 		listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+				for (Conducteur c : Utilisateurs.getListConducteur()) {
 					c.getMarker().setIcon(icon);
 				}
 				listViewConducteur.getSelectionModel().getSelectedItem().getMarker().setIcon(iconSelected);
@@ -83,24 +82,83 @@ public class PagePassager extends Stage {
 			}
 		});
 
+		adresseView.getOKButton().setOnAction(e -> confirmAdresse());
+
+		Annuler.setOnMouseClicked(e -> {
+			Adresse adresse = adresseView.getAdresse();
+			adresseView.enable();
+			map.moveMarker(markerLocationWant, new LatLng(0, 0));
+			commanderUtaxiButton.setDisable(true);
+			Annuler.setDisable(true);
+		});
+
 		commanderUtaxiButton.setOnAction(e -> {
 
 			map.disableRouting();
-			map.moveMarker(markerLocationWant, Double.parseDouble(xField.getText()),
-					Double.parseDouble(yField.getText()));
+			Annuler.setDisable(true);
+			Adresse adresse = adresseView.getAdresse();
+			map.moveMarker(markerLocationWant, adresse.getCoords());
 			map.traceRoute(markerCurrentPosition, markerLocationWant);
 			infoSituation.setText("Le Utaxi viens vous chercher...");
 			commanderUtaxiButton.setDisable(true);
+			listViewConducteur.setMouseTransparent(true);
+			listViewConducteur.setFocusTraversable(false);
 
 			Timer myTimer = new Timer();
 			myTimer.schedule(new TimerTask() {
 				@Override
 				public void run() {
-					Platform.runLater(() -> infoSituation.setText("Votre taxi est arrivé"));
+					Platform.runLater(() -> {
+						infoSituation.setText("Votre Utaxi est arrivé, vous pouvez monter");
+						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+								user.getMarker().getCoords());
+					});
+
 				}
-			}, 4000);
+			}, 8000);
+
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> {
+						infoSituation.setText("Trajet en cours...");
+
+					});
+
+				}
+			}, 16000);
+
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> {
+						infoSituation.setText("Arrivé à destination !");
+						map.disableRouting();
+						Adresse adresse = adresseView.getAdresse();
+						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+								adresse.getCoords());
+						map.moveMarker(markerCurrentPosition, adresse.getCoords());
+						user.getMarker().setPosition(adresse.getCoords());
+						listViewConducteur.setMouseTransparent(false);
+						listViewConducteur.setFocusTraversable(true);
+						adresseView.enable();
+						map.moveMarker(markerLocationWant, new LatLng(0, 0));
+					});
+
+				}
+			}, 30000);
 
 		});
+	}
+
+	private void confirmAdresse() {
+		Adresse adresse = adresseView.getAdresse();
+		if (adresse != null) {
+			adresseView.disable();
+			map.moveMarker(markerLocationWant, adresse.getCoords());
+			commanderUtaxiButton.setDisable(false);
+			Annuler.setDisable(false);
+		}
 	}
 
 	public Parent creerContenu() {
@@ -136,10 +194,10 @@ public class PagePassager extends Stage {
 		leftSide.add(ChoisirUtaxiLabel, 0, 0);
 		leftSide.add(listViewConducteur, 0, 1);
 		leftSide.add(ChoisirCoordLabel, 0, 2);
-		leftSide.add(xField, 0, 3);
-		leftSide.add(yField, 0, 3);
+		leftSide.add(adresseView, 0, 3);
+		leftSide.add(Annuler, 0, 4);
 		leftSide.add(commanderUtaxiButton, 0, 4);
-		leftSide.add(infoSituation, 0, 5);
+		leftSide.add(infoSituation, 0, 6, 1, 1);
 		leftSide.setMinWidth(300);
 		infoSituation.setStyle("-fx-font: 16 arial;");
 		ChoisirUtaxiLabel.setStyle("-fx-font: 24 arial;");
@@ -149,23 +207,25 @@ public class PagePassager extends Stage {
 
 		listViewConducteur.setMinWidth(300);
 		listViewConducteur.setMaxHeight(250);
-		xField.setMaxWidth(160);
-		yField.setMaxWidth(160);
-		GridPane.setHalignment(yField, HPos.RIGHT);
 		GridPane.setHalignment(commanderUtaxiButton, HPos.CENTER);
+		GridPane.setHalignment(infoSituation, HPos.CENTER);
+		commanderUtaxiButton.setDisable(true);
+		Annuler.setDisable(true);
 
 		// Map
-		mapOptions.setCoordinates(47.2186371, -1.5541362);
+		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 
-		for (Conducteur c : Conducteurs.getInstance().getListConducteur()) {
+		for (Conducteur c : Utilisateurs.getListConducteur()) {
 			map.addMarker(c.getMarker());
 			c.getMarker().setIcon(icon);
 		}
 
 		map.addMarker(markerCurrentPosition);
 		map.addMarker(markerLocationWant);
+		markerCurrentPosition.setIcon(iconHome);
+		listViewConducteur.getSelectionModel().select(0);
 
 		mapOptions.setZoom(13);
 
