@@ -95,9 +95,6 @@ public class PageConducteur extends Stage {
 		title.setMaxWidth(Double.MAX_VALUE);
 		HBox.setHgrow(title, Priority.ALWAYS);
 
-		// Logo
-		selectionPage.setStyle("-fx-text-fill: #fff;");
-
 		header.getChildren().addAll(backButton, title, selectionPage);
 
 		// Left Side

@@ -8,6 +8,8 @@ import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.*;
 import fr.iutlannion.map.*;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -16,6 +18,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -36,7 +39,11 @@ public class PagePassager extends Stage {
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
 	private Label title = new Label("Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
-	private Label logo = new Label("UTaxi");
+	private final ObservableList<String> options = FXCollections.observableArrayList(
+			"Tableau de bord",
+			"Édition de profil"
+	);
+	private final ComboBox selectionPage = new ComboBox(options);
 
 	// Left Side
 	private GridPane leftSide = new GridPane();
@@ -71,6 +78,19 @@ public class PagePassager extends Stage {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
+
+		selectionPage.setValue("Tableau de bord");
+
+		selectionPage.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				switch (newValue.toString()) {
+					case "Édition de profil":
+						Window.getInstance().gotoPage("editionProfil");
+						break;
+				}
+			}
+		});
 
 		listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -198,11 +218,7 @@ public class PagePassager extends Stage {
 		title.setMaxWidth(Double.MAX_VALUE);
 		HBox.setHgrow(title, Priority.ALWAYS);
 
-		// Logo
-		logo.setStyle("-fx-text-fill: #fff;");
-		logo.setAlignment(Pos.CENTER_RIGHT);
-
-		header.getChildren().addAll(backButton, title, logo);
+		header.getChildren().addAll(backButton, title, selectionPage);
 
 		// Left Side
 		leftSide.setVgap(15);
