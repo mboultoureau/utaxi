@@ -1,9 +1,7 @@
 package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
-import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.manager.*;
-import fr.iutlannion.map.LatLng;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
