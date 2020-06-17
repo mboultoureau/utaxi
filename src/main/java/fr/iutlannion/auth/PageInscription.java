@@ -313,6 +313,25 @@ public class PageInscription extends Stage {
 
 		GridPane.setHgrow(nomLabel, Priority.ALWAYS);
 		GridPane.setHgrow(mdpLabel, Priority.ALWAYS);
+		
+		// Autocomplétion en cas de retour
+		if (Utilisateurs.getPersonneCourante() != null) {
+			if (Utilisateurs.getPersonneCourante() instanceof Passager || Utilisateurs.getPersonneCourante() instanceof Conducteur) {
+				Personne p = Utilisateurs.getPersonneCourante();
+				nomField.setText(p.getNom());
+				prenomField.setText(p.getPrenom());
+				emailField.setText(p.getEmail());
+				mdpField.setText(p.getMotDePasse());
+				confirmationMdpField.setText(p.getMotDePasse());
+				conditionsCheckbox.setSelected(true);
+				majeurCheckbox.setSelected(true);
+			}
+
+			if (Utilisateurs.getPersonneCourante() instanceof Conducteur) {
+				Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
+				tarifField.setText(String.valueOf(c.getTarif()));
+			}
+		}
 
 		// Masquer le champ tarif
 		afficherTarif(false);
