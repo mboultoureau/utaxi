@@ -126,6 +126,12 @@ public class PageInscription extends Stage {
 		boolean valide = true;
 		cacherErreurs();
 
+		// On trime tous les champs
+		nomField.setText(nomField.getText().trim());
+		prenomField.setText(prenomField.getText().trim());
+		emailField.setText(emailField.getText().trim());
+		tarifField.setText(tarifField.getText().trim());
+
 		// Nom
 		if (nomField.getText().length() < 3 || nomField.getText().length() > 30) {
 			nomError.setText("Le nom doit contenir entre 3 et 30 caractères.");
@@ -149,12 +155,16 @@ public class PageInscription extends Stage {
 		}
 
 		// Adresse email
-		if (emailField.getText().length() < 3 || emailField.getText().length() > 120) {
+		if (emailField.getText().trim().length() < 3 || emailField.getText().trim().length() > 120) {
 			emailError.setText("L'adresse email doit contenir entre 3 et 120 caractères.");
 			emailError.setVisible(true);
 			valide = false;
-		} else if (!emailField.getText().matches("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")) {
+		} else if (!emailField.getText().trim().matches("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")) {
 			emailError.setText("L'adresse email doit être valide.");
+			emailError.setVisible(true);
+			valide = false;
+		} else if (Utilisateurs.emailUtilise(emailField.getText())) {
+			emailError.setText("Cette adresse email est déjà utilisé.");
 			emailError.setVisible(true);
 			valide = false;
 		}

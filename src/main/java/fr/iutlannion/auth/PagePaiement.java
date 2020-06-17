@@ -74,6 +74,8 @@ public class PagePaiement extends Stage {
 		// Événements
 		backButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
 
+		previousButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
+
 		nextButton.setOnAction(e -> {
 			if (numText.matches("^[0-9]{0,16}$") && expirationText.matches("^(0[0-9]|1[0-2])\\/[2-3][0-9]$")
 					&& nameText.matches("^[a-zA-Zéèëàäï ]{3,100}$") && cvcText.matches("^[0-9]{3}$")) {

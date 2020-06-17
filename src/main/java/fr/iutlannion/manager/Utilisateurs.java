@@ -48,6 +48,8 @@ public final class Utilisateurs {
     public static void add(Personne personne) {
         if (personnes.contains(personne)) {
             System.out.println("Cette personne est déjà présent.");
+        } else if (Utilisateurs.emailUtilise(personne.getEmail())) {
+            System.out.println("Cette adresse email est déjà utilisé.");
         } else {
             personnes.add(personne);
         }
@@ -138,5 +140,24 @@ public final class Utilisateurs {
         }
 
         return passagers;
+    }
+
+    /**
+     * Vérifie si l'adresse email est déjà utilisé
+     * @return retourne vrai si l'adresse email est déjà utilisé
+     */
+    public static boolean emailUtilise(String email) {
+        boolean utilise = false;
+        int index = 0;
+
+        while (!utilise && index < personnes.size()) {
+            if (personnes.get(index).getEmail().equals(email)) {
+                utilise = true;
+            } else {
+                index++;
+            }
+        }
+
+        return utilise;
     }
 }
