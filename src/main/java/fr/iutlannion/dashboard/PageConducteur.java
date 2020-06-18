@@ -1,6 +1,7 @@
 package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Utilisateurs;
 import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.MapOptions;
@@ -25,7 +26,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PageConducteur extends Stage {
-
+	private Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	private BorderPane root = new BorderPane();
 
 	// Header
@@ -43,13 +44,30 @@ public class PageConducteur extends Stage {
 	// Left Side
 	private GridPane leftSide = new GridPane();
 	private Label soon = new Label("Prochainement");
+	private Button actif = new Button("Inactif"); 
 
 	// Right Side
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
 
+	public void changementStatus(){
+		if (actif.getText()=="Inactif"){
+			actif.setText("Actif");
+			c.actif=false;
+		}
+		if (actif.getText()=="Actif"){
+			actif.setText("Inactif");
+			c.actif=true;
+		}
+		
+	}
+	
 	public PageConducteur() {
-
+		actif.setOnMouseClicked((new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event){
+				changementStatus();
+			}
+		}));
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("connexion");
@@ -98,8 +116,10 @@ public class PageConducteur extends Stage {
 		header.getChildren().addAll(backButton, title, selectionPage);
 
 		// Left Side
+		leftSide.setHgap(15);
 		leftSide.add(soon, 0, 0);
 		leftSide.setMinWidth(300);
+		leftSide.add(actif,0,1);
 
 		// Map
 		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));

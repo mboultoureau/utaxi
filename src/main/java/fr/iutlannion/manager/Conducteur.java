@@ -11,7 +11,7 @@ public class Conducteur extends Personne {
 
     private double tarif;
     private double nbKmParcourus;
-
+    public boolean actif;
     private ArrayList<Double> notes;
     private ArrayList<Jour> jours;
     private Voiture voiture;
@@ -21,7 +21,7 @@ public class Conducteur extends Personne {
                       Voiture voiture, LatLng coords) {
 
         super(nom, prenom, email, motDePasse);
-
+        this.actif = false;
         this.notes = new ArrayList<Double>();
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
@@ -77,7 +77,9 @@ public class Conducteur extends Personne {
     public double getNbKmParcourus() {
         return nbKmParcourus;
     }
-
+    public boolean getActif(){
+        return actif;
+    }
     public Voiture getVoiture() {
         return voiture;
     }
