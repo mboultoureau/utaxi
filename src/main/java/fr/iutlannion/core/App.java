@@ -82,7 +82,7 @@ public class App extends Application {
 		Utilisateurs.add(p2);
 
 		// Tests purpose only
-		Utilisateurs.setPersonneCourante(p1);
+		Utilisateurs.setPersonneCourante(c1);
 
 		launch();
 	}

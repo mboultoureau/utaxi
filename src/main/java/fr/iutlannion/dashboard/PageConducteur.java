@@ -51,13 +51,15 @@ public class PageConducteur extends Stage {
 	private MapView map;
 
 	public void changementStatus(){
-		if (actif.getText()=="Inactif"){
-			actif.setText("Actif");
-			c.actif=false;
-		}
-		if (actif.getText()=="Actif"){
+		if (c.actif==true){
 			actif.setText("Inactif");
+			c.actif=false;
+			System.out.println(c.actif);
+		}
+		else{
+			actif.setText("Actif");
 			c.actif=true;
+			System.out.println(c.actif);
 		}
 		
 	}
