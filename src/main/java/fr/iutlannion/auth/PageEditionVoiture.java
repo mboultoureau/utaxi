@@ -8,10 +8,12 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -19,7 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.paint.*;
 
 public class PageEditionVoiture extends Stage{
 	//HEADER
@@ -40,7 +41,6 @@ public class PageEditionVoiture extends Stage{
 		private Label couleur = new Label("Couleur");
 		private Label type = new Label("Type");
 		private Label mdp = new Label("Mot de passe");
-		private Label bottomText = new Label("");
 		
 		private TextField ftarif = new TextField();
 		private TextField fnbkm = new TextField();
@@ -54,18 +54,21 @@ public class PageEditionVoiture extends Stage{
 		private Button buttonAnnuler = new Button("Annuler");
 	    private Button buttonOk = new Button("OK");
 	    
+	    private Alert erreur = new Alert(AlertType.ERROR);
+	    private Alert modifOk = new Alert(AlertType.INFORMATION);
+	    
 	    Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	    
 		public PageEditionVoiture() {
 			backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
-	                Window.getInstance().gotoPage("menuPrincipal");
+	                Window.getInstance().gotoPage("conducteur");
 	            }
 	        }));
 			
 			buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
-	                Window.getInstance().gotoPage("menuPrincipal");
+	                Window.getInstance().gotoPage("conducteur");
 	            }
 	        }));
 			
@@ -90,14 +93,9 @@ public class PageEditionVoiture extends Stage{
 						c.modifierInfoVoiture(Double.valueOf(ftarif.getText()), Double.valueOf(fnbkm.getText()),fimmat.getText(), fmarque.getText(), ftEss.getText(), fcouleur.getText(), ftype.getText());
 						
 						fmdp.setText(null);
-						
-						bottomText.setText("Modifications validées");
-						bottomText.setTextFill(Color.GREEN);
-						root.setBottom(bottomText);
+						modifOk.show();
 					}else {
-						bottomText.setText("Erreur de mot de passe");
-						bottomText.setTextFill(Color.RED);
-						root.setBottom(bottomText);
+						erreur.show();
 						
 						ftarif.setText(String.valueOf(c.getTarif()));
 						fnbkm.setText(String.valueOf(c.getNbKmParcourus()));
@@ -154,6 +152,12 @@ public class PageEditionVoiture extends Stage{
 				
 		        buttonAnnuler.setPrefWidth(90);
 		        buttonOk.setPrefWidth(70);
+		        
+		        erreur.setTitle("Erreur de mot de passe");
+				erreur.setHeaderText("Le mot de passe actuel n'est pas le bon, les modifications n'ont pas été apportées.");
+				
+				modifOk.setTitle("Mofication effectuées");
+				modifOk.setHeaderText("Les modifications ont bien été effectuées.");
 		       
 		        gridPane.add(tarif, 0,0);
 		        gridPane.add(ftarif, 0,1);
@@ -179,7 +183,6 @@ public class PageEditionVoiture extends Stage{
 			
 		        root.setTop(header);
 				root.setCenter(gridPane);
-				root.setBottom(bottomText);
 				
 				return root;
 		}
