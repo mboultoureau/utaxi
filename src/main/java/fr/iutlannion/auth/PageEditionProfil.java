@@ -1,13 +1,21 @@
 package fr.iutlannion.auth;
 
+import java.util.Optional;
+
 import fr.iutlannion.core.Window;
+import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Passager;
+import fr.iutlannion.manager.Personne;
 import fr.iutlannion.manager.Utilisateurs;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,7 +26,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.paint.*;
 
 public class PageEditionProfil extends Stage {
 	//HEADER
@@ -32,11 +39,11 @@ public class PageEditionProfil extends Stage {
 	private GridPane gridPane = new GridPane();
 	
 	private Label labelNom = new Label("Nom");
-	private Label labelPrenom = new Label("Prénom");
-	private Label labelMail = new Label("Adresse e-mail");
-	private Label mdpActuel = new Label("Mot de passe actuel");
+	private Label labelPrenom = new Label("PrÃ©nom");
+	private Label labelMail = new Label("Mail");
+	private Label mdpActuel = new Label("Mot de passe actuel *");
 	private Label mdpNouveau = new Label("Nouveau mot de passe");
-	private Label bottomText=new Label("");
+	private Label bottomText=new Label("* champ obligatoire");
 	
 	
 	private TextField tfNom = new TextField();
@@ -47,17 +54,40 @@ public class PageEditionProfil extends Stage {
 	
 	private Button buttonAnnuler = new Button("Annuler");
     private Button buttonOk = new Button("OK");
+    private Button suppButton = new Button("Supprimer le compte");
+    
+    private Alert alert= new Alert(AlertType.CONFIRMATION);
+    private Alert erreur = new Alert(AlertType.ERROR);
+    private Alert modifOk = new Alert(AlertType.INFORMATION);
     
 	public PageEditionProfil() {
+		suppButton.setOnAction(e ->{
+			Optional<ButtonType> option = alert.showAndWait();
+			 
+		      if (option.get() == ButtonType.OK) {
+		    	  Utilisateurs.remove(Utilisateurs.getPersonneCourante());
+		      	  Window.getInstance().gotoPage("connexion");
+		      }      
+		
+		});
+		
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Window.getInstance().gotoPage("menuPrincipal");
+            	Personne personne = Utilisateurs.getPersonneCourante();
+            	if(personne instanceof Conducteur)
+            		Window.getInstance().gotoPage("conducteur");
+            	if(personne instanceof Passager)
+            		Window.getInstance().gotoPage("passager");
             }
         }));
 		
 		buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                Window.getInstance().gotoPage("menuPrincipal");
+            	Personne personne = Utilisateurs.getPersonneCourante();
+            	if(personne instanceof Conducteur)
+            		Window.getInstance().gotoPage("conducteur");
+            	if(personne instanceof Passager)
+            		Window.getInstance().gotoPage("passager");
             }
         }));
 		
@@ -66,22 +96,22 @@ public class PageEditionProfil extends Stage {
 				if(pfMdpActuel.getText().compareTo(Utilisateurs.getPersonneCourante().getMotDePasse())==0) {
 					if(tfNom.getText().trim().isEmpty())
 						tfNom.setText(Utilisateurs.getPersonneCourante().getNom());
+					
 					if(tfPrenom.getText().trim().isEmpty())
 						tfPrenom.setText(Utilisateurs.getPersonneCourante().getPrenom());
+					
 					if(tfMail.getText().trim().isEmpty())
 						tfMail.setText(Utilisateurs.getPersonneCourante().getEmail());
+					
 					if(pfMdpNouveau.getText().trim().isEmpty())
 						pfMdpNouveau.setText(Utilisateurs.getPersonneCourante().getMotDePasse());
+					
 					Utilisateurs.getPersonneCourante().modifierInfo(tfNom.getText(), tfPrenom.getText(), tfMail.getText(), pfMdpNouveau.getText());
 					pfMdpActuel.setText(null);
 					pfMdpNouveau.setText(null);
-					bottomText.setText("Modifications validées");
-					bottomText.setTextFill(Color.GREEN);
-					root.setBottom(bottomText);
+					modifOk.show();
 				}else {
-					bottomText.setText("Erreur de mot de passe");
-					bottomText.setTextFill(Color.RED);
-					root.setBottom(bottomText);
+					erreur.show();
 					tfNom.setText(Utilisateurs.getPersonneCourante().getNom());
 					tfPrenom.setText(Utilisateurs.getPersonneCourante().getPrenom());
 					tfMail.setText(Utilisateurs.getPersonneCourante().getEmail());
@@ -119,7 +149,6 @@ public class PageEditionProfil extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 		
 		//
-			bottomText.setTextFill(Color.WHITE);
 	
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(10);
@@ -132,6 +161,16 @@ public class PageEditionProfil extends Stage {
 			
 	        buttonAnnuler.setPrefWidth(90);
 	        buttonOk.setPrefWidth(70);
+	        suppButton.setPrefWidth(200);
+	        
+			alert.setTitle("Supprimer le compte");
+			alert.setHeaderText("Etes-vous sûr de vouloir supprimer votre compte ?");
+			
+			erreur.setTitle("Erreur de mot de passe");
+			erreur.setHeaderText("Le mot de passe actuel n'est pas le bon, les modifications n'ont pas été apportées.");
+			
+			modifOk.setTitle("Mofication effectuées");
+			modifOk.setHeaderText("Les modifications ont bien été effectuées.");
 	       
 	        gridPane.add(labelNom, 0,0);
 	        gridPane.add(tfNom, 0,1);
@@ -145,6 +184,7 @@ public class PageEditionProfil extends Stage {
 	        gridPane.add(pfMdpNouveau, 0,9);
 	        gridPane.add(buttonOk, 0,10);
 	        gridPane.add(buttonAnnuler, 1,10);
+	        gridPane.add(suppButton, 0, 12);
 	        
 	        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
 	        
