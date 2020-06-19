@@ -39,10 +39,8 @@ public class PagePassager extends Stage {
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
 	private Label title = new Label("Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
-	private final ObservableList<String> options = FXCollections.observableArrayList(
-			"Tableau de bord",
-			"Édition de profil"
-	);
+	private final ObservableList<String> options = FXCollections.observableArrayList("Tableau de bord",
+			"Édition de profil");
 	private final ComboBox selectionPage = new ComboBox(options);
 
 	// Left Side
@@ -182,6 +180,15 @@ public class PagePassager extends Stage {
 
 				}
 			}, 30000);
+
+			myTimer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Platform.runLater(() -> {
+						Window.getInstance().gotoPage("review");
+					});
+				}
+			}, 32000);
 
 		});
 	}
