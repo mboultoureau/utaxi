@@ -41,8 +41,8 @@ public class PageReview extends Stage {
     public PageReview() {
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                // Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
-                // c.ajouterNote(sliderNote.getValue());
+                Conducteur c = Utilisateurs.getRequete().getConducteur();
+                c.ajouterNote(sliderNote.getValue());
                 Window.getInstance().gotoPage("passager");
             }
         }));
@@ -101,7 +101,7 @@ public class PageReview extends Stage {
         gridPane.setHgap(10);
         GridPane.setHgrow(label1, Priority.ALWAYS);
 
-        label1.setText("Note et pourboire pour " + Utilisateurs.getPersonneCourante().getNom());
+        label1.setText("Note et pourboire pour " + Utilisateurs.getRequete().getConducteur().getPrenom());
         label1.setFont(new Font("Arial", 16));
 
         sliderNote.setMin(0);

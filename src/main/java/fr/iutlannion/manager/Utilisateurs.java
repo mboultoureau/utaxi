@@ -5,19 +5,32 @@ import java.util.ArrayList;
 public final class Utilisateurs {
     private static ArrayList<Personne> personnes = new ArrayList<Personne>();
     private static Personne currentUser = null;
+    private static Requete requete;
 
     // Utilisateur courant
 
     /**
      * Définit l'utilisateur connecté
+     * 
      * @param personne La personne connecté
      */
     public static void setPersonneCourante(Personne personne) {
         currentUser = personne;
+        requete = new Requete();
+    }
+
+    /**
+     * Retourne la requete
+     * 
+     * @return la requete
+     */
+    public static Requete getRequete() {
+        return requete;
     }
 
     /**
      * Retourne l'utilisateur connecté
+     * 
      * @return l'utilisateur connecté ou null
      */
     public static Personne getPersonneCourante() {
@@ -35,6 +48,7 @@ public final class Utilisateurs {
 
     /**
      * Retourne la liste des utilisateurs
+     * 
      * @return Un ArrayList des utilisateurs
      */
     public static ArrayList<Personne> getListUtilisateurs() {
@@ -43,6 +57,7 @@ public final class Utilisateurs {
 
     /**
      * Ajoute une personne
+     * 
      * @param personne La personne à ajouter
      */
     public static void add(Personne personne) {
@@ -57,6 +72,7 @@ public final class Utilisateurs {
 
     /**
      * Supprime une personne
+     * 
      * @param personne La personne à supprimer
      */
     public static void remove(Personne personne) {
@@ -69,9 +85,11 @@ public final class Utilisateurs {
 
     /**
      * Permet de se connecter
+     * 
      * @param email L'adresse email de l'utilisateur
-     * @param mdp Le mot de passe de l'utilisateur
-     * @return La personne ou null si il est introuvable avec l'email et le mot de passe fournit
+     * @param mdp   Le mot de passe de l'utilisateur
+     * @return La personne ou null si il est introuvable avec l'email et le mot de
+     *         passe fournit
      */
     public static Personne connexion(String email, String mdp) {
         Personne p = null;
@@ -88,11 +106,11 @@ public final class Utilisateurs {
         return p;
     }
 
-
     // Admins
 
     /**
      * Retourne la liste des administrateurs
+     * 
      * @return Un ArrayList des administrateurs
      */
     public static ArrayList<Admin> getListAdmin() {
@@ -111,6 +129,7 @@ public final class Utilisateurs {
 
     /**
      * Retourne la liste des conducteurs
+     * 
      * @return Un ArrayList des conducteurs
      */
     public static ArrayList<Conducteur> getListConducteur() {
@@ -128,6 +147,7 @@ public final class Utilisateurs {
     // Passagers
     /**
      * Retourne la liste des passagers
+     * 
      * @return Un ArrayList des passagers
      */
     public static ArrayList<Passager> getListPassagers() {
@@ -144,6 +164,7 @@ public final class Utilisateurs {
 
     /**
      * Vérifie si l'adresse email est déjà utilisé
+     * 
      * @return retourne vrai si l'adresse email est déjà utilisé
      */
     public static boolean emailUtilise(String email) {

@@ -1,19 +1,35 @@
 package fr.iutlannion.manager;
 
-public class Requete {
-    private Passager passager;
-    private Conducteur conducteur;
-    private String date;
-    private double xClient;
-    private double yClient;
+import java.util.Date;
 
-    Requete(Passager passager, Conducteur conducteur, String date, double xClient, double yClient) {
-        this.passager = passager;
-        this.conducteur = conducteur;
-        this.date = date;
-        this.xClient = xClient;
-        this.setyClient(yClient);
-    }
+public class Requete {
+	private Passager passager;
+	private Conducteur conducteur;
+	private Date date;
+	private double xClient;
+	private double yClient;
+
+	Requete(Passager passager, Conducteur conducteur, Date date, double xClient, double yClient) {
+		this.passager = passager;
+		this.conducteur = conducteur;
+		this.date = date;
+		this.xClient = xClient;
+		this.setyClient(yClient);
+	}
+
+	Requete() {
+		this.passager = null;
+		this.conducteur = null;
+		this.date = null;
+	}
+
+	public void setParametre(Passager passager, Conducteur conducteur, Date date, double xClient, double yClient) {
+		this.passager = passager;
+		this.conducteur = conducteur;
+		this.date = date;
+		this.xClient = xClient;
+		this.setyClient(yClient);
+	}
 
 	public Passager getPassager() {
 		return passager;
@@ -35,7 +51,7 @@ public class Requete {
 		this.yClient = yClient;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 }

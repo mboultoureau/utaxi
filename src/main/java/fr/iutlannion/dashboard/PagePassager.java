@@ -1,5 +1,6 @@
 package fr.iutlannion.dashboard;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -185,6 +186,10 @@ public class PagePassager extends Stage {
 				@Override
 				public void run() {
 					Platform.runLater(() -> {
+						Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
+								listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
+								markerCurrentPosition.getCoords().getLatitude(),
+								markerCurrentPosition.getCoords().getLongitude());
 						Window.getInstance().gotoPage("review");
 					});
 				}
