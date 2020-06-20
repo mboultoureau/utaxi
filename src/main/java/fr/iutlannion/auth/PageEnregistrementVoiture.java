@@ -75,7 +75,7 @@ public class PageEnregistrementVoiture extends Stage {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("menuPrincipal");
+				Window.getInstance().gotoPage("paiement");
 			}
 		}));
 
@@ -139,6 +139,14 @@ public class PageEnregistrementVoiture extends Stage {
 		} catch (FormatException e) {
 			typeError.setVisible(true);
 			typeError.setText(e.getMessage());
+			hasErrors = true;
+		}
+
+		try {
+			v.setCouleur(fcouleur.getText());
+		} catch (FormatException e) {
+			couleurError.setVisible(true);
+			couleurError.setText(e.getMessage());
 			hasErrors = true;
 		}
 
@@ -225,7 +233,7 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.add(couleurError, 0, 20);
 
 		voiture.add(annuler, 0, 21);
-		voiture.add(buttonSuivant, 1, 22);
+		voiture.add(buttonSuivant, 1, 21);
 
 		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
 
