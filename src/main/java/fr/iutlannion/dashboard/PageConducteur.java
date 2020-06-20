@@ -2,10 +2,16 @@ package fr.iutlannion.dashboard;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Passager;
+import fr.iutlannion.manager.Requete;
 import fr.iutlannion.manager.Utilisateurs;
+import fr.iutlannion.map.Adresse;
+import fr.iutlannion.map.AdresseView;
+import fr.iutlannion.map.Icon;
 import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.MapOptions;
 import fr.iutlannion.map.MapView;
+import fr.iutlannion.map.Marker;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -26,8 +33,12 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PageConducteur extends Stage {
+
+
 	private Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	private BorderPane root = new BorderPane();
+	private AdresseView adresseView = new AdresseView();
+
 
 	// Header
 	private HBox header = new HBox();
@@ -42,14 +53,31 @@ public class PageConducteur extends Stage {
 	private final ComboBox selectionPage = new ComboBox(options);
 
 	// Left Side
+
+
 	private GridPane leftSide = new GridPane();
 	private Label soon = new Label("Prochainement");
 	private Button actif = new Button("Inactif"); 
+	private ObservableList<Requete> Requetes = FXCollections
+			.observableArrayList(Utilisateurs.getRequete());
+	private ListView<Requete> listViewPassagers = new ListView<Requete>(Requetes);
+
 
 	// Right Side
+
+
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
+	private Icon icon = new Icon("img/taxi.png", 40, 20);
+	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
 
+	private Marker markerCurrentPosition = new Marker(c.getMarker().getCoords());
+
+
+	Adresse adresse = adresseView.getAdresse();
+	/*map.moveMarker(markerLocationWant, adresse.getCoords());
+	map.traceRoute(markerCurrentPosition, markerLocationWant);*/
+	
 	public void changementStatus(){
 		if (c.actif==true){
 			actif.setText("Inactif");
@@ -91,8 +119,18 @@ public class PageConducteur extends Stage {
 				}
 			}
 		});
+		listViewPassagers.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				for (Conducteur c : Utilisateurs.getListConducteur()) {
+					c.getMarker().setIcon(icon);
+				}
+				listViewPassagers.getSelectionModel().getSelectedItem().getPassager().getMarker().setIcon(iconSelected);
+				map.refresh();
+			}
+		});
 	}
-
+	
 	public Parent creerContenu() {
 
 		// Header
@@ -122,12 +160,17 @@ public class PageConducteur extends Stage {
 		leftSide.add(soon, 0, 0);
 		leftSide.setMinWidth(300);
 		leftSide.add(actif,0,1);
+		leftSide.add(listViewPassagers,0,2);
 
 		// Map
 		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));
 		mapOptions.setZoom(13);
 		map = new MapView(mapOptions);
 
+		for (Passager p : Utilisateurs.getListPassagers()) {
+			map.addMarker(c.getMarker());
+			c.getMarker().setIcon(icon);
+		}
 		root.setTop(header);
 		root.setRight(map);
 		root.setLeft(leftSide);

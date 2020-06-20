@@ -54,4 +54,14 @@ public class Requete {
 	public Date getDate() {
 		return date;
 	}
+
+	@Override
+	public String toString() {
+		return
+			" Nom = " + getPassager().getNom() + "" +
+			"\nPrenom = "+getPassager().getPrenom()+
+			"\nConducteur=" + getConducteur().getNom() + " "
+			+ getConducteur().getPrenom() + "" +
+			"\nDate=" + getDate() + "";
+	}
 }
