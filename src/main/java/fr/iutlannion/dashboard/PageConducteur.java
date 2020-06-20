@@ -107,9 +107,8 @@ public class PageConducteur extends Stage {
 			}
 		});
 
-		if (Utilisateurs.getRequete().getConducteur() != null) {
-			requeteLabel.setText(Utilisateurs.getRequete().toString());
-		}
+		requeteLabel.setText("Pas de requête en cours");
+
 	}
 
 	public Parent creerContenu() {
@@ -155,6 +154,8 @@ public class PageConducteur extends Stage {
 		root.setTop(header);
 		root.setRight(map);
 		root.setLeft(leftSide);
+		map.addMarker(markerCurrentPosition);
+		markerCurrentPosition.setIcon(icon);
 
 		return root;
 

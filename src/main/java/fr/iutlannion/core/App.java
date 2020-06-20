@@ -86,7 +86,6 @@ public class App extends Application {
 
 		// Tests purpose only
 		Utilisateurs.setPersonneCourante(c2);
-		Utilisateurs.getRequete().setParametre(p1, c2, new Date(), 1.5023, 1.5643);
 
 		launch();
 	}

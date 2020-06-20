@@ -127,7 +127,10 @@ public class PagePassager extends Stage {
 		commanderUtaxiButton.setOnAction(e -> {
 
 			if (listViewConducteur.getSelectionModel().getSelectedItem().getActif()) {
-
+				Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
+						listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
+						markerCurrentPosition.getCoords().getLatitude(),
+						markerCurrentPosition.getCoords().getLongitude());
 				map.disableRouting();
 				Annuler.setDisable(true);
 				moveTaxi.setDisable(true);
@@ -188,10 +191,6 @@ public class PagePassager extends Stage {
 					@Override
 					public void run() {
 						Platform.runLater(() -> {
-							Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
-									listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
-									markerCurrentPosition.getCoords().getLatitude(),
-									markerCurrentPosition.getCoords().getLongitude());
 							Window.getInstance().gotoPage("review");
 						});
 					}
