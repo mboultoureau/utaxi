@@ -34,37 +34,26 @@ import javafx.stage.Stage;
 
 public class PageConducteur extends Stage {
 
-
 	private Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	private BorderPane root = new BorderPane();
 	private AdresseView adresseView = new AdresseView();
 
-
 	// Header
 	private HBox header = new HBox();
 	private Button backButton = new Button("Deconnexion");
-	private Label title = new Label(
-			"Page Conducteur - Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
-	private final ObservableList<String> options = FXCollections.observableArrayList(
-			"Tableau de bord",
-			"Édition de profil",
-			"Édition de voiture"
-	);
+	private Label title = new Label("Page Conducteur - Bienvenue " + Utilisateurs.getPersonneCourante().getPrenom());
+	private final ObservableList<String> options = FXCollections.observableArrayList("Tableau de bord",
+			"Édition de profil", "Édition de voiture");
 	private final ComboBox selectionPage = new ComboBox(options);
 
 	// Left Side
 
-
 	private GridPane leftSide = new GridPane();
 	private Label soon = new Label("Prochainement");
-	private Button actif = new Button("Inactif"); 
-	private ObservableList<Requete> Requetes = FXCollections
-			.observableArrayList(Utilisateurs.getRequete());
-	private ListView<Requete> listViewPassagers = new ListView<Requete>(Requetes);
-
+	private Button actif = new Button("actif");
+	private Label requeteLabel = new Label("");
 
 	// Right Side
-
 
 	private MapOptions mapOptions = new MapOptions();
 	private MapView map;
@@ -73,28 +62,26 @@ public class PageConducteur extends Stage {
 
 	private Marker markerCurrentPosition = new Marker(c.getMarker().getCoords());
 
-
 	Adresse adresse = adresseView.getAdresse();
-	/*map.moveMarker(markerLocationWant, adresse.getCoords());
-	map.traceRoute(markerCurrentPosition, markerLocationWant);*/
-	
-	public void changementStatus(){
-		if (c.actif==true){
+	/*
+	 * map.moveMarker(markerLocationWant, adresse.getCoords());
+	 * map.traceRoute(markerCurrentPosition, markerLocationWant);
+	 */
+
+	public void changementStatus() {
+		if (c.actif == true) {
 			actif.setText("Inactif");
-			c.actif=false;
-			System.out.println(c.actif);
-		}
-		else{
+			c.actif = false;
+		} else {
 			actif.setText("Actif");
-			c.actif=true;
-			System.out.println(c.actif);
+			c.actif = true;
 		}
-		
+
 	}
-	
+
 	public PageConducteur() {
-		actif.setOnMouseClicked((new EventHandler<MouseEvent>(){
-			public void handle(MouseEvent event){
+		actif.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
 				changementStatus();
 			}
 		}));
@@ -119,18 +106,12 @@ public class PageConducteur extends Stage {
 				}
 			}
 		});
-		listViewPassagers.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				for (Conducteur c : Utilisateurs.getListConducteur()) {
-					c.getMarker().setIcon(icon);
-				}
-				listViewPassagers.getSelectionModel().getSelectedItem().getPassager().getMarker().setIcon(iconSelected);
-				map.refresh();
-			}
-		});
+
+		if (Utilisateurs.getRequete().getConducteur() != null) {
+			requeteLabel.setText(Utilisateurs.getRequete().toString());
+		}
 	}
-	
+
 	public Parent creerContenu() {
 
 		// Header
@@ -159,8 +140,8 @@ public class PageConducteur extends Stage {
 		leftSide.setHgap(15);
 		leftSide.add(soon, 0, 0);
 		leftSide.setMinWidth(300);
-		leftSide.add(actif,0,1);
-		leftSide.add(listViewPassagers,0,2);
+		leftSide.add(actif, 0, 1);
+		leftSide.add(requeteLabel, 0, 2);
 
 		// Map
 		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));

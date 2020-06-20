@@ -126,74 +126,79 @@ public class PagePassager extends Stage {
 
 		commanderUtaxiButton.setOnAction(e -> {
 
-			map.disableRouting();
-			Annuler.setDisable(true);
-			moveTaxi.setDisable(true);
-			Adresse adresse = adresseView.getAdresse();
-			map.moveMarker(markerLocationWant, adresse.getCoords());
-			map.traceRoute(markerCurrentPosition, markerLocationWant);
-			infoSituation.setText("Le Utaxi viens vous chercher...");
-			commanderUtaxiButton.setDisable(true);
-			listViewConducteur.setMouseTransparent(true);
-			listViewConducteur.setFocusTraversable(false);
+			if (listViewConducteur.getSelectionModel().getSelectedItem().getActif()) {
 
-			Timer myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Platform.runLater(() -> {
-						infoSituation.setText("Votre Utaxi est arrivé, vous pouvez monter");
-						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
-								user.getMarker().getCoords());
-					});
+				map.disableRouting();
+				Annuler.setDisable(true);
+				moveTaxi.setDisable(true);
+				Adresse adresse = adresseView.getAdresse();
+				map.moveMarker(markerLocationWant, adresse.getCoords());
+				map.traceRoute(markerCurrentPosition, markerLocationWant);
+				infoSituation.setText("Le Utaxi viens vous chercher...");
+				commanderUtaxiButton.setDisable(true);
+				listViewConducteur.setMouseTransparent(true);
+				listViewConducteur.setFocusTraversable(false);
 
-				}
-			}, 8000);
+				Timer myTimer = new Timer();
+				myTimer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						Platform.runLater(() -> {
+							infoSituation.setText("Votre Utaxi est arrivé, vous pouvez monter");
+							map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+									user.getMarker().getCoords());
+						});
 
-			myTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Platform.runLater(() -> {
-						infoSituation.setText("Trajet en cours...");
+					}
+				}, 8000);
 
-					});
+				myTimer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						Platform.runLater(() -> {
+							infoSituation.setText("Trajet en cours...");
 
-				}
-			}, 16000);
+						});
 
-			myTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Platform.runLater(() -> {
-						infoSituation.setText("Arrivé à destination !");
-						map.disableRouting();
-						Adresse adresse = adresseView.getAdresse();
-						map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
-								adresse.getCoords());
-						map.moveMarker(markerCurrentPosition, adresse.getCoords());
-						user.getMarker().setPosition(adresse.getCoords());
-						listViewConducteur.setMouseTransparent(false);
-						listViewConducteur.setFocusTraversable(true);
-						adresseView.enable();
-						map.moveMarker(markerLocationWant, new LatLng(0, 0));
-						moveTaxi.setDisable(false);
-					});
+					}
+				}, 16000);
 
-				}
-			}, 30000);
+				myTimer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						Platform.runLater(() -> {
+							infoSituation.setText("Arrivé à destination !");
+							map.disableRouting();
+							Adresse adresse = adresseView.getAdresse();
+							map.moveMarker(listViewConducteur.getSelectionModel().getSelectedItem().getMarker(),
+									adresse.getCoords());
+							map.moveMarker(markerCurrentPosition, adresse.getCoords());
+							user.getMarker().setPosition(adresse.getCoords());
+							listViewConducteur.setMouseTransparent(false);
+							listViewConducteur.setFocusTraversable(true);
+							adresseView.enable();
+							map.moveMarker(markerLocationWant, new LatLng(0, 0));
+							moveTaxi.setDisable(false);
+						});
 
-			myTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Platform.runLater(() -> {
-						Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
-								listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
-								markerCurrentPosition.getCoords().getLatitude(),
-								markerCurrentPosition.getCoords().getLongitude());
-						Window.getInstance().gotoPage("review");
-					});
-				}
-			}, 32000);
+					}
+				}, 30000);
+
+				myTimer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						Platform.runLater(() -> {
+							Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
+									listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
+									markerCurrentPosition.getCoords().getLatitude(),
+									markerCurrentPosition.getCoords().getLongitude());
+							Window.getInstance().gotoPage("review");
+						});
+					}
+				}, 32000);
+			} else {
+				infoSituation.setText("Le chauffeur est indisponible, il termine sa course...");
+			}
 
 		});
 	}

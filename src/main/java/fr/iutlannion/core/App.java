@@ -50,7 +50,6 @@ public class App extends Application {
 		Utilisateurs.add(erwan);
 		Utilisateurs.add(remi);
 		Utilisateurs.add(mathis);
-		
 
 		// Voitures
 		Voiture v1 = new Voiture("AA-111-AA", "Tesla", "Electrique", "Noir", "Sportive");
@@ -87,7 +86,7 @@ public class App extends Application {
 
 		// Tests purpose only
 		Utilisateurs.setPersonneCourante(c2);
-		Utilisateurs.getRequete().setParametre(p1, c2,new Date(),1.5023 , 1.5643);
+		Utilisateurs.getRequete().setParametre(p1, c2, new Date(), 1.5023, 1.5643);
 
 		launch();
 	}

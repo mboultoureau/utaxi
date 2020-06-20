@@ -18,10 +18,10 @@ public class Conducteur extends Personne {
     private Marker marker;
 
     public Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus,
-                      Voiture voiture, LatLng coords) {
+            Voiture voiture, LatLng coords) {
 
         super(nom, prenom, email, motDePasse);
-        this.actif = false;
+        this.actif = true;
         this.notes = new ArrayList<Double>();
         this.tarif = tarif;
         this.nbKmParcourus = nbKmParcourus;
@@ -77,9 +77,11 @@ public class Conducteur extends Personne {
     public double getNbKmParcourus() {
         return nbKmParcourus;
     }
-    public boolean getActif(){
+
+    public boolean getActif() {
         return actif;
     }
+
     public Voiture getVoiture() {
         return voiture;
     }
