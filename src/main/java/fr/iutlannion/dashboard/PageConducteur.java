@@ -108,6 +108,7 @@ public class PageConducteur extends Stage {
 		});
 
 		requeteLabel.setText("Pas de requête en cours");
+		// System.out.println(Utilisateurs.getRequete().toString());
 
 	}
 
