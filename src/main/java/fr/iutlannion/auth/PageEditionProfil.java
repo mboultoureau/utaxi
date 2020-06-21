@@ -27,7 +27,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-/* La page Edition profil permet la modification du profil d'un utilisateur deja créé
+/**
+ *  La page Edition profil permet la modification du profil d'un utilisateur deja créé
  */
 public class PageEditionProfil extends Stage {
 	//HEADER

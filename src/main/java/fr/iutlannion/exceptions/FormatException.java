@@ -1,7 +1,7 @@
 package fr.iutlannion.exceptions;
 
 /**
- * TextFieldException est une exception si un champ de texte est incorrect.
+ * FormatException est une exception si un champ de texte est incorrect.
  * 
  * @author mboultoureau
  * @version 1

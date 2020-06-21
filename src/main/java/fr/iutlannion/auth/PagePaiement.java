@@ -19,6 +19,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Cette page permet le paiement par carte bancaire
+ */
 public class PagePaiement extends Stage {
 
 	private BorderPane root = new BorderPane();

@@ -1,8 +1,9 @@
 package fr.iutlannion.manager;
 
 import java.util.Date;
-/* Classe Requete c'est par elle qu'est formulée la demande d'un passager vers 
-un conducteur pour effecuter un trajet
+/**
+ *  Classe Requete c'est par elle qu'est formulée la demande d'un passager vers
+ *  un conducteur pour effecuter un trajet
 */
 public class Requete {
 	private Passager passager;

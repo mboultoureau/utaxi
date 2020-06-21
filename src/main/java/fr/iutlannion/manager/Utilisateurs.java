@@ -2,6 +2,9 @@ package fr.iutlannion.manager;
 
 import java.util.ArrayList;
 
+/**
+ * Représente la base de données des utilisateurs, la gestion de l'utilisateur et de la requête courante
+ */
 public final class Utilisateurs {
     private static ArrayList<Personne> personnes = new ArrayList<Personne>();
     private static Personne currentUser = null;

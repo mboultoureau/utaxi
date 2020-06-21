@@ -1,5 +1,8 @@
 package fr.iutlannion.manager;
 
+/**
+ * Représente une carte bancaire
+ */
 public class CarteBancaire {
 
     private String numero;

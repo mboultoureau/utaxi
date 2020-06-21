@@ -2,8 +2,9 @@ package fr.iutlannion.manager;
 
 import java.util.ArrayList;
 
-
-//classe représentant les horaires d'une journée
+/**
+ * classe représentant les horaires d'une journée
+ */
 public class Jour {
     private String nom;
     private int heureD;

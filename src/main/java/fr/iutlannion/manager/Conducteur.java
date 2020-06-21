@@ -8,6 +8,9 @@ import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.Marker;
 import java.util.ArrayList;
 
+/**
+ * Représente un conducteur
+ */
 public class Conducteur extends Personne {
 
     private double tarif;

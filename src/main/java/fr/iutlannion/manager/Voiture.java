@@ -2,7 +2,9 @@ package fr.iutlannion.manager;
 
 import fr.iutlannion.exceptions.FormatException;
 
-//classe descriptive de voiture
+/**
+ * classe descriptive de voiture
+ */
 public class Voiture {
 	private String immatriculation;
 	private String marque;

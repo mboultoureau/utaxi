@@ -22,6 +22,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Cette page permet d'éditer sa voiture
+ */
 public class PageEditionVoiture extends Stage{
 	//HEADER
 		private BorderPane root = new BorderPane();

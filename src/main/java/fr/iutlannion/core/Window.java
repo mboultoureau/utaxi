@@ -16,6 +16,9 @@ import fr.iutlannion.debug.PageMapDebug;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Cette classe permet la gestion de la fenêtre et de son contenu
+ */
 public class Window extends Stage {
 
 	private static Window instance;
