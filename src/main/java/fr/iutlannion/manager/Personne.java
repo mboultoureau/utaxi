@@ -2,6 +2,10 @@ package fr.iutlannion.manager;
 
 import fr.iutlannion.exceptions.FormatException;
 
+/**
+ * Décrit une personne
+ * Classe abstraote
+ */
 abstract public class Personne {
 
 	protected String nom;
@@ -11,6 +15,13 @@ abstract public class Personne {
 	private static int nb = 0;
 	private int id;
 
+	/**
+	 * Créer une nouvelle personne
+	 * @param nom Le nom de la personne
+	 * @param prenom Le prénom de la personne
+	 * @param email L'adresse email de la personne
+	 * @param motDePasse Le mot de passe de la personne
+	 */
 	Personne(String nom, String prenom, String email, String motDePasse) {
 		this.nom = nom;
 		this.prenom = prenom;
