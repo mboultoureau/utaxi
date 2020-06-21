@@ -96,7 +96,7 @@ public class Conducteur extends Personne {
             String typeessence, String couleur, String type) {
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
-        this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
+        this.voiture = this.voiture.modifierInfo(kmParcourus, immatriculation, marque, typeessence, couleur, type);
     }
 
     public void modifierInfoAdmin(String nom, String prenom, String email, String motdepasse, double tarif,
@@ -108,7 +108,7 @@ public class Conducteur extends Personne {
         this.motDePasse = motdepasse;
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
-        this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
+        this.voiture = this.voiture.modifierInfo(kmParcourus, immatriculation, marque, typeessence, couleur, type);
     }
 
     public void addJour(Jour j){
