@@ -37,18 +37,20 @@ public class Requete {
 	}
 
 		//Ensemble de Getters
+
+		//@Return passager renvoie le passager qui demande le taxi
 	public Passager getPassager() {
 		return passager;
 	}
-
+	//@Return conducteur renvoie le conducteur du taxi
 	public Conducteur getConducteur() {
 		return conducteur;
 	}
-
+//@Return xClient renvoie les coordonnées x (latitude) du client
 	public double getxClient() {
 		return xClient;
 	}
-
+//@Return yClient renvoie les coordonnées y (longitude) du client
 	public double getyClient() {
 		return yClient;
 	}
@@ -56,12 +58,12 @@ public class Requete {
 	public void setyClient(double yClient) {
 		this.yClient = yClient;
 	}
-
+//@return date retourne la date de la requete
 	public Date getDate() {
 		return date;
 	}
 
-	//ToString classique
+	//ToString classique @return la chaine contenant les informations necessaire au taxi
 	@Override
 	public String toString() {
 		return
