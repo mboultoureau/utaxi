@@ -3,23 +3,22 @@ package fr.iutlannion.manager;
 import java.util.ArrayList;
 
 public class Jour {
-    private ArrayList<Boolean> heures;
     private String nom;
+    private int heureD;
+    private int heureF;
 
-    public Jour(String nomJ){
+    public Jour(String nomJ, int heureDJ, int heureFJ){
         nom = nomJ;
-        heures = new ArrayList<Boolean>(13);
-        for(int i = 0; i<heures.size(); i++){
-            heures.set(i, false);
-        }
+        heureD = heureDJ;
+        heureF = heureFJ;
     }
 
-    public Boolean getJours(int i){
-        return heures.get(i);
+    public int getHeureD(){
+        return heureD;
     }
 
-    public void modifHeures(int i, Boolean b){
-        heures.set(i, b);
+    public int getHeureF(){
+        return heureF;
     }
 
     public String getNom(){

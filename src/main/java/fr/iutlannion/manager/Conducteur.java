@@ -6,6 +6,7 @@ import fr.iutlannion.core.Window;
 import fr.iutlannion.exceptions.FormatException;
 import fr.iutlannion.map.LatLng;
 import fr.iutlannion.map.Marker;
+import java.util.ArrayList;
 
 public class Conducteur extends Personne {
 
@@ -16,6 +17,7 @@ public class Conducteur extends Personne {
     private ArrayList<Jour> jours;
     private Voiture voiture;
     private Marker marker;
+
 
     public Conducteur(String nom, String prenom, String email, String motDePasse, double tarif, double nbKmParcourus,
             Voiture voiture, LatLng coords) {
@@ -107,6 +109,10 @@ public class Conducteur extends Personne {
         this.tarif = tarif;
         this.nbKmParcourus = kmParcourus;
         this.voiture = this.voiture.modifierInfo(immatriculation, marque, typeessence, couleur, type);
+    }
+
+    public void addJour(Jour j){
+        jours.add(j);
     }
 
     public Jour getJour(int i) {
