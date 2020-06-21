@@ -75,7 +75,7 @@ public class PageEnregistrementVoiture extends Stage {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Window.getInstance().gotoPage("paiement");
+				Window.getInstance().gotoPage("inscription");
 			}
 		}));
 
