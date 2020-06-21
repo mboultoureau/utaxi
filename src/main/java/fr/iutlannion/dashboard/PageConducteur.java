@@ -49,7 +49,7 @@ public class PageConducteur extends Stage {
 	// Left Side
 
 	private GridPane leftSide = new GridPane();
-	private Label soon = new Label("Prochainement");
+	private Label soon = new Label("");
 	private Button actif = new Button("actif");
 	private Label requeteLabel = new Label("");
 
