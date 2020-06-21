@@ -7,8 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -20,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import fr.iutlannion.manager.Conducteur;
 import fr.iutlannion.manager.Utilisateurs;
 import fr.iutlannion.manager.Jour;
+import javafx.geometry.HPos;
 
 public class PageHoraires extends Stage {
 
@@ -63,7 +63,7 @@ public class PageHoraires extends Stage {
 	private ComboBox<Integer> dimancheF;
 
 	private Button annuler = new Button("Annuler");
-	private Button endButton = new Button("Terminer");	
+	private Button endButton = new Button("Terminer");
 
 	public PageHoraires() {
 
@@ -133,48 +133,77 @@ public class PageHoraires extends Stage {
 
 		header.getChildren().addAll(backButton, title, logo);
 
-		//comboboxes
+		// comboboxes
 		lundiD = new ComboBox<Integer>();
 		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		lundiD.getSelectionModel().selectFirst();
+		lundiD.setMinWidth(300);
 
 		lundiF = new ComboBox<Integer>();
 		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		lundiF.getSelectionModel().selectLast();
+		lundiF.setMinWidth(300);
 
 		mardiD = new ComboBox<Integer>();
 		mardiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		mardiD.getSelectionModel().selectFirst();
+		mardiD.setMinWidth(300);
 
 		mardiF = new ComboBox<Integer>();
 		mardiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		mardiF.getSelectionModel().selectLast();
+		mardiF.setMinWidth(300);
 
 		mercrediD = new ComboBox<Integer>();
 		mercrediD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		mercrediD.getSelectionModel().selectFirst();
+		mercrediD.setMinWidth(300);
 
 		mercrediF = new ComboBox<Integer>();
 		mercrediF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		mercrediF.getSelectionModel().selectLast();
+		mercrediF.setMinWidth(300);
 
 		jeudiD = new ComboBox<Integer>();
 		jeudiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		jeudiD.getSelectionModel().selectFirst();
+		jeudiD.setMinWidth(300);
 
 		jeudiF = new ComboBox<Integer>();
 		jeudiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		jeudiF.getSelectionModel().selectLast();
+		jeudiF.setMinWidth(300);
 
 		vendrediD = new ComboBox<Integer>();
 		vendrediD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		vendrediD.getSelectionModel().selectFirst();
+		vendrediD.setMinWidth(300);
 
 		vendrediF = new ComboBox<Integer>();
 		vendrediF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		vendrediF.getSelectionModel().selectLast();
+		vendrediF.setMinWidth(300);
 
 		samediD = new ComboBox<Integer>();
-		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		samediD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		samediD.getSelectionModel().selectFirst();
+		samediD.setMinWidth(300);
 
 		samediF = new ComboBox<Integer>();
-		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		samediF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
+		samediF.getSelectionModel().selectLast();
+		samediF.setMinWidth(300);
 
 		dimancheD = new ComboBox<Integer>();
-		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		dimancheD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
+		dimancheD.getSelectionModel().selectFirst();
+		dimancheD.setMinWidth(300);
 
 		dimancheF = new ComboBox<Integer>();
-		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);		
+		dimancheF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);	
+		dimancheF.getSelectionModel().selectLast();
+		dimancheF.setMinWidth(300);	
+
 
 		horaires.add(lundi, 0, 0);
 		horaires.add(lundiD, 0, 1);
@@ -205,7 +234,7 @@ public class PageHoraires extends Stage {
 		horaires.add(dimancheF, 2, 13);
 
 		horaires.add(annuler, 0, 14);
-		horaires.add(endButton, 1, 14);
+		horaires.add(endButton, 2, 14);
 
 		GridPane.setHalignment(endButton, HPos.RIGHT);
 

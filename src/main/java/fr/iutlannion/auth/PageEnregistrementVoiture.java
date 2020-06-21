@@ -202,6 +202,7 @@ public class PageEnregistrementVoiture extends Stage {
 			"95",
 			"autre"
 		);
+		ftEss.getSelectionModel().selectFirst();
 
 		voiture.add(tarif, 0, 0);
 		voiture.add(ftarif, 0, 1);
