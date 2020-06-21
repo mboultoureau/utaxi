@@ -29,7 +29,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/* 
+Classe PageConducteur où se retrouve un conducteur après s'être connecté
+Map, choix de requete, changement de statut
+*/
 public class PageConducteur extends Stage {
 	//Création d'utilisateur courant pour l'affichage ainsi que l'affichage en lui meme
 	private Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
