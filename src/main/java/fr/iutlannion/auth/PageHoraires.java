@@ -17,6 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
+import fr.iutlannion.manager.Conducteur;
+import fr.iutlannion.manager.Utilisateurs;
+import fr.iutlannion.manager.Jour;
 
 public class PageHoraires extends Stage {
 
@@ -32,44 +35,71 @@ public class PageHoraires extends Stage {
 	private GridPane horaires = new GridPane();
 
 	private Label lundi = new Label("Lundi");
-	private ComboBox<int> lundiD;
-	private ComboBox<int> lundiF;
+	private ComboBox<Integer> lundiD;
+	private ComboBox<Integer> lundiF;
 
 	private Label mardi = new Label("Mardi");
-	private ComboBox<int> mardiD;
-	private ComboBox<int> mardiF;
+	private ComboBox<Integer> mardiD;
+	private ComboBox<Integer> mardiF;
 
 	private Label mercredi = new Label("Mercredi");
-	private ComboBox<int> mercrediD;
-	private ComboBox<int> mercrediF;
+	private ComboBox<Integer> mercrediD;
+	private ComboBox<Integer> mercrediF;
 
 	private Label jeudi = new Label("Jeudi");
-	private ComboBox<int> jeudiD;
-	private ComboBox<int> jeudiF;
+	private ComboBox<Integer> jeudiD;
+	private ComboBox<Integer> jeudiF;
 
 	private Label vendredi = new Label("Vendredi");
-	private ComboBox<int> vendrediD;
-	private ComboBox<int> vendrediF;
+	private ComboBox<Integer> vendrediD;
+	private ComboBox<Integer> vendrediF;
 
 	private Label samedi = new Label("Samedi");
-	private ComboBox<int> samediD;
-	private ComboBox<int> samediF;
+	private ComboBox<Integer> samediD;
+	private ComboBox<Integer> samediF;
 
 	private Label dimanche = new Label("Dimanche");
-	private ComboBox<int> dimancheD;
-	private ComboBox<int> dimancheF;
-	
+	private ComboBox<Integer> dimancheD;
+	private ComboBox<Integer> dimancheF;
 
 	private Button annuler = new Button("Annuler");
-	private Button endButton = new Button("Terminer");
-
-	
+	private Button endButton = new Button("Terminer");	
 
 	public PageHoraires() {
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
+				Window.getInstance().gotoPage("enregistrementVoiture");
+			}
+		}));
+
+		annuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("menuPrincipal");
+			}
+		}));
+
+		endButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
+
+				Jour lundiJ = new Jour("Lundi", lundiD.getValue(), lundiF.getValue());
+				Jour mardiJ = new Jour("Mardi", mardiD.getValue(), mardiF.getValue());
+				Jour mercrediJ = new Jour("Mercredi", mercrediD.getValue(), mercrediF.getValue());
+				Jour jeudiJ = new Jour("Jeudi", jeudiD.getValue(), jeudiF.getValue());
+				Jour vendrediJ = new Jour("Vendredi", vendrediD.getValue(), vendrediF.getValue());
+				Jour samediJ = new Jour("Samedi", samediD.getValue(), samediF.getValue());
+				Jour dimancheJ = new Jour("Dimanche", dimancheD.getValue(), dimancheF.getValue());
+
+				c.addJour(lundiJ);
+				c.addJour(mardiJ);
+				c.addJour(mercrediJ);
+				c.addJour(jeudiJ);
+				c.addJour(vendrediJ);
+				c.addJour(samediJ);
+				c.addJour(dimancheJ);
+
+				Window.getInstance().gotoPage("connexion");
 			}
 		}));
 
@@ -104,46 +134,46 @@ public class PageHoraires extends Stage {
 		header.getChildren().addAll(backButton, title, logo);
 
 		//comboboxes
-		lundiD = new ComboBox<int>();
+		lundiD = new ComboBox<Integer>();
 		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		lundiF = new ComboBox<int>();
+		lundiF = new ComboBox<Integer>();
 		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		mardiD = new ComboBox<int>();
+		mardiD = new ComboBox<Integer>();
 		mardiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		mardiF = new ComboBox<int>();
+		mardiF = new ComboBox<Integer>();
 		mardiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		mercrediD = new ComboBox<int>();
+		mercrediD = new ComboBox<Integer>();
 		mercrediD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		mercrediF = new ComboBox<int>();
+		mercrediF = new ComboBox<Integer>();
 		mercrediF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		jeudiD = new ComboBox<int>();
+		jeudiD = new ComboBox<Integer>();
 		jeudiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		jeudiF = new ComboBox<int>();
+		jeudiF = new ComboBox<Integer>();
 		jeudiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		vendrediD = new ComboBox<int>();
+		vendrediD = new ComboBox<Integer>();
 		vendrediD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		vendrediF = new ComboBox<int>();
+		vendrediF = new ComboBox<Integer>();
 		vendrediF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		samediD = new ComboBox<int>();
+		samediD = new ComboBox<Integer>();
 		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		samediF = new ComboBox<int>();
+		samediF = new ComboBox<Integer>();
 		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);
 
-		dimancheD = new ComboBox<int>();
+		dimancheD = new ComboBox<Integer>();
 		lundiD.getItems().addAll(7,8,9,10,11,12,13,14,15,16,17,18,19);
 
-		dimancheF = new ComboBox<int>();
+		dimancheF = new ComboBox<Integer>();
 		lundiF.getItems().addAll(8,9,10,11,12,13,14,15,16,17,18,19,20);		
 
 		horaires.add(lundi, 0, 0);
