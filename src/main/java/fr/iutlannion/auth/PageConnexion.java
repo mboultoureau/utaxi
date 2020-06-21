@@ -18,6 +18,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import fr.iutlannion.core.Window;
 
+/**
+ * Classe de la page de connexion avec les champs pour rentrer son mail et mot *
+ * de passe
+ */
+
 public class PageConnexion extends Stage {
 
     private BorderPane root = new BorderPane();
@@ -48,6 +53,11 @@ public class PageConnexion extends Stage {
 
         Window.getInstance().setResizable(false);
 
+        /**
+         * Événement sur le bouton "OK" pour se connecter et verifier les champs mail et
+         * mot de passe
+         */
+
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 String email = textField.getText().trim();
@@ -71,10 +81,19 @@ public class PageConnexion extends Stage {
             }
         }));
 
+        /**
+         * Événement sur le bouton "Je n'ai pas de compte" qui redirige vers la page
+         * Inscription
+         */
+
         buttonInscription.setOnAction(e -> {
             Utilisateurs.resetPersonneCourante();
             Window.getInstance().gotoPage("inscription");
         });
+
+        /**
+         * Événement sur le bouton "Retour" qui redirige vers le menu principal
+         */
 
         backButton.setOnAction(e -> Window.getInstance().gotoPage("menuPrincipal"));
     }
