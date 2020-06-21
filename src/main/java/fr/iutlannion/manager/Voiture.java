@@ -2,6 +2,7 @@ package fr.iutlannion.manager;
 
 import fr.iutlannion.exceptions.FormatException;
 
+//classe descriptive de voiture
 public class Voiture {
 	private String immatriculation;
 	private String marque;
@@ -10,6 +11,7 @@ public class Voiture {
 	private String type;
 	private Double nbKms;
 
+	//initialistation des caractèristiques de la voiture
 	public Voiture(String immatriculation, String marque, String typeEssence, String couleur, String type) {
 		this.immatriculation = immatriculation;
 		this.marque = marque;
@@ -18,15 +20,18 @@ public class Voiture {
 		this.type = type;
 	}
 
+	//initialisation d'une voiture à null
 	public Voiture(){
 		this(null, null, null, null, null);
 	}
 
+	//création d'une chaine afin d'afficher les caractéristiques de la voiture
 	public String toString() {
 		return "Immatriculation : " + immatriculation + "\nMarque : " + marque + "\nType essence : " + typeEssence
 				+ "\nCouleur : " + couleur + "\nType : " + type;
 	}
 
+	//vérification de la validité de l'immatriculation
 	public void setImmatriculation(String n) throws FormatException {
 		n = n.trim();
 		
@@ -42,6 +47,7 @@ public class Voiture {
 		return immatriculation;
 	}
 
+	//vérification de la validité de la marque
 	public void setMarque(String n) throws FormatException {
 		n = n.trim();
 		
@@ -62,6 +68,7 @@ public class Voiture {
 		return typeEssence;
 	}
 
+	//vérification de la validité du type
 	public void setType(String n) throws FormatException {
 		n = n.trim();
 		
@@ -78,6 +85,7 @@ public class Voiture {
 		return type;
 	}
 
+	//vérification de la validité de la couleur
 	public void setCouleur(String n) throws FormatException {
 		n = n.trim();
 		
@@ -98,6 +106,7 @@ public class Voiture {
 		return nbKms;
 	}
 
+	//Méthode de modification de la voiture
 	public Voiture modifierInfo(Double nbKm, String immatriculation, String marque, String typeessence, String couleur,
 			String type) {
 		this.immatriculation = immatriculation;
