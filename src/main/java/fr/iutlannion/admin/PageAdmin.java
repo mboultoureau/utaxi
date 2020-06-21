@@ -80,6 +80,10 @@ public class PageAdmin extends Stage {
     private String TypeCurrentPersonne = null;
 
     public PageAdmin() {
+
+        /**
+         * Événement sur la liste des admins
+         */
         listViewAdmin.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -110,6 +114,9 @@ public class PageAdmin extends Stage {
             }
         });
 
+        /**
+         * Événement sur la liste des passagers
+         */
         listViewPassager.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -140,6 +147,9 @@ public class PageAdmin extends Stage {
             }
         });
 
+        /**
+         * Événement sur la liste des conducteurs
+         */
         listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -184,6 +194,10 @@ public class PageAdmin extends Stage {
             }
         });
 
+        /**
+         * Événement sur le bouton "Sauvegarder" afin d'enregistrer les modifications
+         * d'un utilisateur
+         */
         buttonSauvegarder.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 buttonSauvegarder.setDisable(true);
@@ -291,6 +305,9 @@ public class PageAdmin extends Stage {
             }
         }));
 
+        /**
+         * Événement sur le bouton "Supprimer" afin de supprimer un utilisateur
+         */
         buttonSupprimer.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Alert confirmation = new Alert(AlertType.CONFIRMATION);
@@ -347,6 +364,10 @@ public class PageAdmin extends Stage {
             }
         }));
 
+        /**
+         * Événement sur le bouton "Ajouter Admin" afin d'ajouter un nouvel
+         * administrateur
+         */
         buttonAjouterAdmin.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
@@ -364,6 +385,9 @@ public class PageAdmin extends Stage {
             }
         }));
 
+        /**
+         * Événement sur le bouton "Annuler" afin d'annuler les modifications en cours
+         */
         buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 buttonSauvegarder.setDisable(true);
@@ -402,6 +426,9 @@ public class PageAdmin extends Stage {
             }
         }));
 
+        /**
+         * Événement sur le bouton "Deconnexion" pour se déconnecter
+         */
         backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Window.getInstance().gotoPage("connexion");

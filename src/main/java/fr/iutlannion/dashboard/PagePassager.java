@@ -30,6 +30,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Classe de la page passager avec la map des Utaxi, la possibilité de commander
+ * un Utaxi et modifier son compte
+ */
+
 public class PagePassager extends Stage {
 
 	private BorderPane root = new BorderPane();
@@ -72,12 +77,19 @@ public class PagePassager extends Stage {
 	private AdresseView adresseView = new AdresseView();
 
 	public PagePassager() {
+
+		/**
+		 * Événement sur le bouton "Deconnexion" pour se déconnecter de son compte
+		 */
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("connexion");
 			}
 		}));
 
+		/**
+		 * Gestion des 2 onglets : "Tableau de bord" et "Édition de profil"
+		 */
 		selectionPage.setValue("Tableau de bord");
 
 		selectionPage.valueProperty().addListener(new ChangeListener() {
@@ -91,6 +103,10 @@ public class PagePassager extends Stage {
 			}
 		});
 
+		/**
+		 * Événement sur la liste des conducteurs Utaxi afin de les visualiser sur la
+		 * map
+		 */
 		listViewConducteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -102,8 +118,15 @@ public class PagePassager extends Stage {
 			}
 		});
 
+		/**
+		 * Événement sur le bouton "Ok" pour confirmer l'adresse
+		 */
+
 		adresseView.getOKButton().setOnAction(e -> confirmAdresse());
 
+		/**
+		 * Événement sur le bouton "Annuler" pour annuler la confirmation de l'adresse
+		 */
 		Annuler.setOnMouseClicked(e -> {
 			Adresse adresse = adresseView.getAdresse();
 			adresseView.enable();
@@ -112,6 +135,10 @@ public class PagePassager extends Stage {
 			Annuler.setDisable(true);
 		});
 
+		/**
+		 * Événement sur le bouton "Déplacer les Utaxi" pour déplacer les Utaxi afin de
+		 * simuler le déplacement des Utaxi
+		 */
 		moveTaxi.setOnMouseClicked(e -> {
 			double randomLat;
 			double randomLong;
@@ -123,6 +150,10 @@ public class PagePassager extends Stage {
 			}
 
 		});
+
+		/**
+		 * Événement sur le bouton "Commander le Utaxi" pour commander le Utaxi
+		 */
 
 		commanderUtaxiButton.setOnAction(e -> {
 
@@ -194,7 +225,7 @@ public class PagePassager extends Stage {
 							Window.getInstance().gotoPage("review");
 						});
 					}
-				}, 32000);
+				}, 31000);
 			} else {
 				infoSituation.setText("Le chauffeur est indisponible, il termine sa course...");
 			}
@@ -202,6 +233,10 @@ public class PagePassager extends Stage {
 		});
 	}
 
+	/**
+	 * Confirme l'adresse renseigné
+	 * 
+	 */
 	private void confirmAdresse() {
 		Adresse adresse = adresseView.getAdresse();
 		if (adresse != null) {
