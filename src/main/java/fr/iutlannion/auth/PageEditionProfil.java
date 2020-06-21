@@ -27,6 +27,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/* La page Edition profil permet la modification du profil d'un utilisateur deja créé
+ */
 public class PageEditionProfil extends Stage {
 	//HEADER
 	private BorderPane root = new BorderPane();
@@ -55,7 +57,8 @@ public class PageEditionProfil extends Stage {
 	private Button buttonAnnuler = new Button("Annuler");
     private Button buttonOk = new Button("OK");
     private Button suppButton = new Button("Supprimer le compte");
-    
+	
+	//Erreurs
     private Alert alert= new Alert(AlertType.CONFIRMATION);
     private Alert erreur = new Alert(AlertType.ERROR);
     private Alert modifOk = new Alert(AlertType.INFORMATION);
@@ -63,14 +66,14 @@ public class PageEditionProfil extends Stage {
 	public PageEditionProfil() {
 		suppButton.setOnAction(e ->{
 			Optional<ButtonType> option = alert.showAndWait();
-			 
+			 //Bouton permettant de supprimer son compte ramenant a la page connexion
 		      if (option.get() == ButtonType.OK) {
 		    	  Utilisateurs.remove(Utilisateurs.getPersonneCourante());
 		      	  Window.getInstance().gotoPage("connexion");
 		      }      
 		
 		});
-		
+		//Bouton de retour à la page précédente
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
             	Personne personne = Utilisateurs.getPersonneCourante();
@@ -80,7 +83,7 @@ public class PageEditionProfil extends Stage {
             		Window.getInstance().gotoPage("passager");
             }
         }));
-		
+		//Bouton de retour à la page précédente avec annulation des modifications (equivalent au précédent)
 		buttonAnnuler.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
             	Personne personne = Utilisateurs.getPersonneCourante();
@@ -90,7 +93,7 @@ public class PageEditionProfil extends Stage {
             		Window.getInstance().gotoPage("passager");
             }
         }));
-		
+	// Bouton de validation permet de changer les informations par celles entrées ou d'afficher une ou plusieurs erreurs selon les vérifications situées ci-dessous
 		buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if(pfMdpActuel.getText().compareTo(Utilisateurs.getPersonneCourante().getMotDePasse())==0) {
@@ -121,9 +124,13 @@ public class PageEditionProfil extends Stage {
 			}
 		}));
 	}
-	
+
+	//Création du contenu de la page
+
 	public Parent creerContenu() {
-		
+
+		//HEADER
+
 		header.setPadding(new Insets(0, 20, 0, 20));
 		
 		header.setPrefHeight(50);
@@ -148,7 +155,7 @@ public class PageEditionProfil extends Stage {
 		
 		header.getChildren().addAll(backButton, title, logo);
 		
-		//
+		//Affichage selon l'utilisateur et implémentation des messages d'erreurs
 	
 	        gridPane.setPadding(new Insets(30));
 	        gridPane.setVgap(10);
