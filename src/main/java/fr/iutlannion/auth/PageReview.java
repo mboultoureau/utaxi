@@ -20,6 +20,11 @@ import javafx.stage.Stage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ * Classe de la page de review afin de noter la course et d'avoir la possibilité
+ * de donner un pourboire
+ */
+
 public class PageReview extends Stage {
     // HEADER
     private BorderPane root = new BorderPane();
@@ -39,6 +44,10 @@ public class PageReview extends Stage {
     Slider sliderPourboire = new Slider();
 
     public PageReview() {
+
+        /**
+         * Événement sur le bouton "OK" pour valider la note et le pourboire
+         */
         buttonOk.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Conducteur c = Utilisateurs.getRequete().getConducteur();
@@ -46,6 +55,10 @@ public class PageReview extends Stage {
                 Window.getInstance().gotoPage("passager");
             }
         }));
+
+        /**
+         * Ajout des propriétés sur le slider de la note et du pourboire
+         */
 
         sliderNote.valueProperty()
                 .addListener((obs, oldval, newVal) -> sliderNote.setValue(Math.round(newVal.doubleValue())));
