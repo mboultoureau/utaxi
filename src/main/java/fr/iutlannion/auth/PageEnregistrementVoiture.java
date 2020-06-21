@@ -39,10 +39,6 @@ public class PageEnregistrementVoiture extends Stage {
 	// informations voiture
 	private GridPane voiture = new GridPane();
 
-	private Label tarif = new Label("Tarif");
-	private TextField ftarif = new TextField();
-	private Label tarifError = new Label("");
-
 	private Label kmParcourus = new Label("Nombre de kilometres parcourus");
 	private TextField fkmParcourus = new TextField();
 	private Label kmParcourusError = new Label("");
@@ -89,7 +85,7 @@ public class PageEnregistrementVoiture extends Stage {
 			public void handle(MouseEvent event) {
 				if (!checkVoiture()){
 					Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
-					c.modifierInfoVoiture(Double.parseDouble(ftarif.getText()), Double.parseDouble(fkmParcourus.getText()), fimat.getText(), marque.getText(), ftEss.getValue(), fcouleur.getText(), ftype.getText());
+					c.getVoiture().modifierInfo(Double.parseDouble(fkmParcourus.getText()), fimat.getText(), marque.getText(), ftEss.getValue(), fcouleur.getText(), ftype.getText());
 					Window.getInstance().gotoPage("horaires");
 				}
 			}
@@ -185,7 +181,6 @@ public class PageEnregistrementVoiture extends Stage {
 		hideErrors();
 
 		//Erreurs
-		tarifError.setTextFill(Color.RED);
 		kmParcourusError.setTextFill(Color.RED);
 		imatError.setTextFill(Color.RED);
 		marqueError.setTextFill(Color.RED);
@@ -204,37 +199,32 @@ public class PageEnregistrementVoiture extends Stage {
 		);
 		ftEss.getSelectionModel().selectFirst();
 
-		voiture.add(tarif, 0, 0);
-		voiture.add(ftarif, 0, 1);
-		voiture.add(tarifError , 0, 2);
+		voiture.add(kmParcourus, 0, 0);
+		voiture.add(fkmParcourus, 0, 1);
+		voiture.add(kmParcourusError, 0, 2);
 
-		voiture.add(kmParcourus, 0, 3);
-		voiture.add(fkmParcourus, 0, 4);
-		voiture.add(kmParcourusError, 0, 5);
-
-		voiture.add(imat, 0, 6);
-		voiture.add(fimat, 0, 7);
-		voiture.add(imatError, 0, 8);
+		voiture.add(imat, 0, 3);
+		voiture.add(fimat, 0, 4);
+		voiture.add(imatError, 0, 5);
 		
+		voiture.add(marque, 0, 6);
+		voiture.add(fmarque, 0, 7);
+		voiture.add(marqueError, 0, 8);
 
-		voiture.add(marque, 0, 9);
-		voiture.add(fmarque, 0, 10);
-		voiture.add(marqueError, 0, 11);
+		voiture.add(tEss, 0, 9);
+		voiture.add(ftEss, 0, 10);
+		voiture.add(tEssError, 0, 11);
 
-		voiture.add(tEss, 0, 12);
-		voiture.add(ftEss, 0, 13);
-		voiture.add(tEssError, 0, 14);
+		voiture.add(type, 0, 12);
+		voiture.add(ftype, 0, 13);
+		voiture.add(typeError, 0, 14);
 
-		voiture.add(type, 0, 15);
-		voiture.add(ftype, 0, 16);
-		voiture.add(typeError, 0, 17);
+		voiture.add(couleur, 0, 15);
+		voiture.add(fcouleur, 0, 16);
+		voiture.add(couleurError, 0, 17);
 
-		voiture.add(couleur, 0, 18);
-		voiture.add(fcouleur, 0, 19);
-		voiture.add(couleurError, 0, 20);
-
-		voiture.add(annuler, 0, 21);
-		voiture.add(buttonSuivant, 1, 21);
+		voiture.add(annuler, 0, 18);
+		voiture.add(buttonSuivant, 1, 19);
 
 		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
 

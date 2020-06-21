@@ -8,6 +8,7 @@ public class Voiture {
 	private String typeEssence;
 	private String couleur;
 	private String type;
+	private Double nbKms;
 
 	public Voiture(String immatriculation, String marque, String typeEssence, String couleur, String type) {
 		this.immatriculation = immatriculation;
@@ -103,13 +104,18 @@ public class Voiture {
 		return couleur;
 	}
 
-	public Voiture modifierInfo(String immatriculation, String marque, String typeessence, String couleur,
+	public Double getNbKms(){
+		return nbKms;
+	}
+
+	public Voiture modifierInfo(Double nbKm, String immatriculation, String marque, String typeessence, String couleur,
 			String type) {
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.typeEssence = typeessence;
 		this.couleur = couleur;
 		this.type = type;
+		this.nbKms = nbKm;
 		return this;
 	}
 }
