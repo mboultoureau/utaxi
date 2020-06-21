@@ -24,6 +24,15 @@ import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 
+/**
+ * PageEnregistrementVoiture contient la deuxième phase de l'inscription pour le conducteur avec le
+ * renseignement des informations de sa voiture.
+ * 
+ * 
+ * @author rbastille
+ * @version 1.0
+ * 
+ */
 public class PageEnregistrementVoiture extends Stage {
 
 	private Voiture v = new Voiture();
@@ -83,7 +92,7 @@ public class PageEnregistrementVoiture extends Stage {
 
 		buttonSuivant.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if (!checkVoiture()){
+				if (!checkVoiture()){ // si il n'y a pas d'erreurs, modification des inforamtions de la voiture du conducteur actuellement crée
 					Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 					c.getVoiture().modifierInfo(Double.parseDouble(fkmParcourus.getText()), fimat.getText(), marque.getText(), ftEss.getValue(), fcouleur.getText(), ftype.getText());
 					Window.getInstance().gotoPage("horaires");
@@ -100,12 +109,18 @@ public class PageEnregistrementVoiture extends Stage {
 		couleurError.setVisible(false);
 	}
 
+	 /**
+	 * Vérifie si l'utilisateur a saisi tous les champs correctement.
+	 * 
+	 * @return Retourne vrai si tous les champs sont correctes
+	 */
 	private boolean checkVoiture(){
 
 		boolean hasErrors = false;
 
 		hideErrors();
 
+		//immatriculation
 		try {
 			v.setImmatriculation(fimat.getText());
 		} catch (FormatException e) {
@@ -114,6 +129,7 @@ public class PageEnregistrementVoiture extends Stage {
 			hasErrors = true;
 		}
 
+		//marque
 		try {
 			v.setMarque(fmarque.getText());
 		} catch (FormatException e) {
@@ -122,14 +138,7 @@ public class PageEnregistrementVoiture extends Stage {
 			hasErrors = true;
 		}
 
-		try {
-			v.setTypeEssence(ftEss.getValue());
-		} catch (FormatException e) {
-			tEssError.setVisible(true);
-			tEssError.setText(e.getMessage());
-			hasErrors = true;
-		}
-
+		//type
 		try {
 			v.setType(ftype.getText());
 		} catch (FormatException e) {
@@ -138,6 +147,7 @@ public class PageEnregistrementVoiture extends Stage {
 			hasErrors = true;
 		}
 
+		//couleur
 		try {
 			v.setCouleur(fcouleur.getText());
 		} catch (FormatException e) {
@@ -199,6 +209,7 @@ public class PageEnregistrementVoiture extends Stage {
 		);
 		ftEss.getSelectionModel().selectFirst();
 
+		//affichage des champs pour la voiture
 		voiture.add(kmParcourus, 0, 0);
 		voiture.add(fkmParcourus, 0, 1);
 		voiture.add(kmParcourusError, 0, 2);
