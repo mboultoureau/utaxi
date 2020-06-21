@@ -214,6 +214,7 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.add(tEss, 0, 9);
 		voiture.add(ftEss, 0, 10);
 		voiture.add(tEssError, 0, 11);
+		ftEss.setMinWidth(510);
 
 		voiture.add(type, 0, 12);
 		voiture.add(ftype, 0, 13);
@@ -224,7 +225,7 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.add(couleurError, 0, 17);
 
 		voiture.add(annuler, 0, 18);
-		voiture.add(buttonSuivant, 1, 19);
+		voiture.add(buttonSuivant, 1, 18);
 
 		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
 
