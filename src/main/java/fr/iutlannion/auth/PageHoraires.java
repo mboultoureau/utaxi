@@ -21,6 +21,16 @@ import fr.iutlannion.manager.Utilisateurs;
 import fr.iutlannion.manager.Jour;
 import javafx.geometry.HPos;
 
+
+/**
+ * PageHoraires contient la troisième phase de l'inscription pour le conducteur avec le
+ * renseignement des ses horaires.
+ * 
+ * 
+ * @author rbastille
+ * @version 1.0
+ * 
+ */
 public class PageHoraires extends Stage {
 
 	private BorderPane root = new BorderPane();
@@ -83,6 +93,7 @@ public class PageHoraires extends Stage {
 			public void handle(MouseEvent event) {
 				Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 
+				//création et ajout des 7 jours de la semaine avec les horaires définis dans le conducteur actuellement crée
 				Jour lundiJ = new Jour("Lundi", lundiD.getValue(), lundiF.getValue());
 				Jour mardiJ = new Jour("Mardi", mardiD.getValue(), mardiF.getValue());
 				Jour mercrediJ = new Jour("Mercredi", mercrediD.getValue(), mercrediF.getValue());
@@ -204,7 +215,7 @@ public class PageHoraires extends Stage {
 		dimancheF.getSelectionModel().selectLast();
 		dimancheF.setMinWidth(300);	
 
-
+		//ajout des champs pour l'entrée des horaires
 		horaires.add(lundi, 0, 0);
 		horaires.add(lundiD, 0, 1);
 		horaires.add(lundiF, 2, 1);

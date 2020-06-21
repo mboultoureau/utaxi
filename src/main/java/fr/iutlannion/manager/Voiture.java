@@ -58,16 +58,6 @@ public class Voiture {
 		return marque;
 	}
 
-	public void setTypeEssence(String n) throws FormatException {
-		n = n.trim();
-		
-		if (n.length() < 1 || n.length() > 30) {
-			throw new FormatException("Le type d'essence doit contenir entre 1 et 30 caractères");
-		}else {
-			this.typeEssence = n;
-		}
-	}
-
 	public String getTypeEssence() {
 		return typeEssence;
 	}
