@@ -79,7 +79,12 @@ public class PagePassager extends Stage {
 
 	public PagePassager() {
 
+		Window.getInstance().setMinWidth(1200);
+		Window.getInstance().setMaxWidth(3000);
 		Window.getInstance().setWidth(1200);
+
+		Window.getInstance().setMinHeight(700);
+		Window.getInstance().setMaxHeight(2000);
 		Window.getInstance().setHeight(700);
 
 		/**

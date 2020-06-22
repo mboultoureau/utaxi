@@ -77,6 +77,10 @@ public class PageHoraires extends Stage {
 
 	public PageHoraires() {
 
+		Window.getInstance().setResizable(false);
+		Window.getInstance().setMinHeight(650);
+		Window.getInstance().setMinWidth(750);
+
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Window.getInstance().gotoPage("enregistrementVoiture");

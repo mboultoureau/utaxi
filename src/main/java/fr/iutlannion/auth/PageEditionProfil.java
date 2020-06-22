@@ -65,6 +65,19 @@ public class PageEditionProfil extends Stage {
     private Alert modifOk = new Alert(AlertType.INFORMATION);
     
 	public PageEditionProfil() {
+
+		Window.getInstance().setResizable(true);
+
+		Window.getInstance().setMinWidth(640);
+		Window.getInstance().setMaxWidth(640);
+		Window.getInstance().setWidth(640);
+
+		Window.getInstance().setMinHeight(550);
+		Window.getInstance().setMaxHeight(600);
+		Window.getInstance().setHeight(550);
+
+
+
 		suppButton.setOnAction(e ->{
 			Optional<ButtonType> option = alert.showAndWait();
 			 //Bouton permettant de supprimer son compte ramenant a la page connexion
@@ -180,22 +193,23 @@ public class PageEditionProfil extends Stage {
 			modifOk.setTitle("Mofication effectuées");
 			modifOk.setHeaderText("Les modifications ont bien été effectuées.");
 	       
-	        gridPane.add(labelNom, 0,0);
-	        gridPane.add(tfNom, 0,1);
-	        gridPane.add(labelPrenom, 0,2);
-	        gridPane.add(tfPrenom, 0,3);
-	        gridPane.add(labelMail, 0,4);
-	        gridPane.add(tfMail, 0,5);
-	        gridPane.add(mdpActuel, 0,6);
-	        gridPane.add(pfMdpActuel, 0,7);
-	        gridPane.add(mdpNouveau, 0,8);
-	        gridPane.add(pfMdpNouveau, 0,9);
+	        gridPane.add(labelNom, 0,0, 2, 1);
+	        gridPane.add(tfNom, 0,1, 2, 1);
+	        gridPane.add(labelPrenom, 0,2, 2, 1);
+	        gridPane.add(tfPrenom, 0,3, 2, 1);
+	        gridPane.add(labelMail, 0,4, 2, 1);
+	        gridPane.add(tfMail, 0,5, 2, 1);
+	        gridPane.add(mdpActuel, 0,6, 2, 1);
+	        gridPane.add(pfMdpActuel, 0,7, 2, 1);
+	        gridPane.add(mdpNouveau, 0,8, 2, 1);
+	        gridPane.add(pfMdpNouveau, 0,9, 2, 1);
 	        gridPane.add(buttonOk, 0,10);
 	        gridPane.add(buttonAnnuler, 1,10);
 	        gridPane.add(suppButton, 0, 12);
 	        
 	        GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
-	        
+
+	        tfNom.setPrefWidth(600);
 		
 	        root.setTop(header);
 			root.setCenter(gridPane);

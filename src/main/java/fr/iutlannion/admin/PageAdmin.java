@@ -81,6 +81,12 @@ public class PageAdmin extends Stage {
 
     public PageAdmin() {
 
+        Window.getInstance().setResizable(true);
+        Window.getInstance().setMinHeight(600);
+        Window.getInstance().setMaxHeight(1000);
+        Window.getInstance().setHeight(700);
+        Window.getInstance().setWidth(700);
+
         /**
          * Événement sur la liste des admins
          */

@@ -45,6 +45,11 @@ public class PageReview extends Stage {
 
     public PageReview() {
 
+        Window.getInstance().setMinHeight(480);
+        Window.getInstance().setHeight(480);
+        Window.getInstance().setMinWidth(640);
+        Window.getInstance().setWidth(640);
+
         /**
          * Événement sur le bouton "OK" pour valider la note et le pourboire
          */

@@ -102,7 +102,6 @@ public class AdresseView extends GridPane {
                 adresses.add(answer.toString());
             }
 
-            System.out.println(propositions.size());
             if (propositions.isEmpty()) {
                 error.setVisible(true);
                 error.setText("Aucune correspondance");

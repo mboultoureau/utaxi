@@ -51,6 +51,17 @@ public class PageDebug extends Stage {
 	private Button buttonMapDebug = new Button("Débug de carte");
 
 	public PageDebug()  {
+
+		Window.getInstance().setResizable(false);
+
+		Window.getInstance().setMinHeight(480);
+		Window.getInstance().setMaxHeight(480);
+		Window.getInstance().setHeight(480);
+
+		Window.getInstance().setMinWidth(640);
+		Window.getInstance().setMaxWidth(640);
+		Window.getInstance().setWidth(640);
+
 		// Pages principales
 		buttonMenuPrincipal.setOnAction(e -> Window.getInstance().gotoPage("menuPrincipal"));
 		buttonConducteur.setOnAction(e -> Window.getInstance().gotoPage("conducteur"));
