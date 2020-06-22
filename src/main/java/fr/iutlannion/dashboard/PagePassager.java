@@ -28,6 +28,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -67,16 +68,19 @@ public class PagePassager extends Stage {
 			.observableArrayList(Utilisateurs.getListConducteur());
 	private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
-	private Label ChoisirUtaxiLabel = new Label("Choisissez un Utaxi :");
-	private Label ChoisirCoordLabel = new Label("Choisissez où vous voulez aller :");
+	private Label choisirUtaxiLabel = new Label("Choisissez un Utaxi :");
+	private Label choisirCoordLabel = new Label("Choisissez où vous voulez aller :");
 	private Label infoSituation = new Label("");
-	private Button Annuler = new Button("Annuler");
+	private Button annuler = new Button("Annuler");
 	private Button moveTaxi = new Button("Déplacer les Utaxi");
 	private Button commanderUtaxiButton = new Button("Commander le Utaxi");
 	// Geocoding pour récuperer l'adresse en lat/long avec une API
 	private AdresseView adresseView = new AdresseView();
 
 	public PagePassager() {
+
+		Window.getInstance().setWidth(1200);
+		Window.getInstance().setHeight(700);
 
 		/**
 		 * Événement sur le bouton "Deconnexion" pour se déconnecter de son compte
@@ -127,12 +131,12 @@ public class PagePassager extends Stage {
 		/**
 		 * Événement sur le bouton "Annuler" pour annuler la confirmation de l'adresse
 		 */
-		Annuler.setOnMouseClicked(e -> {
+		annuler.setOnMouseClicked(e -> {
 			Adresse adresse = adresseView.getAdresse();
 			adresseView.enable();
 			map.moveMarker(markerLocationWant, new LatLng(0, 0));
 			commanderUtaxiButton.setDisable(true);
-			Annuler.setDisable(true);
+			annuler.setDisable(true);
 		});
 
 		/**
@@ -163,7 +167,7 @@ public class PagePassager extends Stage {
 						markerCurrentPosition.getCoords().getLatitude(),
 						markerCurrentPosition.getCoords().getLongitude());
 				map.disableRouting();
-				Annuler.setDisable(true);
+				annuler.setDisable(true);
 				moveTaxi.setDisable(true);
 				Adresse adresse = adresseView.getAdresse();
 				map.moveMarker(markerLocationWant, adresse.getCoords());
@@ -243,7 +247,7 @@ public class PagePassager extends Stage {
 			adresseView.disable();
 			map.moveMarker(markerLocationWant, adresse.getCoords());
 			commanderUtaxiButton.setDisable(false);
-			Annuler.setDisable(false);
+			annuler.setDisable(false);
 		}
 	}
 
@@ -273,27 +277,33 @@ public class PagePassager extends Stage {
 
 		// Left Side
 		leftSide.setVgap(15);
-		leftSide.add(ChoisirUtaxiLabel, 0, 0);
+		leftSide.add(choisirUtaxiLabel, 0, 0);
 		leftSide.add(listViewConducteur, 0, 1);
-		leftSide.add(ChoisirCoordLabel, 0, 2);
+		leftSide.add(choisirCoordLabel, 0, 2);
 		leftSide.add(adresseView, 0, 3);
-		leftSide.add(Annuler, 0, 4);
+		leftSide.add(annuler, 0, 4);
 		leftSide.add(commanderUtaxiButton, 0, 4);
 		leftSide.add(moveTaxi, 0, 5);
 		leftSide.add(infoSituation, 0, 6, 1, 1);
 		leftSide.setMinWidth(300);
 		infoSituation.setStyle("-fx-font: 16 arial;");
-		ChoisirUtaxiLabel.setStyle("-fx-font: 24 arial;");
-		ChoisirUtaxiLabel.setPadding(new Insets(15, 0, 15, 0));
-		ChoisirCoordLabel.setStyle("-fx-font: 24 arial;");
-		ChoisirCoordLabel.setPadding(new Insets(15, 0, 15, 0));
+		choisirUtaxiLabel.setStyle("-fx-font: 24 arial;");
+		choisirUtaxiLabel.setPadding(new Insets(15, 0, 15, 0));
+		choisirCoordLabel.setStyle("-fx-font: 24 arial;");
+		choisirCoordLabel.setPadding(new Insets(15, 0, 15, 0));
 
-		listViewConducteur.setMinWidth(300);
+		listViewConducteur.setMinWidth(385);
 		listViewConducteur.setMaxHeight(250);
 		GridPane.setHalignment(commanderUtaxiButton, HPos.CENTER);
 		GridPane.setHalignment(infoSituation, HPos.CENTER);
 		commanderUtaxiButton.setDisable(true);
-		Annuler.setDisable(true);
+		annuler.setDisable(true);
+
+		// Centrage
+		choisirUtaxiLabel.setTextAlignment(TextAlignment.CENTER);
+		choisirCoordLabel.setTextAlignment(TextAlignment.CENTER);
+		GridPane.setHalignment(choisirUtaxiLabel, HPos.CENTER);
+		GridPane.setHalignment(choisirCoordLabel, HPos.CENTER);
 
 		// Map
 		mapOptions.setCoordinates(new LatLng(47.2186371, -1.5541362));

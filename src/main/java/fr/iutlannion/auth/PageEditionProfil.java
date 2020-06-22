@@ -42,7 +42,7 @@ public class PageEditionProfil extends Stage {
 	private GridPane gridPane = new GridPane();
 	
 	private Label labelNom = new Label("Nom");
-	private Label labelPrenom = new Label("PrÃ©nom");
+	private Label labelPrenom = new Label("Prénom");
 	private Label labelMail = new Label("Mail");
 	private Label mdpActuel = new Label("Mot de passe actuel *");
 	private Label mdpNouveau = new Label("Nouveau mot de passe");

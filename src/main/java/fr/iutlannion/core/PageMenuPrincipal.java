@@ -35,6 +35,9 @@ public class PageMenuPrincipal extends Stage {
 	public PageMenuPrincipal() {
 		Window.getInstance().setResizable(false);
 
+		Window.getInstance().setWidth(640);
+		Window.getInstance().setHeight(480);
+
 		login.setOnAction(e -> Window.getInstance().gotoPage("connexion"));
 		register.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
 		debug.setOnAction(e -> Window.getInstance().gotoPage("debug"));

@@ -52,6 +52,8 @@ public class PageConnexion extends Stage {
     public PageConnexion() {
 
         Window.getInstance().setResizable(false);
+        Window.getInstance().setHeight(500);
+        Window.getInstance().setWidth(640);
 
         /**
          * Événement sur le bouton "OK" pour se connecter et verifier les champs mail et

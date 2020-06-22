@@ -2,6 +2,7 @@ package fr.iutlannion.auth;
 
 import fr.iutlannion.core.Window;
 import fr.iutlannion.manager.*;
+import fr.iutlannion.map.LatLng;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
@@ -81,6 +82,14 @@ public class PageInscription extends Stage {
 
 	public PageInscription() {
 
+
+		Window.getInstance().setMinHeight(550);
+		Window.getInstance().setMaxHeight(550);
+		Window.getInstance().setHeight(550);
+		Window.getInstance().setMinWidth(660);
+		Window.getInstance().setWidth(660);
+		Window.getInstance().setResizable(true);
+
 		// Événements
 		retourButton.setOnAction(e -> {
 			Utilisateurs.resetPersonneCourante();
@@ -96,11 +105,11 @@ public class PageInscription extends Stage {
 			if (verifierPersonne()) {
 				RadioButton selectionne = (RadioButton) typeGroup.getSelectedToggle();
 				if (selectionne.getText().equals("Passager/ère")) {
-					Passager p = new Passager(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), null, null);
+					Passager p = new Passager(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), new LatLng(48.833, 2.333), null);
 					Utilisateurs.setPersonneCourante(p);
 					Window.getInstance().gotoPage("paiement");
 				} else {
-					Conducteur c = new Conducteur(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), Double.valueOf(tarifField.getText()), 0, null, null);
+					Conducteur c = new Conducteur(nomField.getText(), prenomField.getText(), emailField.getText(), mdpField.getText(), Double.valueOf(tarifField.getText()), 0, null, new LatLng(48.833, 2.333));
 					Utilisateurs.setPersonneCourante(c);
 					Window.getInstance().gotoPage("enregistrementVoiture");
 				}

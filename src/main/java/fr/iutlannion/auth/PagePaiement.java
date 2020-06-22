@@ -73,6 +73,9 @@ public class PagePaiement extends Stage {
 
 	public PagePaiement() {
 		Window.getInstance().setMinWidth(700);
+		Window.getInstance().setWidth(700);
+		Window.getInstance().setHeight(550);
+		Window.getInstance().setResizable(false);
 
 		// Événements
 		backButton.setOnAction(e -> Window.getInstance().gotoPage("inscription"));
@@ -254,6 +257,9 @@ public class PagePaiement extends Stage {
 		root.setMinWidth(640);
 		root.setTop(header);
 		root.setLeft(grid);
+
+		// Champs
+		numField.setMinWidth(265);
 
 		// Erreurs
 		numError.setVisible(false);
