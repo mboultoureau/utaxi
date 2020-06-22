@@ -14,6 +14,7 @@ import fr.iutlannion.dashboard.PagePassager;
 import fr.iutlannion.debug.PageDebug;
 import fr.iutlannion.debug.PageMapDebug;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +34,7 @@ public class Window extends Stage {
 		this.setTitle("UTaxi");
 		this.setMinHeight(480);
 		this.setMinWidth(640);
+		this.getIcons().add(new Image("img/taxi-icon.png"));
 
 		this.gotoPage("menuPrincipal");
 	}

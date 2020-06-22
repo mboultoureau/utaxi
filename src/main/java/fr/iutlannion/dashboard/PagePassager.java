@@ -61,7 +61,7 @@ public class PagePassager extends Stage {
 	private Icon iconSelected = new Icon("img/taxi-selected.png", 40, 20);
 
 	// https://github.com/pointhi/leaflet-color-markers
-	private Icon iconHome = new Icon("img/iconHome.png", 25, 41, 12, 41, 1, -34);
+	private Icon iconHome = new Icon("img/icon-home.png", 25, 41, 12, 41, 1, -34);
 
 	private ObservableList<Conducteur> conducteurs = FXCollections
 			.observableArrayList(Utilisateurs.getListConducteur());
