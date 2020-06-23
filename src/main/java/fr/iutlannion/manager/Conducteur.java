@@ -15,7 +15,7 @@ public class Conducteur extends Personne {
 
     private double tarif;
     private double nbKmParcourus;
-    public boolean actif;
+    private boolean actif;
     private ArrayList<Double> notes;
     private ArrayList<Jour> jours;
     private Voiture voiture;
@@ -83,8 +83,12 @@ public class Conducteur extends Personne {
         return nbKmParcourus;
     }
 
-    public boolean getActif() {
+    public boolean isActif() {
         return actif;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
     }
 
     public Voiture getVoiture() {

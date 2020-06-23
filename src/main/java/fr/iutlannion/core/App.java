@@ -17,7 +17,7 @@ public class App extends Application {
 	 * Active ou non le mode Debug (le bouton apparaîtra ou non sur le menu
 	 * principal).
 	 */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	/**
 	 * Affiche l'interface graphique

@@ -52,7 +52,12 @@ public class PageConnexion extends Stage {
     public PageConnexion() {
 
         Window.getInstance().setResizable(false);
+        Window.getInstance().setMinHeight(500);
+        Window.getInstance().setMaxHeight(500);
         Window.getInstance().setHeight(500);
+
+        Window.getInstance().setMinWidth(640);
+        Window.getInstance().setMaxWidth(640);
         Window.getInstance().setWidth(640);
 
         /**

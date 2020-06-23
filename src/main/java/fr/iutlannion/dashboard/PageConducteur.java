@@ -51,7 +51,7 @@ public class PageConducteur extends Stage {
 	// Left Side
 
 	private GridPane leftSide = new GridPane();
-	private Button actif = new Button("actif");
+	private Button actif = new Button("Devenir actif (actuellement inactif)");
 	private Label requeteLabel = new Label("");
 
 	// Right Side
@@ -66,14 +66,13 @@ public class PageConducteur extends Stage {
 	
 	//fonction permettant de changer le statut du taxi si le taxi est inactif il ne pourra pas conduire de personne
 	public void changementStatus() {
-		if (c.actif == true) {
-			actif.setText("Inactif");
-			c.actif = false;
+		if (c.isActif()) {
+			actif.setText("Devenir actif (actuellement inactif)");
+			c.setActif(false);
 		} else {
-			actif.setText("Actif");
-			c.actif = true;
+			actif.setText("Devenir inactif (actuellement actif)");
+			c.setActif(true);
 		}
-
 	}
 	//création de la page 
 	public PageConducteur() {
@@ -146,6 +145,12 @@ public class PageConducteur extends Stage {
 
 		// Left Side
 		leftSide.setHgap(15);
+
+		if (c.isActif()) {
+			actif.setText("Devenir inactif (actuellement actif)");
+		} else {
+			actif.setText("Devenir actif (actuellement inactif)");
+		}
 		
 		leftSide.setMinWidth(300);
 		leftSide.add(actif, 0, 1);

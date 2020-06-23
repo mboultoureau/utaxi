@@ -166,7 +166,7 @@ public class PagePassager extends Stage {
 
 		commanderUtaxiButton.setOnAction(e -> {
 
-			if (listViewConducteur.getSelectionModel().getSelectedItem().getActif()) {
+			if (listViewConducteur.getSelectionModel().getSelectedItem().isActif()) {
 				Utilisateurs.getRequete().setParametre((Passager) Utilisateurs.getPersonneCourante(),
 						listViewConducteur.getSelectionModel().getSelectedItem(), new Date(),
 						markerCurrentPosition.getCoords().getLatitude(),
@@ -301,6 +301,7 @@ public class PagePassager extends Stage {
 		listViewConducteur.setMaxHeight(250);
 		GridPane.setHalignment(commanderUtaxiButton, HPos.CENTER);
 		GridPane.setHalignment(infoSituation, HPos.CENTER);
+		GridPane.setHgrow(adresseView, Priority.ALWAYS);
 		commanderUtaxiButton.setDisable(true);
 		annuler.setDisable(true);
 
