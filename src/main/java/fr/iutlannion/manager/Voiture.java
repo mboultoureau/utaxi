@@ -40,8 +40,8 @@ public class Voiture {
 		if (n.length() < 1 || n.length() > 30) {
 			throw new FormatException("L'immatriculation doit contenir entre 1 et 30 caractères");
 		}else {
+			n=n.toUpperCase();
 			this.immatriculation = n;
-			this.immatriculation = immatriculation.toUpperCase();
 		}
 	}
 
