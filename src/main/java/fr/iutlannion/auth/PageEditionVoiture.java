@@ -63,6 +63,17 @@ public class PageEditionVoiture extends Stage{
 	    Conducteur c = (Conducteur) Utilisateurs.getPersonneCourante();
 	    
 		public PageEditionVoiture() {
+
+			Window.getInstance().setResizable(false);
+
+			Window.getInstance().setMinWidth(640);
+			Window.getInstance().setMaxWidth(640);
+			Window.getInstance().setWidth(640);
+
+			Window.getInstance().setMinHeight(700);
+			Window.getInstance().setMaxHeight(700);
+			Window.getInstance().setHeight(700);
+
 			backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 	            public void handle(MouseEvent event) {
 	                Window.getInstance().gotoPage("conducteur");

@@ -35,21 +35,21 @@ public class PageAdmin extends Stage {
 
     private BorderPane root = new BorderPane();
     private GridPane gridPane = new GridPane();
-    private Label label2 = new Label("Liste des Admins");
-    private Label label3 = new Label("Liste des Passagers");
-    private Label label4 = new Label("Liste des Conducteurs");
-    private Label label5 = new Label("Nom :");
-    private Label label6 = new Label("Prenom :");
-    private Label label7 = new Label("Email :");
-    private Label label8 = new Label("Mot de passe :");
-    private Label label9 = new Label("Tarif :");
-    private Label label10 = new Label("Km parcourus :");
-    private Label label11 = new Label("Immatriculation :");
-    private Label label12 = new Label("Marque :");
-    private Label label13 = new Label("Type essence :");
-    private Label label14 = new Label("Couleur :");
-    private Label label15 = new Label("Type :");
-    private Label label16 = new Label("");
+    private Label labelAdmin = new Label("Liste des Admins");
+    private Label labelPassager = new Label("Liste des Passagers");
+    private Label labelConducteur = new Label("Liste des Conducteurs");
+    private Label labelNom = new Label("Nom :");
+    private Label labelPrenom = new Label("Prenom :");
+    private Label labelEmail = new Label("Email :");
+    private Label labelMdp = new Label("Mot de passe :");
+    private Label labelTarif = new Label("Tarif :");
+    private Label labelKms = new Label("Km parcourus :");
+    private Label labelImmatriculation = new Label("Immatriculation :");
+    private Label labelMarque = new Label("Marque :");
+    private Label labelTypeEssence = new Label("Type essence :");
+    private Label labelCouleur = new Label("Couleur :");
+    private Label labelType = new Label("Type :");
+    private Label labelErreur = new Label("");
 
     private ObservableList<Admin> admins = FXCollections.observableArrayList(Utilisateurs.getListAdmin());
     private ListView<Admin> listViewAdmin = new ListView<Admin>(admins);
@@ -61,6 +61,10 @@ public class PageAdmin extends Stage {
             .observableArrayList(Utilisateurs.getListConducteur());
     private ListView<Conducteur> listViewConducteur = new ListView<Conducteur>(conducteurs);
 
+    private HBox boutons = new HBox();
+    private Region space1 = new Region();
+    private Region space2 = new Region();
+    private Region space3 = new Region();
     private Button buttonSauvegarder = new Button("Sauvegarder");
     private Button buttonSupprimer = new Button("Supprimer");
     private Button buttonAjouterAdmin = new Button("Ajouter Admin");
@@ -85,6 +89,9 @@ public class PageAdmin extends Stage {
         Window.getInstance().setMinHeight(600);
         Window.getInstance().setMaxHeight(1000);
         Window.getInstance().setHeight(700);
+
+        Window.getInstance().setMinWidth(700);
+        Window.getInstance().setMaxWidth(2000);
         Window.getInstance().setWidth(700);
 
         /**
@@ -94,7 +101,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Admin";
-                label16.setText("");
+                labelErreur.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -106,13 +113,13 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setVisible(false);
                 textFieldCouleur.setVisible(false);
                 textFieldType.setVisible(false);
-                label9.setVisible(false);
-                label10.setVisible(false);
-                label11.setVisible(false);
-                label12.setVisible(false);
-                label13.setVisible(false);
-                label14.setVisible(false);
-                label15.setVisible(false);
+                labelTarif.setVisible(false);
+                labelKms.setVisible(false);
+                labelImmatriculation.setVisible(false);
+                labelMarque.setVisible(false);
+                labelTypeEssence.setVisible(false);
+                labelCouleur.setVisible(false);
+                labelType.setVisible(false);
                 textFieldNom.setText(listViewAdmin.getSelectionModel().getSelectedItem().getNom());
                 textFieldPrenom.setText(listViewAdmin.getSelectionModel().getSelectedItem().getPrenom());
                 textFieldEmail.setText(listViewAdmin.getSelectionModel().getSelectedItem().getEmail());
@@ -127,7 +134,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Passager";
-                label16.setText("");
+                labelErreur.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -139,13 +146,13 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setVisible(false);
                 textFieldCouleur.setVisible(false);
                 textFieldType.setVisible(false);
-                label9.setVisible(false);
-                label10.setVisible(false);
-                label11.setVisible(false);
-                label12.setVisible(false);
-                label13.setVisible(false);
-                label14.setVisible(false);
-                label15.setVisible(false);
+                labelTarif.setVisible(false);
+                labelKms.setVisible(false);
+                labelImmatriculation.setVisible(false);
+                labelMarque.setVisible(false);
+                labelTypeEssence.setVisible(false);
+                labelCouleur.setVisible(false);
+                labelType.setVisible(false);
                 textFieldNom.setText(listViewPassager.getSelectionModel().getSelectedItem().getNom());
                 textFieldPrenom.setText(listViewPassager.getSelectionModel().getSelectedItem().getPrenom());
                 textFieldEmail.setText(listViewPassager.getSelectionModel().getSelectedItem().getEmail());
@@ -160,7 +167,7 @@ public class PageAdmin extends Stage {
             @Override
             public void handle(MouseEvent event) {
                 TypeCurrentPersonne = "Conducteur";
-                label16.setText("");
+                labelErreur.setText("");
                 buttonAjouterAdmin.setDisable(true);
                 buttonSauvegarder.setDisable(false);
                 buttonSupprimer.setDisable(false);
@@ -172,13 +179,13 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setVisible(true);
                 textFieldCouleur.setVisible(true);
                 textFieldType.setVisible(true);
-                label9.setVisible(true);
-                label10.setVisible(true);
-                label11.setVisible(true);
-                label12.setVisible(true);
-                label13.setVisible(true);
-                label14.setVisible(true);
-                label15.setVisible(true);
+                labelTarif.setVisible(true);
+                labelKms.setVisible(true);
+                labelImmatriculation.setVisible(true);
+                labelMarque.setVisible(true);
+                labelTypeEssence.setVisible(true);
+                labelCouleur.setVisible(true);
+                labelType.setVisible(true);
                 textFieldNom.setText(listViewConducteur.getSelectionModel().getSelectedItem().getNom());
                 textFieldPrenom.setText(listViewConducteur.getSelectionModel().getSelectedItem().getPrenom());
                 textFieldEmail.setText(listViewConducteur.getSelectionModel().getSelectedItem().getEmail());
@@ -217,20 +224,20 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setVisible(false);
                 textFieldCouleur.setVisible(false);
                 textFieldType.setVisible(false);
-                label9.setVisible(false);
-                label10.setVisible(false);
-                label11.setVisible(false);
-                label12.setVisible(false);
-                label13.setVisible(false);
-                label14.setVisible(false);
-                label15.setVisible(false);
+                labelTarif.setVisible(false);
+                labelKms.setVisible(false);
+                labelImmatriculation.setVisible(false);
+                labelMarque.setVisible(false);
+                labelTypeEssence.setVisible(false);
+                labelCouleur.setVisible(false);
+                labelType.setVisible(false);
                 if (TypeCurrentPersonne.equals("Admin")) {
                     if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
                             || textFieldEmail.getText().compareTo("") == 0
                             || textFieldMotdepasse.getText().compareTo("") == 0) {
-                        label16.setText("Erreur, champ(s) vide");
+                        labelErreur.setText("Erreur, champ(s) vide");
                     } else {
-                        label16.setText("");
+                        labelErreur.setText("");
                         listViewAdmin.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
                                 textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
                         listViewAdmin.getSelectionModel().clearSelection();
@@ -252,9 +259,9 @@ public class PageAdmin extends Stage {
                     if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
                             || textFieldEmail.getText().compareTo("") == 0
                             || textFieldMotdepasse.getText().compareTo("") == 0) {
-                        label16.setText("Erreur, champs vide(s)");
+                        labelErreur.setText("Erreur, champs vide(s)");
                     } else {
-                        label16.setText("");
+                        labelErreur.setText("");
                         listViewPassager.getSelectionModel().getSelectedItem().modifierInfo(textFieldNom.getText(),
                                 textFieldPrenom.getText(), textFieldEmail.getText(), textFieldMotdepasse.getText());
                         listViewAdmin.getSelectionModel().clearSelection();
@@ -283,9 +290,9 @@ public class PageAdmin extends Stage {
                             || textFieldTypeEssence.getText().compareTo("") == 0
                             || textFieldType.getText().compareTo("") == 0
                             || textFieldCouleur.getText().compareTo("") == 0) {
-                        label16.setText("Erreur, champs vide(s)");
+                        labelErreur.setText("Erreur, champs vide(s)");
                     } else {
-                        label16.setText("");
+                        labelErreur.setText("");
                         listViewConducteur.getSelectionModel().getSelectedItem().modifierInfoAdmin(
                                 textFieldNom.getText(), textFieldPrenom.getText(), textFieldEmail.getText(),
                                 textFieldMotdepasse.getText(), Double.parseDouble(textFieldTarif.getText()),
@@ -320,7 +327,7 @@ public class PageAdmin extends Stage {
                 Optional<ButtonType> result = confirmation.showAndWait();
 
                 if (result.get() == ButtonType.OK) {
-                    label16.setText("");
+                    labelErreur.setText("");
                     textFieldNom.setText("");
                     textFieldPrenom.setText("");
                     textFieldEmail.setText("");
@@ -343,13 +350,13 @@ public class PageAdmin extends Stage {
                     textFieldTypeEssence.setVisible(false);
                     textFieldCouleur.setVisible(false);
                     textFieldType.setVisible(false);
-                    label9.setVisible(false);
-                    label10.setVisible(false);
-                    label11.setVisible(false);
-                    label12.setVisible(false);
-                    label13.setVisible(false);
-                    label14.setVisible(false);
-                    label15.setVisible(false);
+                    labelTarif.setVisible(false);
+                    labelKms.setVisible(false);
+                    labelImmatriculation.setVisible(false);
+                    labelMarque.setVisible(false);
+                    labelTypeEssence.setVisible(false);
+                    labelCouleur.setVisible(false);
+                    labelType.setVisible(false);
                     if (TypeCurrentPersonne.equals("Admin")) {
                         Utilisateurs.remove(listViewAdmin.getSelectionModel().getSelectedItem());
                         admins.remove(listViewAdmin.getSelectionModel().getSelectedItem());
@@ -379,9 +386,9 @@ public class PageAdmin extends Stage {
                 if (textFieldNom.getText().compareTo("") == 0 || textFieldPrenom.getText().compareTo("") == 0
                         || textFieldEmail.getText().compareTo("") == 0
                         || textFieldMotdepasse.getText().compareTo("") == 0) {
-                    label16.setText("Erreur, champs vide(s)");
+                    labelErreur.setText("Erreur, champs vide(s)");
                 } else {
-                    label16.setText("");
+                    labelErreur.setText("");
                     Admin newAdmin = new Admin(textFieldNom.getText(), textFieldPrenom.getText(),
                             textFieldEmail.getText(), textFieldMotdepasse.getText());
                     Utilisateurs.add(newAdmin);
@@ -407,13 +414,13 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setVisible(false);
                 textFieldCouleur.setVisible(false);
                 textFieldType.setVisible(false);
-                label9.setVisible(false);
-                label10.setVisible(false);
-                label11.setVisible(false);
-                label12.setVisible(false);
-                label13.setVisible(false);
-                label14.setVisible(false);
-                label15.setVisible(false);
+                labelTarif.setVisible(false);
+                labelKms.setVisible(false);
+                labelImmatriculation.setVisible(false);
+                labelMarque.setVisible(false);
+                labelTypeEssence.setVisible(false);
+                labelCouleur.setVisible(false);
+                labelType.setVisible(false);
                 listViewAdmin.getSelectionModel().clearSelection();
                 listViewPassager.getSelectionModel().clearSelection();
                 listViewConducteur.getSelectionModel().clearSelection();
@@ -428,7 +435,7 @@ public class PageAdmin extends Stage {
                 textFieldTypeEssence.setText("");
                 textFieldCouleur.setText("");
                 textFieldType.setText("");
-                label16.setText("");
+                labelErreur.setText("");
             }
         }));
 
@@ -473,8 +480,8 @@ public class PageAdmin extends Stage {
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setVgap(5);
         gridPane.setHgap(5);
-        label16.setTextFill(Color.RED);
-        label16.setFont(new Font(20));
+        labelErreur.setTextFill(Color.RED);
+        labelErreur.setFont(new Font(20));
         /* gridPane.setGridLinesVisible(true); */
 
         listViewAdmin.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -493,33 +500,45 @@ public class PageAdmin extends Stage {
         textFieldTypeEssence.setVisible(false);
         textFieldCouleur.setVisible(false);
         textFieldType.setVisible(false);
-        label9.setVisible(false);
-        label10.setVisible(false);
-        label11.setVisible(false);
-        label12.setVisible(false);
-        label13.setVisible(false);
-        label14.setVisible(false);
-        label15.setVisible(false);
+        labelTarif.setVisible(false);
+        labelKms.setVisible(false);
+        labelImmatriculation.setVisible(false);
+        labelMarque.setVisible(false);
+        labelTypeEssence.setVisible(false);
+        labelCouleur.setVisible(false);
+        labelType.setVisible(false);
+
+        /* BOUTONS */
+        boutons.getChildren().addAll(buttonSauvegarder, space1, buttonSupprimer, space2, buttonAjouterAdmin, space3, buttonAnnuler);
+        HBox.setHgrow(space1, Priority.ALWAYS);
+        HBox.setHgrow(space2, Priority.ALWAYS);
+        HBox.setHgrow(space3, Priority.ALWAYS);
+
+        buttonSauvegarder.setMinWidth(100);
+        buttonSupprimer.setMinWidth(100);
+        buttonAjouterAdmin.setMinWidth(100);
+        buttonAnnuler.setMinWidth(100);
+
 
         /* Colonne, Ligne */
-        gridPane.add(label2, 0, 1);
-        gridPane.add(label3, 1, 1);
-        gridPane.add(label4, 2, 1);
+        gridPane.add(labelAdmin, 0, 1);
+        gridPane.add(labelPassager, 1, 1);
+        gridPane.add(labelConducteur, 2, 1);
         gridPane.add(listViewAdmin, 0, 2);
         gridPane.add(listViewPassager, 1, 2);
         gridPane.add(listViewConducteur, 2, 2);
-        gridPane.add(label5, 0, 4);
-        gridPane.add(label6, 1, 4);
-        gridPane.add(label7, 2, 4);
-        gridPane.add(label8, 0, 6);
-        gridPane.add(label9, 1, 6);
-        gridPane.add(label10, 2, 6);
-        gridPane.add(label11, 0, 8);
-        gridPane.add(label12, 1, 8);
-        gridPane.add(label13, 2, 8);
-        gridPane.add(label14, 0, 10);
-        gridPane.add(label15, 1, 10);
-        gridPane.add(label16, 1, 13, 1, 1);
+        gridPane.add(labelNom, 0, 4);
+        gridPane.add(labelPrenom, 1, 4);
+        gridPane.add(labelEmail, 2, 4);
+        gridPane.add(labelMdp, 0, 6);
+        gridPane.add(labelTarif, 1, 6);
+        gridPane.add(labelKms, 2, 6);
+        gridPane.add(labelImmatriculation, 0, 8);
+        gridPane.add(labelMarque, 1, 8);
+        gridPane.add(labelTypeEssence, 2, 8);
+        gridPane.add(labelCouleur, 0, 10);
+        gridPane.add(labelType, 1, 10);
+        gridPane.add(labelErreur, 1, 13, 1, 1);
         gridPane.add(textFieldNom, 0, 5);
         gridPane.add(textFieldPrenom, 1, 5);
         gridPane.add(textFieldEmail, 2, 5);
@@ -531,14 +550,12 @@ public class PageAdmin extends Stage {
         gridPane.add(textFieldTypeEssence, 2, 9);
         gridPane.add(textFieldCouleur, 0, 11);
         gridPane.add(textFieldType, 1, 11);
-        gridPane.add(buttonSauvegarder, 2, 11);
-        gridPane.add(buttonSupprimer, 2, 11);
-        gridPane.add(buttonAjouterAdmin, 2, 12);
-        gridPane.add(buttonAnnuler, 2, 12);
+        gridPane.add(boutons, 0, 12, 4, 1);
 
-        GridPane.setHalignment(label2, HPos.CENTER);
-        GridPane.setHalignment(label3, HPos.CENTER);
-        GridPane.setHalignment(label4, HPos.CENTER);
+
+        GridPane.setHalignment(labelAdmin, HPos.CENTER);
+        GridPane.setHalignment(labelPassager, HPos.CENTER);
+        GridPane.setHalignment(labelConducteur, HPos.CENTER);
         GridPane.setHalignment(buttonSauvegarder, HPos.LEFT);
         GridPane.setHalignment(buttonAnnuler, HPos.RIGHT);
         GridPane.setHalignment(buttonSupprimer, HPos.RIGHT);
