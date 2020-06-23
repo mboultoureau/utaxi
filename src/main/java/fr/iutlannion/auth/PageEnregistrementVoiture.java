@@ -14,10 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -72,11 +69,22 @@ public class PageEnregistrementVoiture extends Stage {
 	private TextField fcouleur = new TextField();
 	private Label couleurError = new Label("");
 
+	private HBox boutons = new HBox();
 	private Button annuler = new Button("Annuler");
-
 	private Button buttonSuivant = new Button("Next");
+	private Region space = new Region();
 
 	public PageEnregistrementVoiture() {
+
+		Window.getInstance().setMinHeight(700);
+		Window.getInstance().setMaxHeight(700);
+		Window.getInstance().setHeight(700);
+
+		Window.getInstance().setMinWidth(660);
+		Window.getInstance().setMaxWidth(660);
+		Window.getInstance().setWidth(660);
+
+		Window.getInstance().setResizable(false);
 
 		backButton.setOnMouseClicked((new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -235,14 +243,18 @@ public class PageEnregistrementVoiture extends Stage {
 		voiture.add(fcouleur, 0, 16);
 		voiture.add(couleurError, 0, 17);
 
-		voiture.add(annuler, 0, 18);
-		voiture.add(buttonSuivant, 1, 18);
+		boutons.getChildren().addAll(annuler, space, buttonSuivant);
+		HBox.setHgrow(space, Priority.ALWAYS);
+
+		voiture.add(boutons, 0, 18);
 
 		GridPane.setHalignment(buttonSuivant, HPos.RIGHT);
 
+		ftEss.setPrefWidth(600);
+
 		voiture.setPadding(new Insets(30, 30, 30, 30));
 		voiture.setMinWidth(640);
-		voiture.setHgap(30);
+		voiture.setHgap(20);
 		voiture.setVgap(10);
 		GridPane.setHgrow(imat, Priority.ALWAYS);
 
